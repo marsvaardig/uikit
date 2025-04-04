@@ -755,6 +755,11 @@ svg {
 [data-sidebar-type=cover] .close-icon {
   display: block !important;
 }
+@media screen and (min-width: 48rem) {
+  [data-sidebar-type=cover] .close-icon {
+    display: none !important;
+  }
+}
 
 .uikit {
   font-size: var(--mv-font-size-m);
@@ -909,7 +914,6 @@ svg {
   background: var(--mv-background-primary);
   overflow: hidden;
   display: flex;
-  border: 1px solid #B7CAD7;
 }
 .sidebar--right > .inner {
   padding: var(--mv-spacing-m);

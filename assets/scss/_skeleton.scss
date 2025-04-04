@@ -523,4 +523,8 @@
 }
 [data-sidebar-type="cover"] .close-icon {
   display: block !important;
+
+  @include breakpoint($breakpoint2) {
+    display: none!important;
+  }
 }
