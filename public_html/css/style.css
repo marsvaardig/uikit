@@ -1184,7 +1184,10 @@ svg {
   align-items: center;
 }
 .filter button:hover, .filter button:focus {
-  background: #d4e3ed;
+  background: #e5f0f6;
+}
+.filter button[aria-expanded=true] {
+  background: #d4e2ed;
 }
 
 .filter-dropdown {
@@ -1260,6 +1263,18 @@ svg {
 
 .sidebar__title {
   font-weight: bold;
+}
+
+.amount-label {
+  width: 1.125rem;
+  height: 1.125rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 700;
+  background: #3FB2FF;
+  border-radius: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */

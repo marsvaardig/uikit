@@ -467,7 +467,11 @@
     align-items: center;
 
     @include hover() {
-      background: #d4e3ed;
+      background: #e5f0f6;
+    }
+
+    &[aria-expanded="true"] {
+      background: #d4e2ed;
     }
   }
 }
@@ -549,6 +553,18 @@
 
 .sidebar__title {
   font-weight: bold;
+}
+
+.amount-label {
+  width: px(18);
+  height: px(18);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 700;
+  background: $brand;
+  border-radius: 100%;
 }
 
 // @TODO: Add always visible scrollbars?

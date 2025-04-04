@@ -237,6 +237,8 @@
     }
   }
   
+  
+  // @TODO: use data-attributes istead of classes
   tabs.forEach((tab, index) => {
     tab.addEventListener('keydown', (e) => {
       let newIndex;
