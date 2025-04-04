@@ -220,9 +220,9 @@
   z-index: 1;
   opacity: .65;
   cursor: pointer;
+  border-radius: var(--mv-radius-s);
   @include coverall();
   @include transition(background 300ms ease-in-out);
-  border-radius: var(--mv-radius-s);
 
   @include hover() {
     background: $brand;
@@ -253,10 +253,12 @@
   }
 
   .main {
-    transform: translateX(calc((min(var(--mv-sidebar-component-width), 100%) * -1) + var(--mv-sidebar-component-hide) - #{px(8)}));
+    & > * {
+      transform: translateX(calc((min(var(--mv-sidebar-component-width), 100%) * -1) + var(--mv-sidebar-component-hide) - #{px(8)}));
 
-    @include breakpoint($breakpoint2) {
-      transform: none;
+      @include breakpoint($breakpoint2) {
+        transform: none;
+      }
     }
   }
 
@@ -412,6 +414,7 @@
   min-inline-size: min(var(--mv-sidebar-component-width), 100%);
   max-inline-size: 100%;
   flex: 0 1 auto;
+  @include transition(transform 300ms ease-in-out);
 
   @include breakpoint($breakpoint2) {
     min-inline-size: px(48);

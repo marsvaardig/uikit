@@ -495,11 +495,11 @@ svg {
     display: block;
   }
 }
-.has\:toggled-sidebar-component .main {
+.has\:toggled-sidebar-component .main > * {
   transform: translateX(calc(min(var(--mv-sidebar-component-width), 100%) * -1 + var(--mv-sidebar-component-hide) - 0.5rem));
 }
 @media screen and (min-width: 48rem) {
-  .has\:toggled-sidebar-component .main {
+  .has\:toggled-sidebar-component .main > * {
     transform: none;
   }
 }
@@ -651,6 +651,9 @@ svg {
   min-inline-size: min(var(--mv-sidebar-component-width), 100%);
   max-inline-size: 100%;
   flex: 0 1 auto;
+}
+.sidebar--component {
+  transition: transform 300ms ease-in-out 0ms;
 }
 @media screen and (min-width: 48rem) {
   .sidebar--component {
