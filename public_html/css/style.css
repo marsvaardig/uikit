@@ -737,6 +737,25 @@ svg {
   margin: -0.5rem;
 }
 
+.sidebar__navigation [data-sidebar-type-toggle=sidebar],
+.sidebar__navigation [data-sidebar-type-toggle=float] .layer-icon {
+  display: none;
+}
+@media screen and (min-width: 48rem) {
+  .sidebar__navigation [data-sidebar-type-toggle=sidebar],
+  .sidebar__navigation [data-sidebar-type-toggle=float] .layer-icon {
+    display: block;
+  }
+}
+
+.sidebar__navigation [data-sidebar-type-toggle=float] .close-icon {
+  display: none;
+}
+
+[data-sidebar-type=cover] .close-icon {
+  display: block !important;
+}
+
 .uikit {
   font-size: var(--mv-font-size-m);
 }
