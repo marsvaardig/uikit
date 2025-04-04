@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  @include transition(min-inline-size 300ms ease-in-out);
+  @include transition(min-inline-size $layout-transition-duration ease-in-out);
 
   @include breakpoint($breakpoint2) {
     min-inline-size: var(--mv-sidebar-left-width);
@@ -79,7 +79,7 @@
   max-inline-size: min(33vw, px(320));
   overflow: hidden;
   margin-inline-start: px(-8);
-  transition: inline-size 300ms ease-in-out, min-inline-size 300ms ease-in-out;
+  transition: inline-size $layout-transition-duration ease-in-out, min-inline-size $layout-transition-duration ease-in-out;
   flex: 0 0 auto;
   max-height: 100%;
   display: flex;
@@ -183,7 +183,7 @@
     &[data-sidebar-type="sidebar"] {
       @include breakpoint($breakpoint2) {
         display: flex;
-        animation: slideInRight 300ms ease-in-out;
+        animation: slideInRight $layout-transition-duration ease-in-out;
         min-inline-size: var(--mv-sidebar-right-min-width);
       }
     }
@@ -217,7 +217,7 @@
   cursor: pointer;
   border-radius: var(--mv-radius-s);
   @include coverall();
-  @include transition(background 300ms ease-in-out);
+  @include transition(background $layout-transition-duration ease-in-out);
 
   @include hover() {
     background: $brand;
@@ -310,7 +310,7 @@
   inline-size: var(--mv-sidebar-right-width);
   //overflow: hidden;
   transform: translateX(100%);
-  transition: transform 300ms ease-in-out;
+  transition: transform $layout-transition-duration ease-in-out, inline-size $layout-transition-duration ease-in-out;
   flex-direction: column;
 
   .sidebar__body {
@@ -324,7 +324,7 @@
       min-inline-size: calc(100vw - #{px(48)});
       max-inline-size: 40vw;
       padding-inline-start: px(8);
-      animation: slideOutRight 300ms ease-in-out forwards;
+      animation: slideOutRight $layout-transition-duration ease-in-out forwards;
       transform: none;
 
       .sidebar__body {
@@ -381,13 +381,11 @@
   from {
     min-inline-size: min(var(--mv-sidebar-right-width), 40vw);
     max-inline-size: min(var(--mv-sidebar-right-width), 40vw);
-    margin-inline-start: px(8);
   }
 
   to {
     min-inline-size: 0;
     max-inline-size: 0;
-    margin-inline-start: 0;
   }
 }
 
@@ -395,14 +393,14 @@
   display: flex;
   flex: 1 1 auto;
   gap: var(--mv-spacing-xs);
-  transition: transform 300ms ease-in-out;
+  transition: transform $layout-transition-duration ease-in-out;
   overflow: hidden;
 }
 
 .content {
   flex: 1 1 auto;
   min-inline-size: calc(100% - var(--mv-sidebar-component-hide));
-  transition: all 300ms ease-in-out;
+  transition: all $layout-transition-duration ease-in-out;
 
   @include breakpoint($breakpoint2) {
     min-inline-size: calc(100% - var(--mv-sidebar-component-width) - var(--mv-spacing-xs))
@@ -415,11 +413,11 @@
   min-inline-size: min(var(--mv-sidebar-component-width), 100%);
   max-inline-size: 100%;
   flex: 0 0 auto;
-  @include transition(transform 300ms ease-in-out);
+  @include transition(transform $layout-transition-duration ease-in-out, inline-size $layout-transition-duration ease-in-out);
 
   @include breakpoint($breakpoint2) {
     min-inline-size: var(--mv-sidebar-component-min-width);
-    max-inline-size: min(33vw, px(400));
+    max-inline-size: min(33vw, var(--mv-sidebar-component-max-width));
   }
 
   & > .inner {

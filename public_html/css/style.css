@@ -210,8 +210,9 @@ summary {
   --mv-sidebar-left-min-width: 12.5rem;
   --mv-sidebar-right-width: 20rem;
   --mv-sidebar-right-min-width: 12.5rem;
-  --mv-sidebar-component-width: 15rem;
-  --mv-sidebar-component-min-width: 10rem;
+  --mv-sidebar-component-width: 20rem;
+  --mv-sidebar-component-min-width: 12.5rem;
+  --mv-sidebar-component-max-width: 35rem;
   --mv-sidebar-component-hide: 2.5rem;
   --mv-mobile: 1;
 }
@@ -557,7 +558,7 @@ svg {
   max-inline-size: calc(100vw - 6rem);
   inline-size: var(--mv-sidebar-right-width);
   transform: translateX(100%);
-  transition: transform 300ms ease-in-out;
+  transition: transform 300ms ease-in-out, inline-size 300ms ease-in-out;
   flex-direction: column;
 }
 .sidebar--right .sidebar__body {
@@ -617,12 +618,10 @@ svg {
   from {
     min-inline-size: min(var(--mv-sidebar-right-width), 40vw);
     max-inline-size: min(var(--mv-sidebar-right-width), 40vw);
-    margin-inline-start: 0.5rem;
   }
   to {
     min-inline-size: 0;
     max-inline-size: 0;
-    margin-inline-start: 0;
   }
 }
 .main {
@@ -652,12 +651,12 @@ svg {
   flex: 0 0 auto;
 }
 .sidebar--component {
-  transition: transform 300ms ease-in-out 0ms;
+  transition: transform 300ms ease-in-out 0ms, inline-size 300ms ease-in-out 0ms;
 }
 @media screen and (min-width: 48rem) {
   .sidebar--component {
     min-inline-size: var(--mv-sidebar-component-min-width);
-    max-inline-size: min(33vw, 25rem);
+    max-inline-size: min(33vw, var(--mv-sidebar-component-max-width));
   }
 }
 .sidebar--component > .inner {
