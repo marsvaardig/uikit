@@ -51,7 +51,7 @@
       }
       if ($ui.classList.contains(className) && newWidth > minWidth) {
         setWidth(newWidth, sidebarType);
-        if (sidebarType === 'left' || sidebarType === 'component') {
+        if (sidebarType === 'left') {
           $ui.classList.remove(className);
           localStorage.removeItem(`sidebarToggle-${sidebarType}`);
         }
@@ -61,18 +61,18 @@
       }
       // @TODO: properly add the closing mechanism without messing stuff up
       else if (newWidth < minWidth) {
-        setWidth(startWidth, sidebarType);
-        if (sidebarType === 'left' || sidebarType === 'component') {
+        if (sidebarType === 'left') {
+          setWidth(startWidth, sidebarType);
           $ui.classList.add(className);
           setToggleStorage(sidebarType);
         }
-        if (sidebarType === 'right') {
-          setWidth(startWidth, sidebarType);
-          $ui.classList.remove(className);
-          // Reset CSS variable and localstorage
-          localStorage.setItem(`sidebarWidth-${sidebarType}`, startWidth);
-          localStorage.removeItem(`sidebarToggle-${sidebarType}`);
-        }
+        // if (sidebarType === 'right') {
+        //   setWidth(startWidth, sidebarType);
+        //   $ui.classList.remove(className);
+        //   // Reset CSS variable and localstorage
+        //   localStorage.setItem(`sidebarWidth-${sidebarType}`, startWidth);
+        //   localStorage.removeItem(`sidebarToggle-${sidebarType}`);
+        // }
       }
     }
     
