@@ -1,0 +1,548 @@
+@use "tools" as *;
+
+.uikit {
+  font-size: var(--mv-font-size-m);
+}
+
+.header__brand {
+  padding: var(--mv-spacing-m);
+  font-weight: bold;
+  font-size: var(--mv-font-size-2xl);
+}
+
+.header__search {
+  padding: var(--mv-spacing-m) 0;
+  text-align: center;
+
+  .search {
+    position: relative; // to position label and button
+    width: 100%;
+    max-width: px(400);
+    box-shadow: 0 0 40px rgba(#000, .5);
+
+    [type="search"] {
+      width: 100%;
+      height: px(40);
+      background: #fff;
+      border: none;
+      border-radius: var(--mv-radius-s);
+      padding-left: px(40);
+      padding-right: 1rem;
+    }
+
+    button {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: px(40);
+      width: px(40);
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: #93AFC2;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: var(--mv-radius-s) 0 0 var(--mv-radius-s);
+
+      @include hover() {
+        color: #000;
+        background: #d4e3ee;
+      }
+
+      svg {
+        display: block;
+      }
+    }
+  }
+}
+
+.header__switch {
+  padding: var(--mv-spacing-m);
+
+  select {
+    height: px(40);
+    background: #fff;
+    border: none;
+    border-radius: var(--mv-radius-s);
+    padding: px(6) .5rem;
+  }
+}
+
+.header__utilities {
+  padding: var(--mv-spacing-m) 0;
+}
+
+.header__utility {
+  inline-size: px(40);
+  block-size: px(40);
+  border: 1px solid #31475A;
+  border-radius: var(--mv-radius-s);
+}
+
+.header__profile {
+  position: relative; // for the dropdown
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mv-spacing-m);
+  padding: var(--mv-spacing-m);
+
+  svg {
+    fill: currentColor;
+  }
+}
+
+.profile {
+  display: flex;
+  inline-size: px(64);
+  block-size: px(32);
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: currentColor;
+  cursor: pointer;
+}
+
+.profile__initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inline-size: px(32);
+  block-size: 100%;
+  background: $brand;
+  border-radius: 100%;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.profile__indicator {
+  width: px(32);
+  height: px(32);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: px(16);
+    height: px(16);
+  }
+}
+
+.layout {
+  padding-inline-start: var(--mv-spacing-xs);
+  padding-inline-end: var(--mv-spacing-xs);
+  padding-block-end: var(--mv-spacing-xs);
+}
+
+
+.component {
+  color: var(--mv-text-primary);
+  background: var(--mv-background-primary);
+  border-radius: var(--mv-radius-m);
+  padding: 1rem;
+
+  @include breakpoint($breakpoint2) {
+    min-inline-size: 0;
+  }
+}
+
+.sidebar--left {
+  & > .inner {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+}
+
+.sidebar--right {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15), 0 0 24px rgba(0, 0, 0, 0.25);
+  color: var(--mv-text-primary);
+  background: var(--mv-background-primary);
+  overflow: hidden;
+  display: flex;
+  border: 1px solid #B7CAD7;
+
+  & > .inner {
+    padding: var(--mv-spacing-m);
+    overflow: auto;
+    flex: 1 1 auto;
+  }
+}
+
+.sidebar--component {
+  display: flex;
+  flex-direction: column;
+
+  & > .inner {
+    background: #fff;
+    border: 1px solid #B7CAD7;
+    border-radius: .5rem;
+    overflow: auto;
+    flex: 1 1 auto;
+    padding: 1rem;
+  }
+}
+
+.button {
+  background: #D4E3ED;
+  border: 1px solid #B7CAD7;
+  border-radius: var(--mv-radius-s);
+  min-height: var(--mv-spacing-xl);
+  display: flex;
+  align-items: center;
+  padding: var(--mv-spacing-xs) var(--mv-spacing-s);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.navigation-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  padding: px(8) 0;
+
+  hr {
+    border: none;
+    width: 100%;
+    height: 1px;
+    background: rgba(#fff, .2);
+    margin: 1rem 0;
+  }
+
+  .navigation:last-child:not(:first-child) {
+    margin-top: auto;
+  }
+}
+
+.navigation__heading {
+  font-size: var(--mv-font-size-m);
+  color: #ACC6D9;
+  padding: var(--mv-spacing-m);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+}
+
+.navigation__list {
+  padding-left: 0;
+  padding-right: px(8);
+  display: flex;
+  flex-direction: column;
+  gap: px(8);
+  margin: 0;
+
+  & > ::marker {
+    font-size: 0;
+  }
+
+  li {
+    padding-left: px(10);
+
+    @include pseudo(before) {
+      top: px(6);
+      left: 0;
+      bottom: px(6);
+      width: px(4);
+      background: #40b2ff;
+      border-radius: 3px;
+      opacity: 0;
+    }
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: px(16);
+    padding: px(9) px(8);
+    font-size: var(--mv-font-size-xl);
+    border: 1px solid transparent;
+    border-radius: var(--mv-radius-s);
+
+    svg {
+      width: 16px;
+      height: 16px;
+      fill: #a7d8f3;
+    }
+
+    @include hover() {
+      background: #283b65;
+      border-color: #3d5075;
+    }
+  }
+
+  .is\:active {
+    &::before {
+      opacity: 1;
+    }
+
+    a {
+      background: #283b65;
+      border-color: #3d5075;
+    }
+  }
+}
+
+.filler {
+  flex-grow: 1;
+}
+
+.toggle-wrapper--sidebar-right {
+  padding-right: var(--mv-spacing-m);
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 9; // @TODO: add z-index SCSS map
+  width: px(240);
+  color: #000;
+  background: #fff;
+  border-radius: var(--mv-radius-s);
+  border: 1px solid #B7CAD7;
+  box-shadow: 0 0 12px rgba(#000, .15);
+  overflow: hidden; // for the radius
+  display: none;
+
+  ul {
+    padding-left: 0;
+    margin: 0;
+
+    & > ::marker {
+      font-size: 0;
+    }
+
+    li + li {
+      border-top: 1px solid #e0e0e0;
+    }
+
+    a {
+      display: block;
+      padding: .75em 1em;
+
+      @include hover() {
+        background: #d4e3ee;
+      }
+    }
+  }
+}
+
+.uikit.has\:toggled-profile {
+  .profile-dropdown {
+    display: block;
+  }
+}
+
+
+// @TODO: We probably want to revisit this
+.layout {
+  overflow: hidden; // for the sidebar overflow hidden to work
+}
+
+.sidebar--left {
+  overflow: hidden; // fo the inner overflow auto to work
+
+  & > .inner {
+    overflow: auto;
+  }
+}
+
+
+
+.toggle-search {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  width: px(32);
+  height: px(32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(#fff, .66);
+  border-radius: 100%;
+}
+
+
+.sidebar__tabs {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  margin-bottom: -1px;
+
+  ul {
+    padding-left: 0;
+    display: flex;
+    gap: .5rem;
+    margin: 0;
+
+    & > ::marker {
+      font-size: 0;
+    }
+
+    li {
+      padding-bottom: 1px;
+    }
+
+    a {
+      display: flex;
+      border-radius: .5em .5em 0 0;
+      padding: .65em 1em;
+      border: 1px solid transparent;
+      border-bottom-width: 0;
+
+      @include hover() {
+        background: rgba(#fff, .5);
+        border-color: rgba(#b7cad7, .5);
+      }
+    }
+
+    .is\:active {
+      padding-bottom: 0;
+
+      a {
+        background: #fff;
+        border-color: #b7cad7;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.sidebar--component:has(.sidebar__tabs li:first-child.is\:active) {
+  & > .inner {
+    border-top-left-radius: 0;
+  }
+}
+
+.tab-content {
+  display: none;
+  overflow: auto;
+
+  &.is\:active {
+    display: block;
+  }
+}
+
+.filters {
+  bordeR: 1px solid #BFD0DB;
+  background: #fff;
+  border-radius: var(--mv-radius-s);
+  min-height: px(40);
+  display: flex;
+}
+
+.filters__icon {
+  width: px(40);
+  height: px(40);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter {
+  position: relative; // for the dropdown
+
+  button {
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    color: inherit;
+    cursor: pointer;
+    border: 1px solid #B7CAD7;
+    height: calc(100% + 2px);
+    margin: -1px;
+    padding: 0 1em;
+    display: flex;
+    gap: .5em;
+    align-items: center;
+
+    @include hover() {
+      background: #d4e3ed;
+    }
+  }
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  width: 100vw;
+  max-width: px(320);
+  background: #fff;
+  border: 1px solid #B7CAD7;
+  box-shadow: 0 0 12px rgba(#000, .15);
+  border-radius: 0 0  var(--mv-radius-s) var(--mv-radius-s);
+  padding: 1rem;
+}
+
+.content {
+  background: #fff;
+  border: 1px solid #B7CAD7;
+  padding: 1rem;
+  border-radius: var(--mv-radius-s);
+  font-size: var(--mv-font-size-3xl);
+}
+
+.reset-filters {
+  margin-left: auto;
+  display: flex;
+  padding: 1em;
+  align-items: center;
+
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.content {
+  overflow: auto;
+}
+
+.scroll-example-block {
+  min-height: 100vh;
+  background: rgba(#000, .05);
+  border-radius: .5rem;
+  border: 1px solid rgba(#000, .05);
+  padding: 1rem;
+  font-size: 14px;
+  margin-top: 1rem;
+}
+
+.sidebar__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem;
+  background: #fff;
+  border-bottom: 1px solid #B7CAD7;
+
+  .cluster {
+    flex: 0 0 auto;
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+
+    svg {
+      width: px(16);
+      height: px(16);
+    }
+  }
+}
+
+.sidebar__title {
+  font-weight: bold;
+}
+
+// @TODO: Add always visible scrollbars?

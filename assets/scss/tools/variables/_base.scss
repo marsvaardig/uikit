@@ -1,0 +1,13 @@
+@use "../illusion" as *;
+
+// Primitive colors as SCSS variables
+$brand: #3FB2FF;
+$brand-light-shade: #A7D8F3;
+$brand-dark-shade1: #1D1C41;
+$brand-dark-shade2: #142848;
+$brand-light-accent1: #F6F6F9;
+$brand-light-accent2: #FFFFFF;
+
+// Breakpoints
+$breakpoint1: px(480);
+$breakpoint2: px(768);

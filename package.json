@@ -1,0 +1,17 @@
+{
+  "name": "uikit",
+  "version": "0.0.1",
+  "description": "",
+  "author": "Marsvaardig",
+  "scripts": {
+    "start": "node ./scripts/development/build.js"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.3",
+    "sass": "^1.86.1"
+  },
+  "dependencies": {
+    "illusion": "github:marsvaardig/illusion#v8.1.0",
+    "modern-normalize": "^3.0.1"
+  }
+}

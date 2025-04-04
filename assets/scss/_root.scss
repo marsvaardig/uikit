@@ -1,0 +1,88 @@
+@use "tools" as *;
+
+:root {
+  /* Spacing */
+  --mv-spacing-xs: #{px(8)};
+  --mv-spacing-s: #{px(12)};
+  --mv-spacing-m: #{px(16)};
+  --mv-spacing-l: #{px(24)};
+  --mv-spacing-xl: #{px(32)};
+
+  /* Gap */
+  --mv-cluster-gap: var(--mv-spacing-s);
+
+  /* Sizing */
+  --mv-font-size-s: #{px(11)};
+  --mv-font-size-m: #{px(12)};
+  --mv-font-size-l: #{px(13)};
+  --mv-font-size-xl: #{px(14)};
+  --mv-font-size-2xl: #{px(15)};
+  --mv-font-size-3xl: #{px(20)};
+
+  /* Radius */
+  --mv-radius-s: #{px(6)};
+  --mv-radius-m: #{px(12)};
+
+  /* Background */
+  --mv-background-primary: #{$brand-light-accent1};
+  --mv-background-invert: #{$brand-dark-shade1};
+  --mv-background-invert-gradient: #{$brand-dark-shade2};
+
+  /* Surface */
+
+  /* Control */
+
+  /* Type */
+  --mv-text-primary: #{$brand-dark-shade1};
+  --mv-text-invert: #{$brand-light-accent1};
+
+  /* Components */
+  --mv-scrollbar-width: 0;
+  --mv-sidebar-left-width: #{px(240)};
+  --mv-sidebar-left-min-width: #{px(200)};
+  --mv-sidebar-right-width: #{px(320)};
+  --mv-sidebar-right-min-width: #{px(200)};
+  --mv-sidebar-component-width: #{px(240)};
+  --mv-sidebar-component-min-width: #{px(200)};
+  --mv-sidebar-component-hide: #{px(40)};
+
+  --mv-mobile: 1;
+
+  @include breakpoint($breakpoint2) {
+    --mv-mobile: 0;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  position: fixed;
+  width: 100%;
+}
+
+html {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  color: #fff;
+  background: var(--body, linear-gradient(180deg, var(--mv-background-invert) 0%, var(--mv-background-invert-gradient) 100%));
+  font-family: 'Ubuntu', sans-serif;
+  height: 100%;
+  overflow: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+svg {
+  fill: currentColor;
+}
