@@ -117,18 +117,68 @@
   cursor: ew-resize;
   display: none;
 
-  @include hover() {
-    background: $brand;
-  }
-
   @include breakpoint($breakpoint2) {
     display: block;
   }
 }
 
-.sidebar[data-resizing] {
+.sidebar--left {
   .sidebar__resizer {
-    background: $brand;
+    inset-block-start: 1rem;
+    inset-block-end: 1rem;
+    border-radius: 4px;
+
+    @include hover() {
+      background: $brand;
+    }
+  }
+
+  &[data-resizing] {
+    .sidebar__resizer {
+      background: $brand;
+    }
+  }
+}
+
+.sidebar--right {
+  .sidebar__resizer {
+    @include hover() {
+      background: linear-gradient(to bottom, rgba($brand, 0), rgba($brand, 1), rgba($brand, 1), rgba($brand, 0));
+    }
+  }
+
+  &[data-resizing] {
+    .sidebar__resizer {
+      background: linear-gradient(to bottom, rgba($brand, 0), rgba($brand, 1), rgba($brand, 1), rgba($brand, 0));
+    }
+  }
+}
+
+.sidebar--component {
+  .sidebar__resizer {
+    width: var(--mv-spacing-m);
+
+    @include pseudo(after, false) {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 3px;
+      height: 1rem;
+      border-left: 1px solid #b7c9de;
+      border-right: 1px solid #b7c9de;
+    }
+
+
+    @include hover() {
+      &::after {
+        border-color: #000;
+      }
+    }
+  }
+  &[data-resizing] {
+    .sidebar__resizer::after {
+      border-color: #000;
+    }
   }
 }
 
@@ -277,7 +327,7 @@
 .component {
   display: flex;
   flex: 1 1 auto;
-  gap: var(--mv-spacing-s);
+  gap: var(--mv-spacing-m);
   max-inline-size: 100%;
   flex-direction: column;
   min-inline-size: 100%;
@@ -370,6 +420,16 @@
     inset-inline-end: auto;
     inset-inline-start: 0;
     display: none;
+
+    @include pseudo(after, false) {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 3px;
+      height: 1rem;
+      border-left: 1px solid #b7c9de;
+      border-right: 1px solid #b7c9de;
+    }
   }
 
   @include breakpoint($breakpoint2) {
@@ -392,7 +452,7 @@
 .main {
   display: flex;
   flex: 1 1 auto;
-  gap: var(--mv-spacing-xs);
+  gap: var(--mv-spacing-m);
   transition: transform $layout-transition-duration ease-in-out;
   overflow: hidden;
 }
@@ -403,7 +463,7 @@
   transition: all $layout-transition-duration ease-in-out;
 
   @include breakpoint($breakpoint2) {
-    min-inline-size: calc(100% - var(--mv-sidebar-component-width) - var(--mv-spacing-xs))
+    min-inline-size: calc(100% - var(--mv-sidebar-component-width) - var(--mv-spacing-m))
   }
 }
 

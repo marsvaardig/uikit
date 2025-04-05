@@ -374,17 +374,51 @@ svg {
   cursor: ew-resize;
   display: none;
 }
-.sidebar__resizer:hover, .sidebar__resizer:focus {
-  background: #3FB2FF;
-}
 @media screen and (min-width: 48rem) {
   .sidebar__resizer {
     display: block;
   }
 }
 
-.sidebar[data-resizing] .sidebar__resizer {
+.sidebar--left .sidebar__resizer {
+  inset-block-start: 1rem;
+  inset-block-end: 1rem;
+  border-radius: 4px;
+}
+.sidebar--left .sidebar__resizer:hover, .sidebar--left .sidebar__resizer:focus {
   background: #3FB2FF;
+}
+.sidebar--left[data-resizing] .sidebar__resizer {
+  background: #3FB2FF;
+}
+
+.sidebar--right .sidebar__resizer:hover, .sidebar--right .sidebar__resizer:focus {
+  background: linear-gradient(to bottom, rgba(63, 178, 255, 0), #3fb2ff, #3fb2ff, rgba(63, 178, 255, 0));
+}
+.sidebar--right[data-resizing] .sidebar__resizer {
+  background: linear-gradient(to bottom, rgba(63, 178, 255, 0), #3fb2ff, #3fb2ff, rgba(63, 178, 255, 0));
+}
+
+.sidebar--component .sidebar__resizer {
+  width: var(--mv-spacing-m);
+}
+.sidebar--component .sidebar__resizer::after {
+  position: absolute;
+  content: " ";
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3px;
+  height: 1rem;
+  border-left: 1px solid #b7c9de;
+  border-right: 1px solid #b7c9de;
+}
+.sidebar--component .sidebar__resizer:hover::after, .sidebar--component .sidebar__resizer:focus::after {
+  border-color: #000;
+}
+.sidebar--component[data-resizing] .sidebar__resizer::after {
+  border-color: #000;
 }
 
 .has\:toggled-sidebar-left .header__brand {
@@ -518,7 +552,7 @@ svg {
 .component {
   display: flex;
   flex: 1 1 auto;
-  gap: var(--mv-spacing-s);
+  gap: var(--mv-spacing-m);
   max-inline-size: 100%;
   flex-direction: column;
   min-inline-size: 100%;
@@ -608,6 +642,18 @@ svg {
   inset-inline-start: 0;
   display: none;
 }
+.sidebar--right .sidebar__resizer::after {
+  position: absolute;
+  content: " ";
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3px;
+  height: 1rem;
+  border-left: 1px solid #b7c9de;
+  border-right: 1px solid #b7c9de;
+}
 @media screen and (min-width: 48rem) {
   .sidebar--right {
     min-inline-size: 3rem;
@@ -627,7 +673,7 @@ svg {
 .main {
   display: flex;
   flex: 1 1 auto;
-  gap: var(--mv-spacing-xs);
+  gap: var(--mv-spacing-m);
   transition: transform 300ms ease-in-out;
   overflow: hidden;
 }
@@ -639,7 +685,7 @@ svg {
 }
 @media screen and (min-width: 48rem) {
   .content {
-    min-inline-size: calc(100% - var(--mv-sidebar-component-width) - var(--mv-spacing-xs));
+    min-inline-size: calc(100% - var(--mv-sidebar-component-width) - var(--mv-spacing-m));
   }
 }
 
