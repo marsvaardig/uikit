@@ -433,6 +433,14 @@ svg {
     min-inline-size: 3rem;
   }
 }
+@media screen and (min-width: 48rem) {
+  .has\:toggled-sidebar-left .sidebar--left:hover, .has\:toggled-sidebar-left .sidebar--left:focus {
+    min-inline-size: var(--mv-sidebar-left-width);
+  }
+  .has\:toggled-sidebar-left .sidebar--left:hover .navigation-wrapper > .navigation, .has\:toggled-sidebar-left .sidebar--left:focus .navigation-wrapper > .navigation {
+    display: block;
+  }
+}
 .has\:toggled-sidebar-left .sidebar-toggle-left .is\:off {
   display: none;
 }

@@ -194,6 +194,18 @@
     @include breakpoint($breakpoint2) {
       min-inline-size: px(48);
     }
+
+    @include hover() {
+      @include breakpoint($breakpoint2) {
+        min-inline-size: var(--mv-sidebar-left-width);
+
+        .navigation-wrapper {
+          & > .navigation  {
+            display: block;
+          }
+        }
+      }
+    }
   }
 
   .sidebar-toggle-left {
