@@ -194,14 +194,18 @@
     @include breakpoint($breakpoint2) {
       min-inline-size: px(48);
     }
+  }
 
-    @include hover() {
-      @include breakpoint($breakpoint2) {
-        min-inline-size: var(--mv-sidebar-left-width);
+  &:not(.has\:resizing) {
+    .sidebar--left {
+      @include hover() {
+        @include breakpoint($breakpoint2) {
+          min-inline-size: var(--mv-sidebar-left-width);
 
-        .navigation-wrapper {
-          & > .navigation  {
-            display: block;
+          .navigation-wrapper {
+            & > *  {
+              display: block;
+            }
           }
         }
       }
@@ -211,9 +215,18 @@
   .sidebar-toggle-left {
     .is\:off {
       display: none;
+      
+      @include breakpoint($breakpoint2) {
+        display: block;
+      }
     }
+
     .is\:on {
       display: block;
+
+      @include breakpoint($breakpoint2) {
+        display: none;
+      }
     }
   }
 

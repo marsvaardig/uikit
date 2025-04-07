@@ -434,18 +434,28 @@ svg {
   }
 }
 @media screen and (min-width: 48rem) {
-  .has\:toggled-sidebar-left .sidebar--left:hover, .has\:toggled-sidebar-left .sidebar--left:focus {
+  .has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:hover, .has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:focus {
     min-inline-size: var(--mv-sidebar-left-width);
   }
-  .has\:toggled-sidebar-left .sidebar--left:hover .navigation-wrapper > .navigation, .has\:toggled-sidebar-left .sidebar--left:focus .navigation-wrapper > .navigation {
+  .has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:hover .navigation-wrapper > *, .has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:focus .navigation-wrapper > * {
     display: block;
   }
 }
 .has\:toggled-sidebar-left .sidebar-toggle-left .is\:off {
   display: none;
 }
+@media screen and (min-width: 48rem) {
+  .has\:toggled-sidebar-left .sidebar-toggle-left .is\:off {
+    display: block;
+  }
+}
 .has\:toggled-sidebar-left .sidebar-toggle-left .is\:on {
   display: block;
+}
+@media screen and (min-width: 48rem) {
+  .has\:toggled-sidebar-left .sidebar-toggle-left .is\:on {
+    display: none;
+  }
 }
 .has\:toggled-sidebar-left .navigation-wrapper > *:not(.navigation--persistent) {
   display: block;
