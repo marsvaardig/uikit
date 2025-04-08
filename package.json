@@ -1,14 +1,23 @@
 {
   "name": "uikit",
-  "version": "0.0.1",
-  "description": "",
-  "author": "Marsvaardig",
+  "version": "1.0.0",
+  "description": "Better Simpler UI",
   "scripts": {
-    "start": "node ./scripts/development/build.js"
+    "compile:sass": "npx sass src/assets/scss:_site/assets/css",
+    "watch:eleventy": "npx @11ty/eleventy --serve",
+    "watch:sass": "npx sass src/assets/scss:_site/assets/css --watch",
+    "build": "rm -rf _site && npm run compile:sass && npx @11ty/eleventy",
+    "start": "npm run build && npm run watch:eleventy & npm run watch:sass"
   },
+  "keywords": [],
+  "author": "Robin Poort",
   "devDependencies": {
-    "browser-sync": "^3.0.3",
-    "sass": "^1.86.1"
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-img": "^6.0.1",
+    "@factorial/eleventy-plugin-twig": "^0.2.1",
+    "clean-css": "^5.3.2",
+    "sass": "^1.86.3",
+    "twig": "^1.17.1"
   },
   "dependencies": {
     "illusion": "github:marsvaardig/illusion#v8.1.0",

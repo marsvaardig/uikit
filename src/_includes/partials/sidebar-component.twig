@@ -1,0 +1,31 @@
+<div class="sidebar sidebar--component" data-sidebar="component">
+    <div class="sidebar__resizer" data-sidebar-resizer="component" title="drag to resize; doubleclick to reset"></div>
+    <div class="sidebar__tabs" role="tablist" aria-label="Sidebar Tabs">
+        <ul>
+            <li class="is:active">
+                <a href="#tabs-1" role="tab" aria-selected="true" aria-controls="tabs-1" id="tab-1">Tab 1</a>
+            </li>
+            <li>
+                <a href="#tabs-2" role="tab" aria-selected="false" aria-controls="tabs-2" id="tab-2">Tab 2</a>
+            </li>
+            <li>
+                <a href="#tabs-3" role="tab" aria-selected="false" aria-controls="tabs-3" id="tab-3">Tab 3</a>
+            </li>
+        </ul>
+    </div>
+    <div class="inner">
+        <div id="tabs-1" class="tab-content is:active" role="tabpanel" aria-labelledby="tab-1">
+            Tab 1 content
+            <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
+        </div>
+        <div id="tabs-2" class="tab-content" role="tabpanel" aria-labelledby="tab-2" hidden>
+            Tab 2 content
+            <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
+        </div>
+        <div id="tabs-3" class="tab-content" role="tabpanel" aria-labelledby="tab-3" hidden>
+            Tab 3 content
+            <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
+        </div>
+    </div>
+    <div class="sidebar-overlay-toggle" data-sidebar-toggle="component"></div>
+</div>

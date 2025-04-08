@@ -1,0 +1,48 @@
+<div class="filters">
+    <div class="filters__icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.121956 1.71563C0.328206 1.27813 0.765706 1 1.25008 1H14.7501C15.2345 1 15.672 1.27813 15.8782 1.71563C16.0845 2.15313 16.022 2.66875 15.7157 3.04375L10.0001 10.0281V14C10.0001 14.3781 9.78758 14.725 9.44696 14.8938C9.10633 15.0625 8.70321 15.0281 8.40008 14.8L6.40008 13.3C6.14696 13.1125 6.00008 12.8156 6.00008 12.5V10.0281L0.281331 3.04063C-0.0217942 2.66875 -0.0874192 2.15 0.121956 1.71563Z" fill="#2697E1"/>
+        </svg>
+    </div>
+    {% if toolbarBody %}
+        {{ toolbarBody|raw }}
+    {% else %}
+        <div class="filter">
+            <button type="button" class="filter-toggle" aria-expanded="false" aria-controls="dropdown-1" id="toggle-1">
+                Filter 1
+                <span class="amount-label">2</span>
+                <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.14228 5.35319C4.33804 5.54894 4.65457 5.54894 4.84824 5.35319L8.84866 1.35485C9.04441 1.1591 9.04441 0.842566 8.84866 0.648896C8.6529 0.455227 8.33637 0.453145 8.1427 0.648896L4.49839 4.29321L0.85199 0.646814C0.656238 0.451062 0.339703 0.451062 0.146034 0.646814C-0.0476354 0.842566 -0.0497178 1.1591 0.146034 1.35277L4.14228 5.35319Z" fill="black"/>
+                </svg>
+            </button>
+            <div class="filter-dropdown" id="dropdown-1" hidden>
+                This is the dropdown
+            </div>
+        </div>
+        <div class="filter">
+            <button type="button" class="filter-toggle" aria-expanded="false" aria-controls="dropdown-2" id="toggle-2">
+                Filter 2
+                <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.14228 5.35319C4.33804 5.54894 4.65457 5.54894 4.84824 5.35319L8.84866 1.35485C9.04441 1.1591 9.04441 0.842566 8.84866 0.648896C8.6529 0.455227 8.33637 0.453145 8.1427 0.648896L4.49839 4.29321L0.85199 0.646814C0.656238 0.451062 0.339703 0.451062 0.146034 0.646814C-0.0476354 0.842566 -0.0497178 1.1591 0.146034 1.35277L4.14228 5.35319Z" fill="black"/>
+                </svg>
+            </button>
+            <div class="filter-dropdown" id="dropdown-2" hidden>
+                This is the dropdown
+            </div>
+        </div>
+        <div class="filter">
+            <button type="button" class="filter-toggle" aria-expanded="false" aria-controls="dropdown-3" id="toggle-3">
+                Filter 3
+                <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.14228 5.35319C4.33804 5.54894 4.65457 5.54894 4.84824 5.35319L8.84866 1.35485C9.04441 1.1591 9.04441 0.842566 8.84866 0.648896C8.6529 0.455227 8.33637 0.453145 8.1427 0.648896L4.49839 4.29321L0.85199 0.646814C0.656238 0.451062 0.339703 0.451062 0.146034 0.646814C-0.0476354 0.842566 -0.0497178 1.1591 0.146034 1.35277L4.14228 5.35319Z" fill="black"/>
+                </svg>
+            </button>
+            <div class="filter-dropdown" id="dropdown-3" hidden>
+                This is the dropdown
+            </div>
+        </div>
+    {% endif %}
+    <div class="reset-filters">
+        <button type="button">Reset filters</button>
+    </div>
+</div>
