@@ -47,6 +47,7 @@
   --mv-sidebar-component-max-width: #{px(560)};
   --mv-sidebar-component-hide: #{px(40)};
 
+  /* Mobile indicator */
   --mv-mobile: 1;
 
   @include breakpoint($breakpoint2) {

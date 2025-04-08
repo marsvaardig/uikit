@@ -13,14 +13,18 @@
             profile: profile|default(true),
         } %}
         <div class="layout">
-            {% include "../partials/sidebar-left.twig" with {
-                sidebarLeftBody: sidebarLeftBody|default(''),
-            } %}
+            {% if viewType == 'dashboard' or viewType == 'table' %}
+                {% include "../partials/sidebar-left.twig" with {
+                    sidebarLeftBody: sidebarLeftBody|default(''),
+                } %}
+            {% endif %}
             <div class="component">
-                {% if viewType == 'table' %}
+                {% if viewType == 'table' or viewType == 'item' %}
                     {% include "../partials/toolbar.twig" with {
                         toolbarBody: toolbarBody|default(''),
                     } %}
+                {% endif %}
+                {% if viewType == 'table' %}
                     {% include "../partials/filters.twig" with {
                         filterBody: filterBody|default(''),
                     } %}
