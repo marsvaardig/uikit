@@ -367,4 +367,42 @@
   }
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  const tree = document.querySelector(".tree-nav");
+  if (!tree) return;
+  
+  const pageId = document.body.id || "default";
+  const stateKey = `tree-nav-state:${pageId}`;
+  let savedState = JSON.parse(localStorage.getItem(stateKey) || "{}");
+  
+  // Herstel opgeslagen open/gesloten status
+  for (const [id, isOpen] of Object.entries(savedState)) {
+    const li = tree.querySelector(`li[data-id="${id}"]`);
+    if (li && isOpen) li.classList.add("open");
+  }
+  
+  tree.addEventListener("click", (e) => {
+    const toggle = e.target.closest("button.toggle");
+    if (!toggle) return;
+    
+    const li = toggle.closest("li[data-id]");
+    const id = li?.dataset.id;
+    if (!id) return;
+    
+    li.classList.toggle("open");
+    savedState[id] = li.classList.contains("open");
+    localStorage.setItem(stateKey, JSON.stringify(savedState));
+  });
+  
 })();

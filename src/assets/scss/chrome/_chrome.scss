@@ -1,4 +1,4 @@
-@use "tools" as *;
+@use "../tools" as *;
 
 // @TODO: Cleanup chrome styles
 // @TODO: All values should be variables
@@ -12,18 +12,21 @@
   --mv-chrome-spacing-s: var(--mv-spacing-xs);
   --mv-chrome-spacing-m: var(--mv-spacing-m);
   --mv-chrome-spacing-l: var(--mv-spacing-l);
+
   // Radius
   --mv-chrome-radius-s: var(--mv-radius-s);
   --mv-chrome-radius-m: var(--mv-radius-m);
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
   // Color
 
   // Chrome style
   font-size: var(--mv-font-size-m);
-  display: flex;
-  flex-direction: column;
   block-size: 100vh;
-  min-block-size: px(320); // So we are usable on not so tall screens
-  overflow: hidden;
+  min-block-size: $uikit-min-height;
 }
 
 .header {
@@ -36,21 +39,34 @@
 
 .header__brand {
   display: flex;
+  flex: 1 1 auto;
   align-items: center;
   gap: var(--mv-chrome-spacing-m);
   padding: var(--mv-chrome-spacing-m) 0;
-  font-weight: bold;
+  overflow: hidden;
   font-size: var(--mv-font-size-2xl);
-  @include transition(min-inline-size $layout-transition-duration ease-in-out);
+  font-weight: 700;
 
-  @include breakpoint($breakpoint2) {
+  @include transition(min-inline-size $chrome-transition-duration ease-in-out);
+
+  @include breakpoint($chrome-breakpoint2) {
     min-inline-size: calc(var(--mv-sidebar-left-width) - (var(--mv-chrome-spacing-m) * 2));
+  }
+
+  svg {
+    flex: 0 0 auto;
   }
 }
 
+.brand-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .header__search {
-  flex: 1 1 auto;
   display: flex;
+  flex: 1 1 auto;
   align-items: center;
   justify-content: center;
   padding: var(--mv-chrome-spacing-m) 0;
@@ -65,31 +81,31 @@
     [type="search"] {
       width: 100%;
       height: px(40);
+      padding-right: 1rem;
+      padding-left: px(40);
       background: #fff;
       border: none;
       border-radius: var(--mv-radius-s);
-      padding-left: px(40);
-      padding-right: 1rem;
     }
 
     button {
       position: absolute;
       top: 0;
       left: 0;
-      height: px(40);
-      width: px(40);
-      background: transparent;
-      border: none;
-      padding: 0;
-      color: #93AFC2;
-      line-height: 1;
       display: flex;
       align-items: center;
       justify-content: center;
+      width: px(40);
+      height: px(40);
+      padding: 0;
+      line-height: 1;
+      color: #93AFC2;
       cursor: pointer;
+      background: transparent;
+      border: none;
       border-radius: var(--mv-radius-s) 0 0 var(--mv-radius-s);
 
-      @include hover() {
+      @include hover {
         color: #000;
         background: #d4e3ee;
       }
@@ -105,16 +121,16 @@
   display: none;
   padding: var(--mv-chrome-spacing-m) 0;
 
-  @include breakpoint($breakpoint2) {
+  @include breakpoint($chrome-breakpoint2) {
     display: flex;
   }
 
   select {
     height: px(40);
+    padding: px(6) .5rem;
     background: #fff;
     border: none;
     border-radius: var(--mv-radius-s);
-    padding: px(6) .5rem;
   }
 }
 
@@ -123,7 +139,7 @@
   gap: px(12);
   padding: var(--mv-chrome-spacing-m) 0;
 
-  @include breakpoint($breakpoint1) {
+  @include breakpoint($chrome-breakpoint1) {
     display: flex;
   }
 }
@@ -139,47 +155,47 @@
 }
 
 .header__profile {
+  position: relative; // for the dropdown
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative; // for the dropdown
   gap: var(--mv-spacing-m);
   padding: var(--mv-chrome-spacing-m) 0;
 
   svg {
-    fill: currentColor;
+    fill: currentcolor;
   }
 }
 
 .profile {
   display: flex;
-  inline-size: px(64);
-  block-size: px(32);
+  padding: 0;
+  color: currentcolor;
+  cursor: pointer;
   background: transparent;
   border: none;
-  padding: 0;
-  color: currentColor;
-  cursor: pointer;
+  inline-size: px(32);
+  block-size: px(32);
 }
 
 .profile__initials {
   display: flex;
-  justify-content: center;
   align-items: center;
-  inline-size: px(32);
-  block-size: 100%;
-  background: $brand;
-  border-radius: 100%;
+  justify-content: center;
   font-size: 16px;
   font-weight: 700;
+  background: $brand;
+  border-radius: 100%;
+  inline-size: px(32);
+  block-size: 100%;
 }
 
 .profile__indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: px(32);
   height: px(32);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   svg {
     width: px(16);
@@ -192,26 +208,25 @@
   display: flex;
   flex: 1 1 auto;
   max-inline-size: 100%;
-  padding-inline-start: var(--mv-chrome-spacing-s);
-  padding-inline-end: var(--mv-chrome-spacing-s);
+  padding-inline: var(--mv-chrome-spacing-s) var(--mv-chrome-spacing-s);
   padding-block-end: var(--mv-chrome-spacing-s);
   overflow: hidden; // for the sidebar overflow hidden to work
 }
 
 .component {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--mv-chrome-spacing-m);
+  padding: var(--mv-chrome-spacing-m);
+  overflow: hidden;
   color: var(--mv-text-primary);
   background: var(--mv-background-primary);
   border-radius: var(--mv-chrome-radius-m);
-  padding: var(--mv-chrome-spacing-m);
-  display: flex;
-  flex: 1 1 auto;
-  gap: var(--mv-chrome-spacing-m);
   max-inline-size: 100%;
-  flex-direction: column;
   min-inline-size: 100%;
-  overflow: hidden;
 
-  @include breakpoint($breakpoint2) {
+  @include breakpoint($chrome-breakpoint2) {
     min-inline-size: 0;
   }
 }
@@ -223,46 +238,61 @@
 }
 
 .sidebar--left {
-  inline-size: px(48);
-  max-inline-size: min(33vw, px(320));
-  overflow: hidden; // fo the inner overflow auto to work
-  margin-inline-start: px(-8);
-  transition: inline-size $layout-transition-duration ease-in-out, min-inline-size $layout-transition-duration ease-in-out;
+  display: flex;
   flex: 0 0 auto;
   max-height: 100%;
-  display: flex;
+  overflow: hidden; // fo the inner overflow auto to work
+  transition: inline-size $chrome-transition-duration ease-in-out, min-inline-size $chrome-transition-duration ease-in-out;
+  inline-size: px(48);
+  max-inline-size: min(33vw, px(320));
+  margin-inline-start: px(-8);
 
-  @include breakpoint($breakpoint2) {
+  @include breakpoint($chrome-breakpoint2) {
     inline-size: var(--mv-sidebar-left-width);
   }
 
   & > .inner {
-    min-inline-size: max(var(--mv-sidebar-left-width), var(--mv-sidebar-left-min-width));
     display: flex;
-    flex-direction: column;
     flex: 1 1 auto;
+    flex-direction: column;
     overflow: hidden;
+    min-inline-size: min(min(33vw, px(320)), max(var(--mv-sidebar-left-width), var(--mv-sidebar-left-min-width)));
+  }
+
+  .sidebar__resizer {
+    inset-block: 1rem;
+    border-radius: 4px;
+
+    @include hover {
+      background: $brand;
+    }
+  }
+
+  &[data-resizing] {
+    .sidebar__resizer {
+      background: $brand;
+    }
   }
 }
 
 .sidebar__body {
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15), 0 0 24px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  max-height: 100%;
+  overflow: hidden;
   color: var(--mv-text-primary);
   background: var(--mv-background-primary);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  flex: 1 1 auto;
-  max-height: 100%;
+  box-shadow: 0 0 12px rgb(0 0 0 / 15%), 0 0 24px rgb(0 0 0 / 25%);
 
   & > * {
     min-inline-size: calc(var(--mv-sidebar-right-min-width) - #{px(8)});
   }
 
   & > .inner {
+    flex: 1 1 auto;
     padding: var(--mv-spacing-m);
     overflow: auto;
-    flex: 1 1 auto;
   }
 }
 
@@ -281,79 +311,51 @@
 
 .sidebar__resizer {
   position: absolute;
-  inset-block-start: 0;
-  inset-block-end: 0;
-  inset-inline-end: 0;
   z-index: 9;
-  inline-size: px(8);
-  background: transparent;
-  cursor: ew-resize;
   display: none;
+  cursor: ew-resize;
+  background: transparent;
+  inset-block: 0;
+  inset-inline-end: 0;
+  inline-size: px(8);
 
-  @include breakpoint($breakpoint2) {
+  @include breakpoint($chrome-breakpoint2) {
     display: block;
   }
 }
 
-.sidebar--left {
-  .sidebar__resizer {
-    inset-block-start: 1rem;
-    inset-block-end: 1rem;
-    border-radius: 4px;
 
-    @include hover() {
-      background: $brand;
-    }
+
+
+
+.navigation-wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  overflow: auto; // for the overflow container
+
+  hr {
+    width: 100%;
+    height: 1px;
+    margin: 1rem 0;
+    background: rgba(#fff, .2);
+    border: none;
   }
 
-  &[data-resizing] {
-    .sidebar__resizer {
-      background: $brand;
-    }
-  }
-}
-
-.sidebar--right {
-  .sidebar__resizer {
-    @include hover() {
-      background: linear-gradient(to bottom, rgba($brand, 0), rgba($brand, 1), rgba($brand, 1), rgba($brand, 0));
-    }
+  .navigation:last-child:not(:first-child) {
+    margin-top: auto;
   }
 
-  &[data-resizing] {
-    .sidebar__resizer {
-      background: linear-gradient(to bottom, rgba($brand, 0), rgba($brand, 1), rgba($brand, 1), rgba($brand, 0));
-    }
-  }
-}
+  .overflow > *:not(.navigation--persistent) {
+    display: none;
 
-.sidebar--component {
-  .sidebar__resizer {
-    width: var(--mv-spacing-m);
-
-    @include pseudo(after, false) {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 3px;
-      height: 1rem;
-      border-left: 1px solid #b7c9de;
-      border-right: 1px solid #b7c9de;
-    }
-
-
-    @include hover() {
-      &::after {
-        border-color: #000;
-      }
-    }
-  }
-  &[data-resizing] {
-    .sidebar__resizer::after {
-      border-color: #000;
+    @include breakpoint($chrome-breakpoint2) {
+      display: block;
     }
   }
 }
+
+
 
 .has\:toggled-sidebar-left {
   .header__brand {
@@ -364,18 +366,18 @@
     min-inline-size: calc(100vw - #{px(16)});
     inline-size: px(48);
 
-    @include breakpoint($breakpoint2) {
+    @include breakpoint($chrome-breakpoint2) {
       min-inline-size: px(48);
     }
   }
 
   &:not(.has\:resizing) {
     .sidebar--left {
-      @include hover() {
-        @include breakpoint($breakpoint2) {
+      @include hover {
+        @include breakpoint($chrome-breakpoint2) {
           min-inline-size: var(--mv-sidebar-left-width);
 
-          .navigation-wrapper {
+          .overflow {
             & > *  {
               display: block;
             }
@@ -389,7 +391,7 @@
     .is\:off {
       display: none;
 
-      @include breakpoint($breakpoint2) {
+      @include breakpoint($chrome-breakpoint2) {
         display: block;
       }
     }
@@ -397,46 +399,19 @@
     .is\:on {
       display: block;
 
-      @include breakpoint($breakpoint2) {
+      @include breakpoint($chrome-breakpoint2) {
         display: none;
       }
     }
   }
 
-  .navigation-wrapper {
+  .overflow {
     & > *:not(.navigation--persistent) {
       display: block;
 
-      @include breakpoint($breakpoint2) {
+      @include breakpoint($chrome-breakpoint2) {
         display: none;
       }
-    }
-  }
-}
-
-.navigation-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  overflow: auto; // for the overflow container
-
-  hr {
-    border: none;
-    width: 100%;
-    height: 1px;
-    background: rgba(#fff, .2);
-    margin: 1rem 0;
-  }
-
-  .navigation:last-child:not(:first-child) {
-    margin-top: auto;
-  }
-
-  & > *:not(.navigation--persistent) {
-    display: none;
-
-    @include breakpoint($breakpoint2) {
-      display: block;
     }
   }
 }
@@ -446,10 +421,10 @@
     transform: translateX(0);
 
     &[data-sidebar-type="sidebar"] {
-      @include breakpoint($breakpoint2) {
-        margin-right: 0;
+      @include breakpoint($chrome-breakpoint2) {
         display: flex;
-        animation: slideInRight $layout-transition-duration ease-in-out;
+        margin-right: 0;
+        animation: slide-in-right $chrome-transition-duration ease-in-out;
         min-inline-size: var(--mv-sidebar-right-min-width);
       }
     }
@@ -464,7 +439,7 @@
   }
 }
 
-@keyframes slideInRight {
+@keyframes slide-in-right {
   from {
     min-inline-size: 0;
     max-inline-size: 0;
@@ -477,26 +452,27 @@
 }
 
 .sidebar-overlay-toggle {
-  background: #fff;
   z-index: 1;
-  opacity: .65;
   cursor: pointer;
+  background: #fff;
   border-radius: var(--mv-chrome-radius-s);
-  @include coverall();
-  @include transition(background $layout-transition-duration ease-in-out);
+  opacity: .65;
 
-  @include hover() {
+  @include coverall;
+  @include transition(background $chrome-transition-duration ease-in-out);
+
+  @include hover {
     background: $brand;
   }
 
-  @include breakpoint($breakpoint2) {
+  @include breakpoint($chrome-breakpoint2) {
     display: none;
   }
 }
 
 .has\:toggled-sidebar-component {
   .sidebar--component {
-    @include breakpoint($breakpoint2) {
+    @include breakpoint($chrome-breakpoint2) {
       min-inline-size: var(--mv-sidebar-component-width);
     }
 
@@ -507,7 +483,7 @@
     .sidebar-overlay-toggle {
       display: none;
 
-      @include breakpoint($breakpoint2) {
+      @include breakpoint($chrome-breakpoint2) {
         display: block;
       }
     }
@@ -517,14 +493,14 @@
     & > * {
       transform: translateX(calc((min(var(--mv-sidebar-component-width), 100%) * -1) + var(--mv-sidebar-component-hide) - #{px(8)}));
 
-      @include breakpoint($breakpoint2) {
+      @include breakpoint($chrome-breakpoint2) {
         transform: none;
       }
     }
   }
 
   .content {
-    @include breakpoint($breakpoint2) {
+    @include breakpoint($chrome-breakpoint2) {
       min-inline-size: calc(100% - var(--mv-sidebar-component-hide));
     }
   }
@@ -534,7 +510,7 @@
   .component {
     min-inline-size: calc(100vw - #{px(48)} - #{px(8)});
 
-    @include breakpoint($breakpoint2) {
+    @include breakpoint($chrome-breakpoint2) {
       min-inline-size: 0;
     }
   }
@@ -548,27 +524,27 @@
 
 .cluster {
   display: flex;
+  flex: 1 1 auto;
   flex-wrap: wrap;
   gap: var(--mv-cluster-gap);
-  flex: 1 1 auto;
 }
 
 .visually\:hidden {
-  @include visually-hidden();
+  @include visually-hidden;
 }
 
 .sidebar--right {
   position: absolute;
   top: 0;
-  bottom: px(8);
   right: 0;
+  bottom: px(8);
   z-index: 9;
   flex: 0 0 auto;
+  flex-direction: column;
+  transition: transform $chrome-transition-duration ease-in-out, inline-size $chrome-transition-duration ease-in-out, margin $chrome-transition-duration ease-in-out;
+  transform: translateX(100%);
   max-inline-size: calc(100vw - #{px(96)});
   inline-size: var(--mv-sidebar-right-width);
-  transform: translateX(100%);
-  transition: transform $layout-transition-duration ease-in-out, inline-size $layout-transition-duration ease-in-out, margin $layout-transition-duration ease-in-out;
-  flex-direction: column;
 
   .sidebar__body {
     border-radius: var(--mv-chrome-radius-m) 0 0 var(--mv-chrome-radius-m);
@@ -576,15 +552,15 @@
   }
 
   &[data-sidebar-type="sidebar"] {
-    @include breakpoint($breakpoint2) {
+    @include breakpoint($chrome-breakpoint2) {
       position: relative;
       bottom: auto;
+      margin-right: px(-8);
+      transform: none;
+      animation: slide-out-right $chrome-transition-duration ease-in-out forwards;
       min-inline-size: calc(100vw - #{px(48)});
       max-inline-size: 40vw;
       padding-inline-start: px(8);
-      margin-right: px(-8);
-      animation: slideOutRight $layout-transition-duration ease-in-out forwards;
-      transform: none;
 
       .sidebar__body {
         border-radius: var(--mv-chrome-radius-m);
@@ -596,16 +572,22 @@
     }
   }
 
+  &[data-resizing] {
+    .sidebar__resizer {
+      background: linear-gradient(to bottom, rgba($brand, 0), rgba($brand, 1), rgba($brand, 1), rgba($brand, 0));
+    }
+  }
+
   // @TODO: 8 and 16 px should be variables
   &[data-sidebar-type="cover"] {
     position: fixed;
     top: px(8);
-    left: px(8);
     right: px(8);
+    left: px(8);
     z-index: 11;
+    border-radius: var(--mv-chrome-radius-m);
     max-inline-size: calc(100% - #{px(16)});
     inline-size: calc(100% - #{px(16)});
-    border-radius: var(--mv-chrome-radius-m);
 
     [data-sidebar-type-toggle="cover"] {
       display: none;
@@ -616,6 +598,7 @@
     .sidebar__resizer {
       inset-inline-start: 0;
     }
+
     [data-sidebar-type-toggle="float"] {
       display: none;
     }
@@ -626,27 +609,30 @@
   }
 
   .sidebar__resizer {
-    inset-inline-end: auto;
-    inset-inline-start: 0;
+    inset-inline: 0 auto;
     display: none;
+
+    @include hover {
+      background: linear-gradient(to bottom, rgba($brand, 0), rgba($brand, 1), rgba($brand, 1), rgba($brand, 0));
+    }
 
     @include pseudo(after, false) {
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
       width: 3px;
       height: 1rem;
-      border-left: 1px solid #b7c9de;
       border-right: 1px solid #b7c9de;
+      border-left: 1px solid #b7c9de;
+      transform: translate(-50%, -50%);
     }
   }
 
-  @include breakpoint($breakpoint2) {
+  @include breakpoint($chrome-breakpoint2) {
     min-inline-size: px(48);
   }
 }
 
-@keyframes slideOutRight {
+@keyframes slide-out-right {
   from {
     min-inline-size: min(var(--mv-sidebar-right-width), 40vw);
     max-inline-size: min(var(--mv-sidebar-right-width), 40vw);
@@ -662,54 +648,79 @@
   display: flex;
   flex: 1 1 auto;
   gap: var(--mv-chrome-spacing-m);
-  transition: transform $layout-transition-duration ease-in-out;
   overflow: hidden;
+  transition: transform $chrome-transition-duration ease-in-out;
 }
 
 .content {
   flex: 1 1 auto;
-  min-inline-size: calc(100% - var(--mv-sidebar-component-hide));
-  transition: all $layout-transition-duration ease-in-out;
+  padding: 1rem;
+  overflow: auto;
+  font-size: var(--mv-font-size-3xl);
   background: #fff;
   border: 1px solid #B7CAD7;
-  padding: 1rem;
   border-radius: var(--mv-chrome-radius-s);
-  font-size: var(--mv-font-size-3xl);
-  overflow: auto;
+  transition: all $chrome-transition-duration ease-in-out;
+  min-inline-size: calc(100% - var(--mv-sidebar-component-hide));
 
-  @include breakpoint($breakpoint2) {
+  @include breakpoint($chrome-breakpoint2) {
     min-inline-size: calc(100% - var(--mv-sidebar-component-width) - var(--mv-spacing-m))
   }
 }
 
 .sidebar--component {
   position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
   inline-size: var(--mv-sidebar-component-width);
   min-inline-size: min(var(--mv-sidebar-component-width), 100%);
   max-inline-size: 100%;
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  @include transition(transform $layout-transition-duration ease-in-out, inline-size $layout-transition-duration ease-in-out);
 
-  @include breakpoint($breakpoint2) {
+  @include transition(transform $chrome-transition-duration ease-in-out, inline-size $chrome-transition-duration ease-in-out);
+
+  @include breakpoint($chrome-breakpoint2) {
     min-inline-size: var(--mv-sidebar-component-min-width);
     max-inline-size: min(33vw, var(--mv-sidebar-component-max-width));
   }
 
   & > .inner {
-    min-inline-size: max(var(--mv-sidebar-component-width), var(--mv-sidebar-component-min-width));
-    max-inline-size: 100%;
+    flex: 1 1 auto;
+    padding: 1rem;
+    overflow: auto;
     background: #fff;
     border: 1px solid #B7CAD7;
     border-radius: var(--mv-chrome-radius-s);
-    overflow: auto;
-    flex: 1 1 auto;
-    padding: 1rem;
+    min-inline-size: max(var(--mv-sidebar-component-width), var(--mv-sidebar-component-min-width));
+    max-inline-size: 100%;
   }
 
   .sidebar__resizer {
     inset-inline-end: 100%;
+    width: var(--mv-spacing-m);
+
+    @include pseudo(after, false) {
+      top: 50%;
+      left: 50%;
+      width: 3px;
+      height: 1rem;
+      border-right: 1px solid #b7c9de;
+      border-left: 1px solid #b7c9de;
+      transform: translate(-50%, -50%);
+    }
+
+
+    @include hover {
+      &::after {
+        border-color: #000;
+      }
+    }
+  }
+
+  &[data-resizing] {
+    .sidebar__resizer::after {
+      border-color: #000;
+    }
   }
 }
 
@@ -723,32 +734,33 @@
   right: 0;
   left: 0;
   z-index: 9; // TODO: add z-index map
-  padding: 0 1rem;
   display: none;
+  padding: 0 1rem;
 
-  @include breakpoint($breakpoint2) {
+  @include breakpoint($chrome-breakpoint2) {
     position: static;
     display: flex;
+    width: 100%;
+
     //justify-content: center;
     padding: 0;
-    width: 100%;
   }
 }
 
 .toggle-search {
-  background: transparent;
-  padding: 0;
-  color: inherit;
-  cursor: pointer;
-  width: px(32);
-  height: px(32);
   display: flex;
   align-items: center;
   justify-content: center;
+  width: px(32);
+  height: px(32);
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  background: transparent;
   border: 2px solid rgba(#fff, .66);
   border-radius: 100%;
 
-  @include breakpoint($breakpoint2) {
+  @include breakpoint($chrome-breakpoint2) {
     display: none;
   }
 }
@@ -757,11 +769,11 @@
   display: none;
 
   button {
-    background: transparent;
-    border: none;
     padding: 0;
     color: inherit;
     cursor: pointer;
+    background: transparent;
+    border: none;
   }
 }
 
@@ -808,17 +820,19 @@
 .sidebar__navigation [data-sidebar-type-toggle="float"] .layer-icon {
   display: none;
 
-  @include breakpoint($breakpoint2) {
+  @include breakpoint($chrome-breakpoint2) {
     display: block;
   }
 }
+
 .sidebar__navigation [data-sidebar-type-toggle="float"] .close-icon {
   display: none;
 }
+
 [data-sidebar-type="cover"] .close-icon {
   display: block !important;
 
-  @include breakpoint($breakpoint2) {
+  @include breakpoint($chrome-breakpoint2) {
     display: none!important;
   }
 }
@@ -826,20 +840,20 @@
 
 
 .navigation__heading {
-  font-size: var(--mv-font-size-m);
-  color: #ACC6D9;
   padding: var(--mv-spacing-m);
+  font-size: var(--mv-font-size-m);
+  font-weight: 400;
+  color: #ACC6D9;
   text-transform: uppercase;
   letter-spacing: 0.01em;
-  font-weight: 400;
 }
 
 .navigation__list {
-  padding-left: 0;
-  padding-right: px(8);
   display: flex;
   flex-direction: column;
   gap: px(8);
+  padding-right: px(8);
+  padding-left: 0;
   margin: 0;
 
   & > ::marker {
@@ -851,8 +865,8 @@
 
     @include pseudo(before) {
       top: px(6);
-      left: 0;
       bottom: px(6);
+      left: 0;
       width: px(4);
       background: #40b2ff;
       border-radius: 3px;
@@ -875,7 +889,7 @@
       fill: #a7d8f3;
     }
 
-    @include hover() {
+    @include hover {
       background: #283b65;
       border-color: #3d5075;
     }
@@ -897,23 +911,20 @@
   flex-grow: 1;
 }
 
-.toggle-wrapper--sidebar-right {
-  padding-right: var(--mv-spacing-m);
-}
 
 .profile-dropdown {
   position: absolute;
   top: 100%;
   right: 0;
   z-index: 9; // @TODO: add z-index SCSS map
+  display: none;
   width: px(240);
+  overflow: hidden; // for the radius
   color: #000;
   background: #fff;
-  border-radius: var(--mv-chrome-radius-s);
   border: 1px solid #B7CAD7;
+  border-radius: var(--mv-chrome-radius-s);
   box-shadow: 0 0 12px rgba(#000, .15);
-  overflow: hidden; // for the radius
-  display: none;
 
   ul {
     padding-left: 0;
@@ -922,18 +933,18 @@
     & > ::marker {
       font-size: 0;
     }
+  }
 
-    li + li {
-      border-top: 1px solid #e0e0e0;
-    }
+  li + li {
+    border-top: 1px solid #e0e0e0;
+  }
 
-    a {
-      display: block;
-      padding: .75em 1em;
+  a {
+    display: block;
+    padding: .75em 1em;
 
-      @include hover() {
-        background: #d4e3ee;
-      }
+    @include hover {
+      background: #d4e3ee;
     }
   }
 }
@@ -951,9 +962,9 @@
   margin-bottom: -1px;
 
   ul {
-    padding-left: 0;
     display: flex;
     gap: .5rem;
+    padding-left: 0;
     margin: 0;
 
     & > ::marker {
@@ -966,12 +977,12 @@
 
     a {
       display: flex;
-      border-radius: .5em .5em 0 0;
       padding: .65em 1em;
       border: 1px solid transparent;
       border-bottom-width: 0;
+      border-radius: .5em .5em 0 0;
 
-      @include hover() {
+      @include hover {
         background: rgba(#fff, .5);
         border-color: rgba(#b7cad7, .5);
       }
@@ -981,15 +992,16 @@
       padding-bottom: 0;
 
       a {
+        height: 100%;
         background: #fff;
         border-color: #b7cad7;
-        height: 100%;
       }
     }
   }
 }
 
-.sidebar--component:has(.sidebar__tabs li:first-child.is\:active) {
+// @TODO: Check if we should fix this
+.sidebar--component:has(.sidebar__tabs :first-child.is\:active) {
   & > .inner {
     border-top-left-radius: 0;
   }
@@ -1005,19 +1017,19 @@
 }
 
 .filters {
-  bordeR: 1px solid #BFD0DB;
+  display: flex;
+  min-height: px(40);
   background: #fff;
   border-radius: var(--mv-chrome-radius-s);
-  min-height: px(40);
-  display: flex;
+  bordeR: 1px solid #BFD0DB;
 }
 
 .filters__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: px(40);
   height: px(40);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .filter {
@@ -1026,18 +1038,18 @@
   button {
     position: relative;
     z-index: 2;
-    background: #fff;
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    height: calc(100% + 2px);
+    padding: 0 1em;
+    margin: -1px;
     color: inherit;
     cursor: pointer;
+    background: #fff;
     border: 1px solid #B7CAD7;
-    height: calc(100% + 2px);
-    margin: -1px;
-    padding: 0 1em;
-    display: flex;
-    gap: .5em;
-    align-items: center;
 
-    @include hover() {
+    @include hover {
       background: #e5f0f6;
     }
 
@@ -1053,24 +1065,24 @@
   left: -1px;
   width: 100vw;
   max-width: px(320);
+  padding: 1rem;
   background: #fff;
   border: 1px solid #B7CAD7;
-  box-shadow: 0 0 12px rgba(#000, .15);
   border-radius: 0 0  var(--mv-chrome-radius-s) var(--mv-chrome-radius-s);
-  padding: 1rem;
+  box-shadow: 0 0 12px rgba(#000, .15);
 }
 
 .reset-filters {
-  margin-left: auto;
   display: flex;
-  padding: 1em;
   align-items: center;
+  padding: 1em;
+  margin-left: auto;
 
   button {
+    text-decoration: underline;
+    cursor: pointer;
     background: transparent;
     border: none;
-    cursor: pointer;
-    text-decoration: underline;
   }
 }
 
@@ -1087,11 +1099,11 @@
   }
 
   button {
-    background: transparent;
-    border: none;
     padding: 0;
     color: inherit;
     cursor: pointer;
+    background: transparent;
+    border: none;
 
     svg {
       width: px(16);
@@ -1101,53 +1113,10 @@
 }
 
 .sidebar__title {
-  font-weight: bold;
+  font-weight: 700;
 }
 
 
 .navigation--stick-to-bottom {
   flex: 0 0 auto;
 }
-
-.overflow {
-  overflow-y: auto;
-}
-
-//
-//::-webkit-scrollbar {
-//  width: 12px;
-//  padding: 4px;
-//}
-//
-//::-webkit-scrollbar-track {
-//  //border-left: 1px solid rgba(#fff, .25);
-//  background: rgba(#fff, .25);
-//  padding: 4px;
-//  border-radius: 12px;
-//}
-//
-//::-webkit-scrollbar-thumb {
-//  background-color: $brand;
-//  margin: 4px;
-//  //border: 1px solid rgba(#fff, .25);
-//  border-radius: 12px;
-//}
-
-
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-::-webkit-scrollbar-track {
-  border-radius: 8px;
-  background: transparent;
-  border: none;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 8px;
-  border: 3px solid transparent;
-  background-clip: content-box;
-  background-color: $brand;
-}
-

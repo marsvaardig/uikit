@@ -83,11 +83,6 @@
                 <div class="header__profile">
             <button type="button" class="profile" data-toggle-profile>
                 <span class="profile__initials">TJ</span>
-                <span class="profile__indicator">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.4687 12.5313C7.76245 12.825 8.23745 12.825 8.52808 12.5313L14.5312 6.53126C14.825 6.23751 14.825 5.76251 14.5312 5.47188C14.2375 5.18126 13.7625 5.17813 13.4718 5.47188L8.00308 10.9406L2.5312 5.46876C2.23745 5.17501 1.76245 5.17501 1.47183 5.46876C1.1812 5.76251 1.17808 6.23751 1.47183 6.52813L7.4687 12.5313Z" />
-                    </svg>
-                </span>
             </button>
             <div class="profile-dropdown">
                 <ul>
@@ -175,6 +170,44 @@
                             <a href="/item">
                                 <span class="navigation__item">Item</span>
                             </a>
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="navigation">
+                    <div class="navigation__heading">
+                        Voorbeeld tree
+                    </div>
+                    <ul class="tree-nav">
+                        <li data-id="settings">
+                            <button class="toggle" type="button" aria-label="Toggle submenu"></button>
+                            <a href="/settings">Instellingen</a>
+                            <ul>
+                                <li data-id="general">
+                                    <button class="toggle" type="button"></button>
+                                    <a href="/settings/general">Algemeen</a>
+                                    <ul>
+                                        <li data-id="general1">
+                                            <a href="/settings/general">Algemeen</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li data-id="settings2">
+                            <button class="toggle" type="button" aria-label="Toggle submenu"></button>
+                            <a href="/settings">Instellingen</a>
+                            <ul>
+                                <li data-id="gen2">
+                                    <button class="toggle" type="button"></button>
+                                    <a href="/settings/general">Algemeen</a>
+                                    <ul>
+                                        <li data-id="lev3">
+                                            <a href="/settings/general">Algemeen</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>

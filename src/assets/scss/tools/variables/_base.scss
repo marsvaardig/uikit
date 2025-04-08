@@ -1,15 +1,20 @@
 @use "../illusion" as *;
 
 // Primitive colors as SCSS variables
-$brand: #1daaff;
-$brand-light-shade: #A7D8F3;
-$brand-dark-shade1: #1D1C41;
-$brand-dark-shade2: #142848;
-$brand-light-accent1: #F6F6F9;
-$brand-light-accent2: #FFFFFF;
+$brand: #1daaff !default;
+$brand-light-shade: #A7D8F3 !default;
+$brand-dark-shade1: #1D1C41 !default;
+$brand-dark-shade2: #142848 !default;
+$brand-light-accent1: #F6F6F9 !default;
+$brand-light-accent2: #FFF !default;
+
+// Sizes
+$uikit-min-height: px(480) !default; // So we are usable on not so tall screens
 
 // Breakpoints
-$breakpoint1: px(480);
-$breakpoint2: px(768);
+$chrome-breakpoint1: px(480) !default;
+$chrome-breakpoint2: px(768) !default;
 
-$layout-transition-duration: 300ms;
+// Transition
+$chrome-transition-duration: 300ms !default;
+$component-transition-duration: 300ms !default;

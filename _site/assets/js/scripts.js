@@ -183,8 +183,8 @@
       var activateTab = activateTab2;
       const tabs = tabList.querySelectorAll('[role="tab"]');
       const panels = document.querySelectorAll(".tab-content");
-      const pageId = document.body.id;
-      const storageKey = `activeTab-${pageId}`;
+      const pageId2 = document.body.id;
+      const storageKey = `activeTab-${pageId2}`;
       const savedTabId = localStorage.getItem(storageKey);
       if (savedTabId) {
         const savedTab = document.querySelector(`[role="tab"][href="${savedTabId}"]`);
@@ -273,5 +273,24 @@
         }
       });
     }
+    const tree = document.querySelector(".tree-nav");
+    if (!tree) return;
+    const pageId = document.body.id || "default";
+    const stateKey = `tree-nav-state:${pageId}`;
+    let savedState = JSON.parse(localStorage.getItem(stateKey) || "{}");
+    for (const [id, isOpen] of Object.entries(savedState)) {
+      const li = tree.querySelector(`li[data-id="${id}"]`);
+      if (li && isOpen) li.classList.add("open");
+    }
+    tree.addEventListener("click", (e) => {
+      const toggle = e.target.closest("button.toggle");
+      if (!toggle) return;
+      const li = toggle.closest("li[data-id]");
+      const id = li?.dataset.id;
+      if (!id) return;
+      li.classList.toggle("open");
+      savedState[id] = li.classList.contains("open");
+      localStorage.setItem(stateKey, JSON.stringify(savedState));
+    });
   })();
 })();

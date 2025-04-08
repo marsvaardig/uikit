@@ -1,0 +1,33 @@
+@use "../tools" as *;
+
+/* ==========================================================================
+   Overflow
+   ========================================================================== */
+
+.overflow {
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
+
+/* Scrollbar
+   ========================================================================== */
+
+// We use actual px values here since the scrollbar is a native element
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $brand;
+  background-clip: content-box;
+  border: 3px solid transparent;
+  border-radius: 8px;
+}

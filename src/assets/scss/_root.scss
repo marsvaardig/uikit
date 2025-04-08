@@ -50,7 +50,7 @@
   /* Mobile indicator */
   --mv-mobile: 1;
 
-  @include breakpoint($breakpoint2) {
+  @include breakpoint($chrome-breakpoint2) {
     --mv-mobile: 0;
   }
 }
@@ -73,11 +73,11 @@ html {
 }
 
 body {
-  color: #fff;
-  background: var(--body, linear-gradient(180deg, var(--mv-background-invert) 0%, var(--mv-background-invert-gradient) 100%));
-  font-family: 'Ubuntu', sans-serif;
   height: 100%;
   overflow: auto;
+  font-family: Ubuntu, sans-serif;
+  color: #fff;
+  background: var(--body, linear-gradient(180deg, var(--mv-background-invert) 0%, var(--mv-background-invert-gradient) 100%));
 }
 
 a {
@@ -86,5 +86,5 @@ a {
 }
 
 svg {
-  fill: currentColor;
+  fill: currentcolor;
 }
