@@ -1,4 +1,5 @@
 (() => {
+  
   // Our elements
   const $ui = document.querySelector('[data-uikit]');
   
@@ -282,6 +283,12 @@
   
   
   const toggles = document.querySelectorAll('.filter-toggle');
+
+  // ✨ Instelbare setting
+  const hoverActivation = true;
+
+  // ✨ Alleen true als je een dropdown handmatig hebt geopend
+  let hoverModeActive = false;
   
   if (toggles.length > 0) {
     
@@ -289,15 +296,24 @@
       const dropdownId = toggle.getAttribute('aria-controls');
       const dropdown = document.getElementById(dropdownId);
       
+      // ✅ Handmatige klik
       toggle.addEventListener('click', () => {
         const isOpen = toggle.getAttribute('aria-expanded') === 'true';
         closeAllDropdowns();
+        
         if (!isOpen) {
           toggle.setAttribute('aria-expanded', 'true');
           dropdown.hidden = false;
+          
+          if (hoverActivation) {
+            hoverModeActive = true;
+          }
+        } else {
+          hoverModeActive = false;
         }
       });
       
+      // ⌨️ Keyboard interactie
       toggle.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -305,6 +321,7 @@
         } else if (e.key === 'Escape') {
           closeAllDropdowns();
           toggle.focus();
+          hoverModeActive = false;
         }
       });
       
@@ -313,14 +330,29 @@
           toggle.setAttribute('aria-expanded', 'false');
           dropdown.hidden = true;
           toggle.focus();
+          hoverModeActive = false;
+        }
+      });
+      
+      // ✨ Hover werkt alleen als:
+      // 1. hoverActivation = true
+      // 2. je eerst handmatig iets open hebt geklikt
+      toggle.addEventListener('mouseenter', () => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        
+        if (hoverActivation && hoverModeActive && !isOpen) {
+          closeAllDropdowns();
+          toggle.setAttribute('aria-expanded', 'true');
+          dropdown.hidden = false;
         }
       });
     });
     
-    // Close dropdowns on outside click
+    // ⛔ Buiten klikken sluit alles + hovermode uit
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.filter')) {
         closeAllDropdowns();
+        hoverModeActive = false;
       }
     });
     
