@@ -207,7 +207,7 @@ summary {
   /* Components */
   --mv-scrollbar-width: 0;
   --mv-sidebar-left-width: 15rem;
-  --mv-sidebar-left-min-width: 12.5rem;
+  --mv-sidebar-left-min-width: 10rem;
   --mv-sidebar-right-width: 20rem;
   --mv-sidebar-right-min-width: 12.5rem;
   --mv-sidebar-component-width: 20rem;
@@ -1335,6 +1335,7 @@ svg {
   border-radius: var(--mv-radius-s);
 }
 .navigation__list a svg {
+  flex: 0 0 auto;
   inline-size: 16px;
   block-size: 16px;
   fill: #a7d8f3;
