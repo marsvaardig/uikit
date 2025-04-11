@@ -6,7 +6,7 @@
   inline-size: px(48);
   max-block-size: 100%;
   margin-inline-start: px(-8);
-  overflow: hidden; // fo the inner overflow auto to work
+  overflow: visible;
   transition: inline-size $chrome-transition-duration ease-in-out, min-inline-size $chrome-transition-duration ease-in-out;
 
   @include state('has', 'toggled-sidebar-left') {
@@ -28,6 +28,8 @@
     flex: 1 1 auto;
     flex-direction: column;
     min-inline-size: min(#{px(320)}, max(var(--mv-sidebar-left-width), var(--mv-sidebar-left-min-width)));
+    padding: 0;
+    overflow: hidden;
 
     @include breakpoint($chrome-breakpoint2) {
       min-inline-size: min(min(33vw, px(320)), max(var(--mv-sidebar-left-width), var(--mv-sidebar-left-min-width)));
@@ -35,17 +37,46 @@
   }
 
   .sidebar__resizer {
-    inset-block: 1rem;
-    border-radius: 4px;
+    inset-inline-end: px(-8);
+
+    @include pseudo(before, false) {
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      inline-size: px(12);
+      block-size: px(56);
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0 0 12px rgb(0 0 0 / 15%), 0 0 24px rgb(0 0 0 / 25%);
+      opacity: 0;
+      transition: opacity 100ms ease-in-out 120ms;
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    @include pseudo(after, false) {
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      inline-size: 3px;
+      block-size: 1rem;
+      border-inline: 1px solid #555;
+      opacity: 0;
+      transition: opacity 100ms ease-in-out 120ms;
+      transform: translate(-50%, -50%);
+    }
 
     @include hover {
-      background: $brand;
+      &::before,
+      &::after {
+        opacity: 1;
+      }
     }
   }
 
   &[data-resizing] {
     .sidebar__resizer {
-      background: $brand;
+      &::before,
+      &::after {
+        opacity: 1;
+      }
     }
   }
 

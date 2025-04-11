@@ -34,7 +34,6 @@
 
   .sidebar__resizer {
     inset-inline-end: 100%;
-    inline-size: var(--mv-spacing-m);
 
     @include state('has', 'toggled-sidebar-component') {
       display: none;
@@ -47,6 +46,7 @@
       block-size: 1rem;
       border-inline-end: 1px solid #b7c9de;
       border-inline-start: 1px solid #b7c9de;
+      transition: border 100ms ease-in-out 120ms;
       transform: translate(-50%, -50%);
     }
 

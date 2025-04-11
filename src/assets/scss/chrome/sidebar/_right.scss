@@ -52,12 +52,6 @@
     }
   }
 
-  &[data-resizing] {
-    .sidebar__resizer {
-      background: linear-gradient(to bottom, rgba($brand, 0), rgba($brand, 1), rgba($brand, 1), rgba($brand, 0));
-    }
-  }
-
   // @TODO: 8 and 16 px should be variables
   &[data-sidebar-type="cover"] {
     position: fixed;
@@ -84,15 +78,31 @@
   }
 
   .sidebar__resizer {
-    inset-inline: 0 auto;
+    inset-inline: px(-4) auto;
     display: none;
 
     @include state('has', 'toggled-sidebar-right') {
       display: block;
     }
 
-    @include hover {
+    @include pseudo(before, false) {
+      inset-block: 0;
+      inset-inline: px(4);
+      inline-size: px(8);
+      block-size: 100%;
       background: linear-gradient(to bottom, rgba($brand, 0), rgba($brand, 1), rgba($brand, 1), rgba($brand, 0));
+      opacity: 0;
+      transition: opacity 100ms ease-in-out 120ms;
+    }
+
+    @include hover {
+      &::before {
+        opacity: 1;
+      }
+
+      &::after {
+        border-color: #000;
+      }
     }
 
     @include pseudo(after, false) {
@@ -101,7 +111,20 @@
       inline-size: 3px;
       block-size: 1rem;
       border-inline: 1px solid #b7c9de;
+      transition: border 100ms ease-in-out 120ms;
       transform: translate(-50%, -50%);
+    }
+  }
+
+  &[data-resizing] {
+    .sidebar__resizer {
+      &::before {
+        opacity: 1;
+      }
+
+      &::after {
+        border-color: #000;
+      }
     }
   }
 

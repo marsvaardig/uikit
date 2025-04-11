@@ -47,49 +47,6 @@
   justify-content: center;
   padding: var(--mv-chrome-spacing-m) 0;
   text-align: center;
-
-  .search {
-    position: relative; // to position label and button
-    inline-size: 100%;
-    max-inline-size: px(400);
-    box-shadow: 0 0 40px rgba(#000, .5);
-
-    [type="search"] {
-      inline-size: 100%;
-      block-size: px(40);
-      padding-inline: 1rem px(40);
-      background: #fff;
-      border: none;
-      border-radius: var(--mv-radius-s);
-    }
-
-    button {
-      position: absolute;
-      inset-block-start: 0;
-      inset-inline-start: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      inline-size: px(40);
-      block-size: px(40);
-      padding: 0;
-      line-height: 1;
-      color: #93AFC2;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      border-radius: var(--mv-radius-s) 0 0 var(--mv-radius-s);
-
-      @include hover {
-        color: #000;
-        background: #d4e3ee;
-      }
-
-      svg {
-        display: block;
-      }
-    }
-  }
 }
 
 .header__switch {
