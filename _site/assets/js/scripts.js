@@ -109,6 +109,14 @@
         }
       });
     });
+    const leftSidebar = document.querySelector(".navigation-wrapper");
+    if (leftSidebar) {
+      leftSidebar.addEventListener("click", (e) => {
+        if (isMobile() && !e.target.closest(".navigation--persistent")) {
+          $ui.classList.add("has:toggled-sidebar-left");
+        }
+      });
+    }
     const searchToggle = document.querySelector("[data-toggle-search]");
     if (searchToggle) {
       searchToggle.addEventListener("click", (e) => {

@@ -67,13 +67,6 @@
           $ui.classList.add(className);
           setToggleStorage(sidebarType);
         }
-        // if (sidebarType === 'right') {
-        //   setWidth(startWidth, sidebarType);
-        //   $ui.classList.remove(className);
-        //   // Reset CSS variable and localstorage
-        //   localStorage.setItem(`sidebarWidth-${sidebarType}`, startWidth);
-        //   localStorage.removeItem(`sidebarToggle-${sidebarType}`);
-        // }
       }
     }
     
@@ -150,6 +143,16 @@
       }
     });
   });
+  
+  // When clicking the left sidebar navigation on mobile
+  const leftSidebar = document.querySelector('.navigation-wrapper');
+  if (leftSidebar) {
+    leftSidebar.addEventListener('click', (e) => {
+      if (isMobile() && !e.target.closest('.navigation--persistent')) {
+        $ui.classList.add('has:toggled-sidebar-left');
+      }
+    });
+  }
   
   // Toggle search
   const searchToggle = document.querySelector('[data-toggle-search]');
