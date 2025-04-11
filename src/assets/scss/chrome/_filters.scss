@@ -2,18 +2,18 @@
 
 .filters {
   display: flex;
-  min-height: px(40);
+  min-block-size: px(40);
   background: #fff;
+  border: 1px solid #BFD0DB;
   border-radius: var(--mv-chrome-radius-s);
-  bordeR: 1px solid #BFD0DB;
 }
 
 .filters__icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: px(40);
-  height: px(40);
+  inline-size: px(40);
+  block-size: px(40);
 }
 
 .filter {
@@ -25,7 +25,7 @@
     display: flex;
     align-items: center;
     gap: .5em;
-    height: calc(100% + 2px);
+    block-size: calc(100% + 2px);
     padding: 0 1em;
     margin: -1px;
     color: inherit;
@@ -45,10 +45,10 @@
 
 .filter-dropdown {
   position: absolute;
-  top: 100%;
-  left: -1px;
-  width: 100vw;
-  max-width: px(320);
+  inset-block-start: 100%;
+  inset-inline-start: -1px;
+  inline-size: 100vw;
+  max-inline-size: px(320);
   padding: 1rem;
   background: #fff;
   border: 1px solid #B7CAD7;
@@ -60,7 +60,7 @@
   display: flex;
   align-items: center;
   padding: 1em;
-  margin-left: auto;
+  margin-inline-start: auto;
 
   button {
     text-decoration: underline;

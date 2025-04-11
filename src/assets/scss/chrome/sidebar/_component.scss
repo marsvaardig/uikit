@@ -34,19 +34,19 @@
 
   .sidebar__resizer {
     inset-inline-end: 100%;
-    width: var(--mv-spacing-m);
+    inline-size: var(--mv-spacing-m);
 
     @include state('has', 'toggled-sidebar-component') {
       display: none;
     }
 
     @include pseudo(after, false) {
-      top: 50%;
-      left: 50%;
-      width: 3px;
-      height: 1rem;
-      border-right: 1px solid #b7c9de;
-      border-left: 1px solid #b7c9de;
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      inline-size: 3px;
+      block-size: 1rem;
+      border-inline-end: 1px solid #b7c9de;
+      border-inline-start: 1px solid #b7c9de;
       transform: translate(-50%, -50%);
     }
 

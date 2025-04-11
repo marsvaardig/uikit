@@ -7,15 +7,15 @@
   overflow: hidden; // for the .overflow container
 
   hr {
-    width: 100%;
-    height: 1px;
+    inline-size: 100%;
+    block-size: 1px;
     margin: 1rem 0;
     background: rgba(#fff, .2);
     border: none;
   }
 
   .navigation:last-child:not(:first-child) {
-    margin-top: auto;
+    margin-block-start: auto;
   }
 
   .overflow > *:not(.navigation--persistent) {
@@ -40,8 +40,7 @@
   display: flex;
   flex-direction: column;
   gap: px(8);
-  padding-right: px(8);
-  padding-left: 0;
+  padding-inline: px(8) 0;
   margin: 0;
 
   & > ::marker {
@@ -49,13 +48,12 @@
   }
 
   li {
-    padding-left: px(10);
+    padding-inline-start: px(10);
 
     @include pseudo(before) {
-      top: px(6);
-      bottom: px(6);
-      left: 0;
-      width: px(4);
+      inset-block: px(6);
+      inset-inline-start: 0;
+      inline-size: px(4);
       background: #40b2ff;
       border-radius: 3px;
       opacity: 0;
@@ -72,8 +70,8 @@
     border-radius: var(--mv-radius-s);
 
     svg {
-      width: 16px;
-      height: 16px;
+      inline-size: 16px;
+      block-size: 16px;
       fill: #a7d8f3;
     }
 

@@ -2,9 +2,8 @@
 
 .search-wrapper {
   position: absolute;
-  top: 100%;
-  right: 0;
-  left: 0;
+  inset-inline: 0;
+  inset-block-start: 100%;
   z-index: 9; // TODO: add z-index map
   display: none;
   padding: 0 1rem;
@@ -16,7 +15,7 @@
   @include breakpoint($chrome-breakpoint2) {
     position: static;
     display: flex;
-    width: 100%;
+    inline-size: 100%;
     padding: 0;
   }
 }
@@ -25,8 +24,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: px(32);
-  height: px(32);
+  inline-size: px(32);
+  block-size: px(32);
   padding: 0;
   color: inherit;
   cursor: pointer;

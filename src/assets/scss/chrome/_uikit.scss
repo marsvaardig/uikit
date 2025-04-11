@@ -13,14 +13,13 @@
   --mv-chrome-radius-s: var(--mv-radius-s);
   --mv-chrome-radius-m: var(--mv-radius-m);
 
+  // Styling
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-
-  // Chrome style
-  font-size: var(--mv-font-size-m);
   block-size: 100vh;
   min-block-size: $uikit-min-height;
+  overflow: hidden;
+  font-size: var(--mv-font-size-m);
 
   // Initializing
   &.is\:initializing {

@@ -50,15 +50,14 @@
 
   .search {
     position: relative; // to position label and button
-    width: 100%;
-    max-width: px(400);
+    inline-size: 100%;
+    max-inline-size: px(400);
     box-shadow: 0 0 40px rgba(#000, .5);
 
     [type="search"] {
-      width: 100%;
-      height: px(40);
-      padding-right: 1rem;
-      padding-left: px(40);
+      inline-size: 100%;
+      block-size: px(40);
+      padding-inline: 1rem px(40);
       background: #fff;
       border: none;
       border-radius: var(--mv-radius-s);
@@ -66,13 +65,13 @@
 
     button {
       position: absolute;
-      top: 0;
-      left: 0;
+      inset-block-start: 0;
+      inset-inline-start: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: px(40);
-      height: px(40);
+      inline-size: px(40);
+      block-size: px(40);
       padding: 0;
       line-height: 1;
       color: #93AFC2;
@@ -102,7 +101,7 @@
   }
 
   select {
-    height: px(40);
+    block-size: px(40);
     padding: px(6) .5rem;
     background: #fff;
     border: none;
@@ -145,47 +144,47 @@
 
 .profile {
   display: flex;
+  inline-size: px(32);
+  block-size: px(32);
   padding: 0;
   color: currentcolor;
   cursor: pointer;
   background: transparent;
   border: none;
-  inline-size: px(32);
-  block-size: px(32);
 }
 
 .profile__initials {
   display: flex;
   align-items: center;
   justify-content: center;
+  inline-size: px(32);
+  block-size: 100%;
   font-size: 16px;
   font-weight: 700;
   background: $brand;
   border-radius: 100%;
-  inline-size: px(32);
-  block-size: 100%;
 }
 
 .profile__indicator {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: px(32);
-  height: px(32);
+  inline-size: px(32);
+  block-size: px(32);
 
   svg {
-    width: px(16);
-    height: px(16);
+    inline-size: px(16);
+    block-size: px(16);
   }
 }
 
 .profile-dropdown {
   position: absolute;
-  top: 100%;
-  right: 0;
+  inset-block-start: 100%;
+  inset-inline-end: 0;
   z-index: 9; // @TODO: add z-index SCSS map
   display: none;
-  width: px(240);
+  inline-size: px(240);
   overflow: hidden; // for the radius
   color: #000;
   background: #fff;
@@ -198,7 +197,7 @@
   }
 
   ul {
-    padding-left: 0;
+    padding-inline-start: 0;
     margin: 0;
 
     & > ::marker {
@@ -207,7 +206,7 @@
   }
 
   li + li {
-    border-top: 1px solid #e0e0e0;
+    border-block-start: 1px solid #e0e0e0;
   }
 
   a {

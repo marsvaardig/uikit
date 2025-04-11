@@ -10,7 +10,7 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  max-height: 100%;
+  max-block-size: 100%;
   overflow: hidden;
 
   & > * {
@@ -62,8 +62,8 @@
     border: none;
 
     svg {
-      width: px(16);
-      height: px(16);
+      inline-size: px(16);
+      block-size: px(16);
     }
   }
 }

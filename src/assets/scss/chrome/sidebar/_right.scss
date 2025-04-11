@@ -2,9 +2,8 @@
 
 .sidebar--right {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: px(8);
+  inset-block: 0 px(8);
+  inset-inline-end: 0;
   z-index: 9;
   flex: 0 0 auto;
   flex-direction: column;
@@ -28,18 +27,18 @@
   &[data-sidebar-type="sidebar"] {
     @include breakpoint($chrome-breakpoint2) {
       position: relative;
-      bottom: auto;
+      inset-block-end: auto;
       min-inline-size: calc(100vw - #{px(48)});
       max-inline-size: 40vw;
       padding-inline-start: px(8);
-      margin-right: px(-8);
+      margin-inline-end: px(-8);
       transform: none;
       animation: slide-out-right $chrome-transition-duration ease-in-out forwards;
 
       @include state('has', 'toggled-sidebar-right') {
         display: flex;
         min-inline-size: var(--mv-sidebar-right-min-width);
-        margin-right: 0;
+        margin-inline-end: 0;
         animation: slide-in-right $chrome-transition-duration ease-in-out;
       }
 
@@ -62,9 +61,8 @@
   // @TODO: 8 and 16 px should be variables
   &[data-sidebar-type="cover"] {
     position: fixed;
-    top: px(8);
-    right: px(8);
-    left: px(8);
+    inset-inline: px(8);
+    inset-block-start: px(8);
     z-index: 11;
     inline-size: calc(100% - #{px(16)});
     max-inline-size: calc(100% - #{px(16)});
@@ -98,12 +96,11 @@
     }
 
     @include pseudo(after, false) {
-      top: 50%;
-      left: 50%;
-      width: 3px;
-      height: 1rem;
-      border-right: 1px solid #b7c9de;
-      border-left: 1px solid #b7c9de;
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      inline-size: 3px;
+      block-size: 1rem;
+      border-inline: 1px solid #b7c9de;
       transform: translate(-50%, -50%);
     }
   }
