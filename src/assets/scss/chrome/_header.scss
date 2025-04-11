@@ -2,7 +2,6 @@
 
 .header {
   position: relative; // For the search-wrapper etc
-  z-index: 12; // @TODO: add z-index SCSS map - we need this to be on top of the right sidebar now
   display: flex;
   align-items: center;
   gap: var(--mv-chrome-spacing-m);

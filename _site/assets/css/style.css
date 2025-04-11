@@ -280,7 +280,6 @@ svg {
 
 .header {
   position: relative;
-  z-index: 12;
   display: flex;
   align-items: center;
   gap: var(--mv-chrome-spacing-m);
@@ -735,7 +734,7 @@ svg {
   position: absolute;
   inset-block: 0 0.5rem;
   inset-inline-end: 0;
-  z-index: 9;
+  z-index: 1;
   flex: 0 0 auto;
   flex-direction: column;
   inline-size: var(--mv-sidebar-right-width);
