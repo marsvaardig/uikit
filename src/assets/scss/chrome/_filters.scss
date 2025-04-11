@@ -1,0 +1,71 @@
+@use "../tools" as *;
+
+.filters {
+  display: flex;
+  min-height: px(40);
+  background: #fff;
+  border-radius: var(--mv-chrome-radius-s);
+  bordeR: 1px solid #BFD0DB;
+}
+
+.filters__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: px(40);
+  height: px(40);
+}
+
+.filter {
+  position: relative; // for the dropdown
+
+  button {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    height: calc(100% + 2px);
+    padding: 0 1em;
+    margin: -1px;
+    color: inherit;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #B7CAD7;
+
+    @include hover {
+      background: #e5f0f6;
+    }
+
+    &[aria-expanded="true"] {
+      background: #d4e2ed;
+    }
+  }
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  width: 100vw;
+  max-width: px(320);
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #B7CAD7;
+  border-radius: 0 0  var(--mv-chrome-radius-s) var(--mv-chrome-radius-s);
+  box-shadow: 0 0 12px rgba(#000, .15);
+}
+
+.reset-filters {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  margin-left: auto;
+
+  button {
+    text-decoration: underline;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+  }
+}

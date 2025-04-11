@@ -1,0 +1,104 @@
+@use "../tools" as *;
+
+.tree-nav {
+  &, ul {
+    padding-inline-start: 0;
+    margin: 0;
+
+    ::marker {
+      font-size: 0;
+    }
+  }
+
+  li {
+    position: relative;
+    line-height: px(32);
+  }
+
+  a {
+    display: block;
+    padding-inline-start: 2rem;
+    font-size: var(--mv-font-size-l);
+    line-height: 2rem;
+
+    @include hover {
+      background: #283b65;
+    }
+  }
+
+  @mixin nested-padding($levels) {
+    $selector: 'li';
+
+    @for $i from 2 through $levels + 1 {
+      $selector: '#{$selector} li';
+
+      #{$selector} {
+        a {
+          padding-inline-start: #{1 + $i}rem;
+        }
+
+        .tree-nav__toggle {
+          inset-inline-start: #{-1 + $i}rem;
+        }
+      }
+    }
+  }
+
+  @include nested-padding(6);
+}
+
+
+.tree-nav__toggle {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 2.5em;
+  block-size: 2rem;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+
+  &:hover ~ a {
+    background: #283b65;
+  }
+
+  &:hover::before {
+    color: #fff;
+  }
+
+  &::before {
+    display: inline-block;
+    inline-size: 8px;
+    block-size: 8px;
+    font-size: 10px;
+    color: #A7D8F3;
+    content: " ";
+    transition: transform 0.2s;
+    transform: rotate(-90deg);
+
+    @include svg-mask('<path d="M3.71027 5.88255C3.86985 6.03915 4.1279 6.03915 4.28578 5.88255L7.54702 2.68388C7.7066 2.52728 7.7066 2.27405 7.54702 2.11912C7.38744 1.96418 7.12939 1.96252 6.97151 2.11912L4.00057 5.03457L1.02794 2.11745C0.868356 1.96085 0.610309 1.96085 0.452425 2.11745C0.29454 2.27405 0.292843 2.52728 0.452425 2.68222L3.71027 5.88255Z"/>', currentcolor, 100%, 100%, 8, 8);
+  }
+
+  &::after {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 100%;
+    inline-size: 10rem;
+    block-size: 100%;
+    content: " ";
+    background-color: transparent;
+  }
+}
+
+/* Voeg eigen icons toe via ::before of background-image */
+.tree-nav .open > .tree-nav__toggle::before {
+  transform: rotate(0deg);
+}
+
+.tree-nav li > ul {
+  display: none;
+}
+
+.tree-nav .open > ul {
+  display: block;
+}

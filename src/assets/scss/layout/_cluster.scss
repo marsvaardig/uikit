@@ -1,0 +1,8 @@
+@use "../tools" as *;
+
+.cluster {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  gap: var(--mv-cluster-gap);
+}

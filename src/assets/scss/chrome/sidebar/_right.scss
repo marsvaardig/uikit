@@ -1,0 +1,163 @@
+@use "../../tools" as *;
+
+.sidebar--right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: px(8);
+  z-index: 9;
+  flex: 0 0 auto;
+  flex-direction: column;
+  inline-size: var(--mv-sidebar-right-width);
+  max-inline-size: calc(100vw - #{px(96)});
+  transition: transform $chrome-transition-duration ease-in-out, inline-size $chrome-transition-duration ease-in-out, margin $chrome-transition-duration ease-in-out;
+  transform: translateX(100%);
+
+  @include state('has', 'toggled-sidebar-right') {
+    transform: translateX(0);
+  }
+
+  .sidebar__body {
+    min-block-size: 100%;
+    color: var(--mv-text-primary);
+    background: var(--mv-background-primary);
+    border-radius: var(--mv-chrome-radius-m) 0 0 var(--mv-chrome-radius-m);
+    box-shadow: 0 0 12px rgb(0 0 0 / 15%), 0 0 24px rgb(0 0 0 / 25%);
+  }
+
+  &[data-sidebar-type="sidebar"] {
+    @include breakpoint($chrome-breakpoint2) {
+      position: relative;
+      bottom: auto;
+      min-inline-size: calc(100vw - #{px(48)});
+      max-inline-size: 40vw;
+      padding-inline-start: px(8);
+      margin-right: px(-8);
+      transform: none;
+      animation: slide-out-right $chrome-transition-duration ease-in-out forwards;
+
+      @include state('has', 'toggled-sidebar-right') {
+        display: flex;
+        min-inline-size: var(--mv-sidebar-right-min-width);
+        margin-right: 0;
+        animation: slide-in-right $chrome-transition-duration ease-in-out;
+      }
+
+      .sidebar__body {
+        border-radius: var(--mv-chrome-radius-m);
+      }
+    }
+
+    [data-sidebar-type-toggle="sidebar"] {
+      display: none;
+    }
+  }
+
+  &[data-resizing] {
+    .sidebar__resizer {
+      background: linear-gradient(to bottom, rgba($brand, 0), rgba($brand, 1), rgba($brand, 1), rgba($brand, 0));
+    }
+  }
+
+  // @TODO: 8 and 16 px should be variables
+  &[data-sidebar-type="cover"] {
+    position: fixed;
+    top: px(8);
+    right: px(8);
+    left: px(8);
+    z-index: 11;
+    inline-size: calc(100% - #{px(16)});
+    max-inline-size: calc(100% - #{px(16)});
+    border-radius: var(--mv-chrome-radius-m);
+
+    [data-sidebar-type-toggle="cover"] {
+      display: none;
+    }
+  }
+
+  &[data-sidebar-type="float"] {
+    .sidebar__resizer {
+      inset-inline-start: 0;
+    }
+
+    [data-sidebar-type-toggle="float"] {
+      display: none;
+    }
+  }
+
+  .sidebar__resizer {
+    inset-inline: 0 auto;
+    display: none;
+
+    @include state('has', 'toggled-sidebar-right') {
+      display: block;
+    }
+
+    @include hover {
+      background: linear-gradient(to bottom, rgba($brand, 0), rgba($brand, 1), rgba($brand, 1), rgba($brand, 0));
+    }
+
+    @include pseudo(after, false) {
+      top: 50%;
+      left: 50%;
+      width: 3px;
+      height: 1rem;
+      border-right: 1px solid #b7c9de;
+      border-left: 1px solid #b7c9de;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @include breakpoint($chrome-breakpoint2) {
+    min-inline-size: px(48);
+  }
+}
+
+
+@keyframes slide-out-right {
+  from {
+    min-inline-size: min(var(--mv-sidebar-right-width), 40vw);
+    max-inline-size: min(var(--mv-sidebar-right-width), 40vw);
+  }
+
+  to {
+    min-inline-size: 0;
+    max-inline-size: 0;
+  }
+}
+
+
+@keyframes slide-in-right {
+  from {
+    min-inline-size: 0;
+    max-inline-size: 0;
+  }
+
+  to {
+    min-inline-size: min(var(--mv-sidebar-right-width), 40vw);
+    max-inline-size: min(var(--mv-sidebar-right-width), 40vw);
+  }
+}
+
+// @TODO: add close button to the cover view or fix this mess
+.sidebar__navigation [data-sidebar-type-toggle="sidebar"],
+.sidebar__navigation [data-sidebar-type-toggle="float"] .layer-icon {
+  display: none;
+
+  @include breakpoint($chrome-breakpoint2) {
+    display: block;
+  }
+}
+
+.sidebar__navigation [data-sidebar-type-toggle="float"] .close-icon {
+  display: none;
+}
+
+[data-sidebar-type="cover"] .close-icon {
+  display: block !important;
+
+  @include breakpoint($chrome-breakpoint2) {
+    display: none!important;
+  }
+}
+

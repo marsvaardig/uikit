@@ -1,0 +1,43 @@
+@mixin state($type, $value) {
+  @if $value == 'toggled-sidebar-left' {
+    @at-root .uikit.#{$type}\:toggled-sidebar-left & {
+      @content
+    }
+  }
+
+  @if $value == 'toggled-sidebar-left|not(resizing)' {
+    @at-root .uikit.#{$type}\:toggled-sidebar-left:not(.has\:resizing) & {
+      @content
+    }
+  }
+
+  @if $value == 'toggled-sidebar-component' {
+    @at-root .uikit.#{$type}\:toggled-sidebar-component & {
+      @content
+    }
+  }
+
+  @if $value == 'toggled-sidebar-right' {
+    @at-root .uikit.#{$type}\:toggled-sidebar-right & {
+      @content
+    }
+  }
+
+  @if $value == 'toggled-profile' {
+    @at-root .uikit.#{$type}\:toggled-profile & {
+      @content
+    }
+  }
+
+  @if $value == 'toggled-search' {
+    @at-root .uikit.#{$type}\:toggled-search & {
+      @content
+    }
+  }
+}
+
+@mixin has($value) {
+  @at-root .uikit:has(#{$value}) & {
+    @content
+  }
+}

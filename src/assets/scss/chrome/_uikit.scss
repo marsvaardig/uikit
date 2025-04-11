@@ -1,0 +1,39 @@
+@use "../tools" as *;
+
+.uikit {
+  // Chrome properties
+  // -----------------
+
+  // Spacing
+  --mv-chrome-spacing-s: var(--mv-spacing-xs);
+  --mv-chrome-spacing-m: var(--mv-spacing-m);
+  --mv-chrome-spacing-l: var(--mv-spacing-l);
+
+  // Radius
+  --mv-chrome-radius-s: var(--mv-radius-s);
+  --mv-chrome-radius-m: var(--mv-radius-m);
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  // Chrome style
+  font-size: var(--mv-font-size-m);
+  block-size: 100vh;
+  min-block-size: $uikit-min-height;
+
+  // Initializing
+  &.is\:initializing {
+    * {
+      animation-duration: 0ms !important;
+    }
+  }
+
+  // Resizing
+  &.has\:resizing {
+    * {
+      transition-duration: 0ms!important;
+      animation-duration: 0ms!important;
+    }
+  }
+}

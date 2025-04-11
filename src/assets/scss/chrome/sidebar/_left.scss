@@ -1,0 +1,97 @@
+@use "../../tools" as *;
+
+.sidebar--left {
+  display: flex;
+  flex: 0 0 auto;
+  inline-size: px(48);
+  max-block-size: 100%;
+  margin-inline-start: px(-8);
+  overflow: hidden; // fo the inner overflow auto to work
+  transition: inline-size $chrome-transition-duration ease-in-out, min-inline-size $chrome-transition-duration ease-in-out;
+
+  @include state('has', 'toggled-sidebar-left') {
+    inline-size: px(48);
+    min-inline-size: calc(100vw - #{px(16)});
+
+    @include breakpoint($chrome-breakpoint2) {
+      min-inline-size: px(48);
+    }
+  }
+
+  @include breakpoint($chrome-breakpoint2) {
+    inline-size: var(--mv-sidebar-left-width);
+    max-inline-size: min(33vw, px(320));
+  }
+
+  .sidebar__content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-inline-size: min(#{px(320)}, max(var(--mv-sidebar-left-width), var(--mv-sidebar-left-min-width)));
+
+    @include breakpoint($chrome-breakpoint2) {
+      min-inline-size: min(min(33vw, px(320)), max(var(--mv-sidebar-left-width), var(--mv-sidebar-left-min-width)));
+    }
+  }
+
+  .sidebar__resizer {
+    inset-block: 1rem;
+    border-radius: 4px;
+
+    @include hover {
+      background: $brand;
+    }
+  }
+
+  &[data-resizing] {
+    .sidebar__resizer {
+      background: $brand;
+    }
+  }
+
+  .sidebar-toggle-left {
+    @include state('has', 'toggled-sidebar-left') {
+      .is\:off {
+        display: none;
+
+        @include breakpoint($chrome-breakpoint2) {
+          display: block;
+        }
+      }
+
+      .is\:on {
+        display: block;
+
+        @include breakpoint($chrome-breakpoint2) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .navigation-rename {
+    @include state('has', 'toggled-sidebar-left') {
+      & > *:not(.navigation--persistent) {
+        display: block;
+
+        @include breakpoint($chrome-breakpoint2) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @include state('has', 'toggled-sidebar-left|not(resizing)') {
+    @include hover {
+      @include breakpoint($chrome-breakpoint2) {
+        min-inline-size: var(--mv-sidebar-left-width);
+
+        .navigation-rename {
+          & > *  {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}

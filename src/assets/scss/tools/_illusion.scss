@@ -1,4 +1,5 @@
 @forward "../../../../node_modules/illusion/scss/illusion" with (
+  $illusion-logical-properties: true,
   $root-site-font-size-s: 16,
   $root-site-font-size: 16,
 );

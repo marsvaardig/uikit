@@ -1,0 +1,27 @@
+@use "../tools" as *;
+
+.component {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--mv-chrome-spacing-m);
+  padding: var(--mv-chrome-spacing-m);
+  overflow: hidden;
+  color: var(--mv-text-primary);
+  background: var(--mv-background-primary);
+  border-radius: var(--mv-chrome-radius-m);
+  max-inline-size: 100%;
+  min-inline-size: 100%;
+
+  @include breakpoint($chrome-breakpoint2) {
+    min-inline-size: 0;
+  }
+
+  @include has(".sidebar--left") {
+    min-inline-size: calc(100vw - #{px(48)} - #{px(8)});
+
+    @include breakpoint($chrome-breakpoint2) {
+      min-inline-size: 0;
+    }
+  }
+}

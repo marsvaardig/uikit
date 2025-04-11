@@ -1,0 +1,73 @@
+@use "../../tools" as *;
+
+.sidebar {
+  position: relative;
+  min-inline-size: px(48);
+  max-inline-size: 33vw;
+}
+
+.sidebar__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  max-height: 100%;
+  overflow: hidden;
+
+  & > * {
+    min-inline-size: calc(var(--mv-sidebar-right-min-width) - #{px(8)});
+  }
+
+  .sidebar__content {
+    flex: 1 1 auto;
+    padding: var(--mv-spacing-m);
+  }
+}
+
+.sidebar__resizer {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  z-index: 9;
+  display: none;
+  inline-size: px(8);
+  cursor: ew-resize;
+  background: transparent;
+
+  @include breakpoint($chrome-breakpoint2) {
+    display: block;
+  }
+}
+
+
+
+
+// @TODO: this is only for the right sidebar right now
+.sidebar__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem;
+  background: #fff;
+  border-bottom: 1px solid #B7CAD7;
+
+  .cluster {
+    flex: 0 0 auto;
+  }
+
+  button {
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+
+    svg {
+      width: px(16);
+      height: px(16);
+    }
+  }
+}
+
+.sidebar__title {
+  font-weight: 700;
+}

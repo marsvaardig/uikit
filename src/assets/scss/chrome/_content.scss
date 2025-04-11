@@ -1,0 +1,22 @@
+@use "../tools" as *;
+
+.content {
+  flex: 1 1 auto;
+  min-inline-size: calc(100% - var(--mv-sidebar-component-hide));
+  padding: 1rem;
+  font-size: var(--mv-font-size-3xl);
+  background: #fff;
+  border: 1px solid #B7CAD7;
+  border-radius: var(--mv-chrome-radius-s);
+  transition: all $chrome-transition-duration ease-in-out;
+
+  @include breakpoint($chrome-breakpoint2) {
+    min-inline-size: calc(100% - var(--mv-sidebar-component-width) - var(--mv-spacing-m))
+  }
+
+  @include state('has', 'toggled-sidebar-component') {
+    @include breakpoint($chrome-breakpoint2) {
+      min-inline-size: calc(100% - var(--mv-sidebar-component-hide));
+    }
+  }
+}

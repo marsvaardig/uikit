@@ -1,0 +1,94 @@
+@use "../../tools" as *;
+
+.sidebar--component {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  inline-size: var(--mv-sidebar-component-width);
+  min-inline-size: min(var(--mv-sidebar-component-width), 100%);
+  max-inline-size: 100%;
+
+  @include transition(transform $chrome-transition-duration ease-in-out, inline-size $chrome-transition-duration ease-in-out);
+
+  @include state('has', 'toggled-sidebar-component') {
+    @include breakpoint($chrome-breakpoint2) {
+      min-inline-size: var(--mv-sidebar-component-width);
+    }
+  }
+
+  @include breakpoint($chrome-breakpoint2) {
+    min-inline-size: var(--mv-sidebar-component-min-width);
+    max-inline-size: min(33vw, var(--mv-sidebar-component-max-width));
+  }
+
+  .sidebar__content {
+    flex: 1 1 auto;
+    min-inline-size: max(var(--mv-sidebar-component-width), var(--mv-sidebar-component-min-width));
+    max-inline-size: 100%;
+    padding: 1rem;
+    background: #fff;
+    border: 1px solid #B7CAD7;
+    border-radius: var(--mv-chrome-radius-s);
+  }
+
+  .sidebar__resizer {
+    inset-inline-end: 100%;
+    width: var(--mv-spacing-m);
+
+    @include state('has', 'toggled-sidebar-component') {
+      display: none;
+    }
+
+    @include pseudo(after, false) {
+      top: 50%;
+      left: 50%;
+      width: 3px;
+      height: 1rem;
+      border-right: 1px solid #b7c9de;
+      border-left: 1px solid #b7c9de;
+      transform: translate(-50%, -50%);
+    }
+
+
+    @include hover {
+      &::after {
+        border-color: #000;
+      }
+    }
+  }
+
+  &[data-resizing] {
+    .sidebar__resizer::after {
+      border-color: #000;
+    }
+  }
+}
+
+// @TODO: should we move this or rename this? Only for component sidebar right now...
+.sidebar-overlay-toggle {
+  z-index: 1;
+  cursor: pointer;
+  background: #fff;
+  border-radius: var(--mv-chrome-radius-s);
+  opacity: .65;
+
+  @include coverall;
+  @include transition(background $chrome-transition-duration ease-in-out);
+
+  @include state('has', 'toggled-sidebar-component') {
+    display: none;
+
+    @include breakpoint($chrome-breakpoint2) {
+      display: block;
+    }
+  }
+
+  @include hover {
+    background: $brand;
+  }
+
+  @include breakpoint($chrome-breakpoint2) {
+    display: none;
+  }
+}

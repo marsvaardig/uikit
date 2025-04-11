@@ -1,24 +1,5 @@
 @use "tools" as *;
 
-.button {
-  display: flex;
-  align-items: center;
-  min-height: var(--mv-spacing-xl);
-  padding: var(--mv-spacing-xs) var(--mv-spacing-s);
-  font-weight: 700;
-  cursor: pointer;
-  background: #D4E3ED;
-  border: 1px solid #9bbacf;
-  border-radius: var(--mv-radius-s);
-
-  @include transition(all);
-
-  @include hover {
-    background: #A7D8F3;
-    border-color: #1daaff;
-  }
-}
-
 .scroll-example-block {
   display: none;
   min-height: 100vh;
@@ -42,98 +23,14 @@
   border-radius: 100%;
 }
 
-
-
-
-
-
-
-
-
-
-.tree-nav {
-  &, ul {
-    padding-left: 0;
-    margin: 0;
-
-    ::marker {
-      font-size: 0;
-    }
-  }
+.visually\:hidden {
+  @include visually-hidden;
 }
 
-.tree-nav {
-  list-style: none;
-  padding-left: 0;
+[hidden] {
+  display: none!important;
 }
 
-.tree-nav li {
-  position: relative;
-  line-height: px(32);
-
-
-}
-
-.tree-nav a {
-  display: block;
-  padding-left: 2rem;
-
-  @include hover {
-    background: #283b65;
-  }
-}
-
-.tree-nav {
-  li li {
-    a {
-      padding-left: 3rem;
-    }
-    .toggle {
-      left: 1rem;
-    }
-  }
-  li li li {
-    a {
-      padding-left: 4rem;
-    }
-    .toggle {
-      left: 2rem;
-    }
-  }
-}
-
-.tree-nav li .toggle {
-  position: absolute;
-  left: 0;
-  top: 0.2em;
-  width: 2em;
-  height: 2em;
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  &:hover ~ a {
-    background: #283b65;
-  }
-}
-
-/* Voeg eigen icons toe via ::before of background-image */
-.tree-nav li .toggle::before {
-  content: "▶";
-  display: inline-block;
-  transform: rotate(0deg);
-  transition: transform 0.2s;
-  color: #fff;
-}
-
-.tree-nav li.open > .toggle::before {
-  transform: rotate(90deg);
-}
-
-.tree-nav li > ul {
+.is\:on {
   display: none;
-}
-
-.tree-nav li.open > ul {
-  display: block;
 }

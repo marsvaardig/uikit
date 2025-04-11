@@ -240,7 +240,6 @@
       }
     }
     
-    
     // @TODO: use data-attributes istead of classes
     tabs.forEach((tab, index) => {
       tab.addEventListener('keydown', (e) => {
@@ -270,6 +269,10 @@
       panels.forEach(panel => {
         panel.classList.remove('is:active');
         panel.setAttribute('hidden', '');
+        const overflowContainer = panel.closest('.overflow');
+        if (!overflowContainer) return;
+        // Reset overflow container scroll position
+        overflowContainer.scrollTop = 0;
       });
       
       selectedTab.setAttribute('aria-selected', 'true');
@@ -394,14 +397,30 @@
   
   tree.addEventListener("click", (e) => {
     const toggle = e.target.closest("button.toggle");
-    if (!toggle) return;
+    const link = e.target.closest("a");
+    if (!toggle && !link) return;
     
-    const li = toggle.closest("li[data-id]");
-    const id = li?.dataset.id;
-    if (!id) return;
+    // Get the closest li element with a data-id attribute
+    const li = e.target.closest("li[data-id]");
     
-    li.classList.toggle("open");
-    savedState[id] = li.classList.contains("open");
+    // When clicked on a toggle; toggle
+    if (toggle) {
+      const id = li?.dataset.id;
+      if (!id) return;
+      
+      li.classList.toggle("open");
+      savedState[id] = li.classList.contains("open");
+    }
+    
+    // When clicked on a link; save the current state before going to the link so it's open on the next page
+    if (link) {
+      const id = li?.dataset.id;
+      if (!id) return;
+      
+      // Sla de huidige status op
+      savedState[id] = li;
+    }
+    
     localStorage.setItem(stateKey, JSON.stringify(savedState));
   });
   

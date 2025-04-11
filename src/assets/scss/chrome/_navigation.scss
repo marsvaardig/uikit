@@ -1,0 +1,101 @@
+@use "../tools" as *;
+
+.navigation-wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  overflow: hidden; // for the .overflow container
+
+  hr {
+    width: 100%;
+    height: 1px;
+    margin: 1rem 0;
+    background: rgba(#fff, .2);
+    border: none;
+  }
+
+  .navigation:last-child:not(:first-child) {
+    margin-top: auto;
+  }
+
+  .overflow > *:not(.navigation--persistent) {
+    display: none;
+
+    @include breakpoint($chrome-breakpoint2) {
+      display: block;
+    }
+  }
+}
+
+.navigation__heading {
+  padding: var(--mv-spacing-m);
+  font-size: var(--mv-font-size-m);
+  font-weight: 400;
+  color: #ACC6D9;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.navigation__list {
+  display: flex;
+  flex-direction: column;
+  gap: px(8);
+  padding-right: px(8);
+  padding-left: 0;
+  margin: 0;
+
+  & > ::marker {
+    font-size: 0;
+  }
+
+  li {
+    padding-left: px(10);
+
+    @include pseudo(before) {
+      top: px(6);
+      bottom: px(6);
+      left: 0;
+      width: px(4);
+      background: #40b2ff;
+      border-radius: 3px;
+      opacity: 0;
+    }
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: px(16);
+    padding: px(9) px(8);
+    font-size: var(--mv-font-size-xl);
+    border: 1px solid transparent;
+    border-radius: var(--mv-radius-s);
+
+    svg {
+      width: 16px;
+      height: 16px;
+      fill: #a7d8f3;
+    }
+
+    @include hover {
+      background: #283b65;
+      border-color: #3d5075;
+    }
+  }
+
+  .is\:active {
+    &::before {
+      opacity: 1;
+    }
+
+    a {
+      background: #283b65;
+      border-color: #3d5075;
+    }
+  }
+}
+
+// @TODO: Want to make this re-usable for other sidebars as well?
+.navigation--stick-to-bottom {
+  flex: 0 0 auto;
+}

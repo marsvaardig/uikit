@@ -1,0 +1,40 @@
+@use "../tools" as *;
+
+.search-wrapper {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 9; // TODO: add z-index map
+  display: none;
+  padding: 0 1rem;
+
+  @include state('has', 'toggled-search') {
+    display: block;
+  }
+
+  @include breakpoint($chrome-breakpoint2) {
+    position: static;
+    display: flex;
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.toggle-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: px(32);
+  height: px(32);
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  background: transparent;
+  border: 2px solid rgba(#fff, .66);
+  border-radius: 100%;
+
+  @include breakpoint($chrome-breakpoint2) {
+    display: none;
+  }
+}

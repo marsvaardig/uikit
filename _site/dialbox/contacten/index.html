@@ -102,9 +102,9 @@
         <div class="layout">
                             <div class="sidebar sidebar--left" data-sidebar="left">
     <div class="sidebar__resizer" data-sidebar-resizer="left" title="drag to resize; doubleclick to reset"></div>
-    <div class="inner">
+    <div class="sidebar__content">
         <div class="navigation-wrapper">
-            <div class="overflow">
+            <div class="navigation-rename overflow">
                 
                 <div class="navigation navigation--persistent">
                     <ul class="navigation__list">
@@ -153,7 +153,7 @@
                                     <hr>
                     <div class="navigation">
                         <div class="navigation__heading">
-                            Dialbox navigation
+                            Telefoonboek
                         </div>
                         <ul class="navigation__list">
                             <li >
@@ -212,30 +212,30 @@
                     </div>
                     <ul class="tree-nav">
                         <li data-id="settings">
-                            <button class="toggle" type="button" aria-label="Toggle submenu"></button>
-                            <a href="/settings">Instellingen</a>
+                            <button class="tree-nav__toggle" type="button" aria-label="Toggle submenu"></button>
+                            <a href="/table">Table</a>
                             <ul>
                                 <li data-id="general">
-                                    <button class="toggle" type="button"></button>
-                                    <a href="/settings/general">Algemeen</a>
+                                    <button class="tree-nav__toggle" type="button"></button>
+                                    <a href="/table">Table</a>
                                     <ul>
                                         <li data-id="general1">
-                                            <a href="/settings/general">Algemeen</a>
+                                            <a href="/item">Item</a>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                         <li data-id="settings2">
-                            <button class="toggle" type="button" aria-label="Toggle submenu"></button>
-                            <a href="/settings">Instellingen</a>
+                            <button class="tree-nav__toggle" type="button" aria-label="Toggle submenu"></button>
+                            <a href="/table">Table</a>
                             <ul>
                                 <li data-id="gen2">
-                                    <button class="toggle" type="button"></button>
-                                    <a href="/settings/general">Algemeen</a>
+                                    <button class="tree-nav__toggle" type="button"></button>
+                                    <a href="/table">Table</a>
                                     <ul>
                                         <li data-id="lev3">
-                                            <a href="/settings/general">Algemeen</a>
+                                            <a href="/item">Item</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -243,7 +243,6 @@
                         </li>
                     </ul>
                 </div>
-                <div class="filler"></div>
             </div>
             <div class="navigation navigation--persistent navigation--stick-to-bottom">
                 <hr>
@@ -321,7 +320,7 @@
     </div>
 </div>
                                 <div class="main">
-                    <div class="content">
+                    <div class="content overflow">
                             Contacten
                         <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
                     </div>
@@ -355,7 +354,7 @@
                 </button>
             </div>
         </div>
-        <div class="inner">
+        <div class="sidebar__content overflow">
             Dit is een sidebar met een title en body
             <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
         </div>

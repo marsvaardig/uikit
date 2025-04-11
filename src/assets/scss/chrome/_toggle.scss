@@ -1,0 +1,46 @@
+@use "../tools" as *;
+
+.toggle-wrapper {
+  display: none;
+
+  button {
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+  }
+}
+
+.uikit:has(.sidebar--left:not([hidden])) {
+  .toggle-wrapper--sidebar-left {
+    display: block;
+  }
+}
+
+.uikit:has(.sidebar--right:not([hidden])) {
+  .toggle-wrapper--sidebar-right {
+    display: block;
+  }
+}
+
+.uikit:has(.sidebar--component:not([hidden])) {
+  .toggle-wrapper--sidebar-component {
+    display: flex;
+  }
+}
+
+.sidebar-toggle-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: px(40);
+  height: px(40);
+  margin: px(-8);
+}
+
+.sidebar-toggle-right {
+  @include state('has', 'toggled-sidebar-right') {
+    color: $brand;
+  }
+}

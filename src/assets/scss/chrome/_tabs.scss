@@ -1,0 +1,63 @@
+@use "../tools" as *;
+
+.sidebar__tabs {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  margin-bottom: -1px;
+
+  ul {
+    display: flex;
+    gap: .5rem;
+    padding-left: 0;
+    margin: 0;
+
+    & > ::marker {
+      font-size: 0;
+    }
+
+    li {
+      padding-bottom: 1px;
+    }
+
+    a {
+      display: flex;
+      padding: .65em 1em;
+      border: 1px solid transparent;
+      border-bottom-width: 0;
+      border-radius: .5em .5em 0 0;
+
+      @include hover {
+        background: rgba(#fff, .5);
+        border-color: rgba(#b7cad7, .5);
+      }
+    }
+
+    .is\:active {
+      padding-bottom: 0;
+
+      a {
+        height: 100%;
+        background: #fff;
+        border-color: #b7cad7;
+      }
+    }
+  }
+}
+
+.tab-content {
+  display: none;
+  overflow: hidden; // For the .overflow container
+
+  &.is\:active {
+    display: block;
+  }
+}
+
+
+// @TODO: Check if we should fix this and where we should put this
+.sidebar--component:has(.sidebar__tabs :first-child.is\:active) {
+  .sidebar__content {
+    border-top-left-radius: 0;
+  }
+}

@@ -173,6 +173,9 @@
         panels.forEach((panel) => {
           panel.classList.remove("is:active");
           panel.setAttribute("hidden", "");
+          const overflowContainer = panel.closest(".overflow");
+          if (!overflowContainer) return;
+          overflowContainer.scrollTop = 0;
         });
         selectedTab.setAttribute("aria-selected", "true");
         selectedTab.parentElement.classList.add("is:active");
@@ -284,12 +287,20 @@
     }
     tree.addEventListener("click", (e) => {
       const toggle = e.target.closest("button.toggle");
-      if (!toggle) return;
-      const li = toggle.closest("li[data-id]");
-      const id = li?.dataset.id;
-      if (!id) return;
-      li.classList.toggle("open");
-      savedState[id] = li.classList.contains("open");
+      const link = e.target.closest("a");
+      if (!toggle && !link) return;
+      const li = e.target.closest("li[data-id]");
+      if (toggle) {
+        const id = li?.dataset.id;
+        if (!id) return;
+        li.classList.toggle("open");
+        savedState[id] = li.classList.contains("open");
+      }
+      if (link) {
+        const id = li?.dataset.id;
+        if (!id) return;
+        savedState[id] = li;
+      }
       localStorage.setItem(stateKey, JSON.stringify(savedState));
     });
   })();

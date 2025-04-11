@@ -1,0 +1,221 @@
+@use "../tools" as *;
+
+.header {
+  position: relative; // For the search-wrapper etc
+  z-index: 12; // @TODO: add z-index SCSS map - we need this to be on top of the right sidebar now
+  display: flex;
+  align-items: center;
+  gap: var(--mv-chrome-spacing-m);
+  padding: 0 var(--mv-chrome-spacing-m);
+}
+
+.header__brand {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: var(--mv-chrome-spacing-m);
+  padding: var(--mv-chrome-spacing-m) 0;
+  overflow: hidden;
+  font-size: var(--mv-font-size-2xl);
+  font-weight: 700;
+
+  @include transition(min-inline-size $chrome-transition-duration ease-in-out);
+
+  @include breakpoint($chrome-breakpoint2) {
+    min-inline-size: calc(var(--mv-sidebar-left-width) - (var(--mv-chrome-spacing-m) * 2));
+  }
+
+  svg {
+    flex: 0 0 auto;
+  }
+
+  @include state('has', 'toggled-sidebar-left') {
+    min-inline-size: 0;
+  }
+}
+
+.brand-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.header__search {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mv-chrome-spacing-m) 0;
+  text-align: center;
+
+  .search {
+    position: relative; // to position label and button
+    width: 100%;
+    max-width: px(400);
+    box-shadow: 0 0 40px rgba(#000, .5);
+
+    [type="search"] {
+      width: 100%;
+      height: px(40);
+      padding-right: 1rem;
+      padding-left: px(40);
+      background: #fff;
+      border: none;
+      border-radius: var(--mv-radius-s);
+    }
+
+    button {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: px(40);
+      height: px(40);
+      padding: 0;
+      line-height: 1;
+      color: #93AFC2;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      border-radius: var(--mv-radius-s) 0 0 var(--mv-radius-s);
+
+      @include hover {
+        color: #000;
+        background: #d4e3ee;
+      }
+
+      svg {
+        display: block;
+      }
+    }
+  }
+}
+
+.header__switch {
+  display: none;
+  padding: var(--mv-chrome-spacing-m) 0;
+
+  @include breakpoint($chrome-breakpoint2) {
+    display: flex;
+  }
+
+  select {
+    height: px(40);
+    padding: px(6) .5rem;
+    background: #fff;
+    border: none;
+    border-radius: var(--mv-radius-s);
+  }
+}
+
+.header__utilities {
+  display: none;
+  gap: px(12);
+  padding: var(--mv-chrome-spacing-m) 0;
+
+  @include breakpoint($chrome-breakpoint1) {
+    display: flex;
+  }
+}
+
+.header__utility {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: px(40);
+  block-size: px(40);
+  border: 1px solid #31475A;
+  border-radius: var(--mv-radius-s);
+}
+
+.header__profile {
+  position: relative; // for the dropdown
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mv-spacing-m);
+  padding: var(--mv-chrome-spacing-m) 0;
+
+  svg {
+    fill: currentcolor;
+  }
+}
+
+.profile {
+  display: flex;
+  padding: 0;
+  color: currentcolor;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  inline-size: px(32);
+  block-size: px(32);
+}
+
+.profile__initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  background: $brand;
+  border-radius: 100%;
+  inline-size: px(32);
+  block-size: 100%;
+}
+
+.profile__indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: px(32);
+  height: px(32);
+
+  svg {
+    width: px(16);
+    height: px(16);
+  }
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 9; // @TODO: add z-index SCSS map
+  display: none;
+  width: px(240);
+  overflow: hidden; // for the radius
+  color: #000;
+  background: #fff;
+  border: 1px solid #B7CAD7;
+  border-radius: var(--mv-chrome-radius-s);
+  box-shadow: 0 0 12px rgba(#000, .15);
+
+  @include state('has', 'toggled-profile') {
+    display: block;
+  }
+
+  ul {
+    padding-left: 0;
+    margin: 0;
+
+    & > ::marker {
+      font-size: 0;
+    }
+  }
+
+  li + li {
+    border-top: 1px solid #e0e0e0;
+  }
+
+  a {
+    display: block;
+    padding: .75em 1em;
+
+    @include hover {
+      background: #d4e3ee;
+    }
+  }
+}

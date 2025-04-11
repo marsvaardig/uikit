@@ -1,0 +1,11 @@
+@use "../tools" as *;
+
+.layout {
+  position: relative; // What for?
+  display: flex;
+  flex: 1 1 auto;
+  max-inline-size: 100%;
+  padding-inline: var(--mv-chrome-spacing-s) var(--mv-chrome-spacing-s);
+  padding-block-end: var(--mv-chrome-spacing-s);
+  overflow: hidden; // for the sidebar overflow hidden to work
+}
