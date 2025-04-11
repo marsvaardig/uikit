@@ -63,6 +63,10 @@
       transform: translate(-50%, -50%);
     }
 
+    @include state('has', 'toggled-sidebar-left|not(resizing)') {
+      display: none;
+    }
+
     @include hover {
       &::before,
       &::after {
