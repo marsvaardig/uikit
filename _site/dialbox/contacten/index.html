@@ -157,14 +157,6 @@
                                 Telefoonboek
                             </div>
                             <ul class="navigation__list">
-                                <li >
-                                    <a href="/dialbox">
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M9.4875 12.985C8.84375 14.2722 8.23125 14.4972 8 14.4972C7.90312 14.4972 7.74062 14.4566 7.5375 14.3191L7.05937 15.9438C7.36875 15.9813 7.68125 16 8 16C12.4187 16 16 12.4194 16 8.00156C16 3.58368 12.4187 0 8 0C3.58125 0 0 3.58055 0 7.99844C0 8.31713 0.01875 8.62957 0.05625 8.93888L1.52188 8.50771C1.50937 8.339 1.50312 8.17028 1.50312 7.99844C1.50312 7.48291 1.5625 6.97989 1.67813 6.49873H4.075C4.03437 6.91428 4.0125 7.34232 4.00625 7.77973L5.51875 7.33607C5.53125 7.05175 5.55313 6.77368 5.58125 6.50186H10.425C10.475 6.97989 10.5031 7.48291 10.5031 8.00156C10.5031 8.52021 10.475 9.02324 10.425 9.50127H8.95625L8.51562 11.001H10.1781C10.0031 11.7633 9.76562 12.4351 9.49063 12.9881L9.4875 12.985ZM6.5125 3.01191C7.15625 1.72466 7.76875 1.49971 8 1.49971C8.23125 1.49971 8.84375 1.72466 9.4875 3.01191C9.7625 3.56493 10 4.23667 10.175 4.99902H5.825C6 4.23667 6.2375 3.56493 6.5125 3.01191ZM12 7.99844C12 7.48604 11.975 6.98301 11.9312 6.49873H14.3281C14.4406 6.97989 14.5031 7.48291 14.5031 7.99844C14.5031 8.51396 14.4438 9.01699 14.3281 9.49815H11.9312C11.9781 9.01387 12 8.51084 12 7.99844ZM11.7094 4.99902C11.4813 3.87737 11.1313 2.88381 10.6906 2.08084C12.0125 2.68385 13.0969 3.7149 13.7656 4.99902H11.7063H11.7094ZM2.23125 4.99902C2.9 3.7149 3.98438 2.68385 5.30625 2.08084C4.86562 2.88069 4.51562 3.87737 4.2875 4.99902H2.22813H2.23125ZM11.7094 10.9979H13.7688C13.1 12.282 12.0156 13.313 10.6938 13.916C11.1344 13.1162 11.4844 12.1195 11.7125 10.9979H11.7094ZM1.21875 9.63874C0.784375 9.76684 0.73125 10.3636 1.1375 10.5667L2.92812 11.4634C2.96875 11.4853 3.00938 11.5103 3.04375 11.5415L0.29375 14.291C-0.096875 14.6815 -0.096875 15.3158 0.29375 15.7063C0.684375 16.0969 1.31875 16.0969 1.70938 15.7063L4.45937 12.9568C4.49062 12.9912 4.51875 13.0287 4.5375 13.0724L5.43437 14.8627C5.6375 15.2689 6.23438 15.2158 6.3625 14.7815L8.24375 8.38274C8.35625 8.00469 8.00313 7.65163 7.62187 7.76098L1.21875 9.63874Z"/>
-                                        </svg>
-                                        <span class="navigation__item">Dashboard</span>
-                                    </a>
-                                </li>
                                 <li class="is:active">
                                     <a href="/dialbox/contacten">
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -265,9 +257,8 @@
                         <div class="component">
                                     <div class="toolbar">
     <div class="cluster">
-                    <button class="button" type="button" onclick="window.location.href='/'">Opslaan</button>
-            <button class="button" type="button" onclick="window.location.href='/'">Toepassen</button>
-            <button class="button" type="button" onclick="window.location.href='/'">Annuleren</button>
+                        <a href="/dialbox/contacten/nieuw" class="button">Nieuw contact</a>
+
             </div>
     <div class="toggle-wrapper toggle-wrapper--sidebar-component">
         <button class="sidebar-toggle-component" data-sidebar-toggle="component">
@@ -283,47 +274,254 @@
             <path d="M0.121956 1.71563C0.328206 1.27813 0.765706 1 1.25008 1H14.7501C15.2345 1 15.672 1.27813 15.8782 1.71563C16.0845 2.15313 16.022 2.66875 15.7157 3.04375L10.0001 10.0281V14C10.0001 14.3781 9.78758 14.725 9.44696 14.8938C9.10633 15.0625 8.70321 15.0281 8.40008 14.8L6.40008 13.3C6.14696 13.1125 6.00008 12.8156 6.00008 12.5V10.0281L0.281331 3.04063C-0.0217942 2.66875 -0.0874192 2.15 0.121956 1.71563Z" fill="#2697E1"/>
         </svg>
     </div>
-            <div class="filter">
-            <button type="button" class="filter-toggle" aria-expanded="false" aria-controls="dropdown-1" id="toggle-1">
-                Filter 1
-                <span class="amount-label">2</span>
-                <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.14228 5.35319C4.33804 5.54894 4.65457 5.54894 4.84824 5.35319L8.84866 1.35485C9.04441 1.1591 9.04441 0.842566 8.84866 0.648896C8.6529 0.455227 8.33637 0.453145 8.1427 0.648896L4.49839 4.29321L0.85199 0.646814C0.656238 0.451062 0.339703 0.451062 0.146034 0.646814C-0.0476354 0.842566 -0.0497178 1.1591 0.146034 1.35277L4.14228 5.35319Z" fill="black"/>
-                </svg>
-            </button>
-            <div class="filter-dropdown" id="dropdown-1" hidden>
-                This is the dropdown
-            </div>
+                <div class="filter">
+        <button type="button" class="filter-toggle" aria-expanded="false" aria-controls="dropdown-1" id="toggle-1">
+            Organisatie
+            <span class="amount-label">2</span>
+            <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.14228 5.35319C4.33804 5.54894 4.65457 5.54894 4.84824 5.35319L8.84866 1.35485C9.04441 1.1591 9.04441 0.842566 8.84866 0.648896C8.6529 0.455227 8.33637 0.453145 8.1427 0.648896L4.49839 4.29321L0.85199 0.646814C0.656238 0.451062 0.339703 0.451062 0.146034 0.646814C-0.0476354 0.842566 -0.0497178 1.1591 0.146034 1.35277L4.14228 5.35319Z" fill="black"/>
+            </svg>
+        </button>
+        <div class="filter-dropdown" id="dropdown-1" hidden>
+            This is the dropdown
         </div>
-        <div class="filter">
-            <button type="button" class="filter-toggle" aria-expanded="false" aria-controls="dropdown-2" id="toggle-2">
-                Filter 2
-                <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.14228 5.35319C4.33804 5.54894 4.65457 5.54894 4.84824 5.35319L8.84866 1.35485C9.04441 1.1591 9.04441 0.842566 8.84866 0.648896C8.6529 0.455227 8.33637 0.453145 8.1427 0.648896L4.49839 4.29321L0.85199 0.646814C0.656238 0.451062 0.339703 0.451062 0.146034 0.646814C-0.0476354 0.842566 -0.0497178 1.1591 0.146034 1.35277L4.14228 5.35319Z" fill="black"/>
-                </svg>
-            </button>
-            <div class="filter-dropdown" id="dropdown-2" hidden>
-                This is the dropdown
-            </div>
+    </div>
+    <div class="filter">
+        <button type="button" class="filter-toggle" aria-expanded="false" aria-controls="dropdown-2" id="toggle-2">
+            Functie
+            <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.14228 5.35319C4.33804 5.54894 4.65457 5.54894 4.84824 5.35319L8.84866 1.35485C9.04441 1.1591 9.04441 0.842566 8.84866 0.648896C8.6529 0.455227 8.33637 0.453145 8.1427 0.648896L4.49839 4.29321L0.85199 0.646814C0.656238 0.451062 0.339703 0.451062 0.146034 0.646814C-0.0476354 0.842566 -0.0497178 1.1591 0.146034 1.35277L4.14228 5.35319Z" fill="black"/>
+            </svg>
+        </button>
+        <div class="filter-dropdown" id="dropdown-2" hidden>
+            This is the dropdown
         </div>
-        <div class="filter">
-            <button type="button" class="filter-toggle" aria-expanded="false" aria-controls="dropdown-3" id="toggle-3">
-                Filter 3
-                <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.14228 5.35319C4.33804 5.54894 4.65457 5.54894 4.84824 5.35319L8.84866 1.35485C9.04441 1.1591 9.04441 0.842566 8.84866 0.648896C8.6529 0.455227 8.33637 0.453145 8.1427 0.648896L4.49839 4.29321L0.85199 0.646814C0.656238 0.451062 0.339703 0.451062 0.146034 0.646814C-0.0476354 0.842566 -0.0497178 1.1591 0.146034 1.35277L4.14228 5.35319Z" fill="black"/>
-                </svg>
-            </button>
-            <div class="filter-dropdown" id="dropdown-3" hidden>
-                This is the dropdown
-            </div>
-        </div>
+    </div>
+    <div class="filters__search">
+        <label for="filter-search">Zoeken...</label>
+        <input id="filter-search" type="search" placeholder="Zoeken..." />
+        <button type="button">
+            <span class="visually:hidden">
+                Zoeken...
+            </span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 6.5C13 7.93437 12.5344 9.25938 11.75 10.3344L15.7063 14.2937C16.0969 14.6844 16.0969 15.3188 15.7063 15.7094C15.3156 16.1 14.6812 16.1 14.2906 15.7094L10.3344 11.75C9.25938 12.5375 7.93437 13 6.5 13C2.90937 13 0 10.0906 0 6.5C0 2.90937 2.90937 0 6.5 0C10.0906 0 13 2.90937 13 6.5ZM6.5 11C7.09095 11 7.67611 10.8836 8.22208 10.6575C8.76804 10.4313 9.26412 10.0998 9.68198 9.68198C10.0998 9.26412 10.4313 8.76804 10.6575 8.22208C10.8836 7.67611 11 7.09095 11 6.5C11 5.90905 10.8836 5.32389 10.6575 4.77792C10.4313 4.23196 10.0998 3.73588 9.68198 3.31802C9.26412 2.90016 8.76804 2.56869 8.22208 2.34254C7.67611 2.1164 7.09095 2 6.5 2C5.90905 2 5.32389 2.1164 4.77792 2.34254C4.23196 2.56869 3.73588 2.90016 3.31802 3.31802C2.90016 3.73588 2.56869 4.23196 2.34254 4.77792C2.1164 5.32389 2 5.90905 2 6.5C2 7.09095 2.1164 7.67611 2.34254 8.22208C2.56869 8.76804 2.90016 9.26412 3.31802 9.68198C3.73588 10.0998 4.23196 10.4313 4.77792 10.6575C5.32389 10.8836 5.90905 11 6.5 11Z" />
+            </svg>
+        </button>
+    </div>
+
         <div class="reset-filters">
         <button type="button">Reset filters</button>
     </div>
 </div>
                                 <div class="main">
                     <div class="content overflow">
-                            Contacten
+                            <table>
+        <thead>
+        <tr>
+            <th>Naam</th>
+            <th>Organisatie</th>
+            <th>Functie</th>
+            <th>Telefoon</th>
+            <th>E-mail</th>
+            <th>Acties</th>
+        </tr>
+        </thead>
+        <tbody>
+                    <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Tom Janssens
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>+32498138317</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Geert Janssens
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Robin Poort
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Steven Rombauts
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+                    <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Tom Janssens
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>+32498138317</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Geert Janssens
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Robin Poort
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Steven Rombauts
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+                    <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Tom Janssens
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>+32498138317</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Geert Janssens
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Robin Poort
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Steven Rombauts
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+                    <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Tom Janssens
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>+32498138317</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Geert Janssens
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Robin Poort
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Steven Rombauts
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+                </tbody>
+    </table>
                         <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
                     </div>
                                     </div>

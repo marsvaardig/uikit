@@ -1,0 +1,112 @@
+{% extends "../../../src/_includes/layouts/base.twig" %}
+
+{% set viewType = 'table' %}
+
+{% set toolbarBody %}
+    <a href="/dialbox/contacten/nieuw" class="button">Nieuw contact</a>
+{% endset %}
+
+{% set filterBody %}
+    <div class="filter">
+        <button type="button" class="filter-toggle" aria-expanded="false" aria-controls="dropdown-1" id="toggle-1">
+            Organisatie
+            <span class="amount-label">2</span>
+            <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.14228 5.35319C4.33804 5.54894 4.65457 5.54894 4.84824 5.35319L8.84866 1.35485C9.04441 1.1591 9.04441 0.842566 8.84866 0.648896C8.6529 0.455227 8.33637 0.453145 8.1427 0.648896L4.49839 4.29321L0.85199 0.646814C0.656238 0.451062 0.339703 0.451062 0.146034 0.646814C-0.0476354 0.842566 -0.0497178 1.1591 0.146034 1.35277L4.14228 5.35319Z" fill="black"/>
+            </svg>
+        </button>
+        <div class="filter-dropdown" id="dropdown-1" hidden>
+            This is the dropdown
+        </div>
+    </div>
+    <div class="filter">
+        <button type="button" class="filter-toggle" aria-expanded="false" aria-controls="dropdown-2" id="toggle-2">
+            Functie
+            <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.14228 5.35319C4.33804 5.54894 4.65457 5.54894 4.84824 5.35319L8.84866 1.35485C9.04441 1.1591 9.04441 0.842566 8.84866 0.648896C8.6529 0.455227 8.33637 0.453145 8.1427 0.648896L4.49839 4.29321L0.85199 0.646814C0.656238 0.451062 0.339703 0.451062 0.146034 0.646814C-0.0476354 0.842566 -0.0497178 1.1591 0.146034 1.35277L4.14228 5.35319Z" fill="black"/>
+            </svg>
+        </button>
+        <div class="filter-dropdown" id="dropdown-2" hidden>
+            This is the dropdown
+        </div>
+    </div>
+    <div class="filters__search">
+        <label for="filter-search">Zoeken...</label>
+        <input id="filter-search" type="search" placeholder="Zoeken..." />
+        <button type="button">
+            <span class="visually:hidden">
+                Zoeken...
+            </span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 6.5C13 7.93437 12.5344 9.25938 11.75 10.3344L15.7063 14.2937C16.0969 14.6844 16.0969 15.3188 15.7063 15.7094C15.3156 16.1 14.6812 16.1 14.2906 15.7094L10.3344 11.75C9.25938 12.5375 7.93437 13 6.5 13C2.90937 13 0 10.0906 0 6.5C0 2.90937 2.90937 0 6.5 0C10.0906 0 13 2.90937 13 6.5ZM6.5 11C7.09095 11 7.67611 10.8836 8.22208 10.6575C8.76804 10.4313 9.26412 10.0998 9.68198 9.68198C10.0998 9.26412 10.4313 8.76804 10.6575 8.22208C10.8836 7.67611 11 7.09095 11 6.5C11 5.90905 10.8836 5.32389 10.6575 4.77792C10.4313 4.23196 10.0998 3.73588 9.68198 3.31802C9.26412 2.90016 8.76804 2.56869 8.22208 2.34254C7.67611 2.1164 7.09095 2 6.5 2C5.90905 2 5.32389 2.1164 4.77792 2.34254C4.23196 2.56869 3.73588 2.90016 3.31802 3.31802C2.90016 3.73588 2.56869 4.23196 2.34254 4.77792C2.1164 5.32389 2 5.90905 2 6.5C2 7.09095 2.1164 7.67611 2.34254 8.22208C2.56869 8.76804 2.90016 9.26412 3.31802 9.68198C3.73588 10.0998 4.23196 10.4313 4.77792 10.6575C5.32389 10.8836 5.90905 11 6.5 11Z" />
+            </svg>
+        </button>
+    </div>
+{% endset %}
+
+{% block content %}
+    <table>
+        <thead>
+        <tr>
+            <th>Naam</th>
+            <th>Organisatie</th>
+            <th>Functie</th>
+            <th>Telefoon</th>
+            <th>E-mail</th>
+            <th>Acties</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in 0..3 %}
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Tom Janssens
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>+32498138317</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Geert Janssens
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Robin Poort
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                <span class="font-size:2xl">
+                    Steven Rombauts
+                </span>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

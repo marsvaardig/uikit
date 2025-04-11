@@ -69,3 +69,48 @@
     border: none;
   }
 }
+
+.filters__search {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+
+  label {
+    @include visually-hidden;
+  }
+
+  input {
+    inline-size: 100%;
+    block-size: 100%;
+    padding-inline: px(40) 1rem;
+    border: none;
+    border-radius: 0;
+  }
+
+  button {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: px(40);
+    block-size: px(40);
+    padding: 0;
+    line-height: 1;
+    color: #93AFC2;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+
+    @include hover {
+      color: #000;
+      background: #d4e3ee;
+    }
+
+    svg {
+      display: block;
+    }
+  }
+}

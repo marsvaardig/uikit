@@ -34,3 +34,32 @@
 .is\:on {
   display: none;
 }
+
+.font-size\:2xl {
+  font-size: var(--mv-font-size-2xl);
+}
+
+table {
+  inline-size: 100%;
+  font-size: var(--mv-font-size-l);
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: px(12);
+    text-align: left;
+  }
+
+  tr:hover {
+    td {
+      background: #DBE5EC;
+    }
+  }
+
+  tr:not(:first-child) {
+    th,
+    td {
+      border-top: 1px solid #BFD0DB;
+    }
+  }
+}

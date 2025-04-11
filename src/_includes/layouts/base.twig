@@ -30,7 +30,7 @@
                     } %}
                 {% endif %}
                 <div class="main">
-                    <div class="content overflow">
+                    <div class="content{% if viewType != 'table' %} content--box{% endif%} overflow">
                         {% block content %}{% endblock %}
                         <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
                     </div>

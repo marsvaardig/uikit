@@ -1,0 +1,13 @@
+{% extends "../../../src/_includes/layouts/base.twig" %}
+
+{% set viewType = 'item' %}
+
+{% set toolbarBody %}
+    <button class="button" type="button" onclick="window.history.back()">Opslaan</button>
+    <button class="button" type="button" onclick="window.history.back()">Toepassen</button>
+    <button class="button" type="button" onclick="window.history.back()">Annuleren</button>
+{% endset %}
+
+{% block content %}
+    Nieuw contact
+{% endblock %}
