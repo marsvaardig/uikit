@@ -303,5 +303,25 @@
       }
       localStorage.setItem(stateKey, JSON.stringify(savedState));
     });
+    const tables = document.querySelectorAll("[data-table]");
+    if (tables.length > 0) {
+      tables.forEach((table) => {
+        const rows = table.querySelectorAll("tbody tr");
+        if (rows) {
+          rows.forEach((row) => {
+            row.addEventListener("click", (e) => {
+              row.classList.toggle("is:selected");
+            });
+            row.addEventListener("dblclick", (e) => {
+              const link = row.querySelector("a");
+              const url = link.getAttribute("href");
+              if (url) {
+                window.location.href = url;
+              }
+            });
+          });
+        }
+      });
+    }
   })();
 })();

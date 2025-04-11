@@ -424,4 +424,29 @@
     localStorage.setItem(stateKey, JSON.stringify(savedState));
   });
   
+  
+  // Table
+  const tables = document.querySelectorAll('[data-table]');
+  if (tables.length > 0) {
+    tables.forEach(table => {
+      // Get rows in tbody
+      const rows = table.querySelectorAll('tbody tr');
+      if (rows) {
+        rows.forEach(row => {
+          // Add single click
+          row.addEventListener('click', (e) => {
+            row.classList.toggle('is:selected');
+          });
+          // Add double click
+          row.addEventListener('dblclick', (e) => {
+            const link = row.querySelector('a');
+            const url = link.getAttribute('href');
+            if (url) {
+              window.location.href = url;
+            }
+          });
+        })
+      }
+    });
+  }
 })();

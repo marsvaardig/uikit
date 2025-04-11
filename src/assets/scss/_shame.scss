@@ -35,11 +35,9 @@
   display: none;
 }
 
-.font-size\:2xl {
-  font-size: var(--mv-font-size-2xl);
-}
-
 table {
+  --mv-table-item-title: #0B55C4;
+
   inline-size: 100%;
   font-size: var(--mv-font-size-l);
   border-collapse: collapse;
@@ -51,6 +49,8 @@ table {
   }
 
   tr:hover {
+    --mv-table-item-title: #013381;
+
     td {
       background: #DBE5EC;
     }
@@ -62,4 +62,24 @@ table {
       border-top: 1px solid #BFD0DB;
     }
   }
+
+  .is\:selected {
+    &,
+    &:hover {
+      td {
+        background: #cde7fd;
+      }
+    }
+  }
 }
+
+.table-item-title {
+  font-size: var(--mv-font-size-xl);
+  color: var(--mv-table-item-title);
+  cursor: pointer;
+
+  @include hover {
+    text-decoration: underline;
+  }
+}
+
