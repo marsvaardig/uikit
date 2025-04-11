@@ -286,7 +286,7 @@
       if (li && isOpen) li.classList.add("open");
     }
     tree.addEventListener("click", (e) => {
-      const toggle = e.target.closest("button.toggle");
+      const toggle = e.target.closest("button.tree-nav__toggle");
       const link = e.target.closest("a");
       if (!toggle && !link) return;
       const li = e.target.closest("li[data-id]");
