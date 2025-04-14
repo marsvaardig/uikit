@@ -91,6 +91,12 @@
       }
     }
     
+    function getWidthValueInPixels($sidebar, type) {
+      const val = getComputedStyle($sidebar).getPropertyValue(type);
+      return val.includes('%') ? parseFloat(val) / 100 * $sidebar.parentElement.getBoundingClientRect().width : parseFloat(val);
+    }
+    
+    
     function initResize(e, direction) {
       const $sidebar = e.target.closest('[data-sidebar]');
       
@@ -103,8 +109,8 @@
       startY = e.clientY;
       startWidth = $sidebar.offsetWidth;
       $ui.classList.add('has:resizing');
-      maxWidth = parseInt(window.getComputedStyle($sidebar).getPropertyValue('max-width'));
-      minWidth = parseInt(window.getComputedStyle($sidebar).getPropertyValue('min-width'));
+      maxWidth = getWidthValueInPixels($sidebar, 'max-width');
+      minWidth = getWidthValueInPixels($sidebar, 'min-width');
       
       // Add listeners
       document.addEventListener('mousemove', (e) => onMouseMove(e, $sidebar));
@@ -123,7 +129,7 @@
   }
   
   // Initialize resizing for sidebars
-  ['left', 'right', 'component'].forEach(side => {
+  ['left', 'right', 'component', 'split'].forEach(side => {
     const el = document.querySelector(`[data-sidebar-resizer="${side}"]`);
     if (el) {
       initResizing(el);
@@ -452,4 +458,15 @@
       }
     });
   }
+  
+  
+  
+  // TODO: TEMP
+  document.querySelectorAll('[data-toggle-split]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      const className = `has:toggled-sidebar-split`;
+      e.preventDefault();
+      $ui.classList.toggle(className);
+    });
+  });
 })();

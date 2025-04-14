@@ -2,23 +2,21 @@
 
 .content {
   flex: 1 1 auto;
-  min-inline-size: calc(100% - var(--mv-sidebar-component-hide));
+  min-inline-size: var(--mv-content-min-width);
   transition: all $chrome-transition-duration ease-in-out;
+
+  &:has(~.sidebar--component) {
+    margin-inline-end: calc(var(--mv-sidebar-component-hide) + var(--mv-chrome-spacing-m));
+
+    @include breakpoint($chrome-breakpoint2) {
+      margin-inline-end: 0;
+    }
+  }
 
   &.content--box {
     padding: 1rem;
     background: #fff;
     border: 1px solid #B7CAD7;
     border-radius: var(--mv-chrome-radius-s);
-  }
-
-  @include breakpoint($chrome-breakpoint2) {
-    min-inline-size: calc(100% - var(--mv-sidebar-component-width) - var(--mv-spacing-m))
-  }
-
-  @include state('has', 'toggled-sidebar-component') {
-    @include breakpoint($chrome-breakpoint2) {
-      min-inline-size: calc(100% - var(--mv-sidebar-component-hide));
-    }
   }
 }

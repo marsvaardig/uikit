@@ -1,35 +1,44 @@
 @use "../../tools" as *;
 
 .sidebar--component {
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(100% - var(--mv-sidebar-component-hide));
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
   inline-size: var(--mv-sidebar-component-width);
-  min-inline-size: min(var(--mv-sidebar-component-width), 100%);
-  max-inline-size: 100%;
+  min-inline-size: min(var(--mv-sidebar-component-width), 100% - var(--mv-sidebar-component-hide) - var(--mv-chrome-spacing-m));
+  max-inline-size: calc(100% - var(--mv-sidebar-component-hide) - var(--mv-chrome-spacing-m));
 
-  @include transition(transform $chrome-transition-duration ease-in-out, inline-size $chrome-transition-duration ease-in-out);
+  @include transition(all $chrome-transition-duration ease-in-out);
 
   @include state('has', 'toggled-sidebar-component') {
     @include breakpoint($chrome-breakpoint2) {
-      min-inline-size: var(--mv-sidebar-component-width);
+      inline-size: var(--mv-sidebar-component-hide);
+      min-inline-size: 0;
     }
   }
 
   @include breakpoint($chrome-breakpoint2) {
+    position: relative;
+    left: 0;
     min-inline-size: var(--mv-sidebar-component-min-width);
     max-inline-size: min(33vw, var(--mv-sidebar-component-max-width));
   }
 
   .sidebar__content {
     flex: 1 1 auto;
-    min-inline-size: max(var(--mv-sidebar-component-width), var(--mv-sidebar-component-min-width));
-    max-inline-size: 100%;
     padding: 1rem;
     background: #fff;
     border: 1px solid #B7CAD7;
     border-radius: var(--mv-chrome-radius-s);
+
+    @include breakpoint($chrome-breakpoint2) {
+      min-inline-size: min(var(--mv-sidebar-component-width), var(--mv-sidebar-component-min-width));
+      max-inline-size: 100%;
+    }
   }
 
   .sidebar__resizer {
@@ -49,7 +58,6 @@
       transition: border 100ms ease-in-out 120ms;
       transform: translate(-50%, -50%);
     }
-
 
     @include hover {
       &::after {

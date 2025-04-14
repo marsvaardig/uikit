@@ -1,6 +1,7 @@
 @use "../tools" as *;
 
 .main {
+  position: relative; // For the split and component sidebars
   display: flex;
   flex: 1 1 auto;
   gap: var(--mv-chrome-spacing-m);

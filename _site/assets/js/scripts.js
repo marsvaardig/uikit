@@ -69,6 +69,10 @@
           localStorage.removeItem(`sidebarToggle-${sidebarType}`);
         }
       }
+      function getWidthValueInPixels($sidebar, type) {
+        const val = getComputedStyle($sidebar).getPropertyValue(type);
+        return val.includes("%") ? parseFloat(val) / 100 * $sidebar.parentElement.getBoundingClientRect().width : parseFloat(val);
+      }
       function initResize(e, direction) {
         const $sidebar = e.target.closest("[data-sidebar]");
         $sidebar.setAttribute("data-resizing", direction);
@@ -79,8 +83,8 @@
         startY = e.clientY;
         startWidth = $sidebar.offsetWidth;
         $ui.classList.add("has:resizing");
-        maxWidth = parseInt(window.getComputedStyle($sidebar).getPropertyValue("max-width"));
-        minWidth = parseInt(window.getComputedStyle($sidebar).getPropertyValue("min-width"));
+        maxWidth = getWidthValueInPixels($sidebar, "max-width");
+        minWidth = getWidthValueInPixels($sidebar, "min-width");
         document.addEventListener("mousemove", (e2) => onMouseMove(e2, $sidebar));
         document.addEventListener("mouseup", (e2) => onMouseUp(e2, $sidebar));
       }
@@ -91,7 +95,7 @@
         localStorage.removeItem(`sidebarWidth-${sidebarType}`);
       });
     }
-    ["left", "right", "component"].forEach((side) => {
+    ["left", "right", "component", "split"].forEach((side) => {
       const el = document.querySelector(`[data-sidebar-resizer="${side}"]`);
       if (el) {
         initResizing(el);
@@ -331,5 +335,12 @@
         }
       });
     }
+    document.querySelectorAll("[data-toggle-split]").forEach((el) => {
+      el.addEventListener("click", (e) => {
+        const className = `has:toggled-sidebar-split`;
+        e.preventDefault();
+        $ui.classList.toggle(className);
+      });
+    });
   })();
 })();

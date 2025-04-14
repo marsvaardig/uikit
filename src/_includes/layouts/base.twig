@@ -13,29 +13,32 @@
             profile: profile|default(true),
         } %}
         <div class="layout">
-            {% if viewType == 'dashboard' or viewType == 'table' %}
+            {% if viewType == 'dashboard' or viewType == 'table' or viewType == 'split' %}
                 {% include "../partials/sidebar-left.twig" with {
                     sidebarLeftBody: sidebarLeftBody|default(''),
                 } %}
             {% endif %}
             <div class="component">
-                {% if viewType == 'table' or viewType == 'item' %}
+                {% if viewType == 'table' or viewType == 'split' or viewType == 'item' %}
                     {% include "../partials/toolbar.twig" with {
                         toolbarBody: toolbarBody|default(''),
                     } %}
                 {% endif %}
-                {% if viewType == 'table' %}
+                {% if viewType == 'table' or viewType == 'split' %}
                     {% include "../partials/filters.twig" with {
                         filterBody: filterBody|default(''),
                     } %}
                 {% endif %}
                 <div class="main">
-                    <div class="content{% if viewType != 'table' %} content--box{% endif%} overflow">
+                    <div class="content content--box overflow">
                         {% block content %}{% endblock %}
                         <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
                     </div>
                     {% if viewType == 'item' %}
                         {% include "../partials/sidebar-component.twig" %}
+                    {% endif %}
+                    {% if viewType == 'split' %}
+                        {% include "../partials/sidebar-split.twig" %}
                     {% endif %}
                 </div>
             </div>

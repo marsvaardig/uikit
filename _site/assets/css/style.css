@@ -214,6 +214,10 @@ summary {
   --mv-sidebar-component-min-width: 12.5rem;
   --mv-sidebar-component-max-width: 35rem;
   --mv-sidebar-component-hide: 2.5rem;
+  --mv-sidebar-split-width: 66%;
+  --mv-sidebar-split-min-width: 12.5rem;
+  --mv-sidebar-split-max-width: 80%;
+  --mv-content-min-width: 15rem;
   /* Mobile indicator */
   --mv-mobile: 1;
 }
@@ -636,37 +640,47 @@ svg {
 }
 
 .sidebar--component {
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(100% - var(--mv-sidebar-component-hide));
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
   inline-size: var(--mv-sidebar-component-width);
-  min-inline-size: min(var(--mv-sidebar-component-width), 100%);
-  max-inline-size: 100%;
+  min-inline-size: min(var(--mv-sidebar-component-width), 100% - var(--mv-sidebar-component-hide) - var(--mv-chrome-spacing-m));
+  max-inline-size: calc(100% - var(--mv-sidebar-component-hide) - var(--mv-chrome-spacing-m));
 }
 .sidebar--component {
-  transition: transform 300ms ease-in-out 0ms, inline-size 300ms ease-in-out 0ms;
+  transition: all 300ms ease-in-out 0ms;
 }
 @media screen and (min-width: 48rem) {
   .uikit.has\:toggled-sidebar-component .sidebar--component {
-    min-inline-size: var(--mv-sidebar-component-width);
+    inline-size: var(--mv-sidebar-component-hide);
+    min-inline-size: 0;
   }
 }
 
 @media screen and (min-width: 48rem) {
   .sidebar--component {
+    position: relative;
+    left: 0;
     min-inline-size: var(--mv-sidebar-component-min-width);
     max-inline-size: min(33vw, var(--mv-sidebar-component-max-width));
   }
 }
 .sidebar--component .sidebar__content {
   flex: 1 1 auto;
-  min-inline-size: max(var(--mv-sidebar-component-width), var(--mv-sidebar-component-min-width));
-  max-inline-size: 100%;
   padding: 1rem;
   background: #fff;
   border: 1px solid #B7CAD7;
   border-radius: var(--mv-chrome-radius-s);
+}
+@media screen and (min-width: 48rem) {
+  .sidebar--component .sidebar__content {
+    min-inline-size: min(var(--mv-sidebar-component-width), var(--mv-sidebar-component-min-width));
+    max-inline-size: 100%;
+  }
 }
 .sidebar--component .sidebar__resizer {
   inset-inline-end: 100%;
@@ -889,6 +903,81 @@ svg {
   }
 }
 
+.sidebar--split {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  z-index: 3;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  inline-size: min(100% - var(--mv-content-min-width) - var(--mv-chrome-spacing-m), var(--mv-sidebar-split-width));
+  min-inline-size: var(--mv-sidebar-split-min-width);
+  max-inline-size: var(--mv-sidebar-split-max-width);
+}
+.sidebar--split {
+  transition: all 300ms ease-in-out 0ms;
+}
+.uikit.has\:toggled-sidebar-split .sidebar--split {
+  inline-size: 100%;
+  max-inline-size: 100%;
+  transform: translateX(-100%);
+}
+
+@media screen and (min-width: 48rem) {
+  .sidebar--split {
+    position: relative;
+    left: auto;
+  }
+}
+.sidebar--split .sidebar__content {
+  flex: 1 1 auto;
+  max-inline-size: 100%;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #B7CAD7;
+  border-radius: var(--mv-chrome-radius-s);
+}
+.sidebar--split .sidebar__resizer {
+  inset-inline-end: 100%;
+}
+.uikit.has\:toggled-sidebar-split .sidebar--split .sidebar__resizer {
+  display: none;
+}
+
+.sidebar--split .sidebar__resizer::after {
+  position: absolute;
+  content: " ";
+  display: block;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  inline-size: 3px;
+  block-size: 1rem;
+  border-inline-end: 1px solid #b7c9de;
+  border-inline-start: 1px solid #b7c9de;
+  transition: border 100ms ease-in-out 120ms;
+  transform: translate(-50%, -50%);
+}
+.sidebar--split .sidebar__resizer:hover::after, .sidebar--split .sidebar__resizer:focus::after {
+  border-color: #000;
+}
+.sidebar--split[data-resizing] .sidebar__resizer::after {
+  border-color: #000;
+}
+
+@media screen and (min-width: 48rem) {
+  .toggle-split-overlay {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 48rem) {
+  .close-split-overlay {
+    display: none;
+  }
+}
+
 .component {
   display: flex;
   flex: 1 1 auto;
@@ -1035,6 +1124,7 @@ svg {
 }
 
 .main {
+  position: relative;
   display: flex;
   flex: 1 1 auto;
   gap: var(--mv-chrome-spacing-m);
@@ -1052,24 +1142,22 @@ svg {
 
 .content {
   flex: 1 1 auto;
-  min-inline-size: calc(100% - var(--mv-sidebar-component-hide));
+  min-inline-size: var(--mv-content-min-width);
   transition: all 300ms ease-in-out;
+}
+.content:has(~ .sidebar--component) {
+  margin-inline-end: calc(var(--mv-sidebar-component-hide) + var(--mv-chrome-spacing-m));
+}
+@media screen and (min-width: 48rem) {
+  .content:has(~ .sidebar--component) {
+    margin-inline-end: 0;
+  }
 }
 .content.content--box {
   padding: 1rem;
   background: #fff;
   border: 1px solid #B7CAD7;
   border-radius: var(--mv-chrome-radius-s);
-}
-@media screen and (min-width: 48rem) {
-  .content {
-    min-inline-size: calc(100% - var(--mv-sidebar-component-width) - var(--mv-spacing-m));
-  }
-}
-@media screen and (min-width: 48rem) {
-  .uikit.has\:toggled-sidebar-component .content {
-    min-inline-size: calc(100% - var(--mv-sidebar-component-hide));
-  }
 }
 
 /* Overflow
