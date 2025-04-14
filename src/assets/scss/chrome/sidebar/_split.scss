@@ -16,9 +16,11 @@
   @include transition(all $chrome-transition-duration ease-in-out);
 
   @include state('has', 'toggled-sidebar-split') {
-    inline-size: 100%;
-    max-inline-size: 100%;
-    transform: translateX(-100%);
+    @include breakpoint(0, $chrome-breakpoint2-min) {
+      inline-size: 100%;
+      max-inline-size: 100%;
+      transform: translateX(-100%);
+    }
   }
 
   @include breakpoint($chrome-breakpoint2) {
@@ -40,6 +42,10 @@
 
     @include state('has', 'toggled-sidebar-split') {
       display: none;
+
+      @include breakpoint($chrome-breakpoint2) {
+        display: block;
+      }
     }
 
     @include pseudo(after, false) {

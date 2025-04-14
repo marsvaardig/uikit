@@ -14,7 +14,7 @@
   }
 
   &.content--box {
-    padding: 1rem;
+    padding: var(--mv-content-box-padding);
     background: #fff;
     border: 1px solid #B7CAD7;
     border-radius: var(--mv-chrome-radius-s);

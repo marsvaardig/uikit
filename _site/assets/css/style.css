@@ -265,6 +265,7 @@ svg {
   --mv-chrome-spacing-s: var(--mv-spacing-xs);
   --mv-chrome-spacing-m: var(--mv-spacing-m);
   --mv-chrome-spacing-l: var(--mv-spacing-l);
+  --mv-content-box-padding: var(--mv-spacing-m);
   --mv-chrome-radius-s: var(--mv-radius-s);
   --mv-chrome-radius-m: var(--mv-radius-m);
   display: flex;
@@ -919,10 +920,12 @@ svg {
 .sidebar--split {
   transition: all 300ms ease-in-out 0ms;
 }
-.uikit.has\:toggled-sidebar-split .sidebar--split {
-  inline-size: 100%;
-  max-inline-size: 100%;
-  transform: translateX(-100%);
+@media screen and (min-width: 0) and (max-width: 47.9375rem) {
+  .uikit.has\:toggled-sidebar-split .sidebar--split {
+    inline-size: 100%;
+    max-inline-size: 100%;
+    transform: translateX(-100%);
+  }
 }
 
 @media screen and (min-width: 48rem) {
@@ -944,6 +947,11 @@ svg {
 }
 .uikit.has\:toggled-sidebar-split .sidebar--split .sidebar__resizer {
   display: none;
+}
+@media screen and (min-width: 48rem) {
+  .uikit.has\:toggled-sidebar-split .sidebar--split .sidebar__resizer {
+    display: block;
+  }
 }
 
 .sidebar--split .sidebar__resizer::after {
@@ -1006,10 +1014,14 @@ svg {
 }
 
 .toolbar {
+  position: relative;
+  z-index: 2;
   display: flex;
 }
 
 .filters {
+  position: relative;
+  z-index: 2;
   display: flex;
   min-block-size: 2.5rem;
   background: #fff;
@@ -1154,7 +1166,7 @@ svg {
   }
 }
 .content.content--box {
-  padding: 1rem;
+  padding: var(--mv-content-box-padding);
   background: #fff;
   border: 1px solid #B7CAD7;
   border-radius: var(--mv-chrome-radius-s);
@@ -1631,6 +1643,10 @@ table {
   font-size: var(--mv-font-size-l);
   border-collapse: collapse;
 }
+.content--box table {
+  inline-size: calc(100% + var(--mv-content-box-padding) * 2);
+  margin: calc(var(--mv-content-box-padding) * -1);
+}
 table th,
 table td {
   padding: 0.75rem;
@@ -1641,6 +1657,11 @@ table tr:hover {
 }
 table tr:hover td {
   background: #DBE5EC;
+}
+table th {
+  padding-block: 1rem;
+  background: #e7eff4;
+  border-bottom: 1px solid #BFD0DB;
 }
 table tr:not(:first-child) th,
 table tr:not(:first-child) td {

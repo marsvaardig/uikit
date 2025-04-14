@@ -14,6 +14,7 @@ $uikit-min-height: px(480) !default; // So we are usable on not so tall screens
 // Breakpoints
 $chrome-breakpoint1: px(480) !default;
 $chrome-breakpoint2: px(768) !default;
+$chrome-breakpoint2-min: px(767) !default;
 
 // Transition
 $chrome-transition-duration: 300ms !default;

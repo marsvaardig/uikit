@@ -1,6 +1,8 @@
 @use "../tools" as *;
 
 .filters {
+  position: relative;
+  z-index: 2;
   display: flex;
   min-block-size: px(40);
   background: #fff;

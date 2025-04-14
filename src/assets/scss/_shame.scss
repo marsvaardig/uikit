@@ -42,6 +42,11 @@ table {
   font-size: var(--mv-font-size-l);
   border-collapse: collapse;
 
+  .content--box & {
+    inline-size: calc(100% + var(--mv-content-box-padding) * 2);
+    margin: calc(var(--mv-content-box-padding) * -1);
+  }
+
   th,
   td {
     padding: px(12);
@@ -54,6 +59,12 @@ table {
     td {
       background: #DBE5EC;
     }
+  }
+
+  th {
+    padding-block: px(16);
+    background: #e7eff4;
+    border-bottom: 1px solid #BFD0DB;
   }
 
   tr:not(:first-child) {

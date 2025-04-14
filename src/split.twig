@@ -3,6 +3,68 @@
 {% set viewType = 'split' %}
 
 {% block content %}
-    Split view<br/>
-    <button type="button" class="toggle-split-overlay" data-toggle-split>Open split</button>
+    <table data-table>
+        <thead>
+        <tr>
+            <th>Naam</th>
+            <th>Organisatie</th>
+            <th>Functie</th>
+            <th>Telefoon</th>
+            <th>E-mail</th>
+            <th>Acties</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in 0..3 %}
+            <tr>
+                <td>
+                    <a href="/dialbox/contacten/nieuw" class="table-item-title" data-toggle-split>
+                        Tom Janssens
+                    </a>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>+32498138317</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="/dialbox/contacten/nieuw" class="table-item-title" data-toggle-split>
+                        Geert Janssens
+                    </a>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="/dialbox/contacten/nieuw" class="table-item-title" data-toggle-split>
+                        Robin Poort
+                    </a>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="/dialbox/contacten/nieuw" class="table-item-title" data-toggle-split>
+                        Steven Rombauts
+                    </a>
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>...</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

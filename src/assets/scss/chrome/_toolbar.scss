@@ -1,5 +1,7 @@
 @use "../tools" as *;
 
 .toolbar {
+  position: relative;
+  z-index: 2;
   display: flex;
 }
