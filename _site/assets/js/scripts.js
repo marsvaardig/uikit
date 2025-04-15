@@ -2,6 +2,13 @@
   // src/assets/scripts/main.js
   (() => {
     const $ui = document.querySelector("[data-uikit]");
+    const $leftSidebar = document.querySelector(".navigation-wrapper");
+    const $trees = document.querySelectorAll(".tree-nav");
+    const $splitSwitch = document.querySelector("[data-table-switch]");
+    const $main = document.querySelector(".main");
+    const $toggleSplits = document.querySelectorAll("[data-toggle-split]");
+    const $tables = document.querySelectorAll("[data-table]");
+    const $toggles = document.querySelectorAll(".filter-toggle");
     $ui.classList.add("is:initializing");
     setTimeout(() => {
       $ui.classList.remove("is:initializing");
@@ -40,15 +47,15 @@
       if (localStorage.getItem(`sidebarToggle-${sidebarType}`)) {
         $ui.classList.add(`has:toggled-sidebar-${sidebarType}`);
       }
-      function onMouseMove(e, $sidebar) {
+      function onMouseMove(e2, $sidebar) {
         if (!resizeDirection || !isResizing) return;
         let newWidth;
         let newHeight;
         if (resizeDirection === "horizontal") {
           if (sidebarType === "left") {
-            newWidth = startWidth + (e.clientX - startX);
+            newWidth = startWidth + (e2.clientX - startX);
           } else {
-            newWidth = startWidth - (e.clientX - startX);
+            newWidth = startWidth - (e2.clientX - startX);
           }
           if ($ui.classList.contains(className) && newWidth > minWidth) {
             setWidth(newWidth, sidebarType);
@@ -61,8 +68,7 @@
           }
         }
         if (resizeDirection === "vertical") {
-          newHeight = startHeight - (e.clientY - startY);
-          console.log(minHeight, maxHeight, newHeight);
+          newHeight = startHeight - (e2.clientY - startY);
           if ($ui.classList.contains(className) && newHeight > minHeight) {
             setHeight(newHeight, sidebarType);
             if (sidebarType === "left") {
@@ -74,7 +80,7 @@
           }
         }
       }
-      function onMouseUp(e, $sidebar) {
+      function onMouseUp(e2, $sidebar) {
         isResizing = false;
         resizeDirection = null;
         document.removeEventListener("mousemove", onMouseMove);
@@ -95,14 +101,14 @@
         const val = getComputedStyle($sidebar).getPropertyValue(type);
         return val.includes("%") ? parseFloat(val) / 100 * $sidebar.parentElement.getBoundingClientRect().width : parseFloat(val);
       }
-      function initResize(e, direction) {
-        const $sidebar = e.target.closest("[data-sidebar]");
+      function initResize(e2, direction) {
+        const $sidebar = e2.target.closest("[data-sidebar]");
         $sidebar.setAttribute("data-resizing", direction);
-        e.preventDefault();
+        e2.preventDefault();
         isResizing = true;
         resizeDirection = direction;
-        startX = e.clientX;
-        startY = e.clientY;
+        startX = e2.clientX;
+        startY = e2.clientY;
         startWidth = $sidebar.offsetWidth;
         startHeight = $sidebar.offsetHeight;
         maxHeight = getWidthValueInPixels($sidebar, "max-height");
@@ -110,15 +116,15 @@
         maxWidth = getWidthValueInPixels($sidebar, "max-width");
         minWidth = getWidthValueInPixels($sidebar, "min-width");
         $ui.classList.add("has:resizing");
-        document.addEventListener("mousemove", (e2) => onMouseMove(e2, $sidebar));
-        document.addEventListener("mouseup", (e2) => onMouseUp(e2, $sidebar));
+        document.addEventListener("mousemove", (ev) => onMouseMove(ev, $sidebar));
+        document.addEventListener("mouseup", (ev) => onMouseUp(ev, $sidebar));
       }
-      $resizer.addEventListener("mousedown", (e) => {
+      $resizer.addEventListener("mousedown", (ev) => {
         const rect = $resizer.getBoundingClientRect();
         const direction = rect.height > rect.width ? "horizontal" : "vertical";
-        initResize(e, direction);
+        initResize(ev, direction);
       });
-      $resizer.addEventListener("dblclick", (e) => {
+      $resizer.addEventListener("dblclick", () => {
         resetWidth(sidebarType);
         resetHeight(sidebarType);
         localStorage.removeItem(`sidebarWidth-${sidebarType}`);
@@ -126,15 +132,15 @@
       });
     }
     ["left", "right", "component", "split"].forEach((side) => {
-      const el = document.querySelector(`[data-sidebar-resizer="${side}"]`);
-      if (el) {
-        initResizing(el);
+      const $el = document.querySelector(`[data-sidebar-resizer="${side}"]`);
+      if ($el) {
+        initResizing($el);
       }
     });
-    document.querySelectorAll("[data-sidebar-toggle]").forEach((el) => {
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        const direction = el.getAttribute("data-sidebar-toggle");
+    document.querySelectorAll("[data-sidebar-toggle]").forEach(($el) => {
+      $el.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        const direction = $el.getAttribute("data-sidebar-toggle");
         $ui.classList.toggle(`has:toggled-sidebar-${direction}`);
         if ($ui.classList.contains(`has:toggled-sidebar-${direction}`)) {
           setToggleStorage(direction);
@@ -143,18 +149,17 @@
         }
       });
     });
-    const leftSidebar = document.querySelector(".navigation-wrapper");
-    if (leftSidebar) {
-      leftSidebar.addEventListener("click", (e) => {
-        if (isMobile() && !e.target.closest(".navigation--persistent")) {
+    if ($leftSidebar) {
+      $leftSidebar.addEventListener("click", (ev) => {
+        if (isMobile() && !ev.target.closest(".navigation--persistent")) {
           $ui.classList.add("has:toggled-sidebar-left");
         }
       });
     }
     const searchToggle = document.querySelector("[data-toggle-search]");
     if (searchToggle) {
-      searchToggle.addEventListener("click", (e) => {
-        e.preventDefault();
+      searchToggle.addEventListener("click", (ev) => {
+        ev.preventDefault();
         $ui.classList.toggle("has:toggled-search");
         if ($ui.classList.contains("has:toggled-search")) {
           const $searchInput = document.querySelector('[type="search"]');
@@ -165,23 +170,23 @@
       });
     }
     const rightSidebarTypeToggleFloat = document.querySelector('[data-sidebar-type="float"]');
-    document.querySelectorAll("[data-sidebar-type-toggle]").forEach((el) => {
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        const sidebar = el.closest("[data-sidebar]");
-        const type = el.getAttribute("data-sidebar-type-toggle");
+    document.querySelectorAll("[data-sidebar-type-toggle]").forEach(($el) => {
+      $el.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        const sidebar = $el.closest("[data-sidebar]");
+        const type = $el.getAttribute("data-sidebar-type-toggle");
         sidebar.setAttribute("data-sidebar-type", type);
       });
     });
     const profileToggle = document.querySelector("[data-toggle-profile]");
     if (profileToggle) {
-      profileToggle.addEventListener("click", (e) => {
-        e.preventDefault();
+      profileToggle.addEventListener("click", (ev) => {
+        ev.preventDefault();
         $ui.classList.toggle("has:toggled-profile");
       });
     }
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
+    document.addEventListener("keydown", (ev) => {
+      if (ev.key === "Escape") {
         if ($ui.classList.contains("has:toggled-search")) {
           $ui.classList.remove("has:toggled-search");
           const $searchToggle = document.querySelector("[data-toggle-search]");
@@ -194,9 +199,9 @@
         }
       }
     });
-    document.addEventListener("click", (e) => {
+    document.addEventListener("click", (ev) => {
       const $profile = document.querySelector("[data-toggle-profile]");
-      if ($ui.classList.contains("has:toggled-profile") && !$profile.contains(e.target)) {
+      if ($ui.classList.contains("has:toggled-profile") && !$profile.contains(ev.target)) {
         $ui.classList.remove("has:toggled-profile");
       }
       const $searchWrapper = document.querySelector(".search-wrapper");
@@ -208,14 +213,14 @@
     const tabList = document.querySelector(".sidebar__tabs ul");
     if (tabList) {
       let activateTab2 = function(selectedTab) {
-        tabs.forEach((tab) => {
-          tab.setAttribute("aria-selected", "false");
-          tab.parentElement.classList.remove("is:active");
+        tabs.forEach(($tab) => {
+          $tab.setAttribute("aria-selected", "false");
+          $tab.parentElement.classList.remove("is:active");
         });
-        panels.forEach((panel) => {
-          panel.classList.remove("is:active");
-          panel.setAttribute("hidden", "");
-          const overflowContainer = panel.closest(".overflow");
+        panels.forEach(($panel) => {
+          $panel.classList.remove("is:active");
+          $panel.setAttribute("hidden", "");
+          const overflowContainer = $panel.closest(".overflow");
           if (!overflowContainer) return;
           overflowContainer.scrollTop = 0;
         });
@@ -228,8 +233,8 @@
       var activateTab = activateTab2;
       const tabs = tabList.querySelectorAll('[role="tab"]');
       const panels = document.querySelectorAll(".tab-content");
-      const pageId2 = document.body.id;
-      const storageKey = `activeTab-${pageId2}`;
+      const pageId = document.body.id;
+      const storageKey = `activeTab-${pageId}`;
       const savedTabId = localStorage.getItem(storageKey);
       if (savedTabId) {
         const savedTab = document.querySelector(`[role="tab"][href="${savedTabId}"]`);
@@ -237,45 +242,44 @@
           activateTab2(savedTab);
         }
       }
-      tabs.forEach((tab, index) => {
-        tab.addEventListener("keydown", (e) => {
+      tabs.forEach(($tab, index) => {
+        $tab.addEventListener("keydown", (ev) => {
           let newIndex;
-          if (e.key === "ArrowRight") {
+          if (ev.key === "ArrowRight") {
             newIndex = (index + 1) % tabs.length;
             tabs[newIndex].focus();
-          } else if (e.key === "ArrowLeft") {
+          } else if (ev.key === "ArrowLeft") {
             newIndex = (index - 1 + tabs.length) % tabs.length;
             tabs[newIndex].focus();
           }
         });
-        tab.addEventListener("click", (e) => {
-          e.preventDefault();
-          activateTab2(tab);
-          localStorage.setItem(storageKey, tab.getAttribute("href"));
+        $tab.addEventListener("click", (ev) => {
+          ev.preventDefault();
+          activateTab2($tab);
+          localStorage.setItem(storageKey, $tab.getAttribute("href"));
         });
       });
     }
-    const toggles = document.querySelectorAll(".filter-toggle");
     const hoverActivation = true;
     let hoverModeActive = false;
-    if (toggles.length > 0) {
+    if ($toggles.length > 0) {
       let closeAllDropdowns2 = function() {
-        toggles.forEach((t) => {
-          const id = t.getAttribute("aria-controls");
+        $toggles.forEach(($toggle) => {
+          const id = $toggle.getAttribute("aria-controls");
           const dd = document.getElementById(id);
-          t.setAttribute("aria-expanded", "false");
+          $toggle.setAttribute("aria-expanded", "false");
           dd.hidden = true;
         });
       };
       var closeAllDropdowns = closeAllDropdowns2;
-      toggles.forEach((toggle) => {
-        const dropdownId = toggle.getAttribute("aria-controls");
+      $toggles.forEach(($toggle) => {
+        const dropdownId = $toggle.getAttribute("aria-controls");
         const dropdown = document.getElementById(dropdownId);
-        toggle.addEventListener("click", () => {
-          const isOpen = toggle.getAttribute("aria-expanded") === "true";
+        $toggle.addEventListener("click", () => {
+          const isOpen = $toggle.getAttribute("aria-expanded") === "true";
           closeAllDropdowns2();
           if (!isOpen) {
-            toggle.setAttribute("aria-expanded", "true");
+            $toggle.setAttribute("aria-expanded", "true");
             dropdown.hidden = false;
             if (hoverActivation) {
               hoverModeActive = true;
@@ -284,78 +288,79 @@
             hoverModeActive = false;
           }
         });
-        toggle.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            toggle.click();
-          } else if (e.key === "Escape") {
+        $toggle.addEventListener("keydown", (ev) => {
+          if (ev.key === "Enter" || e.key === " ") {
+            ev.preventDefault();
+            $toggle.click();
+          } else if (ev.key === "Escape") {
             closeAllDropdowns2();
-            toggle.focus();
+            $toggle.focus();
             hoverModeActive = false;
           }
         });
-        dropdown.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") {
-            toggle.setAttribute("aria-expanded", "false");
+        dropdown.addEventListener("keydown", (ev) => {
+          if (ev.key === "Escape") {
+            $toggle.setAttribute("aria-expanded", "false");
             dropdown.hidden = true;
-            toggle.focus();
+            $toggle.focus();
             hoverModeActive = false;
           }
         });
-        toggle.addEventListener("mouseenter", () => {
-          const isOpen = toggle.getAttribute("aria-expanded") === "true";
+        $toggle.addEventListener("mouseenter", () => {
+          const isOpen = $toggle.getAttribute("aria-expanded") === "true";
           if (hoverActivation && hoverModeActive && !isOpen) {
             closeAllDropdowns2();
-            toggle.setAttribute("aria-expanded", "true");
+            $toggle.setAttribute("aria-expanded", "true");
             dropdown.hidden = false;
           }
         });
       });
-      document.addEventListener("click", (e) => {
-        if (!e.target.closest(".filter")) {
+      document.addEventListener("click", (ev) => {
+        if (!ev.target.closest(".filter")) {
           closeAllDropdowns2();
           hoverModeActive = false;
         }
       });
     }
-    const tree = document.querySelector(".tree-nav");
-    if (!tree) return;
-    const pageId = document.body.id || "default";
-    const stateKey = `tree-nav-state:${pageId}`;
-    let savedState = JSON.parse(localStorage.getItem(stateKey) || "{}");
-    for (const [id, isOpen] of Object.entries(savedState)) {
-      const li = tree.querySelector(`li[data-id="${id}"]`);
-      if (li && isOpen) li.classList.add("open");
+    if ($trees.length > 0) {
+      $trees.forEach(($tree) => {
+        const treeId = $tree.getAttribute("data-tree-uid") || "default";
+        const stateKey = `tree-nav-state:${treeId}`;
+        let savedState = JSON.parse(localStorage.getItem(stateKey) || "{}");
+        for (const [id, isOpen] of Object.entries(savedState)) {
+          const li = $tree.querySelector(`li[data-id="${id}"]`);
+          if (li && isOpen) li.classList.add("open");
+        }
+        $tree.addEventListener("click", (ev) => {
+          const toggle = ev.target.closest("button.tree-nav__toggle");
+          const link = ev.target.closest("a");
+          if (!toggle && !link) return;
+          const li = e.target.closest("li[data-id]");
+          if (toggle) {
+            const id = li?.dataset.id;
+            if (!id) return;
+            li.classList.toggle("open");
+            savedState[id] = li.classList.contains("open");
+          }
+          if (link) {
+            const id = li?.dataset.id;
+            if (!id) return;
+            savedState[id] = li;
+          }
+          localStorage.setItem(stateKey, JSON.stringify(savedState));
+        });
+      });
     }
-    tree.addEventListener("click", (e) => {
-      const toggle = e.target.closest("button.tree-nav__toggle");
-      const link = e.target.closest("a");
-      if (!toggle && !link) return;
-      const li = e.target.closest("li[data-id]");
-      if (toggle) {
-        const id = li?.dataset.id;
-        if (!id) return;
-        li.classList.toggle("open");
-        savedState[id] = li.classList.contains("open");
-      }
-      if (link) {
-        const id = li?.dataset.id;
-        if (!id) return;
-        savedState[id] = li;
-      }
-      localStorage.setItem(stateKey, JSON.stringify(savedState));
-    });
-    const tables = document.querySelectorAll("[data-table]");
-    if (tables.length > 0) {
-      tables.forEach((table) => {
-        const rows = table.querySelectorAll("tbody tr");
+    if ($tables.length > 0) {
+      $tables.forEach(($table) => {
+        const rows = $table.querySelectorAll("tbody tr");
         if (rows) {
-          rows.forEach((row) => {
-            row.addEventListener("click", (e) => {
-              row.classList.toggle("is:selected");
+          rows.forEach(($row) => {
+            $row.addEventListener("click", () => {
+              $row.classList.toggle("is:selected");
             });
-            row.addEventListener("dblclick", (e) => {
-              const link = row.querySelector("a");
+            $row.addEventListener("dblclick", () => {
+              const link = $row.querySelector("a");
               const url = link.getAttribute("href");
               if (url) {
                 window.location.href = url;
@@ -365,21 +370,19 @@
         }
       });
     }
-    document.querySelectorAll("[data-toggle-split]").forEach((el) => {
-      el.addEventListener("click", (e) => {
+    $toggleSplits.forEach(($el) => {
+      $el.addEventListener("click", (ev) => {
         const className = `has:toggled-sidebar-split`;
-        e.preventDefault();
+        ev.preventDefault();
         $ui.classList.toggle(className);
       });
     });
-    const splitSwitch = document.querySelector("[data-table-switch]");
-    const $main = document.querySelector(".main");
-    if (splitSwitch && $main) {
-      splitSwitch.addEventListener("click", (e) => {
-        e.preventDefault();
+    if ($splitSwitch && $main) {
+      $splitSwitch.addEventListener("click", (ev) => {
+        ev.preventDefault();
         $ui.classList.add("has:resizing");
         $main.classList.toggle("main--stack");
-        splitSwitch.classList.toggle("is:stack");
+        $splitSwitch.classList.toggle("is:stack");
         if ($main.classList.contains("main--stack")) {
           localStorage.setItem("splitSwitch", "true");
         } else {
@@ -391,7 +394,7 @@
       });
       if (localStorage.getItem("splitSwitch")) {
         $main.classList.add("main--stack");
-        splitSwitch.classList.add("is:stack");
+        $splitSwitch.classList.add("is:stack");
       }
     }
     let resizeTimeout;

@@ -1,10 +1,19 @@
 (() => {
   
-  // Our elements
+  // Chrome elements
   const $ui = document.querySelector('[data-uikit]');
+  const $leftSidebar = document.querySelector('.navigation-wrapper');
+  const $trees = document.querySelectorAll(".tree-nav");
+  const $splitSwitch = document.querySelector('[data-table-switch]');
+  const $main = document.querySelector('.main');
+  const $toggleSplits = document.querySelectorAll('[data-toggle-split]');
+  const $tables = document.querySelectorAll('[data-table]');
+  const $toggles = document.querySelectorAll('.filter-toggle');
   
+  // Add initializing class
   $ui.classList.add('is:initializing');
   
+  // Remove initializing class after 500ms
   setTimeout(() => {
     $ui.classList.remove('is:initializing');
   }, 500)
@@ -76,7 +85,6 @@
       }
       if (resizeDirection === 'vertical') {
         newHeight = startHeight - (e.clientY - startY);
-        console.log(minHeight, maxHeight, newHeight);
         if ($ui.classList.contains(className) && newHeight > minHeight) {
           setHeight(newHeight, sidebarType);
           if (sidebarType === 'left') {
@@ -139,19 +147,19 @@
       $ui.classList.add('has:resizing');
       
       // Add listeners
-      document.addEventListener('mousemove', (e) => onMouseMove(e, $sidebar));
-      document.addEventListener('mouseup', (e) => onMouseUp(e, $sidebar));
+      document.addEventListener('mousemove', (ev) => onMouseMove(ev, $sidebar));
+      document.addEventListener('mouseup', (ev) => onMouseUp(ev, $sidebar));
     }
     
     // Initial mousedown event
-    $resizer.addEventListener('mousedown', (e) => {
+    $resizer.addEventListener('mousedown', (ev) => {
       const rect = $resizer.getBoundingClientRect();
       const direction = rect.height > rect.width ? 'horizontal' : 'vertical';
-      initResize(e, direction);
+      initResize(ev, direction);
     });
     
     // When doubleclicking on the resizer; reset the corresponding width
-    $resizer.addEventListener('dblclick', (e) => {
+    $resizer.addEventListener('dblclick', () => {
       resetWidth(sidebarType);
       resetHeight(sidebarType);
       localStorage.removeItem(`sidebarWidth-${sidebarType}`);
@@ -160,18 +168,18 @@
   }
   
   // Initialize resizing for sidebars
-  ['left', 'right', 'component', 'split'].forEach(side => {
-    const el = document.querySelector(`[data-sidebar-resizer="${side}"]`);
-    if (el) {
-      initResizing(el);
+  ['left', 'right', 'component', 'split'].forEach((side) => {
+    const $el = document.querySelector(`[data-sidebar-resizer="${side}"]`);
+    if ($el) {
+      initResizing($el);
     }
   });
   
   // The toggle buttons for sidebars
-  document.querySelectorAll('[data-sidebar-toggle]').forEach((el) => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      const direction = el.getAttribute('data-sidebar-toggle');
+  document.querySelectorAll('[data-sidebar-toggle]').forEach(($el) => {
+    $el.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const direction = $el.getAttribute('data-sidebar-toggle');
       $ui.classList.toggle(`has:toggled-sidebar-${direction}`);
       if ($ui.classList.contains(`has:toggled-sidebar-${direction}`)) {
         setToggleStorage(direction);
@@ -182,10 +190,10 @@
   });
   
   // When clicking the left sidebar navigation on mobile
-  const leftSidebar = document.querySelector('.navigation-wrapper');
-  if (leftSidebar) {
-    leftSidebar.addEventListener('click', (e) => {
-      if (isMobile() && !e.target.closest('.navigation--persistent')) {
+  
+  if ($leftSidebar) {
+    $leftSidebar.addEventListener('click', (ev) => {
+      if (isMobile() && !ev.target.closest('.navigation--persistent')) {
         $ui.classList.add('has:toggled-sidebar-left');
       }
     });
@@ -194,8 +202,8 @@
   // Toggle search
   const searchToggle = document.querySelector('[data-toggle-search]');
   if (searchToggle) {
-    searchToggle.addEventListener('click', (e) => {
-      e.preventDefault();
+    searchToggle.addEventListener('click', (ev) => {
+      ev.preventDefault();
       $ui.classList.toggle('has:toggled-search');
       
       // If toggled, place focus on the input
@@ -210,11 +218,11 @@
   
   // toggle the
   const rightSidebarTypeToggleFloat = document.querySelector('[data-sidebar-type="float"]');
-  document.querySelectorAll('[data-sidebar-type-toggle]').forEach((el) => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      const sidebar = el.closest('[data-sidebar]');
-      const type = el.getAttribute('data-sidebar-type-toggle');
+  document.querySelectorAll('[data-sidebar-type-toggle]').forEach(($el) => {
+    $el.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const sidebar = $el.closest('[data-sidebar]');
+      const type = $el.getAttribute('data-sidebar-type-toggle');
       sidebar.setAttribute('data-sidebar-type', type);
     });
   });
@@ -223,15 +231,15 @@
   // Profile toggle
   const profileToggle = document.querySelector('[data-toggle-profile]');
   if (profileToggle) {
-    profileToggle.addEventListener('click', (e) => {
-      e.preventDefault();
+    profileToggle.addEventListener('click', (ev) => {
+      ev.preventDefault();
       $ui.classList.toggle('has:toggled-profile');
     });
   }
   
   // If open, close when esc is pressed
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape') {
       if ($ui.classList.contains('has:toggled-search')) {
         $ui.classList.remove('has:toggled-search');
         // Move the focus to the toggle button
@@ -247,9 +255,9 @@
   });
   
   // Close the search when clicking outside
-  document.addEventListener('click', (e) => {
+  document.addEventListener('click', (ev) => {
     const $profile = document.querySelector('[data-toggle-profile]');
-    if ($ui.classList.contains('has:toggled-profile') && !$profile.contains(e.target)) {
+    if ($ui.classList.contains('has:toggled-profile') && !$profile.contains(ev.target)) {
       $ui.classList.remove('has:toggled-profile');
     }
     
@@ -281,35 +289,35 @@
     }
     
     // @TODO: use data-attributes istead of classes
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('keydown', (e) => {
+    tabs.forEach(($tab, index) => {
+      $tab.addEventListener('keydown', (ev) => {
         let newIndex;
-        if (e.key === 'ArrowRight') {
+        if (ev.key === 'ArrowRight') {
           newIndex = (index + 1) % tabs.length;
           tabs[newIndex].focus();
-        } else if (e.key === 'ArrowLeft') {
+        } else if (ev.key === 'ArrowLeft') {
           newIndex = (index - 1 + tabs.length) % tabs.length;
           tabs[newIndex].focus();
         }
       });
       
-      tab.addEventListener('click', (e) => {
-        e.preventDefault();
-        activateTab(tab);
-        localStorage.setItem(storageKey, tab.getAttribute('href'));
+      $tab.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        activateTab($tab);
+        localStorage.setItem(storageKey, $tab.getAttribute('href'));
       });
     });
     
     function activateTab(selectedTab) {
-      tabs.forEach(tab => {
-        tab.setAttribute('aria-selected', 'false');
-        tab.parentElement.classList.remove('is:active');
+      tabs.forEach(($tab) => {
+        $tab.setAttribute('aria-selected', 'false');
+        $tab.parentElement.classList.remove('is:active');
       });
       
-      panels.forEach(panel => {
-        panel.classList.remove('is:active');
-        panel.setAttribute('hidden', '');
-        const overflowContainer = panel.closest('.overflow');
+      panels.forEach(($panel) => {
+        $panel.classList.remove('is:active');
+        $panel.setAttribute('hidden', '');
+        const overflowContainer = $panel.closest('.overflow');
         if (!overflowContainer) return;
         // Reset overflow container scroll position
         overflowContainer.scrollTop = 0;
@@ -325,7 +333,7 @@
   }
   
   
-  const toggles = document.querySelectorAll('.filter-toggle');
+  
 
   // ✨ Instelbare setting
   const hoverActivation = true;
@@ -333,19 +341,19 @@
   // ✨ Alleen true als je een dropdown handmatig hebt geopend
   let hoverModeActive = false;
   
-  if (toggles.length > 0) {
+  if ($toggles.length > 0) {
     
-    toggles.forEach(toggle => {
-      const dropdownId = toggle.getAttribute('aria-controls');
+    $toggles.forEach(($toggle) => {
+      const dropdownId = $toggle.getAttribute('aria-controls');
       const dropdown = document.getElementById(dropdownId);
       
       // ✅ Handmatige klik
-      toggle.addEventListener('click', () => {
-        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      $toggle.addEventListener('click', () => {
+        const isOpen = $toggle.getAttribute('aria-expanded') === 'true';
         closeAllDropdowns();
         
         if (!isOpen) {
-          toggle.setAttribute('aria-expanded', 'true');
+          $toggle.setAttribute('aria-expanded', 'true');
           dropdown.hidden = false;
           
           if (hoverActivation) {
@@ -357,22 +365,22 @@
       });
       
       // ⌨️ Keyboard interactie
-      toggle.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggle.click();
-        } else if (e.key === 'Escape') {
+      $toggle.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Enter' || e.key === ' ') {
+          ev.preventDefault();
+          $toggle.click();
+        } else if (ev.key === 'Escape') {
           closeAllDropdowns();
-          toggle.focus();
+          $toggle.focus();
           hoverModeActive = false;
         }
       });
       
-      dropdown.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          toggle.setAttribute('aria-expanded', 'false');
+      dropdown.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Escape') {
+          $toggle.setAttribute('aria-expanded', 'false');
           dropdown.hidden = true;
-          toggle.focus();
+          $toggle.focus();
           hoverModeActive = false;
         }
       });
@@ -380,30 +388,30 @@
       // ✨ Hover werkt alleen als:
       // 1. hoverActivation = true
       // 2. je eerst handmatig iets open hebt geklikt
-      toggle.addEventListener('mouseenter', () => {
-        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      $toggle.addEventListener('mouseenter', () => {
+        const isOpen = $toggle.getAttribute('aria-expanded') === 'true';
         
         if (hoverActivation && hoverModeActive && !isOpen) {
           closeAllDropdowns();
-          toggle.setAttribute('aria-expanded', 'true');
+          $toggle.setAttribute('aria-expanded', 'true');
           dropdown.hidden = false;
         }
       });
     });
     
     // ⛔ Buiten klikken sluit alles + hovermode uit
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.filter')) {
+    document.addEventListener('click', (ev) => {
+      if (!ev.target.closest('.filter')) {
         closeAllDropdowns();
         hoverModeActive = false;
       }
     });
     
     function closeAllDropdowns() {
-      toggles.forEach(t => {
-        const id = t.getAttribute('aria-controls');
+      $toggles.forEach(($toggle) => {
+        const id = $toggle.getAttribute('aria-controls');
         const dd = document.getElementById(id);
-        t.setAttribute('aria-expanded', 'false');
+        $toggle.setAttribute('aria-expanded', 'false');
         dd.hidden = true;
       });
     }
@@ -421,65 +429,66 @@
   
   
   
-  
-  const tree = document.querySelector(".tree-nav");
-  if (!tree) return;
-  
-  const pageId = document.body.id || "default";
-  const stateKey = `tree-nav-state:${pageId}`;
-  let savedState = JSON.parse(localStorage.getItem(stateKey) || "{}");
-  
-  // Herstel opgeslagen open/gesloten status
-  for (const [id, isOpen] of Object.entries(savedState)) {
-    const li = tree.querySelector(`li[data-id="${id}"]`);
-    if (li && isOpen) li.classList.add("open");
+  if ($trees.length > 0) {
+    $trees.forEach(($tree) => {
+      const treeId = $tree.getAttribute("data-tree-uid") || "default";
+      const stateKey = `tree-nav-state:${treeId}`;
+      let savedState = JSON.parse(localStorage.getItem(stateKey) || "{}");
+      
+      // Herstel opgeslagen open/gesloten status
+      for (const [id, isOpen] of Object.entries(savedState)) {
+        const li = $tree.querySelector(`li[data-id="${id}"]`);
+        if (li && isOpen) li.classList.add("open");
+      }
+      
+      $tree.addEventListener("click", (ev) => {
+        const toggle = ev.target.closest("button.tree-nav__toggle");
+        const link = ev.target.closest("a");
+        if (!toggle && !link) return;
+        
+        // Get the closest li element with a data-id attribute
+        const li = e.target.closest("li[data-id]");
+        
+        // When clicked on a toggle; toggle
+        if (toggle) {
+          const id = li?.dataset.id;
+          if (!id) return;
+          
+          li.classList.toggle("open");
+          savedState[id] = li.classList.contains("open");
+        }
+        
+        // When clicked on a link; save the current state before going to the link so it's open on the next page
+        if (link) {
+          const id = li?.dataset.id;
+          if (!id) return;
+          
+          // Sla de huidige status op
+          savedState[id] = li;
+        }
+        
+        localStorage.setItem(stateKey, JSON.stringify(savedState));
+      });
+    });
   }
   
-  tree.addEventListener("click", (e) => {
-    const toggle = e.target.closest("button.tree-nav__toggle");
-    const link = e.target.closest("a");
-    if (!toggle && !link) return;
-    
-    // Get the closest li element with a data-id attribute
-    const li = e.target.closest("li[data-id]");
-    
-    // When clicked on a toggle; toggle
-    if (toggle) {
-      const id = li?.dataset.id;
-      if (!id) return;
-      
-      li.classList.toggle("open");
-      savedState[id] = li.classList.contains("open");
-    }
-    
-    // When clicked on a link; save the current state before going to the link so it's open on the next page
-    if (link) {
-      const id = li?.dataset.id;
-      if (!id) return;
-      
-      // Sla de huidige status op
-      savedState[id] = li;
-    }
-    
-    localStorage.setItem(stateKey, JSON.stringify(savedState));
-  });
   
   
   // Table
-  const tables = document.querySelectorAll('[data-table]');
-  if (tables.length > 0) {
-    tables.forEach(table => {
+  
+  if ($tables.length > 0) {
+    $tables.forEach($table => {
       // Get rows in tbody
-      const rows = table.querySelectorAll('tbody tr');
+      const rows = $table.querySelectorAll('tbody tr');
       if (rows) {
-        rows.forEach(row => {
+        rows.forEach($row => {
           // Add single click
-          row.addEventListener('click', (e) => {
-            row.classList.toggle('is:selected');
+          $row.addEventListener('click', () => {
+            $row.classList.toggle('is:selected');
           });
           // Add double click
-          row.addEventListener('dblclick', (e) => {
-            const link = row.querySelector('a');
+          $row.addEventListener('dblclick', () => {
+            const link = $row.querySelector('a');
             const url = link.getAttribute('href');
             if (url) {
               window.location.href = url;
@@ -493,24 +502,23 @@
   
   
   // TODO: TEMP
-  document.querySelectorAll('[data-toggle-split]').forEach(el => {
-    el.addEventListener('click', (e) => {
+  $toggleSplits.forEach(($el) => {
+    $el.addEventListener('click', (ev) => {
       const className = `has:toggled-sidebar-split`;
-      e.preventDefault();
+      ev.preventDefault();
       $ui.classList.toggle(className);
     });
   });
   
   
   // @TODO: Temp
-  const splitSwitch = document.querySelector('[data-table-switch]');
-  const $main = document.querySelector('.main');
-  if (splitSwitch && $main) {
-    splitSwitch.addEventListener('click', (e) => {
-      e.preventDefault();
+  
+  if ($splitSwitch && $main) {
+    $splitSwitch.addEventListener('click', (ev) => {
+      ev.preventDefault();
       $ui.classList.add('has:resizing');
       $main.classList.toggle('main--stack');
-      splitSwitch.classList.toggle('is:stack')
+      $splitSwitch.classList.toggle('is:stack')
       // Save state in localstorage
       if ($main.classList.contains('main--stack')) {
         localStorage.setItem('splitSwitch', 'true');
@@ -524,7 +532,7 @@
     
     if (localStorage.getItem('splitSwitch')) {
       $main.classList.add('main--stack');
-      splitSwitch.classList.add('is:stack')
+      $splitSwitch.classList.add('is:stack')
     }
   }
   
