@@ -34,6 +34,24 @@
   color: #ACC6D9;
   text-transform: uppercase;
   letter-spacing: 0.01em;
+
+  .navigation--persistent & {
+    @include state('has', 'toggled-sidebar-left') {
+      text-indent: -9999px;
+
+      @include pseudo(before) {
+        text-indent: 0;
+        top: 0;
+        left: 0;
+        inline-size: px(48);
+        block-size: 100%;
+        content: "...";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
 }
 
 .navigation__list {

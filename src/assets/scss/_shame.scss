@@ -42,7 +42,7 @@ table {
   font-size: var(--ui-font-size-l);
   border-collapse: collapse;
 
-  .content--box & {
+  .box & {
     inline-size: calc(100% + var(--ui-content-box-padding) * 2);
     margin: calc(var(--ui-content-box-padding) * -1);
   }
@@ -108,6 +108,14 @@ table {
   inline-size: 100%;
 }
 
+.grid--grow {
+  block-size: 100%;
+
+  & > .row {
+    flex-grow: 1;
+  }
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -126,6 +134,12 @@ table {
   border: 1px solid #B7CAD7;
   border-radius: var(--ui-chrome-radius-s);
 }
+
+.box--grow {
+  block-size: 100%;
+}
+
+
 
 
 .switch-views {
@@ -158,4 +172,27 @@ table {
   .icon-columns {
     display: none;
   }
+}
+
+
+.onboarding {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--ui-font-size-3xl);
+
+  svg {
+    width: 1em;
+    height: 1em;
+    margin-right: 1em;
+  }
+}
+
+.mdl-data-table {
+  border: none !important;
+}
+
+.text--strong {
+  font-weight: 700;
 }

@@ -30,23 +30,33 @@
                     } %}
                 {% endif %}
                 <div class="main" data-main>
-                    {% if viewType == 'dashboard' %}
-                        <div class="grid">
-                            <div class="row">
-                                <div class="box">Box<br/>Row2</div>
-                                <div class="box">Box</div>
-                                <div class="box">Box</div>
+                    <div class="content">
+                        {% if viewType == 'dashboard' %}
+                            {% if '/tafelmanager' not in page.url %}
+                                <div class="grid grid--grow">
+                                    <div class="row">
+                                        <div class="box">Box<br/>Row2</div>
+                                        <div class="box">Box</div>
+                                        <div class="box">Box</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="box">Box<br/>Large<br/>With<br/>Graphs<br/>Etc</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="box">Box</div>
+                                        <div class="box">Box</div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                {% block content %}{% endblock %}
+                            {% endif %}
+                        {% else %}
+                            <div class="box box--grow overflow">
+                                {% block content %}{% endblock %}
+                                <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
                             </div>
-                            <div class="row">
-                                <div class="box">Box<br/>Large<br/>With<br/>Graphs<br/>Etc</div>
-                            </div>
-                        </div>
-                    {% else %}
-                        <div class="content content--box overflow">
-                            {% block content %}{% endblock %}
-                            <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
-                        </div>
-                    {% endif %}
+                        {% endif %}
+                    </div>
                     {% if viewType == 'item' %}
                         {% include "../partials/sidebar-component.twig" %}
                     {% endif %}

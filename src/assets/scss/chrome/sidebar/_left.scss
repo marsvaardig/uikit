@@ -127,6 +127,16 @@
             display: block;
           }
         }
+
+        .navigation--persistent {
+          .navigation__heading {
+            text-indent: 0;
+
+            &::before {
+              display: none;
+            }
+          }
+        }
       }
     }
   }
