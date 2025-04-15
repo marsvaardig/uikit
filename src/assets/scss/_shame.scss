@@ -110,12 +110,12 @@ table {
 
 .row {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   gap: var(--mv-chrome-spacing-m);
   inline-size: 100%;
 
   & > * {
-    flex-basis: calc((#{px(480)} - (100% - (var(--mv-chrome-spacing-m) * 1rem))) * 999);
+    flex-basis: calc((#{px(480)} - 100%) * 999);
     flex-grow: 1;
   }
 }
