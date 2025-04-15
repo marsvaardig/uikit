@@ -469,4 +469,16 @@
       $ui.classList.toggle(className);
     });
   });
+  
+  
+  // @TODO: Temp
+  const splitSwitch = document.querySelector('[data-table-switch]');
+  if (splitSwitch) {
+    splitSwitch.addEventListener('click', (e) => {
+      e.preventDefault();
+      const $main = document.querySelector('.main');
+      $main.classList.toggle('main--stack');
+      splitSwitch.classList.toggle('is:stack')
+    });
+  }
 })();

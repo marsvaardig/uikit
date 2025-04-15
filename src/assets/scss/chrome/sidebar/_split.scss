@@ -23,6 +23,12 @@
     }
   }
 
+  .main--stack & {
+    inline-size: 100%;
+    max-inline-size: 100%;
+    block-size: 50%;
+  }
+
   @include breakpoint($chrome-breakpoint2) {
     position: relative;
     left: auto;
@@ -59,11 +65,18 @@
       transform: translate(-50%, -50%);
     }
 
-
     @include hover {
       &::after {
         border-color: #000;
       }
+    }
+
+    .main--stack & {
+      inset-inline: 0;
+      inset-block-start: -1rem;
+      inline-size: 100%;
+      block-size: 1rem;
+      display: none; // @TODO: Hide for now
     }
   }
 
