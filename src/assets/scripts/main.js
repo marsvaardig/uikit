@@ -63,15 +63,15 @@
       $ui.classList.add(`has:toggled-sidebar-${sidebarType}`);
     }
     
-    function onMouseMove(e, $sidebar) {
+    function onMouseMove(ev) {
       if (!resizeDirection || !isResizing) return;
       let newWidth;
       let newHeight;
       if (resizeDirection === 'horizontal') {
         if (sidebarType === 'left') {
-          newWidth = startWidth + (e.clientX - startX);
+          newWidth = startWidth + (ev.clientX - startX);
         } else {
-          newWidth = startWidth - (e.clientX - startX);
+          newWidth = startWidth - (ev.clientX - startX);
         }
         if ($ui.classList.contains(className) && newWidth > minWidth) {
           setWidth(newWidth, sidebarType);
@@ -84,7 +84,7 @@
         }
       }
       if (resizeDirection === 'vertical') {
-        newHeight = startHeight - (e.clientY - startY);
+        newHeight = startHeight - (ev.clientY - startY);
         if ($ui.classList.contains(className) && newHeight > minHeight) {
           setHeight(newHeight, sidebarType);
           if (sidebarType === 'left') {
@@ -97,7 +97,7 @@
       }
     }
     
-    function onMouseUp(e, $sidebar) {
+    function onMouseUp(ev, $sidebar) {
       isResizing = false;
       resizeDirection = null;
       document.removeEventListener('mousemove', onMouseMove);
@@ -128,16 +128,16 @@
     }
     
     
-    function initResize(e, direction) {
-      const $sidebar = e.target.closest('[data-sidebar]');
+    function initResize(ev, direction) {
+      const $sidebar = ev.target.closest('[data-sidebar]');
       
       $sidebar.setAttribute('data-resizing', direction);
       
-      e.preventDefault();
+      ev.preventDefault();
       isResizing = true;
       resizeDirection = direction;
-      startX = e.clientX;
-      startY = e.clientY;
+      startX = ev.clientX;
+      startY = ev.clientY;
       startWidth = $sidebar.offsetWidth;
       startHeight = $sidebar.offsetHeight;
       maxHeight = getWidthValueInPixels($sidebar, 'max-height');
@@ -264,7 +264,7 @@
     // When clicking outside of the .search-wrapper, and not on the search toggle button, close the search
     const $searchWrapper = document.querySelector('.search-wrapper');
     const $searchToggle = document.querySelector('[data-toggle-search]');
-    if ($ui.classList.contains('has:toggled-search') && !$searchWrapper.contains(e.target) && !$searchToggle.contains(e.target)) {
+    if ($ui.classList.contains('has:toggled-search') && !$searchWrapper.contains(ev.target) && !$searchToggle.contains(ev.target)) {
       $ui.classList.remove('has:toggled-search');
     }
   });
@@ -366,7 +366,7 @@
       
       // ⌨️ Keyboard interactie
       $toggle.addEventListener('keydown', (ev) => {
-        if (ev.key === 'Enter' || e.key === ' ') {
+        if (ev.key === 'Enter' || ev.key === ' ') {
           ev.preventDefault();
           $toggle.click();
         } else if (ev.key === 'Escape') {
@@ -447,7 +447,7 @@
         if (!toggle && !link) return;
         
         // Get the closest li element with a data-id attribute
-        const li = e.target.closest("li[data-id]");
+        const li = ev.target.closest("li[data-id]");
         
         // When clicked on a toggle; toggle
         if (toggle) {

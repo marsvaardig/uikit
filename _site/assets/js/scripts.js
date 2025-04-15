@@ -47,15 +47,15 @@
       if (localStorage.getItem(`sidebarToggle-${sidebarType}`)) {
         $ui.classList.add(`has:toggled-sidebar-${sidebarType}`);
       }
-      function onMouseMove(e2, $sidebar) {
+      function onMouseMove(ev) {
         if (!resizeDirection || !isResizing) return;
         let newWidth;
         let newHeight;
         if (resizeDirection === "horizontal") {
           if (sidebarType === "left") {
-            newWidth = startWidth + (e2.clientX - startX);
+            newWidth = startWidth + (ev.clientX - startX);
           } else {
-            newWidth = startWidth - (e2.clientX - startX);
+            newWidth = startWidth - (ev.clientX - startX);
           }
           if ($ui.classList.contains(className) && newWidth > minWidth) {
             setWidth(newWidth, sidebarType);
@@ -68,7 +68,7 @@
           }
         }
         if (resizeDirection === "vertical") {
-          newHeight = startHeight - (e2.clientY - startY);
+          newHeight = startHeight - (ev.clientY - startY);
           if ($ui.classList.contains(className) && newHeight > minHeight) {
             setHeight(newHeight, sidebarType);
             if (sidebarType === "left") {
@@ -80,7 +80,7 @@
           }
         }
       }
-      function onMouseUp(e2, $sidebar) {
+      function onMouseUp(ev, $sidebar) {
         isResizing = false;
         resizeDirection = null;
         document.removeEventListener("mousemove", onMouseMove);
@@ -101,14 +101,14 @@
         const val = getComputedStyle($sidebar).getPropertyValue(type);
         return val.includes("%") ? parseFloat(val) / 100 * $sidebar.parentElement.getBoundingClientRect().width : parseFloat(val);
       }
-      function initResize(e2, direction) {
-        const $sidebar = e2.target.closest("[data-sidebar]");
+      function initResize(ev, direction) {
+        const $sidebar = ev.target.closest("[data-sidebar]");
         $sidebar.setAttribute("data-resizing", direction);
-        e2.preventDefault();
+        ev.preventDefault();
         isResizing = true;
         resizeDirection = direction;
-        startX = e2.clientX;
-        startY = e2.clientY;
+        startX = ev.clientX;
+        startY = ev.clientY;
         startWidth = $sidebar.offsetWidth;
         startHeight = $sidebar.offsetHeight;
         maxHeight = getWidthValueInPixels($sidebar, "max-height");
@@ -116,8 +116,8 @@
         maxWidth = getWidthValueInPixels($sidebar, "max-width");
         minWidth = getWidthValueInPixels($sidebar, "min-width");
         $ui.classList.add("has:resizing");
-        document.addEventListener("mousemove", (ev) => onMouseMove(ev, $sidebar));
-        document.addEventListener("mouseup", (ev) => onMouseUp(ev, $sidebar));
+        document.addEventListener("mousemove", (ev2) => onMouseMove(ev2, $sidebar));
+        document.addEventListener("mouseup", (ev2) => onMouseUp(ev2, $sidebar));
       }
       $resizer.addEventListener("mousedown", (ev) => {
         const rect = $resizer.getBoundingClientRect();
@@ -206,7 +206,7 @@
       }
       const $searchWrapper = document.querySelector(".search-wrapper");
       const $searchToggle = document.querySelector("[data-toggle-search]");
-      if ($ui.classList.contains("has:toggled-search") && !$searchWrapper.contains(e.target) && !$searchToggle.contains(e.target)) {
+      if ($ui.classList.contains("has:toggled-search") && !$searchWrapper.contains(ev.target) && !$searchToggle.contains(ev.target)) {
         $ui.classList.remove("has:toggled-search");
       }
     });
@@ -289,7 +289,7 @@
           }
         });
         $toggle.addEventListener("keydown", (ev) => {
-          if (ev.key === "Enter" || e.key === " ") {
+          if (ev.key === "Enter" || ev.key === " ") {
             ev.preventDefault();
             $toggle.click();
           } else if (ev.key === "Escape") {
@@ -335,7 +335,7 @@
           const toggle = ev.target.closest("button.tree-nav__toggle");
           const link = ev.target.closest("a");
           if (!toggle && !link) return;
-          const li = e.target.closest("li[data-id]");
+          const li = ev.target.closest("li[data-id]");
           if (toggle) {
             const id = li?.dataset.id;
             if (!id) return;
