@@ -1027,13 +1027,13 @@ svg {
 
 .toolbar {
   position: relative;
-  z-index: 2;
+  z-index: 4;
   display: flex;
 }
 
 .filters {
   position: relative;
-  z-index: 2;
+  z-index: 4;
   display: flex;
   min-block-size: 2.5rem;
   background: #fff;

@@ -2,7 +2,7 @@
 
 .filters {
   position: relative;
-  z-index: 2;
+  z-index: 4; // @TODO add to z-index map
   display: flex;
   min-block-size: px(40);
   background: #fff;
