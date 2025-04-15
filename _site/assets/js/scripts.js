@@ -158,7 +158,7 @@
     }
     if ($navigationWrapper) {
       $navigationWrapper.addEventListener("click", (ev) => {
-        if (isMobile() && !ev.target.closest(".navigation--persistent")) {
+        if (isMobile() && (ev.target.closest(".navigation__heading") || !ev.target.closest(".navigation--persistent"))) {
           $ui.classList.add("has:toggled-sidebar-left");
         }
       });
