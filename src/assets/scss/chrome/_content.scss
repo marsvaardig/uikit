@@ -3,6 +3,7 @@
 .content {
   flex: 1 1 auto;
   min-inline-size: var(--ui-content-min-width);
+  overflow: hidden; // We need this for the .overflow container and vertical split
   transition: all $chrome-transition-duration ease-in-out;
 
   &:has(~.sidebar--component) {

@@ -144,14 +144,18 @@ table {
 
 .switch-views {
   button {
+    display: none;
     height: 100%;
     aspect-ratio: 1 / 1;
     padding: 0;
     background: transparent;
     border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+    @include breakpoint($chrome-breakpoint2) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   svg {

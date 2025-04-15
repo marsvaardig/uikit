@@ -1232,6 +1232,7 @@ svg {
 .content {
   flex: 1 1 auto;
   min-inline-size: var(--ui-content-min-width);
+  overflow: hidden;
   transition: all 300ms ease-in-out;
 }
 .content:has(~ .sidebar--component) {
@@ -1835,14 +1836,19 @@ table .is\:selected td, table .is\:selected:hover td {
 }
 
 .switch-views button {
+  display: none;
   height: 100%;
   aspect-ratio: 1/1;
   padding: 0;
   background: transparent;
   border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+@media screen and (min-width: 48rem) {
+  .switch-views button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 .switch-views svg {
   width: 1rem;
