@@ -39,7 +39,7 @@
                     <path d="M13 6.5C13 7.93437 12.5344 9.25938 11.75 10.3344L15.7063 14.2937C16.0969 14.6844 16.0969 15.3188 15.7063 15.7094C15.3156 16.1 14.6812 16.1 14.2906 15.7094L10.3344 11.75C9.25938 12.5375 7.93437 13 6.5 13C2.90937 13 0 10.0906 0 6.5C0 2.90937 2.90937 0 6.5 0C10.0906 0 13 2.90937 13 6.5ZM6.5 11C7.09095 11 7.67611 10.8836 8.22208 10.6575C8.76804 10.4313 9.26412 10.0998 9.68198 9.68198C10.0998 9.26412 10.4313 8.76804 10.6575 8.22208C10.8836 7.67611 11 7.09095 11 6.5C11 5.90905 10.8836 5.32389 10.6575 4.77792C10.4313 4.23196 10.0998 3.73588 9.68198 3.31802C9.26412 2.90016 8.76804 2.56869 8.22208 2.34254C7.67611 2.1164 7.09095 2 6.5 2C5.90905 2 5.32389 2.1164 4.77792 2.34254C4.23196 2.56869 3.73588 2.90016 3.31802 3.31802C2.90016 3.73588 2.56869 4.23196 2.34254 4.77792C2.1164 5.32389 2 5.90905 2 6.5C2 7.09095 2.1164 7.67611 2.34254 8.22208C2.56869 8.76804 2.90016 9.26412 3.31802 9.68198C3.73588 10.0998 4.23196 10.4313 4.77792 10.6575C5.32389 10.8836 5.90905 11 6.5 11Z" />
                 </svg>
             </button>
-            <div class="search-wrapper">
+            <div class="search-wrapper" data-search>
                 <div class="search">
                     <label class="visually:hidden">Zoeken...</label>
                     <input type="search" placeholder="Zoeken...">
@@ -115,7 +115,7 @@
         </button>
     </div>
 </div>
-                                                <div class="main">
+                                                <div class="main" data-main>
                                             <div class="content content--box overflow">
                                 Item layout
                             <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
@@ -124,7 +124,7 @@
     <div class="sidebar__resizer" data-sidebar-resizer="component" title="drag to resize; doubleclick to reset"></div>
     <div class="sidebar__body">
         <div class="sidebar__tabs" role="tablist" aria-label="Sidebar Tabs">
-            <ul>
+            <ul data-tabs>
                 <li class="is:active">
                     <a href="#tabs-1" role="tab" aria-selected="true" aria-controls="tabs-1" id="tab-1">Tab 1</a>
                 </li>
@@ -137,15 +137,15 @@
             </ul>
         </div>
         <div class="sidebar__content overflow">
-            <div id="tabs-1" class="tab-content is:active" role="tabpanel" aria-labelledby="tab-1">
+            <div id="tabs-1" class="tab-content is:active" role="tabpanel" aria-labelledby="tab-1" data-tab-content>
                 Tab 1 content
                 <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
             </div>
-            <div id="tabs-2" class="tab-content" role="tabpanel" aria-labelledby="tab-2" hidden>
+            <div id="tabs-2" class="tab-content" role="tabpanel" aria-labelledby="tab-2" data-tab-content hidden>
                 Tab 2 content
                 <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
             </div>
-            <div id="tabs-3" class="tab-content" role="tabpanel" aria-labelledby="tab-3" hidden>
+            <div id="tabs-3" class="tab-content" role="tabpanel" aria-labelledby="tab-3" data-tab-content hidden>
                 Tab 3 content
                 <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
             </div>

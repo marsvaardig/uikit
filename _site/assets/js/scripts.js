@@ -2,13 +2,18 @@
   // src/assets/scripts/main.js
   (() => {
     const $ui = document.querySelector("[data-uikit]");
-    const $leftSidebar = document.querySelector(".navigation-wrapper");
-    const $trees = document.querySelectorAll(".tree-nav");
+    const $navigationWrapper = document.querySelector("[data-navigation-wrapper]");
+    const $trees = document.querySelectorAll("[data-tree-uid]");
     const $splitSwitch = document.querySelector("[data-table-switch]");
-    const $main = document.querySelector(".main");
+    const $main = document.querySelector("[data-main]");
     const $toggleSplits = document.querySelectorAll("[data-toggle-split]");
     const $tables = document.querySelectorAll("[data-table]");
-    const $toggles = document.querySelectorAll(".filter-toggle");
+    const $toggles = document.querySelectorAll("[data-filter-toggle]");
+    const $sidebarToggles = document.querySelectorAll("[data-sidebar-toggle]");
+    const $sidebarTypeToggles = document.querySelectorAll("[data-sidebar-type-toggle]");
+    const $searchToggle = document.querySelector("[data-toggle-search]");
+    const $profileToggle = document.querySelector("[data-toggle-profile]");
+    const $tabList = document.querySelectorAll("[data-tabs]");
     $ui.classList.add("is:initializing");
     setTimeout(() => {
       $ui.classList.remove("is:initializing");
@@ -137,28 +142,29 @@
         initResizing($el);
       }
     });
-    document.querySelectorAll("[data-sidebar-toggle]").forEach(($el) => {
-      $el.addEventListener("click", (ev) => {
-        ev.preventDefault();
-        const direction = $el.getAttribute("data-sidebar-toggle");
-        $ui.classList.toggle(`has:toggled-sidebar-${direction}`);
-        if ($ui.classList.contains(`has:toggled-sidebar-${direction}`)) {
-          setToggleStorage(direction);
-        } else {
-          localStorage.removeItem(`sidebarToggle-${direction}`);
-        }
+    if ($sidebarToggles.length > 0) {
+      $sidebarToggles.forEach(($el) => {
+        $el.addEventListener("click", (ev) => {
+          ev.preventDefault();
+          const direction = $el.getAttribute("data-sidebar-toggle");
+          $ui.classList.toggle(`has:toggled-sidebar-${direction}`);
+          if ($ui.classList.contains(`has:toggled-sidebar-${direction}`)) {
+            setToggleStorage(direction);
+          } else {
+            localStorage.removeItem(`sidebarToggle-${direction}`);
+          }
+        });
       });
-    });
-    if ($leftSidebar) {
-      $leftSidebar.addEventListener("click", (ev) => {
+    }
+    if ($navigationWrapper) {
+      $navigationWrapper.addEventListener("click", (ev) => {
         if (isMobile() && !ev.target.closest(".navigation--persistent")) {
           $ui.classList.add("has:toggled-sidebar-left");
         }
       });
     }
-    const searchToggle = document.querySelector("[data-toggle-search]");
-    if (searchToggle) {
-      searchToggle.addEventListener("click", (ev) => {
+    if ($searchToggle) {
+      $searchToggle.addEventListener("click", (ev) => {
         ev.preventDefault();
         $ui.classList.toggle("has:toggled-search");
         if ($ui.classList.contains("has:toggled-search")) {
@@ -169,18 +175,18 @@
         }
       });
     }
-    const rightSidebarTypeToggleFloat = document.querySelector('[data-sidebar-type="float"]');
-    document.querySelectorAll("[data-sidebar-type-toggle]").forEach(($el) => {
-      $el.addEventListener("click", (ev) => {
-        ev.preventDefault();
-        const sidebar = $el.closest("[data-sidebar]");
-        const type = $el.getAttribute("data-sidebar-type-toggle");
-        sidebar.setAttribute("data-sidebar-type", type);
+    if ($sidebarTypeToggles.length > 0) {
+      $sidebarTypeToggles.forEach(($el) => {
+        $el.addEventListener("click", (ev) => {
+          ev.preventDefault();
+          const sidebar = $el.closest("[data-sidebar]");
+          const type = $el.getAttribute("data-sidebar-type-toggle");
+          sidebar.setAttribute("data-sidebar-type", type);
+        });
       });
-    });
-    const profileToggle = document.querySelector("[data-toggle-profile]");
-    if (profileToggle) {
-      profileToggle.addEventListener("click", (ev) => {
+    }
+    if ($profileToggle) {
+      $profileToggle.addEventListener("click", (ev) => {
         ev.preventDefault();
         $ui.classList.toggle("has:toggled-profile");
       });
@@ -189,9 +195,9 @@
       if (ev.key === "Escape") {
         if ($ui.classList.contains("has:toggled-search")) {
           $ui.classList.remove("has:toggled-search");
-          const $searchToggle = document.querySelector("[data-toggle-search]");
-          if ($searchToggle) {
-            $searchToggle.focus();
+          const $searchToggle2 = document.querySelector("[data-toggle-search]");
+          if ($searchToggle2) {
+            $searchToggle2.focus();
           }
         }
         if ($ui.classList.contains("has:toggled-profile")) {
@@ -204,60 +210,60 @@
       if ($ui.classList.contains("has:toggled-profile") && !$profile.contains(ev.target)) {
         $ui.classList.remove("has:toggled-profile");
       }
-      const $searchWrapper = document.querySelector(".search-wrapper");
-      const $searchToggle = document.querySelector("[data-toggle-search]");
-      if ($ui.classList.contains("has:toggled-search") && !$searchWrapper.contains(ev.target) && !$searchToggle.contains(ev.target)) {
+      const $searchWrapper = document.querySelector("[data-search]");
+      const $searchToggle2 = document.querySelector("[data-toggle-search]");
+      if ($ui.classList.contains("has:toggled-search") && !$searchWrapper.contains(ev.target) && !$searchToggle2.contains(ev.target)) {
         $ui.classList.remove("has:toggled-search");
       }
     });
-    const tabList = document.querySelector(".sidebar__tabs ul");
-    if (tabList) {
-      let activateTab2 = function(selectedTab) {
-        tabs.forEach(($tab) => {
-          $tab.setAttribute("aria-selected", "false");
-          $tab.parentElement.classList.remove("is:active");
-        });
-        panels.forEach(($panel) => {
-          $panel.classList.remove("is:active");
-          $panel.setAttribute("hidden", "");
-          const overflowContainer = $panel.closest(".overflow");
-          if (!overflowContainer) return;
-          overflowContainer.scrollTop = 0;
-        });
-        selectedTab.setAttribute("aria-selected", "true");
-        selectedTab.parentElement.classList.add("is:active");
-        const targetPanel = document.querySelector(selectedTab.getAttribute("href"));
-        targetPanel.classList.add("is:active");
-        targetPanel.removeAttribute("hidden");
-      };
-      var activateTab = activateTab2;
-      const tabs = tabList.querySelectorAll('[role="tab"]');
-      const panels = document.querySelectorAll(".tab-content");
-      const pageId = document.body.id;
-      const storageKey = `activeTab-${pageId}`;
-      const savedTabId = localStorage.getItem(storageKey);
-      if (savedTabId) {
-        const savedTab = document.querySelector(`[role="tab"][href="${savedTabId}"]`);
-        if (savedTab) {
-          activateTab2(savedTab);
-        }
-      }
-      tabs.forEach(($tab, index) => {
-        $tab.addEventListener("keydown", (ev) => {
-          let newIndex;
-          if (ev.key === "ArrowRight") {
-            newIndex = (index + 1) % tabs.length;
-            tabs[newIndex].focus();
-          } else if (ev.key === "ArrowLeft") {
-            newIndex = (index - 1 + tabs.length) % tabs.length;
-            tabs[newIndex].focus();
+    if ($tabList.length > 0) {
+      $tabList.forEach(($tabList2) => {
+        const $tabs = $tabList2.querySelectorAll('[role="tab"]');
+        const $panels = document.querySelectorAll("[data-tab-content]");
+        const pageId = document.body.id;
+        const storageKey = `activeTab-${pageId}`;
+        const savedTabId = localStorage.getItem(storageKey);
+        if (savedTabId) {
+          const $savedTab = document.querySelector(`[role="tab"][href="${savedTabId}"]`);
+          if ($savedTab) {
+            activateTab($savedTab);
           }
+        }
+        $tabs.forEach(($tab, index) => {
+          $tab.addEventListener("keydown", (ev) => {
+            let newIndex;
+            if (ev.key === "ArrowRight") {
+              newIndex = (index + 1) % $tabs.length;
+              $tabs[newIndex].focus();
+            } else if (ev.key === "ArrowLeft") {
+              newIndex = (index - 1 + $tabs.length) % $tabs.length;
+              $tabs[newIndex].focus();
+            }
+          });
+          $tab.addEventListener("click", (ev) => {
+            ev.preventDefault();
+            activateTab($tab);
+            localStorage.setItem(storageKey, $tab.getAttribute("href"));
+          });
         });
-        $tab.addEventListener("click", (ev) => {
-          ev.preventDefault();
-          activateTab2($tab);
-          localStorage.setItem(storageKey, $tab.getAttribute("href"));
-        });
+        function activateTab(selectedTab) {
+          $tabs.forEach(($tab) => {
+            $tab.setAttribute("aria-selected", "false");
+            $tab.parentElement.classList.remove("is:active");
+          });
+          $panels.forEach(($panel) => {
+            $panel.classList.remove("is:active");
+            $panel.setAttribute("hidden", "");
+            const overflowContainer = $panel.closest(".overflow");
+            if (!overflowContainer) return;
+            overflowContainer.scrollTop = 0;
+          });
+          selectedTab.setAttribute("aria-selected", "true");
+          selectedTab.parentElement.classList.add("is:active");
+          const $targetPanel = document.querySelector(selectedTab.getAttribute("href"));
+          $targetPanel.classList.add("is:active");
+          $targetPanel.removeAttribute("hidden");
+        }
       });
     }
     const hoverActivation = true;
@@ -328,8 +334,8 @@
         const stateKey = `tree-nav-state:${treeId}`;
         let savedState = JSON.parse(localStorage.getItem(stateKey) || "{}");
         for (const [id, isOpen] of Object.entries(savedState)) {
-          const li = $tree.querySelector(`li[data-id="${id}"]`);
-          if (li && isOpen) li.classList.add("open");
+          const $li = $tree.querySelector(`li[data-id="${id}"]`);
+          if ($li && isOpen) $li.classList.add("open");
         }
         $tree.addEventListener("click", (ev) => {
           const toggle = ev.target.closest("button.tree-nav__toggle");
@@ -353,15 +359,15 @@
     }
     if ($tables.length > 0) {
       $tables.forEach(($table) => {
-        const rows = $table.querySelectorAll("tbody tr");
-        if (rows) {
-          rows.forEach(($row) => {
+        const $rows = $table.querySelectorAll("tbody tr");
+        if ($rows) {
+          $rows.forEach(($row) => {
             $row.addEventListener("click", () => {
               $row.classList.toggle("is:selected");
             });
             $row.addEventListener("dblclick", () => {
-              const link = $row.querySelector("a");
-              const url = link.getAttribute("href");
+              const $link = $row.querySelector("a");
+              const url = $link.getAttribute("href");
               if (url) {
                 window.location.href = url;
               }
