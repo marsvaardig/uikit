@@ -2,62 +2,62 @@
 
 :root {
   /* Spacing */
-  --mv-spacing-xs: #{px(8)};
-  --mv-spacing-s: #{px(12)};
-  --mv-spacing-m: #{px(16)};
-  --mv-spacing-l: #{px(24)};
-  --mv-spacing-xl: #{px(32)};
+  --ui-spacing-xs: #{px(8)};
+  --ui-spacing-s: #{px(12)};
+  --ui-spacing-m: #{px(16)};
+  --ui-spacing-l: #{px(24)};
+  --ui-spacing-xl: #{px(32)};
 
   /* Gap */
-  --mv-cluster-gap: var(--mv-spacing-s);
+  --ui-cluster-gap: var(--ui-spacing-s);
 
   /* Sizing */
-  --mv-font-size-s: #{px(11)};
-  --mv-font-size-m: #{px(12)};
-  --mv-font-size-l: #{px(13)};
-  --mv-font-size-xl: #{px(14)};
-  --mv-font-size-2xl: #{px(15)};
-  --mv-font-size-3xl: #{px(20)};
+  --ui-font-size-s: #{px(11)};
+  --ui-font-size-m: #{px(12)};
+  --ui-font-size-l: #{px(13)};
+  --ui-font-size-xl: #{px(14)};
+  --ui-font-size-2xl: #{px(15)};
+  --ui-font-size-3xl: #{px(20)};
 
   /* Radius */
-  --mv-radius-s: #{px(6)};
-  --mv-radius-m: #{px(12)};
+  --ui-radius-s: #{px(6)};
+  --ui-radius-m: #{px(12)};
 
   /* Background */
-  --mv-background-primary: #{$brand-light-accent1};
-  --mv-background-invert: #{$brand-dark-shade1};
-  --mv-background-invert-gradient: #{$brand-dark-shade2};
+  --ui-background-primary: #{$brand-light-accent1};
+  --ui-background-invert: #{$brand-dark-shade1};
+  --ui-background-invert-gradient: #{$brand-dark-shade2};
 
   /* Surface */
 
   /* Control */
 
   /* Type */
-  --mv-text-primary: #{$brand-dark-shade1};
-  --mv-text-invert: #{$brand-light-accent1};
+  --ui-text-primary: #{$brand-dark-shade1};
+  --ui-text-invert: #{$brand-light-accent1};
 
   /* Components */
-  --mv-scrollbar-width: 0;
-  --mv-sidebar-left-width: #{px(240)};
-  --mv-sidebar-left-min-width: #{px(160)};
-  --mv-sidebar-left-max-width: #{px(400)};
-  --mv-sidebar-right-width: #{px(320)};
-  --mv-sidebar-right-min-width: #{px(200)};
-  --mv-sidebar-component-width: #{px(320)};
-  --mv-sidebar-component-min-width: #{px(200)};
-  --mv-sidebar-component-max-width: #{px(560)};
-  --mv-sidebar-component-hide: #{px(40)};
-  --mv-sidebar-split-width: 66%;
-  --mv-sidebar-split-min-width: #{px(200)};
-  --mv-sidebar-split-max-width: 80%;
-  --mv-sidebar-split-height: 50%;
-  --mv-content-min-width: #{px(240)};
+  --ui-scrollbar-width: 0;
+  --ui-sidebar-left-width: #{px(240)};
+  --ui-sidebar-left-min-width: #{px(160)};
+  --ui-sidebar-left-max-width: #{px(400)};
+  --ui-sidebar-right-width: #{px(320)};
+  --ui-sidebar-right-min-width: #{px(200)};
+  --ui-sidebar-component-width: #{px(320)};
+  --ui-sidebar-component-min-width: #{px(200)};
+  --ui-sidebar-component-max-width: #{px(560)};
+  --ui-sidebar-component-hide: #{px(40)};
+  --ui-sidebar-split-width: 66%;
+  --ui-sidebar-split-min-width: #{px(200)};
+  --ui-sidebar-split-max-width: 80%;
+  --ui-sidebar-split-height: 50%;
+  --ui-content-min-width: #{px(240)};
 
   /* Mobile indicator */
-  --mv-mobile: 1;
+  --ui-mobile: 1;
 
   @include breakpoint($chrome-breakpoint2) {
-    --mv-mobile: 0;
+    --ui-mobile: 0;
   }
 }
 
@@ -83,7 +83,7 @@ body {
   overflow: auto;
   font-family: Ubuntu, sans-serif;
   color: #fff;
-  background: var(--body, linear-gradient(180deg, var(--mv-background-invert) 0%, var(--mv-background-invert-gradient) 100%));
+  background: var(--body, linear-gradient(180deg, var(--ui-background-invert) 0%, var(--ui-background-invert-gradient) 100%));
 }
 
 a {

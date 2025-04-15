@@ -5,14 +5,14 @@
   // -----------------
 
   // Spacing
-  --mv-chrome-spacing-s: var(--mv-spacing-xs);
-  --mv-chrome-spacing-m: var(--mv-spacing-m);
-  --mv-chrome-spacing-l: var(--mv-spacing-l);
-  --mv-content-box-padding: var(--mv-spacing-m);
+  --ui-chrome-spacing-s: var(--ui-spacing-xs);
+  --ui-chrome-spacing-m: var(--ui-spacing-m);
+  --ui-chrome-spacing-l: var(--ui-spacing-l);
+  --ui-content-box-padding: var(--ui-spacing-m);
 
   // Radius
-  --mv-chrome-radius-s: var(--mv-radius-s);
-  --mv-chrome-radius-m: var(--mv-radius-m);
+  --ui-chrome-radius-s: var(--ui-radius-s);
+  --ui-chrome-radius-m: var(--ui-radius-m);
 
   // Styling
   display: flex;
@@ -20,7 +20,7 @@
   block-size: 100vh;
   min-block-size: $uikit-min-height;
   overflow: hidden;
-  font-size: var(--mv-font-size-m);
+  font-size: var(--ui-font-size-m);
 
   // Initializing
   &.is\:initializing {

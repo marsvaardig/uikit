@@ -50,7 +50,7 @@
     padding-inline: px(40) 1rem ;
     background: #fff;
     border: none;
-    border-radius: var(--mv-radius-s);
+    border-radius: var(--ui-radius-s);
   }
 
   button {
@@ -68,7 +68,7 @@
     cursor: pointer;
     background: transparent;
     border: none;
-    border-radius: var(--mv-radius-s) 0 0 var(--mv-radius-s);
+    border-radius: var(--ui-radius-s) 0 0 var(--ui-radius-s);
 
     @include hover {
       color: #000;

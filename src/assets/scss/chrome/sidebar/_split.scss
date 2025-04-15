@@ -9,9 +9,9 @@
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
-  inline-size: min(100% - var(--mv-content-min-width) - var(--mv-chrome-spacing-m), var(--mv-sidebar-split-width));
-  min-inline-size: var(--mv-sidebar-split-min-width);
-  max-inline-size: var(--mv-sidebar-split-max-width);
+  inline-size: min(100% - var(--ui-content-min-width) - var(--ui-chrome-spacing-m), var(--ui-sidebar-split-width));
+  min-inline-size: var(--ui-sidebar-split-min-width);
+  max-inline-size: var(--ui-sidebar-split-max-width);
 
   @include transition(all $chrome-transition-duration ease-in-out);
 
@@ -26,7 +26,7 @@
   .main--stack & {
     inline-size: 100%;
     max-inline-size: 100%;
-    block-size: var(--mv-sidebar-split-height);
+    block-size: var(--ui-sidebar-split-height);
     min-block-size: px(200);
     max-block-size: 75%;
   }
@@ -42,7 +42,7 @@
     padding: 1rem;
     background: #fff;
     border: 1px solid #B7CAD7;
-    border-radius: var(--mv-chrome-radius-s);
+    border-radius: var(--ui-chrome-radius-s);
   }
 
   .sidebar__resizer {

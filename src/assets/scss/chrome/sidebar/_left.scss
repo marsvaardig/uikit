@@ -4,7 +4,7 @@
   display: flex;
   flex: 0 0 auto;
   inline-size: px(48);
-  min-inline-size: var(--mv-sidebar-left-min-width);
+  min-inline-size: var(--ui-sidebar-left-min-width);
   max-block-size: 100%;
   margin-inline-start: px(-8);
   overflow: visible;
@@ -20,20 +20,20 @@
   }
 
   @include breakpoint($chrome-breakpoint2) {
-    inline-size: var(--mv-sidebar-left-width);
-    max-inline-size: min(33vw, var(--mv-sidebar-left-max-width));
+    inline-size: var(--ui-sidebar-left-width);
+    max-inline-size: min(33vw, var(--ui-sidebar-left-max-width));
   }
 
   .sidebar__content {
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
-    min-inline-size: min(#{px(320)}, max(var(--mv-sidebar-left-width), var(--mv-sidebar-left-min-width)));
+    min-inline-size: min(#{px(320)}, max(var(--ui-sidebar-left-width), var(--ui-sidebar-left-min-width)));
     padding: 0;
     overflow: hidden;
 
     @include breakpoint($chrome-breakpoint2) {
-      min-inline-size: min(min(33vw, px(320)), max(var(--mv-sidebar-left-width), var(--mv-sidebar-left-min-width)));
+      min-inline-size: min(min(33vw, px(320)), max(var(--ui-sidebar-left-width), var(--ui-sidebar-left-min-width)));
     }
   }
 
@@ -120,7 +120,7 @@
   @include state('has', 'toggled-sidebar-left|not(resizing)') {
     @include hover {
       @include breakpoint($chrome-breakpoint2) {
-        min-inline-size: var(--mv-sidebar-left-width);
+        min-inline-size: var(--ui-sidebar-left-width);
 
         .navigation-rename {
           & > *  {

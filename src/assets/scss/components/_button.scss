@@ -3,13 +3,13 @@
 .button {
   display: flex;
   align-items: center;
-  min-block-size: var(--mv-spacing-xl);
-  padding: var(--mv-spacing-xs) var(--mv-spacing-s);
+  min-block-size: var(--ui-spacing-xl);
+  padding: var(--ui-spacing-xs) var(--ui-spacing-s);
   font-weight: 700;
   cursor: pointer;
   background: #D4E3ED;
   border: 1px solid #9bbacf;
-  border-radius: var(--mv-radius-s);
+  border-radius: var(--ui-radius-s);
 
   @include transition(all);
 

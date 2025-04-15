@@ -4,19 +4,19 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: calc(100% - var(--mv-sidebar-component-hide));
+  left: calc(100% - var(--ui-sidebar-component-hide));
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
-  inline-size: var(--mv-sidebar-component-width);
-  min-inline-size: min(var(--mv-sidebar-component-width), 100% - var(--mv-sidebar-component-hide) - var(--mv-chrome-spacing-m));
-  max-inline-size: calc(100% - var(--mv-sidebar-component-hide) - var(--mv-chrome-spacing-m));
+  inline-size: var(--ui-sidebar-component-width);
+  min-inline-size: min(var(--ui-sidebar-component-width), 100% - var(--ui-sidebar-component-hide) - var(--ui-chrome-spacing-m));
+  max-inline-size: calc(100% - var(--ui-sidebar-component-hide) - var(--ui-chrome-spacing-m));
 
   @include transition(all $chrome-transition-duration ease-in-out);
 
   @include state('has', 'toggled-sidebar-component') {
     @include breakpoint($chrome-breakpoint2) {
-      inline-size: var(--mv-sidebar-component-hide);
+      inline-size: var(--ui-sidebar-component-hide);
       min-inline-size: 0;
     }
   }
@@ -24,8 +24,8 @@
   @include breakpoint($chrome-breakpoint2) {
     position: relative;
     left: 0;
-    min-inline-size: var(--mv-sidebar-component-min-width);
-    max-inline-size: min(33vw, var(--mv-sidebar-component-max-width));
+    min-inline-size: var(--ui-sidebar-component-min-width);
+    max-inline-size: min(33vw, var(--ui-sidebar-component-max-width));
   }
 
   .sidebar__content {
@@ -33,10 +33,10 @@
     padding: 1rem;
     background: #fff;
     border: 1px solid #B7CAD7;
-    border-radius: var(--mv-chrome-radius-s);
+    border-radius: var(--ui-chrome-radius-s);
 
     @include breakpoint($chrome-breakpoint2) {
-      min-inline-size: min(var(--mv-sidebar-component-width), var(--mv-sidebar-component-min-width));
+      min-inline-size: min(var(--ui-sidebar-component-width), var(--ui-sidebar-component-min-width));
       max-inline-size: 100%;
     }
   }
@@ -78,7 +78,7 @@
   z-index: 1;
   cursor: pointer;
   background: #fff;
-  border-radius: var(--mv-chrome-radius-s);
+  border-radius: var(--ui-chrome-radius-s);
   opacity: .65;
 
   @include coverall;

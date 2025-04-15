@@ -7,7 +7,7 @@
   z-index: 1;
   flex: 0 0 auto;
   flex-direction: column;
-  inline-size: var(--mv-sidebar-right-width);
+  inline-size: var(--ui-sidebar-right-width);
   max-inline-size: calc(100vw - #{px(96)});
   transition: transform $chrome-transition-duration ease-in-out, inline-size $chrome-transition-duration ease-in-out, margin $chrome-transition-duration ease-in-out;
   transform: translateX(100%);
@@ -18,9 +18,9 @@
 
   .sidebar__body {
     min-block-size: 100%;
-    color: var(--mv-text-primary);
-    background: var(--mv-background-primary);
-    border-radius: var(--mv-chrome-radius-m) 0 0 var(--mv-chrome-radius-m);
+    color: var(--ui-text-primary);
+    background: var(--ui-background-primary);
+    border-radius: var(--ui-chrome-radius-m) 0 0 var(--ui-chrome-radius-m);
     box-shadow: 0 0 12px rgb(0 0 0 / 15%), 0 0 24px rgb(0 0 0 / 25%);
   }
 
@@ -37,13 +37,13 @@
 
       @include state('has', 'toggled-sidebar-right') {
         display: flex;
-        min-inline-size: var(--mv-sidebar-right-min-width);
+        min-inline-size: var(--ui-sidebar-right-min-width);
         margin-inline-end: 0;
         animation: slide-in-right $chrome-transition-duration ease-in-out;
       }
 
       .sidebar__body {
-        border-radius: var(--mv-chrome-radius-m);
+        border-radius: var(--ui-chrome-radius-m);
       }
     }
 
@@ -60,7 +60,7 @@
     z-index: 11;
     inline-size: calc(100% - #{px(16)});
     max-inline-size: calc(100% - #{px(16)});
-    border-radius: var(--mv-chrome-radius-m);
+    border-radius: var(--ui-chrome-radius-m);
 
     [data-sidebar-type-toggle="cover"] {
       display: none;
@@ -136,8 +136,8 @@
 
 @keyframes slide-out-right {
   from {
-    min-inline-size: min(var(--mv-sidebar-right-width), 40vw);
-    max-inline-size: min(var(--mv-sidebar-right-width), 40vw);
+    min-inline-size: min(var(--ui-sidebar-right-width), 40vw);
+    max-inline-size: min(var(--ui-sidebar-right-width), 40vw);
   }
 
   to {
@@ -154,8 +154,8 @@
   }
 
   to {
-    min-inline-size: min(var(--mv-sidebar-right-width), 40vw);
-    max-inline-size: min(var(--mv-sidebar-right-width), 40vw);
+    min-inline-size: min(var(--ui-sidebar-right-width), 40vw);
+    max-inline-size: min(var(--ui-sidebar-right-width), 40vw);
   }
 }
 

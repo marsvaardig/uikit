@@ -8,7 +8,7 @@
   min-block-size: px(40);
   background: #fff;
   border: 1px solid #BFD0DB;
-  border-radius: var(--mv-chrome-radius-s);
+  border-radius: var(--ui-chrome-radius-s);
 }
 
 .filters__icon {
@@ -55,7 +55,7 @@
   padding: 1rem;
   background: #fff;
   border: 1px solid #B7CAD7;
-  border-radius: 0 0  var(--mv-chrome-radius-s) var(--mv-chrome-radius-s);
+  border-radius: 0 0  var(--ui-chrome-radius-s) var(--ui-chrome-radius-s);
   box-shadow: 0 0 12px rgba(#000, .15);
 }
 

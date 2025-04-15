@@ -10,23 +10,23 @@
   }, 500)
   
   function isMobile() {
-    return window.getComputedStyle($ui).getPropertyValue('--mv-mobile') === '1';
+    return window.getComputedStyle($ui).getPropertyValue('--ui-mobile') === '1';
   }
   
   function setWidth(newWidth, type) {
-    document.body.style.setProperty(`--mv-sidebar-${type}-width`, `${newWidth}px`);
+    document.body.style.setProperty(`--ui-sidebar-${type}-width`, `${newWidth}px`);
   }
   
   function resetWidth(type) {
-    document.body.style.removeProperty(`--mv-sidebar-${type}-width`);
+    document.body.style.removeProperty(`--ui-sidebar-${type}-width`);
   }
   
   function setHeight(newHeight, type) {
-    document.body.style.setProperty(`--mv-sidebar-${type}-height`, `${newHeight}px`);
+    document.body.style.setProperty(`--ui-sidebar-${type}-height`, `${newHeight}px`);
   }
   
   function resetHeight(type) {
-    document.body.style.removeProperty(`--mv-sidebar-${type}-height`);
+    document.body.style.removeProperty(`--ui-sidebar-${type}-height`);
   }
   
   function setToggleStorage(type) {

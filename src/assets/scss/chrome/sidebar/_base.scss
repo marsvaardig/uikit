@@ -14,12 +14,12 @@
   overflow: hidden;
 
   & > * {
-    min-inline-size: calc(var(--mv-sidebar-right-min-width) - #{px(8)});
+    min-inline-size: calc(var(--ui-sidebar-right-min-width) - #{px(8)});
   }
 
   .sidebar__content {
     flex: 1 1 auto;
-    padding: var(--mv-spacing-m);
+    padding: var(--ui-spacing-m);
   }
 }
 

@@ -36,15 +36,15 @@
 }
 
 table {
-  --mv-table-item-title: #0B55C4;
+  --ui-table-item-title: #0B55C4;
 
   inline-size: 100%;
-  font-size: var(--mv-font-size-l);
+  font-size: var(--ui-font-size-l);
   border-collapse: collapse;
 
   .content--box & {
-    inline-size: calc(100% + var(--mv-content-box-padding) * 2);
-    margin: calc(var(--mv-content-box-padding) * -1);
+    inline-size: calc(100% + var(--ui-content-box-padding) * 2);
+    margin: calc(var(--ui-content-box-padding) * -1);
   }
 
   th,
@@ -54,7 +54,7 @@ table {
   }
 
   tr:hover {
-    --mv-table-item-title: #013381;
+    --ui-table-item-title: #013381;
 
     td {
       background: #DBE5EC;
@@ -63,7 +63,7 @@ table {
 
   th {
     position: sticky;
-    top: calc(var(--mv-chrome-spacing-m) * -1);
+    top: calc(var(--ui-chrome-spacing-m) * -1);
     z-index: 1;
     padding-block: px(16);
     background: #e7eff4;
@@ -88,8 +88,8 @@ table {
 }
 
 .table-item-title {
-  font-size: var(--mv-font-size-xl);
-  color: var(--mv-table-item-title);
+  font-size: var(--ui-font-size-xl);
+  color: var(--ui-table-item-title);
   cursor: pointer;
 
   @include hover {
@@ -104,14 +104,14 @@ table {
 .grid {
   display: flex;
   flex-direction: column;
-  gap: var(--mv-chrome-spacing-m);
+  gap: var(--ui-chrome-spacing-m);
   inline-size: 100%;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--mv-chrome-spacing-m);
+  gap: var(--ui-chrome-spacing-m);
   inline-size: 100%;
 
   & > * {
@@ -121,10 +121,10 @@ table {
 }
 
 .box {
-  padding: var(--mv-content-box-padding);
+  padding: var(--ui-content-box-padding);
   background: #fff;
   border: 1px solid #B7CAD7;
-  border-radius: var(--mv-chrome-radius-s);
+  border-radius: var(--ui-chrome-radius-s);
 }
 
 

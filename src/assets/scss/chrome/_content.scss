@@ -2,11 +2,11 @@
 
 .content {
   flex: 1 1 auto;
-  min-inline-size: var(--mv-content-min-width);
+  min-inline-size: var(--ui-content-min-width);
   transition: all $chrome-transition-duration ease-in-out;
 
   &:has(~.sidebar--component) {
-    margin-inline-end: calc(var(--mv-sidebar-component-hide) + var(--mv-chrome-spacing-m));
+    margin-inline-end: calc(var(--ui-sidebar-component-hide) + var(--ui-chrome-spacing-m));
 
     @include breakpoint($chrome-breakpoint2) {
       margin-inline-end: 0;
@@ -14,9 +14,9 @@
   }
 
   &.content--box {
-    padding: var(--mv-content-box-padding);
+    padding: var(--ui-content-box-padding);
     background: #fff;
     border: 1px solid #B7CAD7;
-    border-radius: var(--mv-chrome-radius-s);
+    border-radius: var(--ui-chrome-radius-s);
   }
 }

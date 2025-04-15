@@ -28,8 +28,8 @@
 }
 
 .navigation__heading {
-  padding: var(--mv-spacing-m);
-  font-size: var(--mv-font-size-m);
+  padding: var(--ui-spacing-m);
+  font-size: var(--ui-font-size-m);
   font-weight: 400;
   color: #ACC6D9;
   text-transform: uppercase;
@@ -65,9 +65,9 @@
     align-items: center;
     gap: px(16);
     padding: px(9) px(8);
-    font-size: var(--mv-font-size-xl);
+    font-size: var(--ui-font-size-xl);
     border: 1px solid transparent;
-    border-radius: var(--mv-radius-s);
+    border-radius: var(--ui-radius-s);
 
     svg {
       flex: 0 0 auto;

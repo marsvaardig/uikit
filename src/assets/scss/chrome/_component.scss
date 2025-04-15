@@ -4,21 +4,21 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  gap: var(--mv-chrome-spacing-m);
+  gap: var(--ui-chrome-spacing-m);
   min-inline-size: 100%;
   max-inline-size: 100%;
-  padding: var(--mv-chrome-spacing-m);
+  padding: var(--ui-chrome-spacing-m);
   overflow: hidden;
-  color: var(--mv-text-primary);
-  background: var(--mv-background-primary);
-  border-radius: var(--mv-chrome-radius-m);
+  color: var(--ui-text-primary);
+  background: var(--ui-background-primary);
+  border-radius: var(--ui-chrome-radius-m);
 
   @include breakpoint($chrome-breakpoint2) {
     min-inline-size: 0;
   }
 
   @include has(".sidebar--left") {
-    min-inline-size: calc(100vw - var(--mv-sidebar-left-width) - #{px(8)});
+    min-inline-size: calc(100vw - var(--ui-sidebar-left-width) - #{px(8)});
 
     @include breakpoint($chrome-breakpoint2) {
       min-inline-size: 0;
