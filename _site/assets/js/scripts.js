@@ -15,6 +15,12 @@
     function resetWidth(type) {
       document.body.style.removeProperty(`--mv-sidebar-${type}-width`);
     }
+    function setHeight(newHeight, type) {
+      document.body.style.setProperty(`--mv-sidebar-${type}-height`, `${newHeight}px`);
+    }
+    function resetHeight(type) {
+      document.body.style.removeProperty(`--mv-sidebar-${type}-height`);
+    }
     function setToggleStorage(type) {
       if (isMobile()) {
         return;
@@ -22,7 +28,7 @@
       localStorage.setItem(`sidebarToggle-${type}`, true);
     }
     function initResizing($resizer) {
-      let startX, startY, startWidth, maxWidth, minWidth, resizeDirection, isResizing = false;
+      let startX, startY, startWidth, minWidth, maxWidth, startHeight, minHeight, maxHeight, resizeDirection, isResizing = false;
       const sidebarType = $resizer.getAttribute("data-sidebar-resizer");
       const className = `has:toggled-sidebar-${sidebarType}`;
       if (localStorage.getItem(`sidebarWidth-${sidebarType}`)) {
@@ -34,24 +40,34 @@
       function onMouseMove(e, $sidebar) {
         if (!resizeDirection || !isResizing) return;
         let newWidth;
-        if (sidebarType === "left") {
-          newWidth = startWidth + (e.clientX - startX);
-        } else {
-          newWidth = startWidth - (e.clientX - startX);
-        }
-        if ($ui.classList.contains(className) && newWidth > minWidth) {
-          setWidth(newWidth, sidebarType);
+        let newHeight;
+        if (resizeDirection === "horizontal") {
           if (sidebarType === "left") {
-            $ui.classList.remove(className);
-            localStorage.removeItem(`sidebarToggle-${sidebarType}`);
+            newWidth = startWidth + (e.clientX - startX);
+          } else {
+            newWidth = startWidth - (e.clientX - startX);
           }
-        } else if (newWidth > minWidth && newWidth < maxWidth) {
-          setWidth(newWidth, sidebarType);
-        } else if (newWidth < minWidth) {
-          if (sidebarType === "left") {
-            setWidth(startWidth, sidebarType);
-            $ui.classList.add(className);
-            setToggleStorage(sidebarType);
+          if ($ui.classList.contains(className) && newWidth > minWidth) {
+            setWidth(newWidth, sidebarType);
+            if (sidebarType === "left") {
+              $ui.classList.remove(className);
+              localStorage.removeItem(`sidebarToggle-${sidebarType}`);
+            }
+          } else if (newWidth > minWidth && newWidth < maxWidth) {
+            setWidth(newWidth, sidebarType);
+          }
+        }
+        if (resizeDirection === "vertical") {
+          newHeight = startHeight - (e.clientY - startY);
+          console.log(minHeight, maxHeight, newHeight);
+          if ($ui.classList.contains(className) && newHeight > minHeight) {
+            setHeight(newHeight, sidebarType);
+            if (sidebarType === "left") {
+              $ui.classList.remove(className);
+              localStorage.removeItem(`sidebarToggle-${sidebarType}`);
+            }
+          } else if (newHeight > minHeight && newHeight < maxHeight) {
+            setHeight(newHeight, sidebarType);
           }
         }
       }
@@ -82,15 +98,21 @@
         startX = e.clientX;
         startY = e.clientY;
         startWidth = $sidebar.offsetWidth;
-        $ui.classList.add("has:resizing");
+        startHeight = $sidebar.offsetHeight;
+        maxHeight = getWidthValueInPixels($sidebar, "max-height");
+        minHeight = getWidthValueInPixels($sidebar, "min-height");
         maxWidth = getWidthValueInPixels($sidebar, "max-width");
         minWidth = getWidthValueInPixels($sidebar, "min-width");
+        $ui.classList.add("has:resizing");
         document.addEventListener("mousemove", (e2) => onMouseMove(e2, $sidebar));
         document.addEventListener("mouseup", (e2) => onMouseUp(e2, $sidebar));
       }
-      $resizer.addEventListener("mousedown", (e) => initResize(e, "horizontal"));
+      $resizer.addEventListener("mousedown", (e) => {
+        const rect = $resizer.getBoundingClientRect();
+        const direction = rect.height > rect.width ? "horizontal" : "vertical";
+        initResize(e, direction);
+      });
       $resizer.addEventListener("dblclick", (e) => {
-        const $sidebar = e.target.closest("[data-sidebar]");
         resetWidth(sidebarType);
         localStorage.removeItem(`sidebarWidth-${sidebarType}`);
       });
@@ -343,13 +365,22 @@
       });
     });
     const splitSwitch = document.querySelector("[data-table-switch]");
-    if (splitSwitch) {
+    const $main = document.querySelector(".main");
+    if (splitSwitch && $main) {
       splitSwitch.addEventListener("click", (e) => {
         e.preventDefault();
-        const $main = document.querySelector(".main");
         $main.classList.toggle("main--stack");
         splitSwitch.classList.toggle("is:stack");
+        if ($main.classList.contains("main--stack")) {
+          localStorage.setItem("splitSwitch", "true");
+        } else {
+          localStorage.removeItem("splitSwitch");
+        }
       });
+      if (localStorage.getItem("splitSwitch")) {
+        $main.classList.add("main--stack");
+        splitSwitch.classList.add("is:stack");
+      }
     }
     let resizeTimeout;
     window.addEventListener("resize", () => {

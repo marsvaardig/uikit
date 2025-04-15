@@ -26,7 +26,9 @@
   .main--stack & {
     inline-size: 100%;
     max-inline-size: 100%;
-    block-size: 50%;
+    block-size: var(--mv-sidebar-split-height);
+    min-block-size: px(200);
+    max-block-size: 66%;
   }
 
   @include breakpoint($chrome-breakpoint2) {
@@ -76,7 +78,11 @@
       inset-block-start: -1rem;
       inline-size: 100%;
       block-size: 1rem;
-      display: none; // @TODO: Hide for now
+      cursor: ns-resize;
+
+      &::after {
+        transform: translate(-50%, -50%) rotate(90deg);
+      }
     }
   }
 

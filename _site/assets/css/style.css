@@ -217,6 +217,7 @@ summary {
   --mv-sidebar-split-width: 66%;
   --mv-sidebar-split-min-width: 12.5rem;
   --mv-sidebar-split-max-width: 80%;
+  --mv-sidebar-split-height: 50%;
   --mv-content-min-width: 15rem;
   /* Mobile indicator */
   --mv-mobile: 1;
@@ -931,7 +932,9 @@ svg {
 .main--stack .sidebar--split {
   inline-size: 100%;
   max-inline-size: 100%;
-  block-size: 50%;
+  block-size: var(--mv-sidebar-split-height);
+  min-block-size: 12.5rem;
+  max-block-size: 66%;
 }
 @media screen and (min-width: 48rem) {
   .sidebar--split {
@@ -980,7 +983,10 @@ svg {
   inset-block-start: -1rem;
   inline-size: 100%;
   block-size: 1rem;
-  display: none;
+  cursor: ns-resize;
+}
+.main--stack .sidebar--split .sidebar__resizer::after {
+  transform: translate(-50%, -50%) rotate(90deg);
 }
 .sidebar--split[data-resizing] .sidebar__resizer::after {
   border-color: #000;
