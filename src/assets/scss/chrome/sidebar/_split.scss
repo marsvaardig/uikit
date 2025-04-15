@@ -28,7 +28,7 @@
     max-inline-size: 100%;
     block-size: var(--mv-sidebar-split-height);
     min-block-size: px(200);
-    max-block-size: 66%;
+    max-block-size: 75%;
   }
 
   @include breakpoint($chrome-breakpoint2) {

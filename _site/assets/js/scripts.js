@@ -34,6 +34,9 @@
       if (localStorage.getItem(`sidebarWidth-${sidebarType}`)) {
         setWidth(localStorage.getItem(`sidebarWidth-${sidebarType}`), sidebarType);
       }
+      if (localStorage.getItem(`sidebarHeight-${sidebarType}`)) {
+        setHeight(localStorage.getItem(`sidebarHeight-${sidebarType}`), sidebarType);
+      }
       if (localStorage.getItem(`sidebarToggle-${sidebarType}`)) {
         $ui.classList.add(`has:toggled-sidebar-${sidebarType}`);
       }
@@ -82,6 +85,9 @@
           localStorage.setItem(`sidebarWidth-${sidebarType}`, $sidebar.offsetWidth);
         }
         if (!$ui.classList.contains(className)) {
+          localStorage.setItem(`sidebarHeight-${sidebarType}`, $sidebar.offsetHeight);
+        }
+        if (!$ui.classList.contains(className)) {
           localStorage.removeItem(`sidebarToggle-${sidebarType}`);
         }
       }
@@ -114,7 +120,9 @@
       });
       $resizer.addEventListener("dblclick", (e) => {
         resetWidth(sidebarType);
+        resetHeight(sidebarType);
         localStorage.removeItem(`sidebarWidth-${sidebarType}`);
+        localStorage.removeItem(`sidebarHeight-${sidebarType}`);
       });
     }
     ["left", "right", "component", "split"].forEach((side) => {

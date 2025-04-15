@@ -934,7 +934,7 @@ svg {
   max-inline-size: 100%;
   block-size: var(--mv-sidebar-split-height);
   min-block-size: 12.5rem;
-  max-block-size: 66%;
+  max-block-size: 75%;
 }
 @media screen and (min-width: 48rem) {
   .sidebar--split {

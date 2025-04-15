@@ -46,6 +46,10 @@
       setWidth(localStorage.getItem(`sidebarWidth-${sidebarType}`), sidebarType);
     }
     
+    if (localStorage.getItem(`sidebarHeight-${sidebarType}`)) {
+      setHeight(localStorage.getItem(`sidebarHeight-${sidebarType}`), sidebarType);
+    }
+    
     if (localStorage.getItem(`sidebarToggle-${sidebarType}`)) {
       $ui.classList.add(`has:toggled-sidebar-${sidebarType}`);
     }
@@ -100,6 +104,10 @@
         localStorage.setItem(`sidebarWidth-${sidebarType}`, $sidebar.offsetWidth);
       }
       
+      if ((!$ui.classList.contains(className))) {
+        localStorage.setItem(`sidebarHeight-${sidebarType}`, $sidebar.offsetHeight);
+      }
+      
       // If not toggled; remove the toggled localstorage
       if (!$ui.classList.contains(className)) {
         localStorage.removeItem(`sidebarToggle-${sidebarType}`);
@@ -145,7 +153,9 @@
     // When doubleclicking on the resizer; reset the corresponding width
     $resizer.addEventListener('dblclick', (e) => {
       resetWidth(sidebarType);
+      resetHeight(sidebarType);
       localStorage.removeItem(`sidebarWidth-${sidebarType}`);
+      localStorage.removeItem(`sidebarHeight-${sidebarType}`);
     });
   }
   
