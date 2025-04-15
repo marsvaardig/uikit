@@ -479,6 +479,8 @@
       const $main = document.querySelector('.main');
       $main.classList.toggle('main--stack');
       splitSwitch.classList.toggle('is:stack')
+      
+      // @TODO: save in localstorage
     });
   }
 })();
