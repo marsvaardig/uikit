@@ -1025,7 +1025,7 @@ svg {
   }
 }
 .uikit:has(.sidebar--left) .component {
-  min-inline-size: calc(100vw - 3rem - 0.5rem);
+  min-inline-size: calc(100vw - var(--mv-sidebar-left-width) - 0.5rem);
 }
 @media screen and (min-width: 48rem) {
   .uikit:has(.sidebar--left) .component {
