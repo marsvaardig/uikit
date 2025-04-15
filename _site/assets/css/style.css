@@ -1043,6 +1043,7 @@ svg {
   position: relative;
   z-index: 4;
   display: flex;
+  flex: 0 0 auto;
   min-block-size: 2.5rem;
   background: #fff;
   border: 1px solid #BFD0DB;

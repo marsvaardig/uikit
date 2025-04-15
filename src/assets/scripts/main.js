@@ -508,6 +508,7 @@
   if (splitSwitch && $main) {
     splitSwitch.addEventListener('click', (e) => {
       e.preventDefault();
+      $ui.classList.add('has:resizing');
       $main.classList.toggle('main--stack');
       splitSwitch.classList.toggle('is:stack')
       // Save state in localstorage
@@ -516,6 +517,9 @@
       } else {
         localStorage.removeItem('splitSwitch');
       }
+      setTimeout(() => {
+        $ui.classList.remove('has:resizing');
+      }, 0);
     });
     
     if (localStorage.getItem('splitSwitch')) {

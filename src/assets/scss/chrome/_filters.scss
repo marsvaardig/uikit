@@ -4,6 +4,7 @@
   position: relative;
   z-index: 4; // @TODO add to z-index map
   display: flex;
+  flex: 0 0 auto;
   min-block-size: px(40);
   background: #fff;
   border: 1px solid #BFD0DB;

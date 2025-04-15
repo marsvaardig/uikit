@@ -377,6 +377,7 @@
     if (splitSwitch && $main) {
       splitSwitch.addEventListener("click", (e) => {
         e.preventDefault();
+        $ui.classList.add("has:resizing");
         $main.classList.toggle("main--stack");
         splitSwitch.classList.toggle("is:stack");
         if ($main.classList.contains("main--stack")) {
@@ -384,6 +385,9 @@
         } else {
           localStorage.removeItem("splitSwitch");
         }
+        setTimeout(() => {
+          $ui.classList.remove("has:resizing");
+        }, 0);
       });
       if (localStorage.getItem("splitSwitch")) {
         $main.classList.add("main--stack");
