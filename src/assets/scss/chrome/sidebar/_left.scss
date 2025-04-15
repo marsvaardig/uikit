@@ -4,7 +4,6 @@
   display: flex;
   flex: 0 0 auto;
   inline-size: px(48);
-  min-inline-size: var(--ui-sidebar-left-min-width);
   max-block-size: 100%;
   margin-inline-start: calc(var(--ui-chrome-spacing-s) * -1);
   overflow: visible;
@@ -21,6 +20,7 @@
 
   @include breakpoint($chrome-breakpoint2) {
     inline-size: var(--ui-sidebar-left-width);
+    min-inline-size: var(--ui-sidebar-left-min-width);
     max-inline-size: min(33vw, var(--ui-sidebar-left-max-width));
   }
 
