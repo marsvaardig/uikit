@@ -208,6 +208,7 @@ summary {
   --mv-scrollbar-width: 0;
   --mv-sidebar-left-width: 15rem;
   --mv-sidebar-left-min-width: 10rem;
+  --mv-sidebar-left-max-width: 25rem;
   --mv-sidebar-right-width: 20rem;
   --mv-sidebar-right-min-width: 12.5rem;
   --mv-sidebar-component-width: 20rem;
@@ -531,6 +532,7 @@ svg {
   display: flex;
   flex: 0 0 auto;
   inline-size: 3rem;
+  min-inline-size: var(--mv-sidebar-left-min-width);
   max-block-size: 100%;
   margin-inline-start: -0.5rem;
   overflow: visible;
@@ -549,7 +551,7 @@ svg {
 @media screen and (min-width: 48rem) {
   .sidebar--left {
     inline-size: var(--mv-sidebar-left-width);
-    max-inline-size: min(33vw, 20rem);
+    max-inline-size: min(33vw, var(--mv-sidebar-left-max-width));
   }
 }
 .sidebar--left .sidebar__content {
