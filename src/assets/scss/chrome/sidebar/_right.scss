@@ -30,8 +30,8 @@
       inset-block-end: auto;
       min-inline-size: calc(100vw - #{px(48)});
       max-inline-size: 40vw;
-      padding-inline-start: px(8);
-      margin-inline-end: px(-8);
+      padding-inline-start: var(--ui-chrome-spacing-s);
+      margin-inline-end: calc(var(--ui-chrome-spacing-s) * -1);
       transform: none;
       animation: slide-out-right $chrome-transition-duration ease-in-out forwards;
 
@@ -78,8 +78,9 @@
   }
 
   .sidebar__resizer {
-    inset-inline: px(-4) auto;
+    inset-inline: 0 auto;
     display: none;
+    inline-size: var(--ui-chrome-spacing-s);
 
     @include state('has', 'toggled-sidebar-right') {
       display: block;
@@ -87,8 +88,8 @@
 
     @include pseudo(before, false) {
       inset-block: 0;
-      inset-inline: px(4);
-      inline-size: px(8);
+      inset-inline: 0;
+      inline-size: var(--ui-chrome-spacing-s);
       block-size: 100%;
       background: linear-gradient(to bottom, rgba($brand, 0), rgba($brand, 1), rgba($brand, 1), rgba($brand, 0));
       opacity: 0;

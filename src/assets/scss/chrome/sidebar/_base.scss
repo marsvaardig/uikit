@@ -29,7 +29,7 @@
   inset-inline-end: 0;
   z-index: 9;
   display: none;
-  inline-size: px(16);
+  inline-size: var(--ui-chrome-spacing-m);
   cursor: ew-resize;
   background: transparent;
 
@@ -37,8 +37,6 @@
     display: block;
   }
 }
-
-
 
 
 // @TODO: this is only for the right sidebar right now

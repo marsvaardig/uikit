@@ -491,7 +491,7 @@ svg {
   inset-inline-end: 0;
   z-index: 9;
   display: none;
-  inline-size: 1rem;
+  inline-size: var(--ui-chrome-spacing-m);
   cursor: ew-resize;
   background: transparent;
 }
@@ -534,7 +534,7 @@ svg {
   inline-size: 3rem;
   min-inline-size: var(--ui-sidebar-left-min-width);
   max-block-size: 100%;
-  margin-inline-start: -0.5rem;
+  margin-inline-start: calc(var(--ui-chrome-spacing-s) * -1);
   overflow: visible;
   transition: inline-size 300ms ease-in-out, min-inline-size 300ms ease-in-out;
 }
@@ -568,7 +568,7 @@ svg {
   }
 }
 .sidebar--left .sidebar__resizer {
-  inset-inline-end: -0.5rem;
+  inset-inline-end: calc(var(--ui-chrome-spacing-m) / 2 * -1);
 }
 .sidebar--left .sidebar__resizer::before {
   position: absolute;
@@ -777,8 +777,8 @@ svg {
     inset-block-end: auto;
     min-inline-size: calc(100vw - 3rem);
     max-inline-size: 40vw;
-    padding-inline-start: 0.5rem;
-    margin-inline-end: -0.5rem;
+    padding-inline-start: var(--ui-chrome-spacing-s);
+    margin-inline-end: calc(var(--ui-chrome-spacing-s) * -1);
     transform: none;
     animation: slide-out-right 300ms ease-in-out forwards;
   }
@@ -814,8 +814,9 @@ svg {
   display: none;
 }
 .sidebar--right .sidebar__resizer {
-  inset-inline: -0.25rem auto;
+  inset-inline: 0 auto;
   display: none;
+  inline-size: var(--ui-chrome-spacing-s);
 }
 .uikit.has\:toggled-sidebar-right .sidebar--right .sidebar__resizer {
   display: block;
@@ -826,8 +827,8 @@ svg {
   content: " ";
   display: block;
   inset-block: 0;
-  inset-inline: 0.25rem;
-  inline-size: 0.5rem;
+  inset-inline: 0;
+  inline-size: var(--ui-chrome-spacing-s);
   block-size: 100%;
   background: linear-gradient(to bottom, rgba(29, 170, 255, 0), #1daaff, #1daaff, rgba(29, 170, 255, 0));
   opacity: 0;
@@ -982,9 +983,9 @@ svg {
 }
 .main--stack .sidebar--split .sidebar__resizer {
   inset-inline: 0;
-  inset-block-start: -1rem;
+  inset-block-start: calc(var(--ui-chrome-spacing-m) * -1);
   inline-size: 100%;
-  block-size: 1rem;
+  block-size: var(--ui-chrome-spacing-m);
   cursor: ns-resize;
 }
 .main--stack .sidebar--split .sidebar__resizer::after {
@@ -1426,7 +1427,7 @@ svg {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  padding-inline: 0 0.5rem;
+  padding-inline: 0 var(--ui-chrome-spacing-s);
   margin: 0;
 }
 .navigation__list > ::marker {

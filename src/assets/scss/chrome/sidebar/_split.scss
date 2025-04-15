@@ -75,9 +75,9 @@
 
     .main--stack & {
       inset-inline: 0;
-      inset-block-start: -1rem;
+      inset-block-start: calc(var(--ui-chrome-spacing-m) * -1);
       inline-size: 100%;
-      block-size: 1rem;
+      block-size: var(--ui-chrome-spacing-m);
       cursor: ns-resize;
 
       &::after {
