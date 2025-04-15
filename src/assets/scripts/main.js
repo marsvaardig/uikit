@@ -552,4 +552,32 @@
       $ui.classList.remove('is:resizing');
     }, 500);
   });
+  
+  
+  // Open our search on cmd/ctrl + f
+  document.addEventListener('keydown', (e) => {
+    const isMac = navigator.platform.toUpperCase().includes('MAC');
+    const isFindShortcut = (isMac && e.metaKey && e.key === 'f') || (!isMac && e.ctrlKey && e.key === 'f');
+    
+    if (!isFindShortcut) return;
+    
+    const active = document.activeElement;
+    const isFormField = active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable;
+    
+    // Alleen overriden als we NIET al in een form field zitten
+    if (!isFormField) {
+      e.preventDefault();
+      
+      const $searchInput = document.querySelector('[data-search-input]');
+      if ($searchInput) {
+        $searchInput.focus();
+        $searchInput.select();
+      }
+    }
+  });
+  
+  
+  
+  
+  
 })();
