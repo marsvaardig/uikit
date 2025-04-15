@@ -483,4 +483,15 @@
       // @TODO: save in localstorage
     });
   }
+  
+  // @TODO: Temp
+  // Add a class when the window is resizing
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    $ui.classList.add('is:resizing');
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      $ui.classList.remove('is:resizing');
+    }, 500);
+  });
 })();

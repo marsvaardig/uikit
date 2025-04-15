@@ -278,7 +278,7 @@ svg {
 .uikit.is\:initializing * {
   animation-duration: 0ms !important;
 }
-.uikit.has\:resizing * {
+.uikit.is\:resizing *, .uikit.has\:resizing * {
   transition-duration: 0ms !important;
   animation-duration: 0ms !important;
 }

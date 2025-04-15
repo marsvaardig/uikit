@@ -30,6 +30,7 @@
   }
 
   // Resizing
+  &.is\:resizing,
   &.has\:resizing {
     * {
       transition-duration: 0ms!important;

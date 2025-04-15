@@ -351,5 +351,13 @@
         splitSwitch.classList.toggle("is:stack");
       });
     }
+    let resizeTimeout;
+    window.addEventListener("resize", () => {
+      $ui.classList.add("is:resizing");
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        $ui.classList.remove("is:resizing");
+      }, 500);
+    });
   })();
 })();
