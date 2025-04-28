@@ -19,6 +19,8 @@
   }
 
   @include state('has', 'split-vertical') {
-    flex-direction: column;
+    &:has(.sidebar--split) {
+      flex-direction: column;
+    }
   }
 }
