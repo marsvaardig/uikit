@@ -76,6 +76,10 @@ html {
   display: flex;
   height: 100%;
   overflow: hidden;
+
+  @supports (height: 100dvh) {
+    height: 100dvh;
+  }
 }
 
 body {
@@ -83,7 +87,11 @@ body {
   overflow: auto;
   font-family: Ubuntu, sans-serif;
   color: #fff;
-  background: var(--body, linear-gradient(180deg, var(--ui-background-invert) 0%, var(--ui-background-invert-gradient) 100%));
+  background: var(--ui-background-invert) linear-gradient(180deg, var(--ui-background-invert) 0%, var(--ui-background-invert-gradient) 100%);
+
+  @supports (height: 100dvh) {
+    height: 100dvh;
+  }
 }
 
 a {

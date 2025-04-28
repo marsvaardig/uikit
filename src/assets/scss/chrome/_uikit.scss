@@ -22,6 +22,10 @@
   overflow: hidden;
   font-size: var(--ui-font-size-m);
 
+  @supports (height: 100dvh) {
+    block-size: 100dvh;
+  }
+
   // Initializing
   &.is\:initializing {
     * {
