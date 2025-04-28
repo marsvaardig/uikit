@@ -333,8 +333,8 @@
     if ($trees.length > 0) {
       $trees.forEach(($tree) => {
         const treeId = $tree.getAttribute("data-tree-uid") || "default";
-        const stateKey = `tree-nav-state:${treeId}`;
-        let savedState = JSON.parse(localStorage.getItem(stateKey) || "{}");
+        let chromeState = getChromeState();
+        let savedState = chromeState.treeStates && chromeState.treeStates[treeId] ? chromeState.treeStates[treeId] : {};
         for (const [id, isOpen] of Object.entries(savedState)) {
           const $li = $tree.querySelector(`li[data-id="${id}"]`);
           if ($li && isOpen) $li.classList.add("open");
@@ -342,20 +342,24 @@
         $tree.addEventListener("click", (ev) => {
           const toggle = ev.target.closest("button.tree-nav__toggle");
           const link = ev.target.closest("a");
-          if (!toggle && !link) return;
           const li = ev.target.closest("li[data-id]");
+          if (!li) return;
+          const id = li.dataset.id;
+          if (!id) return;
+          let isOpen = false;
           if (toggle) {
-            const id = li?.dataset.id;
-            if (!id) return;
             li.classList.toggle("open");
-            savedState[id] = li.classList.contains("open");
+            isOpen = li.classList.contains("open");
+          } else {
+            isOpen = true;
           }
-          if (link) {
-            const id = li?.dataset.id;
-            if (!id) return;
-            savedState[id] = li;
+          if (toggle || link) {
+            const chromeState2 = getChromeState();
+            chromeState2.treeStates = chromeState2.treeStates || {};
+            chromeState2.treeStates[treeId] = chromeState2.treeStates[treeId] || {};
+            chromeState2.treeStates[treeId][id] = isOpen;
+            setChromeState(chromeState2);
           }
-          localStorage.setItem(stateKey, JSON.stringify(savedState));
         });
       });
     }

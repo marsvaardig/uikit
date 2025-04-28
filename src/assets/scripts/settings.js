@@ -60,6 +60,19 @@
         }
       }
     }
+
+    // Restore tree open/closed state
+    if (settings.treeStates) {
+      for (const [treeId, treeState] of Object.entries(settings.treeStates)) {
+        const $tree = document.querySelector(`[data-tree-uid="${treeId}"]`);
+        if ($tree) {
+          for (const [id, isOpen] of Object.entries(treeState)) {
+            const $li = $tree.querySelector(`li[data-id="${id}"]`);
+            if ($li && isOpen) $li.classList.add("open");
+          }
+        }
+      }
+    }
   } catch (e) {
     console.error('Failed to parse UIkit settings:', e);
   }

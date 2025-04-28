@@ -428,9 +428,10 @@
   if ($trees.length > 0) {
     $trees.forEach(($tree) => {
       const treeId = $tree.getAttribute("data-tree-uid") || "default";
-      const stateKey = `tree-nav-state:${treeId}`;
-      let savedState = JSON.parse(localStorage.getItem(stateKey) || "{}");
-      
+      // Use chrome state for treeStates
+      let chromeState = getChromeState();
+      let savedState = (chromeState.treeStates && chromeState.treeStates[treeId]) ? chromeState.treeStates[treeId] : {};
+
       // Herstel opgeslagen open/gesloten status
       for (const [id, isOpen] of Object.entries(savedState)) {
         const $li = $tree.querySelector(`li[data-id="${id}"]`);
@@ -440,30 +441,30 @@
       $tree.addEventListener("click", (ev) => {
         const toggle = ev.target.closest("button.tree-nav__toggle");
         const link = ev.target.closest("a");
-        if (!toggle && !link) return;
-        
-        // Get the closest li element with a data-id attribute
         const li = ev.target.closest("li[data-id]");
+        if (!li) return;
         
-        // When clicked on a toggle; toggle
+        const id = li.dataset.id;
+        if (!id) return;
+        
+        let isOpen = false;
+        
+        // Echte toggle: veranderen
         if (toggle) {
-          const id = li?.dataset.id;
-          if (!id) return;
-          
           li.classList.toggle("open");
-          savedState[id] = li.classList.contains("open");
+          isOpen = li.classList.contains("open"); // status na togglen
+        } else {
+          isOpen = true;
         }
         
-        // When clicked on a link; save the current state before going to the link so it's open on the next page
-        if (link) {
-          const id = li?.dataset.id;
-          if (!id) return;
-          
-          // Sla de huidige status op
-          savedState[id] = li;
+        // Klik op toggle of link: altijd status opslaan
+        if (toggle || link) {
+          const chromeState = getChromeState();
+          chromeState.treeStates = chromeState.treeStates || {};
+          chromeState.treeStates[treeId] = chromeState.treeStates[treeId] || {};
+          chromeState.treeStates[treeId][id] = isOpen;
+          setChromeState(chromeState);
         }
-        
-        localStorage.setItem(stateKey, JSON.stringify(savedState));
       });
     });
   }
