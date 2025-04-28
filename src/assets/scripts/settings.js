@@ -1,3 +1,39 @@
+// Set a global variable for the UIkit settings
+window.UIkit = window.UIkit || {};
+
+// Set a global variable for the Tabs
+window.UIkit.tabs = window.UIkit.tabs || {};
+
+// Add a function to activate a tab
+UIkit.tabs.activateTab = function(selectedTab) {
+  const $tabs = document.querySelectorAll('[role="tab"]');
+  const $panels = document.querySelectorAll('[data-tab-content]');
+  
+  $tabs.forEach(($tab) => {
+    $tab.setAttribute('aria-selected', 'false');
+    $tab.parentElement.classList.remove('is:active');
+  });
+  
+  $panels.forEach(($panel) => {
+    $panel.classList.remove('is:active');
+    $panel.setAttribute('hidden', '');
+    const overflowContainer = $panel.closest('.overflow');
+    if (overflowContainer) {
+      overflowContainer.scrollTop = 0;
+    }
+  });
+  
+  selectedTab.setAttribute('aria-selected', 'true');
+  selectedTab.parentElement.classList.add('is:active');
+  
+  const $targetPanel = document.querySelector(selectedTab.getAttribute('href'));
+  if ($targetPanel) {
+    $targetPanel.classList.add('is:active');
+    $targetPanel.removeAttribute('hidden');
+  }
+};
+
+// Run code immediately
 (() => {
   // Get UI container
   const $ui = document.querySelector('[data-uikit]');
@@ -62,6 +98,7 @@
     }
 
     // Restore tree open/closed state
+    // @TODO: set a11y aria-expanded etc.
     if (settings.treeStates) {
       for (const [treeId, treeState] of Object.entries(settings.treeStates)) {
         const $tree = document.querySelector(`[data-tree-uid="${treeId}"]`);
@@ -70,6 +107,18 @@
             const $li = $tree.querySelector(`li[data-id="${id}"]`);
             if ($li && isOpen) $li.classList.add("open");
           }
+        }
+      }
+    }
+    
+    // Restore active tabs
+    if (settings.tabs) {
+      const pageId = document.body.id;
+      const savedTabId = settings.tabs[pageId];
+      if (savedTabId) {
+        const $savedTab = document.querySelector(`[role="tab"][href="${savedTabId}"]`);
+        if ($savedTab) {
+          UIkit.tabs.activateTab($savedTab);
         }
       }
     }

@@ -282,16 +282,6 @@
       const $tabs = $tabList.querySelectorAll('[role="tab"]');
       const $panels = document.querySelectorAll('[data-tab-content]');
       const pageId = document.body.id; // e.g., "page-id-345"
-      const storageKey = `activeTab-${pageId}`;
-      
-      // Load saved tab from localStorage
-      const savedTabId = localStorage.getItem(storageKey);
-      if (savedTabId) {
-        const $savedTab = document.querySelector(`[role="tab"][href="${savedTabId}"]`);
-        if ($savedTab) {
-          activateTab($savedTab);
-        }
-      }
       
       // @TODO: use data-attributes istead of classes
       $tabs.forEach(($tab, index) => {
@@ -305,36 +295,16 @@
             $tabs[newIndex].focus();
           }
         });
-        
+
         $tab.addEventListener('click', (ev) => {
           ev.preventDefault();
-          activateTab($tab);
-          localStorage.setItem(storageKey, $tab.getAttribute('href'));
+          UIkit.tabs.activateTab($tab);
+          const chromeState = getChromeState();
+          chromeState.tabs = chromeState.tabs || {};
+          chromeState.tabs[pageId] = $tab.getAttribute('href');
+          setChromeState(chromeState);
         });
       });
-      
-      function activateTab(selectedTab) {
-        $tabs.forEach(($tab) => {
-          $tab.setAttribute('aria-selected', 'false');
-          $tab.parentElement.classList.remove('is:active');
-        });
-        
-        $panels.forEach(($panel) => {
-          $panel.classList.remove('is:active');
-          $panel.setAttribute('hidden', '');
-          const overflowContainer = $panel.closest('.overflow');
-          if (!overflowContainer) return;
-          // Reset overflow container scroll position
-          overflowContainer.scrollTop = 0;
-        });
-        
-        selectedTab.setAttribute('aria-selected', 'true');
-        selectedTab.parentElement.classList.add('is:active');
-        
-        const $targetPanel = document.querySelector(selectedTab.getAttribute('href'));
-        $targetPanel.classList.add('is:active');
-        $targetPanel.removeAttribute('hidden');
-      }
     });
   }
   
