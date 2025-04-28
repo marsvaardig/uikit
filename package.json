@@ -8,7 +8,9 @@
     "watch:sass": "npx sass src/assets/scss:_site/assets/css --watch",
     "build:js": "esbuild src/assets/scripts/main.js --bundle --outfile=_site/assets/js/scripts.js",
     "watch:js": "esbuild src/assets/scripts/main.js --bundle --outfile=_site/assets/js/scripts.js --watch",
-    "build": "rm -rf _site && npm run compile:sass && npm run build:js && npx @11ty/eleventy",
+    "build:settings": "esbuild src/assets/scripts/settings.js --bundle --outfile=_site/assets/js/settings.js",
+    "watch:settings": "esbuild src/assets/scripts/settings.js --bundle --outfile=_site/assets/js/settings.js --watch",
+    "build": "rm -rf _site && npm run compile:sass && npm run build:js && npm run build:settings && npx @11ty/eleventy",
     "start": "npm-run-all build --parallel watch:*"
   },
   "keywords": [],

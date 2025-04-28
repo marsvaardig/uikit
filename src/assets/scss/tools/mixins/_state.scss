@@ -29,6 +29,12 @@
     }
   }
 
+  @if $value == 'split-vertical' {
+    @at-root .uikit.#{$type}\:split-vertical & {
+      @content
+    }
+  }
+
   @if $value == 'toggled-profile' {
     @at-root .uikit.#{$type}\:toggled-profile & {
       @content

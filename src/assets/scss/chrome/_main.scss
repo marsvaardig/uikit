@@ -17,8 +17,8 @@
       }
     }
   }
-}
 
-.main--stack {
-  flex-direction: column;
+  @include state('has', 'split-vertical') {
+    flex-direction: column;
+  }
 }

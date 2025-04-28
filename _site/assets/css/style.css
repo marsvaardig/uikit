@@ -758,7 +758,7 @@ svg {
   position: absolute;
   inset-block: 0 0.5rem;
   inset-inline-end: 0;
-  z-index: 1;
+  z-index: 4;
   flex: 0 0 auto;
   flex-direction: column;
   inline-size: var(--ui-sidebar-right-width);
@@ -938,13 +938,14 @@ svg {
   }
 }
 
-.main--stack .sidebar--split {
+.uikit.has\:split-vertical .sidebar--split {
   inline-size: 100%;
   max-inline-size: 100%;
   block-size: var(--ui-sidebar-split-height);
   min-block-size: 12.5rem;
   max-block-size: 75%;
 }
+
 @media screen and (min-width: 48rem) {
   .sidebar--split {
     position: relative;
@@ -990,16 +991,17 @@ svg {
 .sidebar--split .sidebar__resizer:hover::after, .sidebar--split .sidebar__resizer:focus::after {
   border-color: #000;
 }
-.main--stack .sidebar--split .sidebar__resizer {
+.uikit.has\:split-vertical .sidebar--split .sidebar__resizer {
   inset-inline: 0;
   inset-block-start: calc(var(--ui-chrome-spacing-m) * -1);
   inline-size: 100%;
   block-size: var(--ui-chrome-spacing-m);
   cursor: ns-resize;
 }
-.main--stack .sidebar--split .sidebar__resizer::after {
+.uikit.has\:split-vertical .sidebar--split .sidebar__resizer::after {
   transform: translate(-50%, -50%) rotate(90deg);
 }
+
 .sidebar--split[data-resizing] .sidebar__resizer::after {
   border-color: #000;
 }
@@ -1225,7 +1227,7 @@ svg {
   }
 }
 
-.main--stack {
+.uikit.has\:split-vertical .main {
   flex-direction: column;
 }
 

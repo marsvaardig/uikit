@@ -23,7 +23,7 @@
     }
   }
 
-  .main--stack & {
+  @include state('has', 'split-vertical') {
     inline-size: 100%;
     max-inline-size: 100%;
     block-size: var(--ui-sidebar-split-height);
@@ -76,7 +76,7 @@
       }
     }
 
-    .main--stack & {
+    @include state('has', 'split-vertical') {
       inset-inline: 0;
       inset-block-start: calc(var(--ui-chrome-spacing-m) * -1);
       inline-size: 100%;

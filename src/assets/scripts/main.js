@@ -15,13 +15,24 @@
   const $profileToggle = document.querySelector('[data-toggle-profile]');
   const $tabList = document.querySelectorAll('[data-tabs]');
   
-  // Add initializing class
-  $ui.classList.add('is:initializing');
+  // Chrome localstorage settings
+  function getChromeState() {
+    const saved = localStorage.getItem('uikit-chrome');
+    return saved ? JSON.parse(saved) : {};
+  }
   
-  // Remove initializing class after 500ms
-  setTimeout(() => {
-    $ui.classList.remove('is:initializing');
-  }, 500)
+  function setChromeState(newState) {
+    localStorage.setItem('uikit-chrome', JSON.stringify(newState));
+  }
+  
+  function removeFromChromeState(type, key) {
+    const state = getChromeState();
+    
+    if (state[type] && typeof state[type] === 'object') {
+      delete state[type][key];
+      setChromeState(state);
+    }
+  }
   
   function isMobile() {
     return window.getComputedStyle($ui).getPropertyValue('--ui-mobile') === '1';
@@ -43,11 +54,14 @@
     document.body.style.removeProperty(`--ui-sidebar-${type}-height`);
   }
   
-  function setToggleStorage(type) {
+  function setToggleStorage(type, toggled) {
     if (isMobile()) {
       return;
     }
-    localStorage.setItem(`sidebarToggle-${type}`, true);
+    const state = getChromeState();
+    state.sidebarToggles = state.sidebarToggles || {};
+    state.sidebarToggles[type] = toggled; // true of false
+    setChromeState(state);
   }
   
   // Resizing logic
@@ -55,18 +69,6 @@
     let startX, startY, startWidth, minWidth, maxWidth, startHeight, minHeight, maxHeight, resizeDirection, isResizing = false;
     const sidebarType = $resizer.getAttribute('data-sidebar-resizer');
     const className = `has:toggled-sidebar-${sidebarType}`;
-    
-    if (localStorage.getItem(`sidebarWidth-${sidebarType}`)) {
-      setWidth(localStorage.getItem(`sidebarWidth-${sidebarType}`), sidebarType);
-    }
-    
-    if (localStorage.getItem(`sidebarHeight-${sidebarType}`)) {
-      setHeight(localStorage.getItem(`sidebarHeight-${sidebarType}`), sidebarType);
-    }
-    
-    if (localStorage.getItem(`sidebarToggle-${sidebarType}`)) {
-      $ui.classList.add(`has:toggled-sidebar-${sidebarType}`);
-    }
     
     function onMouseMove(ev) {
       if (!resizeDirection || !isResizing) return;
@@ -82,7 +84,6 @@
           setWidth(newWidth, sidebarType);
           if (sidebarType === 'left') {
             $ui.classList.remove(className);
-            localStorage.removeItem(`sidebarToggle-${sidebarType}`);
           }
         } else if (newWidth > minWidth && newWidth < maxWidth) {
           setWidth(newWidth, sidebarType);
@@ -94,7 +95,6 @@
           setHeight(newHeight, sidebarType);
           if (sidebarType === 'left') {
             $ui.classList.remove(className);
-            localStorage.removeItem(`sidebarToggle-${sidebarType}`);
           }
         } else if (newHeight > minHeight && newHeight < maxHeight) {
           setHeight(newHeight, sidebarType);
@@ -109,21 +109,18 @@
       document.removeEventListener('mouseup', onMouseUp);
       
       $ui.classList.remove('has:resizing');
-      
       $sidebar.removeAttribute('data-resizing');
       
       // Save the new width and height in localstorage if not toggled
       if ((!$ui.classList.contains(className) && sidebarType !== 'right') || (sidebarType === 'right' && $ui.classList.contains(className))) {
-        localStorage.setItem(`sidebarWidth-${sidebarType}`, $sidebar.offsetWidth);
-      }
-      
-      if ((!$ui.classList.contains(className))) {
-        localStorage.setItem(`sidebarHeight-${sidebarType}`, $sidebar.offsetHeight);
-      }
-      
-      // If not toggled; remove the toggled localstorage
-      if (!$ui.classList.contains(className)) {
-        localStorage.removeItem(`sidebarToggle-${sidebarType}`);
+        const state = getChromeState();
+        state.sidebarWidths = state.sidebarWidths || {};
+        state.sidebarHeights = state.sidebarHeights || {};
+        
+        state.sidebarWidths[sidebarType] = $sidebar.offsetWidth;
+        state.sidebarHeights[sidebarType] = $sidebar.offsetHeight;
+        
+        setChromeState(state);
       }
     }
     
@@ -167,8 +164,8 @@
     $resizer.addEventListener('dblclick', () => {
       resetWidth(sidebarType);
       resetHeight(sidebarType);
-      localStorage.removeItem(`sidebarWidth-${sidebarType}`);
-      localStorage.removeItem(`sidebarHeight-${sidebarType}`);
+      removeFromChromeState('sidebarWidths', sidebarType);
+      removeFromChromeState('sidebarHeights', sidebarType);
     });
   }
   
@@ -186,12 +183,8 @@
       $el.addEventListener('click', (ev) => {
         ev.preventDefault();
         const direction = $el.getAttribute('data-sidebar-toggle');
-        $ui.classList.toggle(`has:toggled-sidebar-${direction}`);
-        if ($ui.classList.contains(`has:toggled-sidebar-${direction}`)) {
-          setToggleStorage(direction);
-        } else {
-          localStorage.removeItem(`sidebarToggle-${direction}`);
-        }
+        const toggled = $ui.classList.toggle(`has:toggled-sidebar-${direction}`);
+        setToggleStorage(direction, toggled);
       });
     });
   }
@@ -223,7 +216,7 @@
     });
   }
   
-  // toggle the
+  // toggle the sidebar type
   if ($sidebarTypeToggles.length > 0) {
     $sidebarTypeToggles.forEach(($el) => {
       $el.addEventListener('click', (ev) => {
@@ -231,6 +224,13 @@
         const sidebar = $el.closest('[data-sidebar]');
         const type = $el.getAttribute('data-sidebar-type-toggle');
         sidebar.setAttribute('data-sidebar-type', type);
+        
+        // Save in localStorage
+        const sidebarId = sidebar.getAttribute('data-sidebar'); // bijvoorbeeld 'right'
+        const state = getChromeState();
+        state.sidebarTypes = state.sidebarTypes || {};
+        state.sidebarTypes[sidebarId] = type;
+        setChromeState(state);
       });
     });
   }
@@ -425,16 +425,6 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   if ($trees.length > 0) {
     $trees.forEach(($tree) => {
       const treeId = $tree.getAttribute("data-tree-uid") || "default";
@@ -523,23 +513,16 @@
     $splitSwitch.addEventListener('click', (ev) => {
       ev.preventDefault();
       $ui.classList.add('has:resizing');
-      $main.classList.toggle('main--stack');
-      $splitSwitch.classList.toggle('is:stack')
-      // Save state in localstorage
-      if ($main.classList.contains('main--stack')) {
-        localStorage.setItem('splitSwitch', 'true');
-      } else {
-        localStorage.removeItem('splitSwitch');
-      }
+      $ui.classList.toggle('has:split-vertical');
+      
+      const state = getChromeState();
+      state.splitSwitch = $ui.classList.contains('has:split-vertical');
+      setChromeState(state);
+      
       setTimeout(() => {
         $ui.classList.remove('has:resizing');
       }, 0);
     });
-    
-    if (localStorage.getItem('splitSwitch')) {
-      $main.classList.add('main--stack');
-      $splitSwitch.classList.add('is:stack')
-    }
   }
   
   // @TODO: Temp
