@@ -4,72 +4,70 @@
 {% set viewType = viewType|default('item') %} {# table | item | dashboard - set in page, not here #}
 <body id="page-id-345"> {# @TODO: set dynamic page id #}
 <div class="uikit" data-uikit>
-    <div class="uikit" data-uikit>
-        {% include "../partials/header.twig" with {
-            brand: brand|default(true),
-            search: search|default(true),
-            switch: switch|default(true),
-            utilities: utilities|default(true),
-            profile: profile|default(true),
-        } %}
-        <div class="layout">
-            {% if viewType == 'dashboard' or viewType == 'table' or viewType == 'split' %}
-                {% include "../partials/sidebar-left.twig" with {
-                    sidebarLeftBody: sidebarLeftBody|default(''),
+    {% include "../partials/header.twig" with {
+        brand: brand|default(true),
+        search: search|default(true),
+        switch: switch|default(true),
+        utilities: utilities|default(true),
+        profile: profile|default(true),
+    } %}
+    <div class="layout">
+        {% if viewType == 'dashboard' or viewType == 'table' or viewType == 'split' %}
+            {% include "../partials/sidebar-left.twig" with {
+                sidebarLeftBody: sidebarLeftBody|default(''),
+            } %}
+        {% endif %}
+        <div class="component">
+            {% if viewType == 'table' or viewType == 'split' or viewType == 'item' %}
+                {% include "../partials/toolbar.twig" with {
+                    toolbarBody: toolbarBody|default(''),
                 } %}
             {% endif %}
-            <div class="component">
-                {% if viewType == 'table' or viewType == 'split' or viewType == 'item' %}
-                    {% include "../partials/toolbar.twig" with {
-                        toolbarBody: toolbarBody|default(''),
-                    } %}
-                {% endif %}
-                {% if viewType == 'table' or viewType == 'split' %}
-                    {% include "../partials/filters.twig" with {
-                        filterBody: filterBody|default(''),
-                    } %}
-                {% endif %}
-                <div class="main" data-main>
-                    <div class="content">
-                        {% if viewType == 'dashboard' %}
-                            {% if '/tafelmanager' not in page.url %}
-                                <div class="grid grid--grow">
-                                    <div class="row">
-                                        <div class="box">Box<br/>Row2</div>
-                                        <div class="box">Box</div>
-                                        <div class="box">Box</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="box">Box<br/>Large<br/>With<br/>Graphs<br/>Etc</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="box">Box</div>
-                                        <div class="box">Box</div>
-                                    </div>
+            {% if viewType == 'table' or viewType == 'split' %}
+                {% include "../partials/filters.twig" with {
+                    filterBody: filterBody|default(''),
+                } %}
+            {% endif %}
+            <div class="main" data-main>
+                <div class="content">
+                    {% if viewType == 'dashboard' %}
+                        {% if '/tafelmanager' not in page.url %}
+                            <div class="grid grid--grow">
+                                <div class="row">
+                                    <div class="box">Box<br/>Row2</div>
+                                    <div class="box">Box</div>
+                                    <div class="box">Box</div>
                                 </div>
-                            {% else %}
-                                {% block content %}{% endblock %}
-                            {% endif %}
-                        {% else %}
-                            <div class="box box--grow overflow">
-                                {% block content %}{% endblock %}
-                                <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
+                                <div class="row">
+                                    <div class="box">Box<br/>Large<br/>With<br/>Graphs<br/>Etc</div>
+                                </div>
+                                <div class="row">
+                                    <div class="box">Box</div>
+                                    <div class="box">Box</div>
+                                </div>
                             </div>
+                        {% else %}
+                            {% block content %}{% endblock %}
                         {% endif %}
-                    </div>
-                    {% if viewType == 'item' %}
-                        {% include "../partials/sidebar-component.twig" %}
-                    {% endif %}
-                    {% if viewType == 'split' %}
-                        {% include "../partials/sidebar-split.twig" %}
+                    {% else %}
+                        <div class="box box--grow overflow">
+                            {% block content %}{% endblock %}
+                            <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
+                        </div>
                     {% endif %}
                 </div>
+                {% if viewType == 'item' %}
+                    {% include "../partials/sidebar-component.twig" %}
+                {% endif %}
+                {% if viewType == 'split' %}
+                    {% include "../partials/sidebar-split.twig" %}
+                {% endif %}
             </div>
-            {% include "../partials/sidebar-right.twig" with {
-                title: 'Title',
-                body: 'Dit is een sidebar met een title en body',
-            } %}
         </div>
+        {% include "../partials/sidebar-right.twig" with {
+            title: 'Title',
+            body: 'Dit is een sidebar met een title en body',
+        } %}
     </div>
 </div>
 <script>
