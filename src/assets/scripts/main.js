@@ -64,21 +64,34 @@
     setChromeState(state);
   }
   
-  // Resizing logic
+  function getClientCoords(ev) {
+    if (ev.touches && ev.touches.length > 0) {
+      return { clientX: ev.touches[0].clientX, clientY: ev.touches[0].clientY };
+    } else if (ev.changedTouches && ev.changedTouches.length > 0) {
+      return { clientX: ev.changedTouches[0].clientX, clientY: ev.changedTouches[0].clientY };
+    } else {
+      return { clientX: ev.clientX, clientY: ev.clientY };
+    }
+  }
+
+// Resizing logic
   function initResizing($resizer) {
     let startX, startY, startWidth, minWidth, maxWidth, startHeight, minHeight, maxHeight, resizeDirection, isResizing = false;
     const sidebarType = $resizer.getAttribute('data-sidebar-resizer');
     const className = `has:toggled-sidebar-${sidebarType}`;
+    let $sidebar;
     
-    function onMouseMove(ev) {
+    function onMove(ev) {
       if (!resizeDirection || !isResizing) return;
-      let newWidth;
-      let newHeight;
+      
+      const { clientX, clientY } = getClientCoords(ev);
+      let newWidth, newHeight;
+      
       if (resizeDirection === 'horizontal') {
         if (sidebarType === 'left') {
-          newWidth = startWidth + (ev.clientX - startX);
+          newWidth = startWidth + (clientX - startX);
         } else {
-          newWidth = startWidth - (ev.clientX - startX);
+          newWidth = startWidth - (clientX - startX);
         }
         if ($ui.classList.contains(className) && newWidth > minWidth) {
           setWidth(newWidth, sidebarType);
@@ -89,8 +102,9 @@
           setWidth(newWidth, sidebarType);
         }
       }
+      
       if (resizeDirection === 'vertical') {
-        newHeight = startHeight - (ev.clientY - startY);
+        newHeight = startHeight - (clientY - startY);
         if ($ui.classList.contains(className) && newHeight > minHeight) {
           setHeight(newHeight, sidebarType);
           if (sidebarType === 'left') {
@@ -102,11 +116,13 @@
       }
     }
     
-    function onMouseUp(ev, $sidebar) {
+    function onEnd(ev) {
       isResizing = false;
       resizeDirection = null;
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onEnd);
+      document.removeEventListener('touchmove', onMove);
+      document.removeEventListener('touchend', onEnd);
       
       $ui.classList.remove('has:resizing');
       $sidebar.removeAttribute('data-resizing');
@@ -129,38 +145,47 @@
       return val.includes('%') ? parseFloat(val) / 100 * $sidebar.parentElement.getBoundingClientRect().width : parseFloat(val);
     }
     
-    
     function initResize(ev, direction) {
-      const $sidebar = ev.target.closest('[data-sidebar]');
+      $sidebar = ev.target.closest('[data-sidebar]');
+      if (!$sidebar) return;
+      
+      const { clientX, clientY } = getClientCoords(ev);
       
       $sidebar.setAttribute('data-resizing', direction);
-      
       ev.preventDefault();
+      
       isResizing = true;
       resizeDirection = direction;
-      startX = ev.clientX;
-      startY = ev.clientY;
+      startX = clientX;
+      startY = clientY;
       startWidth = $sidebar.offsetWidth;
       startHeight = $sidebar.offsetHeight;
       maxHeight = getWidthValueInPixels($sidebar, 'max-height');
       minHeight = getWidthValueInPixels($sidebar, 'min-height');
       maxWidth = getWidthValueInPixels($sidebar, 'max-width');
       minWidth = getWidthValueInPixels($sidebar, 'min-width');
+      
       $ui.classList.add('has:resizing');
       
       // Add listeners
-      document.addEventListener('mousemove', (ev) => onMouseMove(ev, $sidebar));
-      document.addEventListener('mouseup', (ev) => onMouseUp(ev, $sidebar));
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onEnd);
+      document.addEventListener('touchmove', onMove, { passive: false });
+      document.addEventListener('touchend', onEnd);
     }
     
-    // Initial mousedown event
     $resizer.addEventListener('mousedown', (ev) => {
       const rect = $resizer.getBoundingClientRect();
       const direction = rect.height > rect.width ? 'horizontal' : 'vertical';
       initResize(ev, direction);
     });
     
-    // When doubleclicking on the resizer; reset the corresponding width
+    $resizer.addEventListener('touchstart', (ev) => {
+      const rect = $resizer.getBoundingClientRect();
+      const direction = rect.height > rect.width ? 'horizontal' : 'vertical';
+      initResize(ev, direction);
+    }, { passive: false });
+    
     $resizer.addEventListener('dblclick', () => {
       resetWidth(sidebarType);
       resetHeight(sidebarType);
