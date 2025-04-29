@@ -26,14 +26,8 @@
     block-size: 100dvh;
   }
 
-  // Initializing
-  &.is\:initializing {
-    * {
-      animation-duration: 0ms !important;
-    }
-  }
-
   // Resizing
+  &.is\:initializing,
   &.is\:resizing,
   &.has\:resizing {
     * {
