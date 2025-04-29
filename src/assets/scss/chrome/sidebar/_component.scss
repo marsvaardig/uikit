@@ -115,6 +115,7 @@
 
       @include hover {
         background: $brand;
+        opacity: .5;
       }
     }
   }

@@ -558,6 +558,11 @@
   
   
   
+  function getSidebarWidth(varName, fallback) {
+    const value = parseFloat(getComputedStyle($ui).getPropertyValue(varName));
+    return isNaN(value) ? fallback : value;
+  }
+  
   // Touch support
 // ==========================
   
@@ -570,10 +575,7 @@
   const swipeThreshold = 10; // pixels voordat we bepalen
 
 // Max swipe afstand
-  let swipeWidths = {
-    left: window.innerWidth * 0.8,
-    component: window.innerWidth * 0.8,
-  };
+  let swipeWidths;
   
   function handleTouchStart(e) {
     const touch = e.touches[0];
@@ -581,9 +583,11 @@
     startY = touch.clientY;
     isHorizontalSwipe = null;
     
+    const minMoveValue = 240;
+    
     swipeWidths = {
-      left: window.innerWidth * 0.8,
-      component: window.innerWidth * 0.8,
+      left: Math.min(window.innerWidth * 0.8, 400),
+      component: Math.max(getSidebarWidth('--ui-sidebar-component-width', window.innerWidth * 0.8), minMoveValue),
     };
     
     const swipeAreas = document.querySelectorAll('[data-swipe]');
@@ -616,7 +620,6 @@
     isDragging = true;
     // Store the touch start time for velocity calculation
     e.currentTarget._touchStartTime = e.timeStamp;
-    $ui.classList.add('is:resizing');
   }
   
   function handleTouchMove(e) {
@@ -635,8 +638,10 @@
     
     if (isHorizontalSwipe) {
       e.preventDefault();
+      if (!$ui.classList.contains('is:resizing')) {
+        $ui.classList.add('is:resizing');
+      }
       
-      const $ui = document.querySelector('[data-uikit]');
       let adjustedDeltaX = deltaX;
       if (activeSidebar === 'component') {
         adjustedDeltaX = startX - currentX;

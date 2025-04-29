@@ -8,11 +8,13 @@
   overflow: hidden;
   transition: transform $chrome-transition-duration $chrome-transition-easing;
 
-  & > * {
-    transform: translateX(calc((min(var(--ui-sidebar-component-width), #{100%}) - var(--ui-sidebar-component-hide)) * -1 * var(--ui-sidebar-component-progress)));
+  @include has(".sidebar--component") {
+    & > * {
+      transform: translateX(calc((min(var(--ui-sidebar-component-width), #{100%}) - var(--ui-sidebar-component-hide)) * -1 * var(--ui-sidebar-component-progress)));
 
-    @include breakpoint($chrome-breakpoint2) {
-      transform: none;
+      @include breakpoint($chrome-breakpoint2) {
+        transform: none;
+      }
     }
   }
 

@@ -9,12 +9,12 @@ $brand-light-accent1: #F6F6F9 !default;
 $brand-light-accent2: #FFF !default;
 
 // Sizes
-$uikit-min-height: px(480) !default; // So we are usable on not so tall screens
+$uikit-min-height: px(400) !default; // So we are usable on not so tall screens
 
 // Breakpoints
 $chrome-breakpoint1: px(480) !default;
-$chrome-breakpoint2: px(920) !default;
-$chrome-breakpoint2-min: px(919) !default;
+$chrome-breakpoint2: px(960) !default;
+$chrome-breakpoint2-min: px(959) !default;
 
 // Transition
 $chrome-transition-duration: 250ms !default;

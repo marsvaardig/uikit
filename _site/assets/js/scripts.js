@@ -423,6 +423,10 @@
         }
       }
     });
+    function getSidebarWidth(varName, fallback) {
+      const value = parseFloat(getComputedStyle($ui).getPropertyValue(varName));
+      return isNaN(value) ? fallback : value;
+    }
     let startX = 0;
     let startY = 0;
     let startProgress = 0;
@@ -430,18 +434,16 @@
     let activeSidebar = null;
     let isHorizontalSwipe = null;
     const swipeThreshold = 10;
-    let swipeWidths = {
-      left: window.innerWidth * 0.8,
-      component: window.innerWidth * 0.8
-    };
+    let swipeWidths;
     function handleTouchStart(e) {
       const touch = e.touches[0];
       startX = touch.clientX;
       startY = touch.clientY;
       isHorizontalSwipe = null;
+      const minMoveValue = 240;
       swipeWidths = {
-        left: window.innerWidth * 0.8,
-        component: window.innerWidth * 0.8
+        left: Math.min(window.innerWidth * 0.8, 400),
+        component: Math.max(getSidebarWidth("--ui-sidebar-component-width", window.innerWidth * 0.8), minMoveValue)
       };
       const swipeAreas = document.querySelectorAll("[data-swipe]");
       activeSidebar = null;
@@ -463,7 +465,6 @@
       startProgress = parseFloat(progressValue) || 0;
       isDragging = true;
       e.currentTarget._touchStartTime = e.timeStamp;
-      $ui2.classList.add("is:resizing");
     }
     function handleTouchMove(e) {
       if (!isDragging || !activeSidebar) return;
@@ -478,14 +479,16 @@
       }
       if (isHorizontalSwipe) {
         e.preventDefault();
-        const $ui2 = document.querySelector("[data-uikit]");
+        if (!$ui.classList.contains("is:resizing")) {
+          $ui.classList.add("is:resizing");
+        }
         let adjustedDeltaX = deltaX;
         if (activeSidebar === "component") {
           adjustedDeltaX = startX - currentX;
         }
         let progress = startProgress + adjustedDeltaX / swipeWidths[activeSidebar];
         progress = Math.min(Math.max(progress, 0), 1);
-        $ui2.style.setProperty(`--ui-sidebar-${activeSidebar}-progress`, progress);
+        $ui.style.setProperty(`--ui-sidebar-${activeSidebar}-progress`, progress);
       }
     }
     function handleTouchEnd(e) {
