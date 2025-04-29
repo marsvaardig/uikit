@@ -8,13 +8,11 @@
   overflow: hidden;
   transition: transform $chrome-transition-duration ease-in-out;
 
-  @include state('has', 'toggled-sidebar-component') {
-    & > * {
-      transform: translateX(calc((min(var(--ui-sidebar-component-width), 100%) * -1) + var(--ui-sidebar-component-hide) - #{px(8)}));
+  & > * {
+    transform: translateX(calc((min(var(--ui-sidebar-component-width), #{100%}) - var(--ui-sidebar-component-hide)) * -1 * var(--ui-sidebar-component-progress)));
 
-      @include breakpoint($chrome-breakpoint2) {
-        transform: none;
-      }
+    @include breakpoint($chrome-breakpoint2) {
+      transform: none;
     }
   }
 

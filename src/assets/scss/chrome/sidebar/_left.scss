@@ -4,24 +4,20 @@
   display: flex;
   flex: 0 0 auto;
   inline-size: px(48);
+  min-inline-size: calc(#{px(48)} + (calc(100vw - #{px(16)}) - #{px(48)}) * var(--ui-sidebar-left-progress));
   max-block-size: 100%;
   margin-inline-start: calc(var(--ui-chrome-spacing-s) * -1);
   overflow: visible;
-  transition: inline-size $chrome-transition-duration ease-in-out, min-inline-size $chrome-transition-duration ease-in-out;
-
-  @include state('has', 'toggled-sidebar-left') {
-    inline-size: px(48);
-    min-inline-size: calc(100vw - #{px(16)});
-
-    @include breakpoint($chrome-breakpoint2) {
-      min-inline-size: px(48);
-    }
-  }
+  transition: min-inline-size $chrome-transition-duration ease-in-out, inline-size $chrome-transition-duration ease-in-out;
 
   @include breakpoint($chrome-breakpoint2) {
-    inline-size: var(--ui-sidebar-left-width);
+    inline-size: calc(#{px(48)} + (calc(var(--ui-sidebar-left-width)) - #{px(48)}) * var(--ui-sidebar-left-progress));
     min-inline-size: var(--ui-sidebar-left-min-width);
     max-inline-size: min(33vw, var(--ui-sidebar-left-max-width));
+
+    @include state('has', 'toggled-sidebar-left|not(resizing)') {
+      min-inline-size: px(48);
+    }
   }
 
   .sidebar__content {
@@ -109,11 +105,9 @@
     @include state('has', 'toggled-sidebar-left') {
       & > *:not(.navigation--persistent) {
         pointer-events: auto;
-        opacity: 1;
 
         @include breakpoint($chrome-breakpoint2) {
           pointer-events: none;
-          opacity: .5;
         }
       }
     }
@@ -122,12 +116,11 @@
   @include state('has', 'toggled-sidebar-left|not(resizing)') {
     @include hover {
       @include breakpoint($chrome-breakpoint2) {
-        min-inline-size: var(--ui-sidebar-left-width);
+        --ui-sidebar-left-progress: 1;
 
         .navigation-rename {
           & > *  {
             pointer-events: auto;
-            opacity: 1;
           }
         }
 
@@ -141,6 +134,22 @@
           }
         }
       }
+    }
+  }
+
+  .sidebar__swiper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    width: 100vw;
+    pointer-events: none;
+    background: yellow;
+    opacity: 0;
+
+    @include breakpoint($chrome-breakpoint2) {
+      display: none;
     }
   }
 }

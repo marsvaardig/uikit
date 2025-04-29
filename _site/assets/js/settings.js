@@ -28,6 +28,9 @@
   (() => {
     const $ui = document.querySelector("[data-uikit]");
     $ui.classList.add("is:initializing");
+    function isMobile() {
+      return window.getComputedStyle($ui).getPropertyValue("--ui-mobile") === "1";
+    }
     setTimeout(() => {
       $ui.classList.remove("is:initializing");
     }, 500);
@@ -52,7 +55,7 @@
       if (settings.splitSwitch) {
         $ui.classList.add("has:split-vertical");
       }
-      if (settings.sidebarToggles) {
+      if (settings.sidebarToggles && !isMobile()) {
         for (const [type, toggled] of Object.entries(settings.sidebarToggles)) {
           if (toggled) {
             $ui.classList.add(`has:toggled-sidebar-${type}`);

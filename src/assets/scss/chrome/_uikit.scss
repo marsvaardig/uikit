@@ -14,6 +14,10 @@
   --ui-chrome-radius-s: var(--ui-radius-s);
   --ui-chrome-radius-m: var(--ui-radius-m);
 
+  // Transitions
+  --ui-sidebar-left-progress: 0;
+  --ui-sidebar-component-progress: 0;
+
   // Styling
   display: flex;
   flex-direction: column;
@@ -24,6 +28,32 @@
 
   @supports (height: 100dvh) {
     block-size: 100dvh;
+  }
+
+  // 'Open' on desktop
+  @include breakpoint($chrome-breakpoint2) {
+    --ui-sidebar-left-progress: 1;
+    --ui-sidebar-component-progress: 1;
+  }
+
+  // 'Open' on toggle class
+  &.has\:toggled-sidebar-left {
+    --ui-sidebar-left-progress: 1;
+
+    // 'Revert' on desktop
+    @include breakpoint($chrome-breakpoint2) {
+      --ui-sidebar-left-progress: 0;
+    }
+  }
+
+  // 'Open' on toggle class
+  &.has\:toggled-sidebar-component {
+    --ui-sidebar-component-progress: 1;
+
+    // 'Revert' on desktop
+    @include breakpoint($chrome-breakpoint2) {
+      --ui-sidebar-component-progress: 0;
+    }
   }
 
   // Resizing

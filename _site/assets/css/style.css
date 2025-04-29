@@ -280,6 +280,8 @@ svg {
   --ui-content-box-padding: var(--ui-spacing-m);
   --ui-chrome-radius-s: var(--ui-radius-s);
   --ui-chrome-radius-m: var(--ui-radius-m);
+  --ui-sidebar-left-progress: 0;
+  --ui-sidebar-component-progress: 0;
   display: flex;
   flex-direction: column;
   block-size: 100vh;
@@ -290,6 +292,28 @@ svg {
 @supports (height: 100dvh) {
   .uikit {
     block-size: 100dvh;
+  }
+}
+@media screen and (min-width: 48rem) {
+  .uikit {
+    --ui-sidebar-left-progress: 1;
+    --ui-sidebar-component-progress: 1;
+  }
+}
+.uikit.has\:toggled-sidebar-left {
+  --ui-sidebar-left-progress: 1;
+}
+@media screen and (min-width: 48rem) {
+  .uikit.has\:toggled-sidebar-left {
+    --ui-sidebar-left-progress: 0;
+  }
+}
+.uikit.has\:toggled-sidebar-component {
+  --ui-sidebar-component-progress: 1;
+}
+@media screen and (min-width: 48rem) {
+  .uikit.has\:toggled-sidebar-component {
+    --ui-sidebar-component-progress: 0;
   }
 }
 .uikit.is\:initializing *, .uikit.is\:resizing *, .uikit.has\:resizing * {
@@ -315,19 +339,8 @@ svg {
   font-size: var(--ui-font-size-2xl);
   font-weight: 700;
 }
-.header__brand {
-  transition: min-inline-size 300ms ease-in-out 0ms;
-}
-@media screen and (min-width: 48rem) {
-  .header__brand {
-    min-inline-size: calc(var(--ui-sidebar-left-width) - var(--ui-chrome-spacing-m) * 2);
-  }
-}
 .header__brand svg {
   flex: 0 0 auto;
-}
-.uikit.has\:toggled-sidebar-left .header__brand {
-  min-inline-size: 0;
 }
 
 .brand-name {
@@ -544,26 +557,20 @@ svg {
   display: flex;
   flex: 0 0 auto;
   inline-size: 3rem;
+  min-inline-size: calc(3rem + (100vw - 1rem - 3rem) * var(--ui-sidebar-left-progress));
   max-block-size: 100%;
   margin-inline-start: calc(var(--ui-chrome-spacing-s) * -1);
   overflow: visible;
-  transition: inline-size 300ms ease-in-out, min-inline-size 300ms ease-in-out;
+  transition: min-inline-size 300ms ease-in-out, inline-size 300ms ease-in-out;
 }
-.uikit.has\:toggled-sidebar-left .sidebar--left {
-  inline-size: 3rem;
-  min-inline-size: calc(100vw - 1rem);
-}
-@media screen and (min-width: 48rem) {
-  .uikit.has\:toggled-sidebar-left .sidebar--left {
-    min-inline-size: 3rem;
-  }
-}
-
 @media screen and (min-width: 48rem) {
   .sidebar--left {
-    inline-size: var(--ui-sidebar-left-width);
+    inline-size: calc(3rem + ((var(--ui-sidebar-left-width)) - 3rem) * var(--ui-sidebar-left-progress));
     min-inline-size: var(--ui-sidebar-left-min-width);
     max-inline-size: min(33vw, var(--ui-sidebar-left-max-width));
+  }
+  .uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left {
+    min-inline-size: 3rem;
   }
 }
 .sidebar--left .sidebar__content {
@@ -639,27 +646,41 @@ svg {
 
 .uikit.has\:toggled-sidebar-left .sidebar--left .navigation-rename > *:not(.navigation--persistent) {
   pointer-events: auto;
-  opacity: 1;
 }
 @media screen and (min-width: 48rem) {
   .uikit.has\:toggled-sidebar-left .sidebar--left .navigation-rename > *:not(.navigation--persistent) {
     pointer-events: none;
-    opacity: 0.5;
   }
 }
 
 @media screen and (min-width: 48rem) {
   .uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:hover, .uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:focus {
-    min-inline-size: var(--ui-sidebar-left-width);
+    --ui-sidebar-left-progress: 1;
   }
   .uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:hover .navigation-rename > *, .uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:focus .navigation-rename > * {
     pointer-events: auto;
-    opacity: 1;
   }
   .uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:hover .navigation--persistent .navigation__heading, .uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:focus .navigation--persistent .navigation__heading {
     text-indent: 0;
   }
   .uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:hover .navigation--persistent .navigation__heading::before, .uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:focus .navigation--persistent .navigation__heading::before {
+    display: none;
+  }
+}
+
+.sidebar--left .sidebar__swiper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  width: 100vw;
+  pointer-events: none;
+  background: yellow;
+  opacity: 0;
+}
+@media screen and (min-width: 48rem) {
+  .sidebar--left .sidebar__swiper {
     display: none;
   }
 }
@@ -733,40 +754,80 @@ svg {
 .sidebar--component[data-resizing] .sidebar__resizer::after {
   border-color: #000;
 }
+.sidebar--component .sidebar__swiper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -100vw;
+  z-index: 99;
+  width: 200vw;
+  pointer-events: none;
+  background: yellow;
+  opacity: 0;
+}
+@media screen and (min-width: 48rem) {
+  .sidebar--component .sidebar__swiper {
+    display: none;
+  }
+}
 
 .sidebar-overlay-toggle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
   z-index: 1;
   cursor: pointer;
   background: #fff;
-  border-radius: var(--ui-chrome-radius-s);
-  opacity: 0.65;
-}
-.sidebar-overlay-toggle {
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline-end: 0;
-  inset-block-end: 0;
-  inset-inline-start: 0;
+  border-radius: var(--ui-radius-s);
+  opacity: calc(0.75 - var(--ui-sidebar-component-progress) * 0.75);
 }
 .sidebar-overlay-toggle {
   transition: background 300ms ease-in-out 0ms;
 }
+@media screen and (min-width: 48rem) {
+  .sidebar-overlay-toggle {
+    pointer-events: none;
+  }
+}
 .uikit.has\:toggled-sidebar-component .sidebar-overlay-toggle {
-  display: none;
+  pointer-events: none;
 }
 @media screen and (min-width: 48rem) {
   .uikit.has\:toggled-sidebar-component .sidebar-overlay-toggle {
-    display: block;
+    pointer-events: auto;
+  }
+  .uikit.has\:toggled-sidebar-component .sidebar-overlay-toggle:hover, .uikit.has\:toggled-sidebar-component .sidebar-overlay-toggle:focus {
+    background: #1daaff;
   }
 }
 
-.sidebar-overlay-toggle:hover, .sidebar-overlay-toggle:focus {
-  background: #1daaff;
+.sidebar-overlay-toggle-left {
+  position: absolute;
+  top: 0;
+  right: calc(100% + var(--ui-chrome-spacing-m));
+  bottom: 0;
+  z-index: 1;
+  width: 100vw;
+  pointer-events: none;
+  cursor: pointer;
+  background: #fff;
+  border-radius: var(--ui-radius-s);
+  opacity: calc(var(--ui-sidebar-component-progress) * 0.75);
+}
+.sidebar-overlay-toggle-left {
+  transition: opacity 300ms ease-in-out 0ms;
 }
 @media screen and (min-width: 48rem) {
-  .sidebar-overlay-toggle {
+  .sidebar-overlay-toggle-left {
     display: none;
   }
+  .sidebar-overlay-toggle-left:hover, .sidebar-overlay-toggle-left:focus {
+    background: #1daaff;
+  }
+}
+.uikit.has\:toggled-sidebar-component .sidebar-overlay-toggle-left {
+  pointer-events: auto;
 }
 
 .sidebar--right {
@@ -1052,7 +1113,7 @@ svg {
   }
 }
 .uikit:has(.sidebar--left) .component {
-  min-inline-size: calc(100vw - var(--ui-sidebar-left-width) - 0.5rem);
+  min-inline-size: calc(100vw - 3rem - 0.5rem);
 }
 @media screen and (min-width: 48rem) {
   .uikit:has(.sidebar--left) .component {
@@ -1233,15 +1294,14 @@ svg {
   overflow: hidden;
   transition: transform 300ms ease-in-out;
 }
-.uikit.has\:toggled-sidebar-component .main > * {
-  transform: translateX(calc(min(var(--ui-sidebar-component-width), 100%) * -1 + var(--ui-sidebar-component-hide) - 0.5rem));
+.main > * {
+  transform: translateX(calc((min(var(--ui-sidebar-component-width), 100%) - var(--ui-sidebar-component-hide)) * -1 * var(--ui-sidebar-component-progress)));
 }
 @media screen and (min-width: 48rem) {
-  .uikit.has\:toggled-sidebar-component .main > * {
+  .main > * {
     transform: none;
   }
 }
-
 .uikit.has\:split-vertical .main:has(.sidebar--split) {
   flex-direction: column;
 }
@@ -1470,12 +1530,12 @@ svg {
 }
 .navigation-wrapper .overflow > *:not(.navigation--persistent) {
   pointer-events: none;
-  opacity: 0.5;
+  opacity: calc(0.5 + 0.5 * var(--ui-sidebar-left-progress, 0));
+  transition: opacity 300ms ease-in-out;
 }
 @media screen and (min-width: 48rem) {
   .navigation-wrapper .overflow > *:not(.navigation--persistent) {
     pointer-events: auto;
-    opacity: 1;
   }
 }
 

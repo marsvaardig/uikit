@@ -71,32 +71,80 @@
       border-color: #000;
     }
   }
+
+  .sidebar__swiper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -100vw;
+    z-index: 99;
+    width: 200vw;
+    pointer-events: none;
+    background: yellow;
+    opacity: 0;
+
+    @include breakpoint($chrome-breakpoint2) {
+      display: none;
+    }
+  }
 }
 
 // @TODO: should we move this or rename this? Only for component sidebar right now...
 .sidebar-overlay-toggle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
   z-index: 1;
   cursor: pointer;
   background: #fff;
-  border-radius: var(--ui-chrome-radius-s);
-  opacity: .65;
+  border-radius: var(--ui-radius-s);
+  opacity: calc(0.75 - var(--ui-sidebar-component-progress) * 0.75);
 
-  @include coverall;
   @include transition(background $chrome-transition-duration ease-in-out);
 
+  @include breakpoint($chrome-breakpoint2) {
+    pointer-events: none;
+  }
+
   @include state('has', 'toggled-sidebar-component') {
-    display: none;
+    pointer-events: none;
 
     @include breakpoint($chrome-breakpoint2) {
-      display: block;
+      pointer-events: auto;
+
+      @include hover {
+        background: $brand;
+      }
     }
   }
+}
 
-  @include hover {
-    background: $brand;
-  }
+.sidebar-overlay-toggle-left {
+  position: absolute;
+  top: 0;
+  right: calc(100% + var(--ui-chrome-spacing-m));
+  bottom: 0;
+  z-index: 1;
+  width: 100vw;
+  pointer-events: none;
+  cursor: pointer;
+  background: #fff;
+  border-radius: var(--ui-radius-s);
+  opacity: calc(var(--ui-sidebar-component-progress) * 0.75);
+
+  @include transition(opacity $chrome-transition-duration ease-in-out);
 
   @include breakpoint($chrome-breakpoint2) {
     display: none;
+
+    @include hover {
+      background: $brand;
+    }
+  }
+
+  @include state('has', 'toggled-sidebar-component') {
+    pointer-events: auto;
   }
 }
+

@@ -18,18 +18,8 @@
   font-size: var(--ui-font-size-2xl);
   font-weight: 700;
 
-  @include transition(min-inline-size $chrome-transition-duration ease-in-out);
-
-  @include breakpoint($chrome-breakpoint2) {
-    min-inline-size: calc(var(--ui-sidebar-left-width) - (var(--ui-chrome-spacing-m) * 2));
-  }
-
   svg {
     flex: 0 0 auto;
-  }
-
-  @include state('has', 'toggled-sidebar-left') {
-    min-inline-size: 0;
   }
 }
 

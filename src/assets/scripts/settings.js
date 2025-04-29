@@ -41,6 +41,10 @@ UIkit.tabs.activateTab = function(selectedTab) {
   // Add initializing class
   $ui.classList.add('is:initializing');
   
+  function isMobile() {
+    return window.getComputedStyle($ui).getPropertyValue('--ui-mobile') === '1';
+  }
+  
   // Remove initializing class after 500ms
   setTimeout(() => {
     $ui.classList.remove('is:initializing');
@@ -79,7 +83,7 @@ UIkit.tabs.activateTab = function(selectedTab) {
     }
     
     // SidebarToggles
-    if (settings.sidebarToggles) {
+    if (settings.sidebarToggles && !isMobile()) {
       for (const [type, toggled] of Object.entries(settings.sidebarToggles)) {
         if (toggled) {
           $ui.classList.add(`has:toggled-sidebar-${type}`);

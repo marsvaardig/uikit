@@ -531,4 +531,96 @@
     }
   });
   
+  
+  
+  // Touch support
+  // ==========================
+  
+  let startX = 0;
+  let startProgress = 0;
+  let isDragging = false;
+  let activeSidebar = null;
+  
+  // Max swipe afstand
+  let swipeWidths = {
+    left: window.innerWidth * 0.8,
+    component: window.innerWidth * 0.8,
+  };
+  
+  document.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    const x = touch.clientX;
+    const y = touch.clientY;
+    
+    swipeWidths = {
+      left: window.innerWidth * 0.8,
+      component: window.innerWidth * 0.8,
+    };
+    
+    const swipeAreas = document.querySelectorAll('[data-swipe]');
+    activeSidebar = null;
+    
+    swipeAreas.forEach(($area) => {
+      const rect = $area.getBoundingClientRect();
+      if (
+        x >= rect.left &&
+        x <= rect.right &&
+        y >= rect.top &&
+        y <= rect.bottom
+      ) {
+        const type = $area.getAttribute('data-swipe');
+        if (type === 'sidebar-left' || type === 'sidebar-component') {
+          activeSidebar = type.replace('sidebar-', '');
+        }
+      }
+    });
+    
+    if (!activeSidebar) {
+      isDragging = false;
+      return;
+    }
+    
+    startX = x;
+    
+    const progressValue = getComputedStyle($ui).getPropertyValue(`--ui-sidebar-${activeSidebar}-progress`);
+    startProgress = parseFloat(progressValue) || 0;
+    
+    isDragging = true;
+    $ui.classList.add('is:resizing');
+  });
+  
+  document.addEventListener('touchmove', (e) => {
+    if (!isDragging || !activeSidebar) return;
+    
+    const currentX = e.touches[0].clientX;
+    let deltaX = currentX - startX;
+    
+    if (activeSidebar === 'component') {
+      deltaX = startX - currentX; // Right swipe omdraaien
+    }
+    
+    let progress = startProgress + deltaX / swipeWidths[activeSidebar];
+    progress = Math.min(Math.max(progress, 0), 1); // Clamp tussen 0 en 1
+    
+    $ui.style.setProperty(`--ui-sidebar-${activeSidebar}-progress`, progress);
+  });
+  
+  document.addEventListener('touchend', () => {
+    if (!isDragging || !activeSidebar) return;
+    
+    isDragging = false;
+    const finalProgress = parseFloat(getComputedStyle($ui).getPropertyValue(`--ui-sidebar-${activeSidebar}-progress`)) || 0;
+    
+    if (finalProgress > 0.5) {
+      $ui.classList.add(`has:toggled-sidebar-${activeSidebar}`);
+      $ui.style.removeProperty(`--ui-sidebar-${activeSidebar}-progress`);
+    } else {
+      $ui.classList.remove(`has:toggled-sidebar-${activeSidebar}`);
+      $ui.style.removeProperty(`--ui-sidebar-${activeSidebar}-progress`);
+    }
+    
+    activeSidebar = null;
+    $ui.classList.remove('is:resizing');
+  });
+  
 })();
