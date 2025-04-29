@@ -13,7 +13,7 @@
   min-inline-size: var(--ui-sidebar-split-min-width);
   max-inline-size: var(--ui-sidebar-split-max-width);
 
-  @include transition(all $chrome-transition-duration ease-in-out);
+  @include transition(all $chrome-transition-duration $chrome-transition-easing);
 
   @include state('has', 'toggled-sidebar-split') {
     @include breakpoint(0, $chrome-breakpoint2-min) {

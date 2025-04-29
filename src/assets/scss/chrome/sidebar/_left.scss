@@ -8,7 +8,7 @@
   max-block-size: 100%;
   margin-inline-start: calc(var(--ui-chrome-spacing-s) * -1);
   overflow: visible;
-  transition: min-inline-size $chrome-transition-duration ease-in-out, inline-size $chrome-transition-duration ease-in-out;
+  transition: min-inline-size $chrome-transition-duration $chrome-transition-easing, inline-size $chrome-transition-duration $chrome-transition-easing;
 
   @include breakpoint($chrome-breakpoint2) {
     inline-size: calc(#{px(48)} + (calc(var(--ui-sidebar-left-width)) - #{px(48)}) * var(--ui-sidebar-left-progress));

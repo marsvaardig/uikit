@@ -9,7 +9,7 @@
   flex-direction: column;
   inline-size: var(--ui-sidebar-right-width);
   max-inline-size: calc(100vw - #{px(96)});
-  transition: transform $chrome-transition-duration ease-in-out, inline-size $chrome-transition-duration ease-in-out, margin $chrome-transition-duration ease-in-out;
+  transition: transform $chrome-transition-duration $chrome-transition-easing, inline-size $chrome-transition-duration $chrome-transition-easing, margin $chrome-transition-duration $chrome-transition-easing;
   transform: translateX(100%);
 
   @include state('has', 'toggled-sidebar-right') {
@@ -33,13 +33,13 @@
       padding-inline-start: var(--ui-chrome-spacing-s);
       margin-inline-end: calc(var(--ui-chrome-spacing-s) * -1);
       transform: none;
-      animation: slide-out-right $chrome-transition-duration ease-in-out forwards;
+      animation: slide-out-right $chrome-transition-duration $chrome-transition-easing forwards;
 
       @include state('has', 'toggled-sidebar-right') {
         display: flex;
         min-inline-size: var(--ui-sidebar-right-min-width);
         margin-inline-end: 0;
-        animation: slide-in-right $chrome-transition-duration ease-in-out;
+        animation: slide-in-right $chrome-transition-duration $chrome-transition-easing;
       }
 
       .sidebar__body {

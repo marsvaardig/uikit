@@ -17,5 +17,6 @@ $chrome-breakpoint2: px(768) !default;
 $chrome-breakpoint2-min: px(767) !default;
 
 // Transition
-$chrome-transition-duration: 300ms !default;
+$chrome-transition-duration: 250ms !default;
+$chrome-transition-easing: ease-out !default;
 $component-transition-duration: 300ms !default;

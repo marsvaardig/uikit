@@ -534,23 +534,27 @@
   
   
   // Touch support
-  // ==========================
+// ==========================
   
   let startX = 0;
+  let startY = 0;
   let startProgress = 0;
   let isDragging = false;
   let activeSidebar = null;
-  
-  // Max swipe afstand
+  let isHorizontalSwipe = null; // Nieuw: weten of we horizontaal zijn
+  const swipeThreshold = 10; // pixels voordat we bepalen
+
+// Max swipe afstand
   let swipeWidths = {
     left: window.innerWidth * 0.8,
     component: window.innerWidth * 0.8,
   };
   
-  document.addEventListener('touchstart', (e) => {
+  function handleTouchStart(e) {
     const touch = e.touches[0];
-    const x = touch.clientX;
-    const y = touch.clientY;
+    startX = touch.clientX;
+    startY = touch.clientY;
+    isHorizontalSwipe = null;
     
     swipeWidths = {
       left: window.innerWidth * 0.8,
@@ -563,10 +567,10 @@
     swipeAreas.forEach(($area) => {
       const rect = $area.getBoundingClientRect();
       if (
-        x >= rect.left &&
-        x <= rect.right &&
-        y >= rect.top &&
-        y <= rect.bottom
+        startX >= rect.left &&
+        startX <= rect.right &&
+        startY >= rect.top &&
+        startY <= rect.bottom
       ) {
         const type = $area.getAttribute('data-swipe');
         if (type === 'sidebar-left' || type === 'sidebar-component') {
@@ -580,38 +584,69 @@
       return;
     }
     
-    startX = x;
-    
+    const $ui = document.querySelector('[data-uikit]');
     const progressValue = getComputedStyle($ui).getPropertyValue(`--ui-sidebar-${activeSidebar}-progress`);
     startProgress = parseFloat(progressValue) || 0;
     
     isDragging = true;
+    // Store the touch start time for velocity calculation
+    e.currentTarget._touchStartTime = e.timeStamp;
     $ui.classList.add('is:resizing');
-  });
+  }
   
-  document.addEventListener('touchmove', (e) => {
+  function handleTouchMove(e) {
     if (!isDragging || !activeSidebar) return;
     
     const currentX = e.touches[0].clientX;
-    let deltaX = currentX - startX;
+    const currentY = e.touches[0].clientY;
+    const deltaX = currentX - startX;
+    const deltaY = currentY - startY;
     
-    if (activeSidebar === 'component') {
-      deltaX = startX - currentX; // Right swipe omdraaien
+    if (isHorizontalSwipe === null) {
+      if (Math.abs(deltaX) > swipeThreshold || Math.abs(deltaY) > swipeThreshold) {
+        isHorizontalSwipe = Math.abs(deltaX) > Math.abs(deltaY);
+      }
     }
     
-    let progress = startProgress + deltaX / swipeWidths[activeSidebar];
-    progress = Math.min(Math.max(progress, 0), 1); // Clamp tussen 0 en 1
-    
-    $ui.style.setProperty(`--ui-sidebar-${activeSidebar}-progress`, progress);
-  });
+    if (isHorizontalSwipe) {
+      e.preventDefault();
+      
+      const $ui = document.querySelector('[data-uikit]');
+      let adjustedDeltaX = deltaX;
+      if (activeSidebar === 'component') {
+        adjustedDeltaX = startX - currentX;
+      }
+      
+      let progress = startProgress + adjustedDeltaX / swipeWidths[activeSidebar];
+      progress = Math.min(Math.max(progress, 0), 1);
+      
+      $ui.style.setProperty(`--ui-sidebar-${activeSidebar}-progress`, progress);
+    }
+  }
   
-  document.addEventListener('touchend', () => {
+  function handleTouchEnd(e) {
     if (!isDragging || !activeSidebar) return;
+    
+    const $ui = document.querySelector('[data-uikit]');
+    
+    // Calculate velocity and flick detection
+    const deltaX = e.changedTouches[0].clientX - startX;
+    const timeDelta = e.timeStamp - (e.currentTarget._touchStartTime || 0);
+    const velocity = Math.abs(deltaX / (timeDelta || 1)); // Avoid div by zero
+    const flickThreshold = 0.8; // pixels per millisecond (verhoog gevoeligheid)
+    const isFlick = velocity > flickThreshold && Math.abs(deltaX) > 30;
+    const isFlickDirection = deltaX > 0 ? 'right' : 'left';
     
     isDragging = false;
     const finalProgress = parseFloat(getComputedStyle($ui).getPropertyValue(`--ui-sidebar-${activeSidebar}-progress`)) || 0;
     
-    if (finalProgress > 0.5) {
+    // Nieuwe logica voor beide richtingen
+    const shouldOpen = isFlick
+      ? (activeSidebar === 'left' && isFlickDirection === 'right') ||
+        (activeSidebar === 'component' && isFlickDirection === 'left')
+      : finalProgress > 0.5;
+
+    if (shouldOpen) {
       $ui.classList.add(`has:toggled-sidebar-${activeSidebar}`);
       $ui.style.removeProperty(`--ui-sidebar-${activeSidebar}-progress`);
     } else {
@@ -620,7 +655,12 @@
     }
     
     activeSidebar = null;
+    isHorizontalSwipe = null;
     $ui.classList.remove('is:resizing');
-  });
+  }
+  
+  document.addEventListener('touchstart', handleTouchStart, { passive: true });
+  document.addEventListener('touchmove', handleTouchMove, { passive: false });
+  document.addEventListener('touchend', handleTouchEnd, { passive: true });
   
 })();

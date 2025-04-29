@@ -6,7 +6,7 @@
   flex: 1 1 auto;
   gap: var(--ui-chrome-spacing-m);
   overflow: hidden;
-  transition: transform $chrome-transition-duration ease-in-out;
+  transition: transform $chrome-transition-duration $chrome-transition-easing;
 
   & > * {
     transform: translateX(calc((min(var(--ui-sidebar-component-width), #{100%}) - var(--ui-sidebar-component-hide)) * -1 * var(--ui-sidebar-component-progress)));

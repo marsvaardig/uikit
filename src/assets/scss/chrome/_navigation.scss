@@ -21,7 +21,7 @@
   .overflow > *:not(.navigation--persistent) {
     pointer-events: none;
     opacity: calc(0.5 + (0.5 * var(--ui-sidebar-left-progress, 0)));
-    transition: opacity $chrome-transition-duration ease-in-out;
+    transition: opacity $chrome-transition-duration $chrome-transition-easing;
 
     @include breakpoint($chrome-breakpoint2) {
       pointer-events: auto;
