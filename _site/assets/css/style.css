@@ -285,7 +285,8 @@ svg {
   display: flex;
   flex-direction: column;
   block-size: 100vh;
-  min-block-size: 25rem;
+  min-block-size: 35rem;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   overflow: hidden;
   font-size: var(--ui-font-size-m);
 }
@@ -557,7 +558,7 @@ svg {
   display: flex;
   flex: 0 0 auto;
   inline-size: 3rem;
-  min-inline-size: calc(3rem + min(100vw - 1rem - 3rem, 25rem) * var(--ui-sidebar-left-progress));
+  min-inline-size: calc(3rem + min(100vw - (env(safe-area-inset-right) + env(safe-area-inset-left)) - 1rem - 3rem, 25rem) * var(--ui-sidebar-left-progress));
   max-block-size: 100%;
   margin-inline-start: calc(var(--ui-chrome-spacing-s) * -1);
   overflow: visible;
@@ -839,7 +840,7 @@ svg {
   flex: 0 0 auto;
   flex-direction: column;
   inline-size: var(--ui-sidebar-right-width);
-  max-inline-size: calc(100vw - 6rem);
+  max-inline-size: calc(100vw - (env(safe-area-inset-right) + env(safe-area-inset-left)) - 6rem);
   transition: transform 250ms ease-out, inline-size 250ms ease-out, margin 250ms ease-out;
   transform: translateX(100%);
 }
@@ -858,7 +859,7 @@ svg {
   .sidebar--right[data-sidebar-type=sidebar] {
     position: relative;
     inset-block-end: auto;
-    min-inline-size: calc(100vw - 3rem);
+    min-inline-size: calc(100vw - (env(safe-area-inset-right) + env(safe-area-inset-left)) - 3rem);
     max-inline-size: 40vw;
     padding-inline-start: var(--ui-chrome-spacing-s);
     margin-inline-end: calc(var(--ui-chrome-spacing-s) * -1);
@@ -1119,7 +1120,7 @@ svg {
   }
 }
 .uikit:has(.sidebar--left) .component {
-  min-inline-size: calc(100vw - 3rem - 0.5rem);
+  min-inline-size: calc(100vw - (env(safe-area-inset-right) + env(safe-area-inset-left)) - 3rem - 0.5rem);
 }
 @media screen and (min-width: 60rem) {
   .uikit:has(.sidebar--left) .component {
@@ -1195,7 +1196,7 @@ svg {
   position: absolute;
   inset-block-start: 100%;
   inset-inline-start: -1px;
-  inline-size: 100vw;
+  inline-size: calc(100vw - (env(safe-area-inset-right) + env(safe-area-inset-left)));
   max-inline-size: 20rem;
   padding: 1rem;
   background: #fff;
@@ -1342,6 +1343,8 @@ svg {
 .overflow {
   flex: 1 1 auto;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 /* Scrollbar

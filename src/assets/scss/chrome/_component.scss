@@ -22,7 +22,7 @@
   }
 
   @include has(".sidebar--left") {
-    min-inline-size: calc(100vw - #{px(48)} - #{px(8)});
+    min-inline-size: calc((100vw - (env(safe-area-inset-right) + env(safe-area-inset-left))) - #{px(48)} - #{px(8)});
 
     @include breakpoint($chrome-breakpoint2) {
       min-inline-size: 0;

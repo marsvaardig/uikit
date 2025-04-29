@@ -466,19 +466,46 @@
       isDragging = true;
       e.currentTarget._touchStartTime = e.timeStamp;
     }
+    function isHorizontallyScrollable(el) {
+      return el && el.scrollWidth > el.clientWidth;
+    }
+    let allowHorizontalScroll = false;
+    let blockSwipeForCurrentTouch = false;
     function handleTouchMove(e) {
       if (!isDragging || !activeSidebar) return;
+      if (blockSwipeForCurrentTouch) {
+        return;
+      }
       const currentX = e.touches[0].clientX;
       const currentY = e.touches[0].clientY;
       const deltaX = currentX - startX;
       const deltaY = currentY - startY;
+      let el = e.target;
+      allowHorizontalScroll = false;
+      const $el = el.closest(".overflow");
+      if ($el) {
+        if (isHorizontallyScrollable($el)) {
+          const canScrollLeft = $el.scrollLeft > 0;
+          const canScrollRight = $el.scrollLeft + $el.clientWidth < $el.scrollWidth;
+          const isSwipingLeft = deltaX < 0;
+          const isSwipingRight = deltaX > 0;
+          console.log($el, isSwipingLeft, canScrollRight, isSwipingRight, canScrollLeft);
+          if (isSwipingLeft && canScrollRight || isSwipingRight && canScrollLeft) {
+            allowHorizontalScroll = true;
+            blockSwipeForCurrentTouch = true;
+            return;
+          }
+        }
+      }
       if (isHorizontalSwipe === null) {
         if (Math.abs(deltaX) > swipeThreshold || Math.abs(deltaY) > swipeThreshold) {
           isHorizontalSwipe = Math.abs(deltaX) > Math.abs(deltaY);
         }
       }
       if (isHorizontalSwipe) {
-        e.preventDefault();
+        if (e.cancelable) {
+          e.preventDefault();
+        }
         if (!$ui.classList.contains("is:resizing")) {
           $ui.classList.add("is:resizing");
         }
@@ -494,10 +521,18 @@
     function handleTouchEnd(e) {
       if (!isDragging || !activeSidebar) return;
       const $ui2 = document.querySelector("[data-uikit]");
+      if (blockSwipeForCurrentTouch) {
+        isDragging = false;
+        isHorizontalSwipe = null;
+        activeSidebar = null;
+        blockSwipeForCurrentTouch = false;
+        $ui2.classList.remove("is:resizing");
+        return;
+      }
       const deltaX = e.changedTouches[0].clientX - startX;
       const timeDelta = e.timeStamp - (e.currentTarget._touchStartTime || 0);
       const velocity = Math.abs(deltaX / (timeDelta || 1));
-      const flickThreshold = 0.8;
+      const flickThreshold = 0.5;
       const isFlick = velocity > flickThreshold && Math.abs(deltaX) > 30;
       const isFlickDirection = deltaX > 0 ? "right" : "left";
       isDragging = false;
@@ -512,6 +547,7 @@
       }
       activeSidebar = null;
       isHorizontalSwipe = null;
+      blockSwipeForCurrentTouch = false;
       $ui2.classList.remove("is:resizing");
     }
     document.addEventListener("touchstart", handleTouchStart, { passive: true });

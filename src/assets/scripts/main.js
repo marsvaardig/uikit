@@ -622,13 +622,49 @@
     e.currentTarget._touchStartTime = e.timeStamp;
   }
   
+  function isHorizontallyScrollable(el) {
+    return el && el.scrollWidth > el.clientWidth;
+  }
+  
+  let allowHorizontalScroll = false;
+  let blockSwipeForCurrentTouch = false;
+  
   function handleTouchMove(e) {
     if (!isDragging || !activeSidebar) return;
+    
+    if (blockSwipeForCurrentTouch) {
+      return; // Swipe volledig blokkeren, zelfs als we later niet meer kunnen scrollen
+    }
     
     const currentX = e.touches[0].clientX;
     const currentY = e.touches[0].clientY;
     const deltaX = currentX - startX;
     const deltaY = currentY - startY;
+    
+    let el = e.target;
+    
+    allowHorizontalScroll = false; // reset standaard
+    
+    const $el = el.closest('.overflow');
+    if ($el) {
+      if (isHorizontallyScrollable($el)) {
+        const canScrollLeft = $el.scrollLeft > 0;
+        const canScrollRight = $el.scrollLeft + $el.clientWidth < $el.scrollWidth;
+        const isSwipingLeft = deltaX < 0;
+        const isSwipingRight = deltaX > 0;
+        
+        console.log($el, isSwipingLeft, canScrollRight, isSwipingRight, canScrollLeft);
+        
+        if (
+          (isSwipingLeft && canScrollRight) ||
+          (isSwipingRight && canScrollLeft)
+        ) {
+          allowHorizontalScroll = true;
+          blockSwipeForCurrentTouch = true; // STOP swipe permanent
+          return;
+        }
+      }
+    }
     
     if (isHorizontalSwipe === null) {
       if (Math.abs(deltaX) > swipeThreshold || Math.abs(deltaY) > swipeThreshold) {
@@ -637,7 +673,9 @@
     }
     
     if (isHorizontalSwipe) {
-      e.preventDefault();
+      if (e.cancelable) {
+        e.preventDefault();
+      }
       if (!$ui.classList.contains('is:resizing')) {
         $ui.classList.add('is:resizing');
       }
@@ -659,23 +697,32 @@
     
     const $ui = document.querySelector('[data-uikit]');
     
-    // Calculate velocity and flick detection
+    if (blockSwipeForCurrentTouch) {
+      // We zaten in een scrollable swipe → sidebar logica permanent uitzetten
+      isDragging = false;
+      isHorizontalSwipe = null;
+      activeSidebar = null;
+      blockSwipeForCurrentTouch = false;
+      $ui.classList.remove('is:resizing');
+      return;
+    }
+    
+    // jouw bestaande logica:
     const deltaX = e.changedTouches[0].clientX - startX;
     const timeDelta = e.timeStamp - (e.currentTarget._touchStartTime || 0);
-    const velocity = Math.abs(deltaX / (timeDelta || 1)); // Avoid div by zero
-    const flickThreshold = 0.8; // pixels per millisecond (verhoog gevoeligheid)
+    const velocity = Math.abs(deltaX / (timeDelta || 1));
+    const flickThreshold = 0.5;
     const isFlick = velocity > flickThreshold && Math.abs(deltaX) > 30;
     const isFlickDirection = deltaX > 0 ? 'right' : 'left';
     
     isDragging = false;
     const finalProgress = parseFloat(getComputedStyle($ui).getPropertyValue(`--ui-sidebar-${activeSidebar}-progress`)) || 0;
     
-    // Nieuwe logica voor beide richtingen
     const shouldOpen = isFlick
       ? (activeSidebar === 'left' && isFlickDirection === 'right') ||
-        (activeSidebar === 'component' && isFlickDirection === 'left')
+      (activeSidebar === 'component' && isFlickDirection === 'left')
       : finalProgress > 0.5;
-
+    
     if (shouldOpen) {
       $ui.classList.add(`has:toggled-sidebar-${activeSidebar}`);
       $ui.style.removeProperty(`--ui-sidebar-${activeSidebar}-progress`);
@@ -686,6 +733,7 @@
     
     activeSidebar = null;
     isHorizontalSwipe = null;
+    blockSwipeForCurrentTouch = false; // RESET voor volgende swipe
     $ui.classList.remove('is:resizing');
   }
   
