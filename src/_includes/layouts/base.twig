@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en" dir="ltr" class="no-js">
-{#{% set assetsUrl = '/uikit' %}#}
+{#{% set siteUrl = '/uikit' %}#}
 {% include "../partials/head.twig" %}
 {% set viewType = viewType|default('item') %} {# table | item | dashboard - set in page, not here #}
 <body id="page-id-345"> {# @TODO: set dynamic page id #}
@@ -72,7 +72,7 @@
     </div>
 </div>
 <!-- But for now we are just going to load immediately using the script like this -->
-<script src="{{ assetsUrl }}/assets/js/settings.js"></script>
-<script src="{{ assetsUrl }}/assets/js/scripts.js" defer></script>
+<script src="{{ siteUrl }}/assets/js/settings.js"></script>
+<script src="{{ siteUrl }}/assets/js/scripts.js" defer></script>
 </body>
 </html>
