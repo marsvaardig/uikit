@@ -19,10 +19,12 @@
   }
 
   .overflow > *:not(.navigation--persistent) {
-    display: none;
+    pointer-events: none;
+    opacity: .5;
 
     @include breakpoint($chrome-breakpoint2) {
-      display: block;
+      pointer-events: auto;
+      opacity: 1;
     }
   }
 }

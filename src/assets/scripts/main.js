@@ -508,6 +508,7 @@
   });
   
   
+  
   // Open our search on cmd/ctrl + f
   document.addEventListener('keydown', (e) => {
     const isMac = navigator.platform.toUpperCase().includes('MAC');

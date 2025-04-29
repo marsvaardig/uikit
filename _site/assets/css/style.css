@@ -208,7 +208,7 @@ summary {
   --ui-scrollbar-width: 0;
   --ui-sidebar-left-width: 15rem;
   --ui-sidebar-left-min-width: 10rem;
-  --ui-sidebar-left-max-width: 25rem;
+  --ui-sidebar-left-max-width: 35rem;
   --ui-sidebar-right-width: 20rem;
   --ui-sidebar-right-min-width: 12.5rem;
   --ui-sidebar-component-width: 20rem;
@@ -638,11 +638,13 @@ svg {
 }
 
 .uikit.has\:toggled-sidebar-left .sidebar--left .navigation-rename > *:not(.navigation--persistent) {
-  display: block;
+  pointer-events: auto;
+  opacity: 1;
 }
 @media screen and (min-width: 48rem) {
   .uikit.has\:toggled-sidebar-left .sidebar--left .navigation-rename > *:not(.navigation--persistent) {
-    display: none;
+    pointer-events: none;
+    opacity: 0.5;
   }
 }
 
@@ -651,7 +653,8 @@ svg {
     min-inline-size: var(--ui-sidebar-left-width);
   }
   .uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:hover .navigation-rename > *, .uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:focus .navigation-rename > * {
-    display: block;
+    pointer-events: auto;
+    opacity: 1;
   }
   .uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:hover .navigation--persistent .navigation__heading, .uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left:focus .navigation--persistent .navigation__heading {
     text-indent: 0;
@@ -1466,11 +1469,13 @@ svg {
   margin-block-start: auto;
 }
 .navigation-wrapper .overflow > *:not(.navigation--persistent) {
-  display: none;
+  pointer-events: none;
+  opacity: 0.5;
 }
 @media screen and (min-width: 48rem) {
   .navigation-wrapper .overflow > *:not(.navigation--persistent) {
-    display: block;
+    pointer-events: auto;
+    opacity: 1;
   }
 }
 
