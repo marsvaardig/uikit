@@ -489,7 +489,6 @@
           const canScrollRight = $el.scrollLeft + $el.clientWidth < $el.scrollWidth;
           const isSwipingLeft = deltaX < 0;
           const isSwipingRight = deltaX > 0;
-          console.log($el, isSwipingLeft, canScrollRight, isSwipingRight, canScrollLeft);
           if (isSwipingLeft && canScrollRight || isSwipingRight && canScrollLeft) {
             allowHorizontalScroll = true;
             blockSwipeForCurrentTouch = true;
