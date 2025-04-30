@@ -1,0 +1,79 @@
+.group { @include clearfix; }
+
+.group {
+  margin-bottom: $grid-padding * 3;
+}
+
+.one-halfs {
+  @include breakpoint($charlie) {
+    column-count: 1;
+    column-gap: calc($grid-padding / 3);
+    break-inside: avoid-column;
+  }
+
+  .one-half {
+    padding-bottom: calc($grid-padding / 2);
+    break-inside: avoid;
+  }
+}
+
+@include breakpoint($charlie) {
+  .align-vertical {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.visually-hidden.visually-hidden {
+  @include visually-hidden;
+}
+
+.js-enabled .js-visually-hidden {
+  @include visually-hidden;
+}
+
+.lazyload__wrapper {
+  position: relative;
+  overflow: hidden;
+
+  .ls-blur-up-is-loading,
+  .lazyload:not([src]) {
+    visibility: hidden;
+  }
+}
+
+// https://github.com/aFarkas/lazysizes/blob/gh-pages/plugins/blur-up/README.md#blur-up-options
+.lazyload__wrapper img,
+.ls-blur-up-img {
+  font-family: "blur-up: auto", "object-fit: cover";
+}
+
+.ls-blur-up-img.ls-blur-up-img.ls-blur-up-img.ls-blur-up-img {
+  @include coverall();
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  transition: opacity 1000ms;
+}
+
+.ls-blur-up-img.ls-blur-up-img.ls-blur-up-img.ls-blur-up-img.ls-inview.ls-original-loaded {
+  opacity: 0;
+}
+
+/*
+ * marsvaardig.photo
+ */
+.lazyload__wrapper[data-fit^="fill"] {
+  aspect-ratio: var(--aspect-ratio, auto);
+
+  img {
+    aspect-ratio: var(--aspect-ratio, auto);
+    object-fit: contain;
+  }
+}
+
+.no-js .lazyload__wrapper {
+  display: none;
+}

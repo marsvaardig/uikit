@@ -1,0 +1,32 @@
+@if $extension--reviews == true {
+  .star {
+    $size: px(50);
+
+    overflow: hidden;
+    display: inline-block;
+    font-size: 0;
+    position: relative;
+
+    .star__input {
+      display: none;
+    }
+
+    &:hover .star__label:hover,
+    &:hover .star__label:hover ~ .star__label,
+    .star__input:checked ~ .star__label {
+      background-image: url('../images/star-full.svg');
+    }
+
+    .star__label,
+    &:hover .star__label {
+      position: relative;
+      float: right;
+      display: block;
+      width: $size + px(4);
+      height: $size;
+      background-image: url('../images/star-empty.svg');
+      background-size: $size;
+      background-repeat: no-repeat;
+    }
+  }
+}

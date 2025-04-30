@@ -1,0 +1,14 @@
+@if $readmore == 'button' {
+// Override .article__content a
+.media__text,
+.article__content {
+  .readmore {
+    text-align: $readmore-align;
+  }
+
+  .readmore__button {
+    @extend .btn;
+    @include button-variant($button-color-text, $button-color-background, $button-color-border);
+  }
+}
+}

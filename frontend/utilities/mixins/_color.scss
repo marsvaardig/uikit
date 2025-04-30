@@ -1,0 +1,9 @@
+@mixin color($foreground, $background, $fallback-light: $color-grey-light, $fallback-dark: $body-color) {
+  @if (not($foreground) and lightness($background) > 60) {
+    color: $fallback-dark;
+  } @else if not($foreground) {
+    color: $fallback-light;
+  } @else {
+    color: $foreground;
+  }
+}

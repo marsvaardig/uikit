@@ -1,0 +1,296 @@
+.article {
+  @include spacing(bottom, margin, $article-spacing-bottom-amount);
+
+  img:not(.card-image){
+    border-radius: $article-image-border-radius;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  .gallery {
+    background-color: transparent;
+    padding-top: 0;
+    padding-bottom: $grid-padding * 2;
+  }
+
+  .module:last-child {
+      padding-bottom: 0;
+  }
+}
+
+.article__title {
+  @include spacing(bottom);
+
+  // Override .content__inner h1
+  &.article__title {
+    margin-bottom: 0;
+
+    max-width: $headings-max-width;
+    @if($headings-position == center) {
+      text-align: $headings-position;
+      margin-left: auto; // Override .content__inner h2
+      margin-right: auto; // Override .content__inner h2
+    }
+  }
+
+  &.article__title--timestamp {
+    @include spacing(bottom, padding, .5);
+  }
+
+  @if($headings-position == center) {
+    &.balance-text {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+.article__description {
+  max-width: $bravo;
+
+  @if($headings-position == center) {
+    text-align: $headings-position;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// Override .content__inner .h3
+.article__timestamp.article__timestamp.h3 {
+  margin-top: 0; // Override .content__inner .h3
+  @include spacing(bottom, margin);
+  line-height: 1.5;
+
+  @if($headings-position == center) {
+    text-align: center;
+  }
+}
+
+.article__label {
+  @include spacing(bottom, margin);
+
+  .label {
+    font-weight: $weight-light;
+    letter-spacing: px(1, em);
+    padding: .5em 1em;
+    font-size: $font-size;
+  }
+}
+
+.article__content {
+  max-width: $article-size-content;
+  margin-left: auto;
+  margin-right: auto;
+
+  // If first child is an h2, remove top margin
+  & > h2:first-child {
+    margin-top: 0;
+  }
+
+  // Links get other colors
+  a {
+    color: $color-link;
+
+    &:hover,
+    &:active {
+      color: $color-link--hover;
+    }
+  }
+
+  .form__group {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+// Stacked class to win from `.article__content a`
+.article__button.article__button,
+.article__cta-button.article__cta-button {
+  @extend .btn;
+
+  @if ($button-arrow != false) {
+    &:after {
+      content: '\2192';
+      margin-left: .5em;
+    }
+  }
+}
+
+.article__button.article__button, {
+  @include button-variant($button-color-text, $button-color-background, $button-color-border);
+}
+
+.article__cta-button.article__cta-button {
+  @include button-variant($button-cta-color-text, $button-cta-color-background, $button-cta-color-border);
+}
+
+.article__introtext,
+.article__outset {
+  @include content-block;
+}
+
+.article__image {
+  text-align: center;
+
+  max-width: $article-size-image;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include spacing(bottom);
+}
+
+// Image below content
+.article__content + .article__image {
+  @include spacing(top);
+  padding-bottom: 0;
+}
+
+// Card deck below content (first article fulltext)
+.article__content + .article__card {
+  @include spacing(top, margin, 2);
+}
+
+.article__cta {
+  @include spacing(top, margin);
+  text-align: center;
+}
+
+.article__video--inline {
+  width: 100%;
+}
+
+.article__video--embed {
+  @include spacing(top, margin);
+
+  position: relative;
+  padding-top: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+
+.article__header + .article__video--embed {
+  margin-top: 0;
+  @include spacing(bottom, margin);
+}
+
+.article__video--embed iframe,
+.article__video--embed object,
+.article__video--embed embed,
+.article__video--embed lite-vimeo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.article__figure {
+  margin: 0;
+
+  figcaption {
+    font-size: $font-size-small;
+    color: $color-muted;
+  }
+}
+
+@include breakpoint($alfa) {
+  .article__figure {
+    display: block;
+    position: relative;
+    overflow: hidden;
+
+    figcaption {
+      position: absolute;
+      bottom: px(6);
+      left: 0;
+      width: 100%;
+
+      background: rgba(black, .75);
+      padding: $spacing-s $spacing-m;
+
+      color: white;
+    }
+  }
+}
+
+// Remove margin for first article title
+.articles .article:first-of-type .article__title {
+  margin-top: 0;
+}
+
+@if ($article-size-outset) {
+  @include breakpoint($article-size-content + ($grid-padding * 2)) {
+    .article__outset {
+      @include spacing(vertical, margin, 1.5);
+
+      width: calc(100vw - (#{$grid-padding} * 2));
+      margin-left: calc(((#{$article-size-content} + (#{$grid-padding} * 2)) - 100vw) / 2);
+    }
+  }
+
+  @include breakpoint($article-size-outset + ($grid-padding * 2)) {
+    .article__outset:not(.article__outset--large) {
+      width: $article-size-outset;
+      margin-left: calc(($article-size-content - $article-size-outset) / 2);
+    }
+  }
+
+  @include breakpoint($echo + ($grid-padding * 2)) {
+    .article__outset--large {
+      width: $echo;
+      margin-left: calc(($article-size-content - $echo) / 2);
+    }
+  }
+
+  // Avoid double spacing between title and image
+  .article__content > .article__outset {
+    margin-top: 0;
+  }
+}
+
+@if($article-position-title == left) {
+  .article__header, .page__header {
+    max-width: $article-position-title-width;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+// Article figure zoom images magnify overlay
+@if ($article-figure-zoom-images-overlay) {
+  @include selectors($article-figure-zoom-images-overlay-selectors) {
+    [data-photoswipe-link] {
+      display: block;
+      cursor: zoom-in;
+
+      img {
+        @include transition(transform);
+      }
+
+      @include pseudo(after) {
+        width: 1.6em;
+        height: 1.6em;
+        right: .4em;
+        bottom: .4em;
+        @include svg-background('<path d="M94.75 86.125L70 61.25c11.75-16.5 7.875-39.375-8.625-51.125s-39.5-7.875-51.25 8.625-7.875 39.5 8.625 51.125c12.75 9 29.75 9 42.5 0L86.125 94.75c2.25 2.625 6.125 2.875 8.625.625 2.625-2.25 2.875-6.125.625-8.625-.125-.25-.375-.5-.625-.625zM60.625 60.5c-11.375 11.25-29.625 11.25-41 0s-11.25-29.625 0-41C30.875 8.25 49.25 8.25 60.5 19.5c11.375 11.375 11.375 29.75.125 41z"/><path d="M55.5 37.25H43.875V25.5c0-1.625-1.25-2.875-2.875-2.875s-2.875 1.25-2.875 2.875v11.75H26.25c-1.625 0-2.875 1.25-2.875 2.875S24.625 43 26.25 43H38v11.625c0 1.625 1.25 2.875 2.875 2.875s2.875-1.25 2.875-2.875V43h11.625c1.625 0 2.875-1.25 2.875-2.875.125-1.625-1.125-2.875-2.75-2.875z"/>', $article-figure-zoom-images-overlay-background, 24, 24, 100, 100);
+        background-size: 66%;
+        background-color: rgba($color-brand, .75);
+        border-radius: .25em;
+        @include transition(background-color);
+      }
+
+      @include hover {
+        img {
+          transform: scale(1.05);
+        }
+
+        &::after {
+          background-color: $color-brand;
+        }
+      }
+    }
+  }
+}

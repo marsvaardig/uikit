@@ -1,0 +1,30 @@
+.icon {
+  display: inline-block;
+  vertical-align: bottom;
+  font-size: $card-size-icon;
+}
+
+.icon-inherit { font-size: inherit; }
+.icon-16 { font-size: px(16) };
+.icon-24 { font-size: px(24) };
+.icon-32 { font-size: px(32) };
+.icon-48 { font-size: px(48) };
+.icon-64 { font-size: px(64) };
+.icon-80 { font-size: px(80) };
+
+.icon-weppo-facebook { color: $color-facebook; }
+.icon-weppo-instagram { color: $color-instagram; }
+.icon-weppo-linkedin { color: $color-linkedin; }
+.icon-weppo-pinterest { color: $color-pinterest; }
+.icon-weppo-twitter { color: $color-twitter; }
+.icon-weppo-vimeo { color: $color-vimeo; }
+.icon-weppo-youtube { color: $color-youtube; }
+.icon-weppo-spotify { color: $color-spotify; }
+.icon-weppo-tripadvisor { color: $color-tripadvisor; }
+.icon-weppo-google { color: $color-google; }
+.icon-weppo-whatsapp { color: $color-whatsapp; }
+
+.contact__sociallist .icon,
+.navigation__item--social .icon {
+  border-radius: px(4);
+}

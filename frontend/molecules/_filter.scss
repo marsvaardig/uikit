@@ -1,0 +1,118 @@
+@if $extension--products or $extension--properties {
+
+  @if($filter-color-heading != 'inherit')
+  {
+    // Override .content__inner h3
+    .filter__title.filter__title {
+      color: $filter-color-heading;
+    }
+  }
+
+  .filter__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &:last-child {
+      @include spacing(bottom);
+    }
+
+    // Nested lists
+    .filter__list {
+      padding-bottom: 0;
+
+      .filter__item {
+        padding-left: $filter-size + $spacing-s;
+      }
+    }
+  }
+
+  .filter__item {
+    border-bottom: 1px solid $filter-color-border;
+    padding: $spacing-s $spacing-s;
+
+    color: $filter-color-link;
+    background: $filter-color-background;
+    text-decoration: none;
+
+    &.checked {
+      color: $filter-color-link--active;
+      background: $filter-color-background--active;
+    }
+
+    &:hover,
+    &:active {
+      text-decoration: none;
+
+      background: $filter-color-background--hover;
+      color: $filter-color-link--hover;
+    }
+  }
+
+  .filter__single-choice,
+  .filter__multiple-choice {
+    display: flex;
+    align-items: center;
+
+    .filter__input {
+      flex-shrink: 0;
+
+      cursor: pointer;
+      width: $filter-size;
+      height: $filter-size;
+      margin: 0;
+      border: 1px solid;
+
+      &--checked::after {
+        content: "";
+        display: flex;
+        position: relative;
+        top: 1px;
+        left: 1px;
+
+        background: currentColor;
+        width: $filter-size - px(4);
+        height: $filter-size - px(4);
+      }
+    }
+
+    .filter__label {
+      cursor: pointer;
+      touch-action: manipulation;
+      padding-left: $spacing-s;
+    }
+  }
+
+  .filter__single-choice {
+    .filter__input {
+      border-radius: 100%;
+
+      &--checked::after {
+        border-radius: 100%;
+      }
+    }
+  }
+
+  .filter__list--minimized li:nth-child(1n+10):not(.filter__item_toggle)
+  {
+    @include visually-hidden();
+  }
+
+  .filter__list:not(.filter__list--minimized) .filter__item_toggle {
+    @include visually-hidden();
+  }
+
+  .filter__toggle {
+    @include reset();
+    color: $color-link;
+    text-decoration: underline;
+    padding-top: .5em;
+    padding-left: .5em;
+
+    &:hover {
+      color: $color-link--hover;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}

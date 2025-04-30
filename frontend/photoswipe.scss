@@ -1,0 +1,22 @@
+// PhotoSwipe
+$pswp__assets-path: '../../images/photoswipe/';
+
+@import "../../../../../../node_modules/photoswipe/src/css/main";
+@import "../../../../../../node_modules/photoswipe/src/css/default-skin/default-skin";
+@import "utilities/functions";
+
+.pswp .pswp__img {
+  border-radius: 0; // Override default img border radius
+}
+
+.pswp__caption {
+  min-height: px(56);
+}
+
+.pswp__caption__center {
+  font-size: px(18);
+  line-height: px(24);
+  padding: px(16);
+  max-width: 72ch;
+  text-align: center;
+}

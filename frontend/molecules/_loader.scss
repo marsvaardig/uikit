@@ -1,0 +1,42 @@
+.loader__overlay {
+  @include coverall($position: fixed);
+
+  display: none;
+  z-index: 9999;
+
+  background-color: rgba(0,0,0,.8);
+}
+
+.loader__spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  height: px(80);
+  width: px(80);
+
+  margin: (-(px(40))) 0 0 (-(px(40)));
+  opacity: 0;
+
+  border-radius: 100%;
+  border: px(8) solid #fff;
+
+  animation: pulsate 1s ease-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(.1);
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,30 @@
+.summary {
+  @include clearfix;
+  @include spacing(bottom, padding, 2);
+
+  // border: 1px solid red;
+}
+
+.summary__title.summary__title {
+  margin-top: 0;
+}
+
+.summary__attachments.summary__attachments {
+  // @include span(8 of 12);
+
+  .attachments__images {
+    @include spacing(top, margin);
+  }
+
+  .card-deck {
+    justify-content: flex-start;
+  }
+
+  .card-deck-wrapper.card-deck-wrapper {
+    padding-bottom: 0;
+  }
+}
+
+.summary__text {
+  max-width: $article-size-content;
+}

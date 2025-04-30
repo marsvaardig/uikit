@@ -1,0 +1,229 @@
+@if $calendar != false {
+  .calendar-wrapper {
+    position: relative;
+    font-size: 1rem;
+
+    .calendar-header {
+      padding: 1rem;
+      margin: -1rem -1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 9;
+      background: #fff;
+
+      form {
+        display: flex;
+        justify-content: center;
+        flex: 0 0 auto;
+        margin: 0 0 -.5rem -.5rem;
+      }
+
+      button {
+        margin: 0 0 .5rem .5rem;
+      }
+    }
+
+    .calendar-header-shade {
+      position: sticky;
+      top: calc(4.5rem + 2px);
+      z-index: 8;
+      height: 1px;
+      margin-top: -11px;
+      background: #fff;
+      box-shadow: 0 2px 5px 0 #000;
+      margin-bottom: 10px;
+    }
+
+    .calendar-select {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      & > * {
+        flex-grow: 1;
+        margin-bottom: .5rem;
+        margin-left: .5rem;
+      }
+    }
+
+    table,
+    tbody,
+    tr,
+    td {
+      @media (max-width: $calendar-breakpoint-max) {
+        display: block;
+      }
+    }
+
+    th {
+      @media (max-width: $calendar-breakpoint-max) {
+        display: none;
+      }
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: transparent;
+      padding: 0.75em 0.5em;
+      font-size: .875rem;
+    }
+
+    td {
+      border: 1px solid rgba(#000, .1);
+      padding: 0;
+      vertical-align: top;
+
+      @media (min-width: $calendar-breakpoint-min) {
+        width: calc(100% / 7);
+      }
+    }
+
+    .day {
+      display: block;
+      background: rgba(#000, .05);
+      font-size: .875rem;
+      padding: .35em .5em;
+    }
+
+    .no-events {
+      @media (max-width: $calendar-breakpoint-max) {
+        display: none;
+      }
+    }
+
+    .day-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      @media (min-width: $calendar-breakpoint-min) {
+        min-height: clamp(3rem, 10vw, 10rem);
+      }
+    }
+
+    .afspraken {
+      position: relative;
+      z-index: 1; // On top of outline of today
+      padding: .25rem;
+      font-size: .875rem;
+    }
+
+    .afspraak {
+      display: block;
+      color: $calendar-event-color;
+      background: $calendar-event-background;
+      border-radius: .25rem;
+      padding: .375rem .5rem;
+      line-height: 1.5rem;
+
+      &:not(:first-child) {
+        margin-top: .25rem;
+      }
+
+      &[href]:hover {
+        background: $calendar-event-hover;
+        text-decoration: none;
+      }
+    }
+
+    .day-name {
+      display: inline-block;
+      margin-right: .5em;
+
+      @media (min-width: $calendar-breakpoint-min) {
+        display: none;
+      }
+    }
+
+    .noRow {
+      td {
+        padding: .5em;
+        text-align: center;
+      }
+
+      @media (min-width: $calendar-breakpoint-min) {
+        display: none;
+      }
+    }
+
+    .today {
+      border-color: 1px solid $calendar-today-color;
+      outline: 2px solid $calendar-today-color;
+      outline-offset: -1px;
+
+      .day {
+        background: $calendar-today-color;
+      }
+    }
+
+    .opacity {
+      opacity: .5;
+      display: none; // Hide on mobile by default
+
+      // Display on full calendar view
+      @media (min-width: $calendar-breakpoint-min) {
+        display: table-cell;
+      }
+    }
+
+    .afspraak--multi {
+      @media (min-width: $calendar-breakpoint-min) {
+        &:not(.afspraak--start) {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          margin-left: calc(-.25rem - 1px);
+        }
+
+        &:not(.afspraak--end) {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          margin-right: calc(-.25rem - 1px);
+        }
+      }
+    }
+
+    .filler {
+      display: block;
+      width: 100%;
+      min-height: 1.5rem;
+
+      &:not(:first-child) {
+        margin-top: .25rem;
+      }
+    }
+
+    .calendar-extra {
+      max-width: 65ch;
+    }
+
+    .is-hidden.is-hidden {
+      display: none;
+    }
+
+    .anchor {
+      position: absolute;
+      top: -2rem;
+      width: 100%;
+      height: 1px;
+      background: transparent;
+      pointer-events: none;
+    }
+
+    .calendar-footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.5rem;
+
+      .collapsible-link-wrapper .heading {
+        margin-top: 0;
+      }
+    }
+  }
+}

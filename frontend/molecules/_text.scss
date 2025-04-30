@@ -1,0 +1,99 @@
+.text--center {
+  &, th, td {
+    text-align: center;
+  }
+}
+
+// Override to use this class on .content__inner h2
+.text--muted.text--muted {
+  color: $text-muted;
+}
+
+.text--large {
+  font-size: px(18);
+}
+
+.text--larger {
+  font-size: px(24);
+}
+
+.text--largest {
+  font-size: px(32);
+}
+
+.text--small {
+  font-size: px(15);
+}
+
+.text--smaller {
+  font-size: px(14);
+}
+
+.text--smallest {
+  font-size: px(13);
+}
+
+.text--bold {
+  font-weight: $weight-bold;
+}
+
+.text--narrow {
+  max-width: $bravo;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@include breakpoint($alfa) {
+  .text--nowrap {
+    white-space: nowrap;
+  }
+}
+
+.text--uppercase {
+  text-transform: uppercase;
+}
+
+@if($color-accent) {
+  .text--accent.text--accent.text--accent {
+    color: $color-accent;
+
+    // Links get same accent color
+    a {
+      color: $color-accent;
+
+      &:hover,
+      &:active {
+        color: darken($color-accent, 15%);
+      }
+    }
+  }
+}
+
+.text--ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text--block {
+  display: block;
+}
+
+.text--separator {
+  span:after {
+    content: " &";
+  }
+
+  span:last-of-type:after {
+    content: "";
+  }
+}
+
+.balance-text {
+  text-wrap: balance;
+}
+
+.balance-text--center {
+  margin-left: auto;
+  margin-right: auto;
+}

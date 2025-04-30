@@ -1,0 +1,163 @@
+@if $extension--products or $extension--properties {
+.products {
+
+}
+
+.products__sidebar {
+  .heading {
+    margin-top: 0;
+    margin-bottom: $spacing-m;
+    text-align: left;
+
+    @include breakpoint($charlie) {
+      @include visually-hidden();
+    }
+  }
+
+  h3:first-of-type {
+    margin-top: 0;
+  }
+}
+
+.products__sidebar {
+  @include span(3 of 12, $charlie);
+
+  & + .products__main {
+    @include span(9 of 12, $charlie);
+  }
+}
+
+.products__main {
+  .article__title {
+    font-size: $size-h2;
+  }
+}
+
+.products--columns {
+  @include breakpoint($charlie) {
+    column-count: 2;
+    column-gap: $grid-padding * 1.5;
+    break-inside: avoid-column;
+  }
+}
+
+.products__description {
+  @include spacing(bottom, margin);
+}
+
+.product__matrix {
+  @include spacing(bottom, margin);
+}
+
+.product__cta {
+  @include spacing(bottom, margin, 2);
+
+  .product__quantity {
+    justify-content: center;
+  }
+}
+
+.product__price {
+  display: grid;
+  grid-gap: $grid-padding;
+  justify-items: center;
+
+  margin-left: auto;
+  margin-right: auto;
+  max-width: max-content;
+
+  text-align: center;
+
+  .tag {
+    @include breakpoint($alfa) {
+      grid-column: 1 / 3;
+    }
+    max-width: max-content;
+  }
+}
+
+.product__quantity {
+  display: flex;
+  font-size: $font-size-small;
+
+  .btn {
+    margin-left: $spacing-m;
+  }
+
+  input {
+    background-color: white;
+    border: 1px solid $color-grey;
+    border-right: 0 none;
+    border-left: 0 none;
+    text-align: center;
+
+    &:focus {
+      outline: 0;
+      border: 1px solid $color-link;
+    }
+  }
+
+  button {
+    background-color: white;
+    border: 1px solid $color-grey;
+    width: px(32);
+    color: $color-link;
+    text-align: center;
+    text-decoration: none;
+
+    &:focus {
+      outline: 0;
+      border: 1px solid $color-link;
+    }
+
+    &:first-of-type {
+      border-radius: px(4) 0 0 px(4);
+    }
+
+    &:last-of-type {
+      border-radius: 0 px(4) px(4) 0;
+    }
+  }
+}
+
+.product_card__quantity,
+.table {
+  .product__volume_discount {
+    margin-top: $spacing-s;
+    font-size: $font-size-small;
+    line-height: 1.5em;
+    color: $color-muted;
+  }
+}
+
+// For brochures filter
+.article__image_gallery + .pager {
+  border-top: 0 none;
+  padding-top: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @include spacing(bottom);
+
+  .pager__next,
+  .pager__previous {
+    padding: 0;
+  }
+
+  @include breakpoint($alfa, $alfa--plus-min) {
+    padding: 0;
+    margin: 0;
+
+    .pager__next,
+    .pager__previous {
+      width: 48%;
+
+      a {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+}

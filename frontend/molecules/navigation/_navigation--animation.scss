@@ -1,0 +1,100 @@
+%menuExtender {
+  @import "../../../../../../../../node_modules/menu-animation/src/scss/menu-animation";
+}
+
+@mixin pseudoAfter() {
+  position: absolute;
+  content: " ";
+  left: $navigation-item-margin;
+  right: $navigation-item-margin;
+  bottom: 0;
+  height: px(3);
+  background: $navigation-color-border;
+  @include transition(opacity);
+}
+
+@if $navigation == 'animation' {
+  html {
+    @extend %menuExtender;
+  }
+
+  .navigation--header {
+    @include breakpoint($header-breakpoint) {
+      border-top: 0 none;
+      border-bottom: 0 none;
+    }
+
+    .navigation__list {
+      @include breakpoint($header-breakpoint) {
+        width: auto;
+        flex-grow: 0;
+        margin: auto 0 auto auto;
+
+        &:not(.ma-initiated) {
+          .navigation__link {
+            &:focus,
+            &:hover {
+              &::after {
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .navigation__item {
+      &.active a,
+      &.active a:focus,
+      &.active a:hover {
+        border-left: $navigation-size-border solid $navigation-color-border--active;
+      }
+
+      @include breakpoint($header-breakpoint) {
+        &.active a,
+        &.active a:focus,
+        &.active a:hover {
+          border-left: none;
+
+          &::after {
+            opacity: 1;
+            background: $navigation-color-border--active;
+          }
+        }
+      }
+
+      @include breakpoint($header-breakpoint) {
+        margin: 0;
+      }
+    }
+
+    .navigation__link {
+      @include breakpoint($bravo) {
+        text-align: center;
+        justify-content: center;
+      }
+
+      @include breakpoint($header-breakpoint) {
+        padding: calc($navigation-item-margin / 2) $navigation-item-margin;
+
+        &::after {
+          @include pseudoAfter();
+          opacity: 0;
+        }
+      }
+    }
+
+    .ma-fx {
+      display: none;
+
+      @include breakpoint($header-breakpoint) {
+        display: block;
+      }
+
+      &::after {
+        @include pseudoAfter();
+        opacity: .66;
+      }
+    }
+  }
+}

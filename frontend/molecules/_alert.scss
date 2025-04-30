@@ -1,0 +1,35 @@
+// Alerts
+
+@mixin alert-variant($background, $border, $body-color) {
+  background-color: $background;
+  border-color: $border;
+  color: $body-color;
+}
+
+//
+// Base styles
+//
+
+.alert {
+  padding: $alert-padding-y $alert-padding-x;
+  margin-bottom: $spacer-y;
+  border: $alert-border-width solid transparent;
+  @include border-radius($alert-border-radius);
+}
+
+// Alternate styles
+//
+// Generate contextual modifier classes for colorizing the alert.
+
+.alert-success {
+  @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text);
+}
+.alert-danger {
+  @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);
+}
+.alert-error {
+  @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);
+}
+.alert-message {
+  @include alert-variant($alert-message-bg, $alert-message-border, $alert-message-text);
+}

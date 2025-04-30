@@ -1,0 +1,228 @@
+.navigation {
+  width: 100%;
+  display: flex;
+
+  @if($navigation-color-background == transparent)
+  {
+    @include color($navigation-color-link, $header-color-background, white);
+  } @else {
+    @include color($navigation-color-link, $navigation-color-background, white);
+  }
+
+  @if($header-max-width == false and $navigation-color-background != transparent)
+  {
+    background: $navigation-color-background;
+  }
+}
+
+.navigation--header {
+  border-top: 1px solid $navigation-color-border;
+  border-bottom: 1px solid $navigation-color-border;
+  @include property(text-transform, $navigation-text-transform);
+  @include property(font-family, $navigation-font-family);
+  @include property(font-size, $navigation-font-size);
+  @include property(font-weight, $navigation-font-weight);
+  @include property(line-height, $navigation-line-height);
+  @include property(letter-spacing, $navigation-letter-spacing);
+}
+
+@if ($navigation-highlight-last-of-type) {
+  @include breakpoint($header-breakpoint) {
+    .navigation--header {
+      .navigation__item:last-of-type .navigation__link {
+        @include font-smoothing();
+        border-bottom: 0 none;
+        padding: $navigation-highlight-padding;
+        background: $navigation-highlight-background;
+        border-radius: $navigation-highlight-radius;
+
+        @if ($navigation-highlight-color != default) {
+          color: $navigation-highlight-color;
+        } @else {
+          @include color(false, $navigation-highlight-background, #fff);
+        }
+
+        @include property(font-weight, $navigation-highlight-font-weight);
+        @include property(box-shadow, $navigation-highlight-box-shadow);
+
+        @include hover {
+          background-color: $navigation-highlight-hover-background;
+        }
+      }
+    }
+  }
+}
+
+.navigation__list {
+  max-width: $navigation-max-width;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex-grow: 1;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @include breakpoint($alfa) {
+    flex-direction: row;
+    flex-flow: wrap;
+  }
+
+  @include breakpoint($bravo) {
+    display: flex;
+  }
+}
+
+.navigation__item {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+
+  border-top: 1px solid $navigation-color-border;
+
+  &:nth-child(1) {
+    border-top: 0 none;
+  }
+
+  // Active nav items
+  a:hover {
+    @if($navigation-color-background--hover == transparent)
+    {
+      @include color($navigation-color-link--hover, $header-color-background, white);
+    } @else {
+      @include color($navigation-color-link--hover, $navigation-color-background--hover, white);
+    }
+
+    background-color: $navigation-color-background--hover;
+    text-decoration: none;
+  }
+
+  &.active a,
+  &.active a:hover,
+  &.active a:focus {
+    @if($navigation-color-background--active == transparent)
+    {
+      @include color($navigation-color-link--active, $header-color-background, white);
+    } @else {
+      @include color($navigation-color-link--active, $navigation-color-background--active, white);
+    }
+    @include property(font-weight, $navigation-font-weight--active);
+
+    background-color: $navigation-color-background--active;
+    text-decoration: none;
+  }
+
+  @include breakpoint($alfa) {
+    width: 50%;
+
+    &:nth-child(2) {
+      border-top: 0 none;
+    }
+
+    &:nth-child(even) {
+      border-left: 1px solid $navigation-color-border;
+    }
+  }
+
+  @include breakpoint($bravo) {
+    width: 33%;
+
+    border-left: 1px solid $navigation-color-border;
+
+    &:nth-child(1) {
+      border-left: 0 none;
+    }
+  }
+
+  @include breakpoint($bravo, $charlie-min) {
+    &:nth-child(3) {
+      border-top: 0 none;
+    }
+
+    // 4 or 5 menu items? Put them on a single row
+    &:first-child:nth-last-child(4),
+    &:first-child:nth-last-child(5),
+    &:first-child:nth-last-child(4) ~ li,
+    &:first-child:nth-last-child(5) ~ li {
+      width: auto;
+
+      &:nth-child(4),
+      &:nth-child(5) {
+        border-top: 0 none;
+      }
+    }
+
+    // Remove left border from all third items when having 6 menu items
+    &:first-child:nth-last-child(n + 6),
+    &:first-child:nth-last-child(n + 6) ~ li {
+      &:nth-child(3n + 1) {
+        border-left: 0 none;
+      }
+    }
+  }
+
+  @include breakpoint($charlie) {
+    display: flex;
+
+    flex-grow: $navigation-item-flex-grow;
+    width: auto;
+
+    // 8 menu items? Put them in two rows
+    @include at-least(8) {
+      width: 25%;
+
+      &:nth-child(3),
+      &:nth-child(4) {
+        border-top: 0 none;
+      }
+
+      &:nth-child(4n+1) {
+        border-left: none;
+      }
+    }
+
+    @include at-most(7) {
+      border-top: 0 none;
+    }
+  }
+
+  @include breakpoint($header-breakpoint) {
+
+    // 8 menu items? Put them on a single row
+    @include at-least(8) {
+      width: auto;
+    }
+
+    // Reset all borders
+    &,
+    &:nth-child(n) {
+      border: 0 none;
+    }
+  }
+}
+
+.navigation__link {
+  display: flex;
+  flex-grow: 1;
+
+  align-items: center;
+
+  padding: $navigation-item-padding;
+
+  text-decoration: none;
+
+  @include breakpoint(0, $header-breakpoint-min) {
+    height: 100%;
+  }
+
+  @include breakpoint($header-breakpoint) {
+    flex-grow: 0;
+  }
+}

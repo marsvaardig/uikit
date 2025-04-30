@@ -1,0 +1,342 @@
+@if $extension--pager-toc {
+
+  // Article modifier so we can assign flexbox etc.
+  .article--toc {
+    display: flex;
+    flex-direction: column-reverse;
+    max-width: calc(#{$pager-toc-page-max-width - (#{$grid-padding * 2})});
+    margin-right: auto;
+    margin-left: auto;
+
+    @include breakpoint($charlie) {
+      flex-direction: row;
+    }
+  }
+
+  // The dov holding the actual TOC
+  .article__toc {
+    position: absolute;
+    @include spacing(top, margin, 2, $minus: 4);
+    font-size: px(16);
+    content: 'mobile';
+
+    // Adjust nested article div (only for page-toc websites)
+    & ~ .article {
+      margin-right: auto;
+      margin-left: auto;
+      width: 100%;
+
+      @include breakpoint($charlie) {
+        width: calc(100% - #{$pager-toc-width1 + $pager-toc-margin-right});
+      }
+
+      @include breakpoint($delta) {
+        width: calc(100% - #{$pager-toc-width2 + $pager-toc-margin-right});
+      }
+    }
+
+    @include breakpoint($charlie) {
+      position: static;
+      top: $grid-padding;
+      width: $pager-toc-width1;
+      margin-top: 0;
+      height: auto;
+      align-self: flex-start;
+      margin-right: $pager-toc-margin-right;
+      background: $pager-toc-background;
+      border-radius: .5rem;
+      border: 1px solid $pager-toc-darker-accent;
+      content: 'desktop';
+    }
+
+    @include breakpoint($delta) {
+      width: $pager-toc-width2;
+    }
+
+    &.is-open {
+      // Position the TOC on mobile so it's actually visible
+      @include breakpoint(0, $charlie-min) {
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: 0;
+        z-index: 0;
+        margin: 0 0 -.25rem;
+        padding: 0 .5rem 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        max-height: calc(100vh - #{$pager-toc-height});
+
+        & > .toc-list {
+          max-height: 100%;
+          overflow: auto;
+          display: block;
+          border-radius: .5rem;
+          box-shadow: 0 0 4px 0 rgba(0, 0, 0, .1), 0 0 24px 0 rgba(0, 0, 0, .2);
+        }
+      }
+    }
+
+    // Reset default list styling
+    ul {
+      padding-left: 0;
+      list-style: none;
+    }
+
+    // Borders
+    ul.toc-list > li {
+      &:first-child {
+        border-top-right-radius: inherit;
+        border-top-left-radius: inherit;
+      }
+
+      &:last-child {
+        border-bottom-right-radius: inherit;
+        border-bottom-left-radius: inherit;
+      }
+
+      ul li,
+      &:not(:first-child) {
+        border-top: 1px solid $pager-toc-darker-accent;
+      }
+    }
+
+    .is-hidden {
+      display: none;
+    }
+
+    // Active element
+    .is-active > span a {
+      text-decoration: none;
+      font-weight: $weight-bold;
+    }
+
+    // Links
+    a {
+      display: block;
+      border-radius: inherit;
+      padding: .6em 1em;
+      text-indent: calc(var(--level, 0) * 1em);
+      @include transition(background);
+
+      @include hover() {
+        background: $pager-toc-hover;
+      }
+    }
+  }
+
+  // The list
+  .article__toc > .toc-list {
+    background: $pager-toc-background;
+    font-size: px(15);
+    display: none;
+    border-radius: inherit;
+
+    @include breakpoint($charlie) {
+      position: static;
+      display: block;
+      padding: 0;
+      width: 100%;
+    }
+  }
+
+  // Bottom of page TOC controls (prev, next, pages, hamburger etc.)
+  .toc-controls {
+    position: sticky;
+    margin-top: $grid-padding * 1.5;
+    margin-left: -($grid-padding);
+    bottom: -1px;
+    z-index: 99;
+    padding: .5em;
+    width: calc(100% + #{$grid-padding * 2});
+    height: $pager-toc-height;
+    background: $pager-toc-accent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    border: 1px solid $pager-toc-darker-accent;
+
+    @include breakpoint($charlie) {
+      position: static;
+      width: 100%;
+      max-width: $article-size-content;
+      margin-right: auto;
+      margin-left: auto;
+      border-radius: 1em;
+
+      [data-toggle-toc].toc-button {
+        display: none;
+      }
+    }
+
+    .toc-button {
+      color: inherit;
+      background: #fff;
+      border: 1px solid darken($pager-toc-accent, 15%);
+      padding: .5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: px(40);
+      border-radius: .25rem;
+      text-decoration: none;
+      line-height: 1.25;
+      cursor: pointer;
+      @include transition(background);
+
+      @include hover() {
+        background: $pager-toc-darker-accent;
+      }
+    }
+
+    .toc-button--previous,
+    .toc-button--next {
+      width: px(40);
+      height: px(40);
+
+      @include pseudo(before) {
+        top: calc(50% - .5rem);
+        width: 1rem;
+        height: 1rem;
+        border: 3px solid;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        border-radius: 3px;
+        opacity: .8;
+      }
+    }
+
+    .toc-button--previous {
+      &::before {
+        left: calc(50% - .25rem);
+        transform: rotate(-135deg);
+      }
+    }
+
+    .toc-button--next {
+      &::before {
+        left: calc(50% - .75rem);
+        transform: rotate(45deg);
+      }
+    }
+
+    .toc-burger-close {
+      position: relative;
+      width: 1rem;
+      height: 1rem;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: .5rem;
+      opacity: .8;
+    }
+
+    .toc-burger,
+    .toc-close {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 1rem;
+      height: 1rem;
+      @include transition(opacity, transform);
+    }
+
+    .toc-burger {
+      border-top: 2px solid;
+      border-bottom: 2px solid;
+      opacity: 1;
+      transform: scale(1);
+
+      @include pseudo(before) {
+        top: calc(50% - 1px);
+        left: 0;
+        height: 0;
+        width: 100%;
+        border-top: 2px solid;
+      }
+    }
+
+    .toc-close {
+      opacity: 0;
+      transform: scale(.5);
+
+      &::before,
+      &::after {
+        position: absolute;
+        display: block;
+        content: " ";
+        top: calc(50% - 1px);
+        left: 0;
+        height: 0;
+        width: 100%;
+        border-top: 2px solid;
+      }
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+      }
+    }
+
+    // Open state
+    [data-toggle-toc].is-open {
+      .toc-burger {
+        opacity: 0;
+        transform: scale(.5);
+      }
+
+      .toc-close {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  // Bottom page indicator (1/X)
+  .toc-page {
+    display: inline-flex;
+    align-items: center;
+    gap: .25em;
+  }
+
+  .toc-page__large {
+    font-size: 2em;
+  }
+
+  .article--toc {
+    // No outset when there's no space for it
+    .article__outset.article__outset {
+      @include breakpoint(0, ($article-size-outset + $pager-toc-width2 + ($grid-padding * 3))) {
+        margin-left: 0;
+        max-width: 100%;
+      }
+    }
+
+    // Article grid special styling inside TOC
+    .article_grid.article_grid--outer-full-width:not(.ag-legacy),
+    .article_grid.article_grid--outer-widest-width:not(.ag-legacy),
+    .article_grid.article_grid--outer-wider-width:not(.ag-legacy),
+    .article_grid.article_grid--default-width:not(.ag-legacy) {
+      @include breakpoint($charlie) {
+        max-width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      @include breakpoint(($article-size-content + ($grid-padding * 2)) + $pager-toc-width2 + $pager-toc-margin-right) {
+        max-width: calc((100vw - var(--scrollbar-width) - ($grid-padding * 2)) - $pager-toc-width2 - $pager-toc-margin-right);
+      }
+
+      // There's a small (-scrollbar-width) jump which we can't solve without rewriting this entire thing to display: grid
+      // @TODO: See above; we might want to do this later?
+      @include breakpoint($width-maximum-content) {
+        max-width: calc(($width-maximum-content - ($grid-padding * 2)) - ($pager-toc-width2) - $pager-toc-margin-right);
+      }
+    }
+  }
+}

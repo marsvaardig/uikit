@@ -1,0 +1,46 @@
+$site: 'foobar';
+
+// Base
+// ==========================================================================
+
+@import "../utilities/variables/base";
+
+
+// Root variables
+// ==========================================================================
+
+$color-brand: #424242;
+$color-light-shade: #f6f6f7;
+$color-light-accent: #61727b;
+$color-dark-accent: #102027;
+$color-dark-shade: #1b1b1b;
+
+// Wrapper
+$wrapper-framed: true;
+
+// Widths
+$width-maximum: px(2560);
+$width-maximum-content: px(1240);
+
+// Header
+$header-max-width: $width-maximum-content;
+
+// Organization
+$organization-logo-height: px(25);
+$organization-logo-width: px(186);
+$organization-logo-padding: (
+  responsive: true,
+  top: $grid-padding,
+  right: $grid-padding,
+  bottom: $grid-padding,
+  left: $grid-padding
+);
+
+// Content
+$article-grid: true;
+
+
+// Styling
+// ==========================================================================
+
+@import "../default.scss";

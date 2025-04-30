@@ -1,0 +1,52 @@
+.card--bottom-left,
+.card--bottom-center {
+  border: 0 none;
+  color: $card--image-color-text;
+
+  @if (lightness($card--image-color-text) > 50) {
+    @include font-smoothing;
+  }
+
+  .card-block {
+    @include spacing(all, padding, 0.5);
+    align-items: inherit;
+    @include property("background", $card--image-overlay);
+
+    @if (lightness($card--image-color-text) > 50) {
+      text-shadow: $card--image-text-shadow;
+    }
+
+    text-align: left;
+  }
+
+  .card__title {
+    font-size: $card-size-title-font;
+  }
+
+  .card__subtitle {
+    color: $card--image-color-subtitle;
+  }
+}
+
+// Override card molecule default
+.card--bottom-left,
+.card--bottom-center {
+  a {
+    @include hover {
+      .card-block {
+        background-color: $card--image-overlay-hover-background-color;
+      }
+
+      .card__title,
+      .card__subtitle {
+        color: $card--image-color-text--hover;
+      }
+    }
+  }
+}
+
+.card--bottom-center {
+  .card-block {
+    text-align: center;
+  }
+}

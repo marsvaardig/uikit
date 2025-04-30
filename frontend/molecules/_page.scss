@@ -1,0 +1,4 @@
+.page__header.page__header--title,
+.page__header.page__header--description {
+  @include spacing(bottom);
+}

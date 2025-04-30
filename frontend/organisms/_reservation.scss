@@ -1,0 +1,62 @@
+@if $extension--reservation {
+.reservation-default {
+  .grid--narrow {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.reservation-default .article {
+  h2 {
+    text-align: center;
+  }
+
+  .grid--narrow {
+    @include spacing(bottom);
+  }
+
+  .form__group {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.reservations--persons {
+  text-align: center;
+}
+
+.reservations--persons .radiobutton__label {
+  min-width: px(55);
+  margin-bottom: px(6);
+}
+
+.reservations--time .radiobutton__label {
+  min-width: px(105);
+  text-align: center;
+}
+
+// X in disabled radiobutton
+.reservations--date,
+.reservations--time {
+  .radiobutton__label--disabled {
+    position: relative;
+  }
+  .radiobutton__label--disabled:after,
+  .radiobutton__label--disabled:before {
+    content: '';
+    height: 100%;
+    border-left: 2px solid rgba(0,0,0, .05);
+    position: absolute;
+    left: 50%;
+    top: 0;
+  }
+
+  .radiobutton__label--disabled:after {
+    transform: rotate(45deg);
+  }
+
+  .radiobutton__label--disabled:before {
+    transform: rotate(-45deg);
+  }
+}
+}

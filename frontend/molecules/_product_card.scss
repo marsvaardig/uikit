@@ -1,0 +1,208 @@
+// Extends Bootstrap Card layout
+@if $extension--products {
+.product_card-deck-wrapper {
+  margin: 0 auto;
+}
+
+.product_card {
+  padding-bottom: calc($product-card-deck-spacing / 2);
+  margin-bottom: calc($product-card-deck-spacing / 2);
+  border-bottom: 1px solid $product_card-color-border;
+
+  @include breakpoint($bravo) {
+    margin-bottom: $product-card-deck-spacing;
+    padding-bottom: 0;
+    border: 0 none;
+  }
+}
+
+.product_card-block {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.product_card__title {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column; // Fix for IE 10
+
+  // Override .content__inner h2 & .content__inner > .module h2
+  &.product_card__title.product_card__title {
+    margin: calc($grid-padding / 2) 0;
+    text-align: left;
+  }
+
+  font-size: $font-size;
+}
+
+.product_card__title_tags {
+  margin-top: $spacing-s;
+}
+
+// @TODO: Do we need this ratio on here when the image is enough?
+.product_card__image {
+  position: relative;
+
+  &.product_card__image--1-to-1 {
+    @include ratio-block(1 to 1);
+  }
+
+  @if $product_card-passepartout {
+    padding: calc($grid-padding / 2);
+  }
+
+  @include breakpoint($bravo) {
+    @if $product_card-passepartout {
+      padding: $grid-padding;
+    }
+  }
+
+  img {
+    // IE11 - http://stackoverflow.com/questions/36822370/flexbox-on-ie11-image-stretched-for-no-reason
+    max-width: 100%;
+    flex-shrink: 0;
+
+    @include ratio-block(1 to 1);
+
+    @if $product_card-border-radius and not $product_card-passepartout {
+      border-radius: $product_card-border-radius;
+    }
+  }
+
+  .tag {
+    @include fluid-property(font-size, $tag-font-size - px(4), $tag-font-size, $alfa, $bravo);
+    z-index: 10;
+  }
+
+  .tag--discount {
+    position: absolute;
+    bottom: $spacing-s;
+    left: $spacing-s;
+  }
+
+  .tag--new {
+    position: absolute;
+    top: $spacing-s;
+    right: $spacing-s;
+  }
+
+  .tag--stock {
+    position: absolute;
+    top: $spacing-s;
+    left: $spacing-s;
+  }
+}
+
+.js-enabled .product_card__image {
+  border: 1px solid transparent;
+
+  &:hover {
+    cursor: pointer;
+    border-color: $color-grey;
+    border-radius: $product_card-border-radius;
+  }
+}
+
+.product_card__image--placeholder {
+  @include ratio-block(1 to 1);
+
+  background-color: $color-grey-light;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .icon {
+    width: 50%;
+    height: 50%;
+
+    color: $color-grey-dark;
+  }
+}
+
+.product_card__details {
+  display: flex;
+}
+
+.product_card__price {
+  display: flex;
+  align-self: center;
+  flex: 1;
+
+  del {
+    margin-right: px(8);
+  }
+}
+
+.product_card__quantity {
+  min-height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  .product__volume_discount {
+    margin-bottom: $spacing-s;
+  }
+
+  .product__quantity .btn {
+    margin-left: auto;
+  }
+}
+
+.product_card-deck {
+  display: flex;
+  flex-flow: row wrap;
+
+  .product_card {
+    float: left; // Flexbox fallback
+    width: 100%;
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: column;
+
+    @include breakpoint($alfa, $bravo) {
+      flex-direction: row;
+      align-items: center;
+
+      .product_card__image {
+        width: 30%;
+        flex-shrink: 0;
+        margin-right: calc($grid-padding / 2);
+      }
+    }
+
+    @include gallery(6, $bravo to $charlie-min, $gutter: $product-card-deck-spacing);
+    @include gallery(4, $charlie, $gutter: $product-card-deck-spacing, $defaults: false);
+  }
+}
+
+.product_card-deck--center {
+  @include breakpoint($charlie) {
+    justify-content: center;
+  }
+}
+
+.product_card-deck--two,
+.module.products--twopack {
+  .product_card {
+    @include gallery(6, $charlie, $gutter: $product-card-deck-spacing, $defaults: false);
+  }
+}
+
+.product_card-deck--four,
+.module.products--fourpack {
+  .product_card {
+    @include gallery(3, $charlie, $gutter: $product-card-deck-spacing, $defaults: false);
+  }
+}
+
+.products__sidebar + .products__main {
+  .product_card-deck--four {
+    .product_card {
+      @include gallery(4, $charlie, $gutter: $product-card-deck-spacing, $defaults: false);
+      @include gallery(3, $delta, $gutter: $product-card-deck-spacing, $defaults: false);
+    }
+  }
+}
+}

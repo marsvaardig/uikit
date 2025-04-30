@@ -1,0 +1,757 @@
+// Extends Bootstrap Card layout
+
+.card-deck-wrapper {
+  margin: 0 auto;
+}
+
+// Descendants pages (see com:wepo.view.articles)
+.card-deck-wrapper--descendants {
+  @include spacing(bottom, margin, 2);
+}
+
+.card-deck-wrapper--toc {
+  @include spacing(vertical, margin, 1);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  text-align: center;
+
+  color: $card-color-text;
+  background-color: $card-color-background;
+
+  @if $card-border {
+    border: $card-size-border solid $card-color-border;
+  }
+
+  border-radius: $card-size-border-radius;
+
+  @if (lightness($card-color-text) > 50) {
+    @include font-smoothing;
+  }
+
+  a {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: inherit;
+    min-height: 100%;
+    border-radius: inherit;
+    @include property(overflow, $card-anchor-overflow);
+  }
+}
+
+.card--link {
+  @if $card-animation-time {
+    transition: border-color $card-animation-time ease;
+
+    .card-block,
+    .card__image,
+    .card__subtitle {
+      @include property(transition, $card-transition);
+      transition: color round($card-animation-time / 1.25) ease;
+      transition: background-color round($card-animation-time / 1.25) ease;
+    }
+
+    a {
+      overflow: hidden; // Hide overflowing content for zooming image on hover
+    }
+  }
+
+  a {
+    text-decoration: none;
+
+    @if $card-shadow {
+      box-shadow: $card-link-shadow;
+      transition: all 150ms ease;
+
+      @include hover {
+        box-shadow: $card-link-shadow--hover;
+      }
+    }
+
+    @include hover {
+      border-color: $card-color-border--hover;
+
+      .card-block,
+      .card__image {
+        background-color: $card-color-background--hover;
+        color: $card-color-text--hover;
+
+        &:has(img[src*="brandfetch"])
+        {
+          background-color: white;
+        }
+
+        @if (lightness($card-color-text--hover) > 50) {
+          @include font-smoothing;
+        }
+      }
+
+      .card__title {
+        @include property(text-decoration, $card-text-decoration-title--hover);
+        @include property(color, $card-title-hover-color);
+      }
+
+      .card__subtitle {
+        color: $card-color-subtitle--hover;
+
+        @if (lightness($card-color-subtitle--hover) > 50) {
+          @include font-smoothing;
+        }
+      }
+    }
+  }
+}
+
+.card__content {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.card--borderless {
+  border: 0 none;
+}
+
+@if ($card-overlay-block) {
+  .card--1-to-1,
+  .card--2-to-3,
+  .card--3-to-1,
+  .card--3-to-2,
+  .card--4-to-3,
+  .card--16-to-9 {
+    a {
+      @include coverall();
+    }
+
+    .card__content {
+      display: flex;
+      flex-direction: column;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .card__image {
+      flex-grow: 1;
+    }
+  }
+
+  .card--1-to-1 {
+    @include ratio-block(1 to 1, false);
+  }
+
+  .card--2-to-3 {
+    @include ratio-block(2 to 3, false);
+  }
+
+  .card--3-to-1 {
+    @include ratio-block(3 to 1, false);
+  }
+
+  .card--3-to-2 {
+    @include ratio-block(3 to 2, false);
+  }
+
+  .card--4-to-3 {
+    @include ratio-block(4 to 3, false);
+  }
+
+  .card--16-to-9 {
+    @include ratio-block(16 to 9, false);
+  }
+} @else {
+  .card--1-to-1 .card__image {
+    @include ratio-block(1 to 1);
+  }
+
+  .card--2-to-3 .card__image {
+    @include ratio-block(2 to 3);
+  }
+
+  .card--3-to-1 .card__image {
+    @include ratio-block(3 to 1);
+  }
+
+  .card--3-to-2 .card__image {
+    @include ratio-block(3 to 2);
+  }
+
+  .card--4-to-3 .card__image {
+    @include ratio-block(4 to 3);
+  }
+
+  .card--16-to-9 .card__image {
+    @include ratio-block(16 to 9);
+  }
+}
+
+.card__image {
+  img {
+    width: 100%;
+  }
+
+  img[src*="brandfetch"] {
+    aspect-ratio: 1/1;
+    object-fit: contain;
+  }
+}
+
+.card--3-to-2 {
+  .card__image {
+    img[src*="brandfetch"] {
+      aspect-ratio: 3/2;
+    }
+  }
+}
+
+.card__image_placeholder {
+  color: $card-color-text;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+
+  @include hover {
+    color: $card-color-text--hover;
+  }
+}
+
+.card__title {
+  @include property(font-family, $card-title-font-family);
+  @include property(text-transform, $card-text-transform-title);
+  @include property(text-decoration, $card-text-decoration-title);
+  @include property(font-weight, $card-title-font-weight);
+  @include property(font-size, $card-title-font-size);
+  @include property(line-height, $card-title-line-height);
+  @include property(color, $card-title-color);
+  @include property(text-shadow, $card-title-text-shadow);
+
+  &--icon {
+    display: flex;
+    align-self: flex-start;
+
+    .icon {
+      margin-right: $spacing-m;
+    }
+  }
+}
+
+.card__subtitle {
+  @if ($card-overlay-block == false) {
+    @include content-block($spacing-xs, top);
+  }
+
+  font-size: $card-size-subtitle-font;
+  color: $card-color-subtitle;
+  @include property(text-transform, $card-text-transform-subtitle);
+  @include property(line-height, $card-subtitle-line-height);
+  @include property(margin-top, $card-subtitle-margin-top);
+}
+
+.card-block {
+  padding: $card-spacer-x;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+
+  *:not(.balance-text) {
+    // IE11 - http://stackoverflow.com/questions/36822370/flexbox-on-ie11-image-stretched-for-no-reason
+    max-width: 100%;
+  }
+
+  justify-content: center;
+  align-items: center;
+
+  @if $card-size-block-font == 'responsive' {
+    @include breakpoint($bravo) {
+      font-size: $size-h3 - px(2);
+    }
+
+    @include breakpoint($charlie) {
+      font-size: $size-h3 - px(1);
+    }
+
+    @include breakpoint($delta) {
+      font-size: $size-h3;
+    }
+  }
+}
+
+.card-image {
+  @if $card-border and $card-size-border == 1px {
+    border-radius: $card-size-border-radius;
+  }
+
+  // IE11 - http://stackoverflow.com/questions/36822370/flexbox-on-ie11-image-stretched-for-no-reason
+  max-width: 100%;
+  flex-shrink: 0;
+}
+
+.card--image {
+  background-color: transparent;
+
+  .card-block {
+    @include property(backdrop-filter, $card-block-backdrop-filter);
+
+    @if ($card-overlay-block) {
+      position: absolute;
+      background-color: $card-color-background;
+
+      @if $card-size-block-padding == 'responsive' {
+        @include spacing(all, padding, 0.5);
+      } @else {
+        padding: $spacing-s $spacing-xs;
+
+        @include breakpoint($alfa--plus) {
+          padding: $card-size-block-padding;
+        }
+      }
+
+      @if $card-size-block-spacing == 'responsive' {
+        $spacing: spacing(0.5);
+
+        bottom: $spacing;
+        left: $spacing;
+        right: $spacing;
+
+        @include breakpoint($bravo) {
+          $spacing: spacing(0.5);
+
+          bottom: $spacing;
+          left: $spacing;
+          right: $spacing;
+        }
+
+        @include breakpoint($delta) {
+          $spacing: spacing(0.5);
+
+          bottom: $spacing;
+          left: $spacing;
+          right: $spacing;
+        }
+      } @else {
+        bottom: $card-size-block-spacing;
+        left: $card-size-block-spacing;
+        right: $card-size-block-spacing;
+      }
+
+      @if($card-size-block-spacing != 0)
+      {
+        border-radius: $card-size-border-radius;
+      }
+    }
+  }
+  @if ($card--image-color-title) {
+    .card__title {
+      color: $card--image-color-title;
+    }
+  }
+}
+
+.card-deck {
+  justify-content: $card-deck-justify;
+  display: flex;
+  flex-flow: row wrap;
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: -($card-deck-gutter);
+
+  &[data-max-columns='true'] {
+    justify-content: flex-start;
+  }
+
+  .card {
+    float: left; // Flexbox fallback
+    width: 100%;
+    margin-bottom: $card-deck-gutter;
+
+    @if ($card-overlay-block) {
+      display: block;
+
+      &.card--image {
+        .card__content {
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  // Two
+  &.card-deck--two {
+    .card {
+      @include gallery(6, $charlie, $gutter: $card-deck-gutter);
+    }
+  }
+
+  // Ten
+  &.card-deck--ten {
+    display: grid;
+    grid-gap: $card-deck-gutter;
+
+    .card.card.card {
+      margin-bottom: 0;
+    }
+
+    grid-template-columns: repeat(1, 1fr);
+
+    @include breakpoint($alfa) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include breakpoint($alfa--plus) {
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    @include breakpoint($bravo) {
+      grid-template-columns: repeat(8, 1fr);
+    }
+
+    @include breakpoint($charlie) {
+      grid-template-columns: repeat(10, 1fr);
+    }
+  }
+
+  // Six
+  &.card-deck--six {
+    .card {
+      @include gallery(6, $alfa to $alfa--plus-min, $gutter: $card-deck-gutter);
+      @include gallery(4, $alfa--plus to $charlie-min, $gutter: $card-deck-gutter, $defaults: false);
+      @include gallery(2, $charlie, $gutter: $card-deck-gutter, $defaults: false);
+
+      // Only five items
+      &:first-child:nth-last-child(5),
+      &:first-child:nth-last-child(5) ~ .card {
+        @include gallery(2.4, $charlie, $gutter: $card-deck-gutter);
+      }
+    }
+  }
+
+  // Three, Four and Five
+  &:not(.card-deck--one):not(.card-deck--two):not(.card-deck--six):not(.card-deck--ten) {
+    .card {
+      @include gallery(6, $bravo to $delta-min, $gutter: $card-deck-gutter);
+      @include gallery(4, $delta, $gutter: $card-deck-gutter, $defaults: false);
+    }
+    .card--image {
+      @include gallery(6, $alfa--plus to $charlie-min, $gutter: $card-deck-gutter);
+      @include gallery(4, $charlie, $gutter: $card-deck-gutter, $defaults: false);
+    }
+  }
+
+  // Four and Five
+  &:not(.card-deck--one):not(.card-deck--two):not(.card-deck--three):not(.card-deck--six):not(.card-deck--ten) {
+    .card {
+      @include gallery(3, $delta, $gutter: $card-deck-gutter, $defaults: false);
+    }
+  }
+
+  // Five
+  &:not(.card-deck--one):not(.card-deck--two):not(.card-deck--three):not(.card-deck--four):not(.card-deck--six):not(.card-deck--ten) {
+    .card {
+      @include gallery(2.4, $delta, $gutter: $card-deck-gutter, $defaults: false);
+    }
+  }
+
+  .card-body {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+
+.card-deck.card-deck.card-deck--masonry.card-deck--masonry {
+  @supports (display: grid) {
+    display: grid;
+    grid-gap: 1.5em;
+
+    .card.card.card {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 0;
+    }
+
+    @include breakpoint($alfa) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoint($charlie) {
+      &.card-deck--three { grid-template-columns: repeat(3, 1fr); }
+      &.card-deck--four { grid-template-columns: repeat(3, 1fr); }
+      &.card-deck--five { grid-template-columns: repeat(3, 1fr); }
+      &.card-deck--six { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @include breakpoint($delta) {
+      &.card-deck--four { grid-template-columns: repeat(4, 1fr); }
+      &.card-deck--five { grid-template-columns: repeat(5, 1fr); }
+      &.card-deck--six { grid-template-columns: repeat(6, 1fr); }
+    }
+  }
+
+  .card__image {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .lazyload__wrapper {
+    flex-grow: 1;
+  }
+
+  img {
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%; /* default value: image is centered*/
+  }
+}
+
+.card--circle {
+  display: block;
+  @include property(background, $card-circle-background);
+  @include property(border, $card-circle-border);
+
+  a {
+    overflow: hidden;
+  }
+
+  .card__image {
+    padding-top: $card-spacer-x;
+
+    .lazyload__wrapper {
+      display: inline-block;
+      position: relative;
+    }
+  }
+
+  img {
+    margin: 0 auto;
+    border-radius: $card-size-media-radius;
+  }
+
+  img,
+  img.card-image {
+    width: px(120);
+    height: px(120);
+    border: 1px solid $card-color-border;
+  }
+
+  .icon__frame {
+    position: relative;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $card-size-icon-background;
+    width: $card-size-icon-background;
+
+    @if $card-color-icon-background-type == 'diamond' {
+      &:after {
+        display: block;
+        z-index: 0;
+        position: absolute;
+        content: " ";
+        top: 0;
+        right: calc($card-size-icon-background / 2);
+        width: 0;
+        height: 0;
+        border-top: round($card-size-icon-background * 0.58) solid transparent;
+        border-bottom: round($card-size-icon-background * 0.42) solid transparent;
+        border-right: calc($card-size-icon-background / 2) solid $card-color-icon-background;
+        transform-origin: 100% 50%;
+        transition: transform $card-animation-time ease, border-color $card-animation-time ease;
+        will-change: transform;
+      }
+
+      &:before {
+        display: block;
+        z-index: 0;
+        position: absolute;
+        content: " ";
+        top: 0;
+        left: calc($card-size-icon-background / 2);
+        width: 0;
+        height: 0;
+        border-top: round($card-size-icon-background * 0.65) solid transparent;
+        border-bottom: round($card-size-icon-background * 0.35) solid transparent;
+        border-left: calc($card-size-icon-background / 2) solid $card-color-icon-background;
+        transform-origin: 0 50%;
+        @if $card-animation-time != false {
+          transition: transform $card-animation-time ease, border-color $card-animation-time ease;
+        }
+        will-change: transform;
+      }
+    } @else {
+      &:before {
+        display: block;
+        z-index: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: " ";
+        width: $card-size-icon-background;
+        height: $card-size-icon-background;
+        border-radius: $card-size-media-radius;
+        background: $card-color-icon-background;
+        background: var(--card-icon-background, $card-color-icon-background);
+        transform-origin: 50% 50%;
+        @if $card-animation-time != false {
+          transition: transform $card-animation-time ease, background $card-animation-time ease;
+        }
+        will-change: transform;
+      }
+    }
+  }
+
+  .icon {
+    display: table-cell;
+    vertical-align: middle;
+
+    position: relative;
+    z-index: 1;
+    color: $card-color-icon;
+  }
+
+  .card-block {
+    z-index: 1;
+  }
+}
+
+.card--circle.card--icon {
+  @if ($card-animation-time) {
+    a {
+      @include hover {
+        .card__image.card__image,
+        .card-block.card-block {
+          background: none; // Override
+        }
+
+        @if $card-color-icon-background-type == 'diamond' {
+          .icon__frame:before {
+            transform: scale(7);
+            border-left-color: $card-color-background--hover;
+          }
+
+          .icon__frame:after {
+            transform: scale(7);
+            border-right-color: $card-color-background--hover;
+          }
+        } @else {
+          .icon__frame:before {
+            transform: scale(7);
+            background-color: $card-color-background--hover;
+          }
+        }
+      }
+    }
+  }
+}
+
+.card--menu {
+  overflow: hidden;
+
+  .card-block {
+    @include spacing(vertical, padding);
+  }
+
+  .card__title {
+    font-size: 1.25em;
+    margin-top: 0;
+  }
+}
+
+@if $card-transform {
+  .card--link:not(.card--circle) {
+    a {
+      @include hover {
+        img {
+          transform: scale(1.1);
+        }
+      }
+
+      img {
+        transition: all 0.3s;
+      }
+    }
+  }
+}
+
+.card-deck__toolbar {
+  @include spacing(top);
+  text-align: center;
+}
+
+// Force PDF previews have an overlay when cards are not styled as overlay
+@if ($card-overlay-block == false) {
+  .card-deck--overlay {
+    .card {
+      display: block;
+      background-color: transparent;
+
+      @include ratio-block(2 to 3);
+
+      .card__content {
+        display: flex;
+        flex-direction: column;
+
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      .card__image {
+        flex-grow: 1;
+      }
+
+      .card-block {
+        position: absolute;
+
+        @if $card-size-block-spacing == 'responsive' {
+          $spacing: spacing(0.5);
+
+          bottom: $spacing;
+          left: $spacing;
+          right: $spacing;
+
+          @include breakpoint($bravo) {
+            $spacing: spacing(0.5);
+
+            bottom: $spacing;
+            left: $spacing;
+            right: $spacing;
+          }
+
+          @include breakpoint($delta) {
+            $spacing: spacing(0.5);
+
+            bottom: $spacing;
+            left: $spacing;
+            right: $spacing;
+          }
+        } @else {
+          bottom: $card-size-block-spacing;
+          left: $card-size-block-spacing;
+          right: $card-size-block-spacing;
+        }
+
+        background-color: $card-color-background;
+
+        padding: $spacing-s $spacing-xs;
+
+        @include breakpoint($alfa--plus) {
+          padding: $card-size-block-padding;
+        }
+      }
+    }
+  }
+}

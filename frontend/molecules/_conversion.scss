@@ -1,0 +1,132 @@
+@if $extension--conversion {
+  .conversion {
+    max-width: $conversion-max-width;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1rem;
+    border-radius: $conversion-border-radius;
+    box-shadow: $conversion-box-shadow;
+    @include spacing(bottom, margin, 2, $lastchildnone: true);
+  }
+
+  .conversion__title {
+    padding: .5em 1em;
+    color: #fff;
+    font-weight: $weight-bold;
+    background: $conversion-title-background;
+    font-size: 1.2rem;
+    border-radius: $conversion-border-radius $conversion-border-radius 0 0;
+  }
+
+  .conversion__body {
+    padding: .5rem;
+    background: $conversion-description-background;
+    border-radius: 0 0 $conversion-border-radius $conversion-border-radius;
+    @include clearfix();
+    display: flex;
+
+    & > * {
+      padding: .5rem;
+    }
+  }
+
+  .conversion__description {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 75%;
+
+    p {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+
+  .conversion__image {
+    min-width: 64px;
+    flex: 1 0 25%;
+
+    .lazyload__wrapper {
+      max-width: 120px;
+    }
+  }
+
+  .conversion__button {
+    flex: 0 0 auto;
+    margin-top: 1em;
+
+    .btn {
+      @include color(false, $conversion-title-background);
+      background-color: $conversion-title-background;
+    }
+  }
+
+  .is-magnet {
+    position: fixed;
+    right: 1em;
+    bottom: 1em;
+    z-index: 999;
+    width: calc(100% - 2em);
+    max-width: 25rem;
+    animation: magnet-in 1s ease-out forwards;
+    animation-delay: 3s; // Wait for 3 seconds because first 3 seconds of seeing a page you need to get used to seeing all the different elements
+    opacity: 0;
+    transform: translateX(100%);
+    margin-bottom: 0;
+
+    .magnet-close-button {
+      position: absolute;
+      top: -.5em;
+      right: -.5em;
+      @include reset();
+      width: 1.5em;
+      height: 1.5em;
+      border-radius: 50%;
+      background: rgba(black, .75);
+      cursor: pointer;
+      @include transition(background-color);
+
+      @include pseudo(after, false, $content: "✕") {
+        top: 50%;
+        left: 50%;
+        color: #fff;
+        transform: translate(-50%, -50%);
+        line-height: 1em;
+        font-size: .8em;
+      }
+
+      span {
+        @include visually-hidden();
+      }
+
+      @include hover {
+        background-color: #000;
+      }
+    }
+  }
+
+  .hide-magnet {
+    animation: magnet-out 1s ease-out forwards;
+  }
+
+  @keyframes magnet-in {
+    0% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes magnet-out {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+}

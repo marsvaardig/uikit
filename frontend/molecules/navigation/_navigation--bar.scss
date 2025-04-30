@@ -1,0 +1,68 @@
+@if $navigation == 'bar' {
+  .navigation--header {
+    @include breakpoint($header-breakpoint) {
+      @if $navigation-margin != 0 {
+        border-top: 0 none;
+        border-bottom: 0 none;
+      }
+    }
+
+    .navigation__list {
+
+      @if($header-max-width)
+      {
+        background: $navigation-color-background;
+      }
+
+      @include breakpoint($header-breakpoint) {
+        @if $navigation-margin != 0 {
+          border: $navigation-width-border solid $navigation-color-border;
+        }
+        border-radius: px(4);
+      }
+    }
+
+    .navigation__item {
+      &.active {
+        text-decoration: underline;
+      }
+
+      @include breakpoint($header-breakpoint) {
+        border-left: $navigation-width-border solid $navigation-color-border;
+
+        &.active a {
+          border-bottom: 0 none;
+        }
+
+        &:first-child {
+          border-left: 0 none;
+        }
+      }
+    }
+
+    .navigation__link {
+      text-align: center;
+      justify-content: center;
+      flex-grow: 1;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    // When using the bar in a row header
+    @if $header == 'row' {
+      @include breakpoint($header-breakpoint) {
+        & {
+          justify-content: flex-end;
+          align-items: center;
+        }
+
+        .navigation__list {
+          width: auto;
+          flex-grow: 0;
+        }
+      }
+    }
+  }
+}

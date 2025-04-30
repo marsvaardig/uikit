@@ -1,0 +1,15 @@
+// Supports
+
+@mixin supports($input, $fallback) {
+  $colon: str-index($input, ':');
+  $property: str-slice($input, 1, $colon - 1);
+  $value: str-slice($input, $colon + 1);
+  @while (str-slice($value, 1, 1) == ' ') {
+    $value: str-slice($value, 2);
+  }
+  $input: '(' + $input + ')';
+  #{$property}: #{$fallback};
+  @supports #{$input} {
+    #{$property}: #{$value};
+  }
+}

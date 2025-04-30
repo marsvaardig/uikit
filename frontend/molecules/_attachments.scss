@@ -1,0 +1,18 @@
+.attachments__title {
+  text-align: center;
+}
+
+.attachments__documents {
+  max-width: $article-size-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.attachments__images,
+.article__content + .attachments__pdfs {
+  @include spacing(top, margin, 2);
+}
+
+.attachments__documents + .attachments__pdfs {
+  @include spacing(top, margin);
+}

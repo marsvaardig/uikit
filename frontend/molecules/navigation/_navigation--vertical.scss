@@ -1,0 +1,41 @@
+@if $navigation == 'vertical' {
+  .navigation--header {
+    @include breakpoint($bravo, $header-breakpoint-min) {
+      .navigation__link {
+        text-align: center;
+        justify-content: center;
+      }
+    }
+
+    @include breakpoint($header-breakpoint) {
+      .navigation__list {
+        flex-direction: column;
+
+        background: $navigation-color-background;
+      }
+
+      .navigation__item {
+        &.navigation__item:nth-child(n+2) {
+          border-top: 1px solid $navigation-color-border;
+          border-left: 0 none;
+        }
+
+        &.active {
+          text-decoration: underline;
+        }
+
+        &:first-child {
+          border-top: 0 none;
+        }
+      }
+
+      .navigation__link {
+        flex-grow: 1;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

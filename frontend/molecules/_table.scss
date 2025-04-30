@@ -1,0 +1,291 @@
+//
+// Basic Bootstrap table
+//
+
+.table {
+  width: 100%;
+  max-width: 100%;
+
+  border-spacing: 0;
+
+  padding: 0;
+  margin: 0;
+
+  &:not(.table--products) {
+    @include content-block;
+  }
+
+  caption {
+    caption-side: top;
+    margin: $margin-h2;
+  }
+
+  th,
+  td {
+    padding: $table-cell-padding;
+    vertical-align: top;
+    border-color: $table-border-color;
+    border-top: $table-border-width solid $table-border-color;
+    text-align: left;
+  }
+
+  @if $table-first-row-border == false {
+    tr:first-child {
+      th,
+      td {
+        border-top: none;
+      }
+    }
+  }
+
+  td {
+    vertical-align: middle;
+  }
+
+  thead th {
+    vertical-align: bottom;
+    border-bottom: (2 * $table-border-width) solid $table-border-color;
+    border-top: 0 none;
+  }
+
+  // Zebra-striping
+  &:not(.table--reservations) tbody tr:nth-child(even) {
+    background-color: $table-bg-accent;
+  }
+
+  tbody + tbody {
+    border-top: (2 * $table-border-width) solid $table-border-color;
+  }
+
+  tfoot {
+    tr {
+      @include spacing(top, margin);
+    }
+
+    td {
+      border: 0 none;
+    }
+  }
+
+  .table {
+    background-color: $body-bg;
+  }
+
+  .icon {
+    margin-right: $spacing-xs;
+  }
+}
+
+.table--reservations {
+  table-layout: fixed;
+  font-size: px(14);
+
+  @include breakpoint($alfa--plus) {
+    font-size: inherit;
+  }
+
+  th {
+    padding: 0;
+    width: 14%;
+  }
+
+  td {
+    padding: 0;
+    border-top: 0 none;
+
+    .radiobutton__label {
+      display: block;
+      padding: 20% 0;
+      margin: 5%;
+    }
+  }
+}
+
+.table--openinghours {
+  @include spacing(top);
+
+  // Override `.content .h2`
+  &.table--openinghours .h2 {
+    margin-top: 0;
+  }
+
+  tfoot tr td {
+    text-align: center;
+  }
+
+  tbody {
+    @include breakpoint($table-breakpoint) {
+      td:first-child {
+        width: 25%;
+        text-align: right;
+      }
+    }
+
+    // No bottom margin when note field has multiple p-tag
+    td span.text--small p {
+      margin-bottom: px(0);
+    }
+  }
+}
+
+.table--events {
+  @include breakpoint($table-breakpoint) {
+    td:nth-child(2) {
+      width: 100%;
+    }
+  }
+}
+
+@include breakpoint($charlie) {
+  .table__date {
+    white-space: nowrap;
+  }
+}
+
+.table--products {
+  &:last-child {
+    @include spacing(bottom, margin, 2);
+  }
+  td:first-of-type:not([colspan]) {
+    display: block;
+  }
+
+  .table__flex {
+    display: flex;
+  }
+
+  .table__image {
+    flex-shrink: 0;
+    margin-right: px(8);
+  }
+
+  .table__title {
+    align-self: center;
+  }
+}
+
+@if $table-products-layout == 'large' {
+  .table--products {
+    .table__image {
+      width: $table-products-layout-image-width;
+      max-width: 25%;
+      margin-right: .75rem;
+
+      img {
+        display: block;
+        min-width: 100%;
+        border-radius: px(8);
+      }
+    }
+
+    .table__title {
+      a {
+        color: $color-dark-shade;
+        font-weight: $weight-heading;
+        font-size: 1.25em;
+      }
+    }
+
+    .text--muted {
+      color: inherit;
+      margin-top: px(6);
+    }
+
+    .product__filters {
+      margin-top: .25em;
+      font-size: px(14);
+    }
+
+    span.product__filters_list {
+      font-weight: $weight-bold;
+      color: lighten($color-dark-shade, 10%);
+    }
+  }
+}
+
+.table--responsive {
+
+  @include breakpoint(0, $table-breakpoint-min) {
+    table-layout: fixed;
+
+    thead {
+      @include visually-hidden;
+    }
+
+    tr, td {
+      display: block;
+    }
+
+    tbody {
+      tr {
+        @include content-block;
+
+        background-color: transparent !important;
+        border-left: 1px solid $table-border-color;
+        border-right: 1px solid $table-border-color;
+        border-bottom: 1px solid $table-border-color;
+      }
+
+      td {
+        &:first-of-type {
+          background-color: $table-color-background-accent;
+          //text-align: center;
+        }
+      }
+
+      td[data-label]:before {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label) ": ";
+        //font-weight: bold;
+      }
+    }
+  }
+
+  @include breakpoint($table-breakpoint) {
+    .table__data--nowrap {
+      white-space: nowrap;
+    }
+  }
+
+  @if($table-size-grow-to) {
+    &:not(.table--products):not(.table--events) {
+      // Add spacing as a safety area since 100vw doesn't not substract the toolbar width
+      $breakpoint: $article-size-content + ($grid-padding * 2);
+
+      // Avoid stretching the single column table when `table-breakpoint` is larger
+      @if($table-breakpoint > $breakpoint) {
+        $breakpoint: $table-breakpoint;
+      }
+
+      @include breakpoint($breakpoint) {
+        $margin: calc((-100vw + #{$article-size-content} + (#{$grid-padding} * 2)) / 2);
+
+        margin-right: $margin;
+        margin-left: $margin;
+
+        max-width: calc(100vw - (#{$grid-padding} * 2));
+        width: calc(100vw - (#{$grid-padding} * 2));
+      }
+
+      @include breakpoint($table-size-grow-to + ($grid-padding * 2)) {
+        $margin: calc(($article-size-content - $table-size-grow-to) / 2);
+
+        margin-left: $margin;
+        margin-right: $margin;
+
+        max-width: $table-size-grow-to;
+        width: $table-size-grow-to;
+      }
+    }
+  }
+}
+
+.article__content table {
+  @extend .table;
+  @extend .table--responsive;
+}
+
+

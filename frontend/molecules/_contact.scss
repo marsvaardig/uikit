@@ -1,0 +1,143 @@
+.contact__details {
+  @include clearfix();
+}
+
+.contact__details--picture {
+  @include breakpoint($charlie) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.contact__address {
+  @include spacing(bottom, margin);
+
+  // Links get other colors
+  a {
+    color: $color-link;
+
+    &:hover,
+    &:active {
+      color: $color-link--hover;
+    }
+  }
+}
+
+.contact__image img {
+  border-radius: .25em;
+}
+
+.contact__legal {
+  @extend .text--smaller;
+  @extend .text--muted;
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.contact__sociallist {
+  @include spacing(bottom, margin, 1);
+
+  ul {
+    @include reset();
+    @include content-block();
+  }
+
+  li {
+    margin-top: $spacing-xs;
+  }
+
+  .icon {
+    margin-right: $spacing-xs;
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+
+    @include hover {
+      span {
+        text-decoration: none;
+      }
+    }
+  }
+
+  svg,
+  span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  a span {
+    text-decoration: underline;
+  }
+}
+
+@if ($contact-form == 'larger') {
+  .contact__address {
+    @include span(5 of 12, $charlie);
+  }
+
+  .contact__image {
+    @include span(7 of 12, $charlie);
+  }
+} @else {
+  .contact__address,
+  .contact__image {
+    @include span(6 of 12, $charlie);
+  }
+}
+
+@include breakpoint($charlie) {
+  .contact__address {
+    margin-bottom: 0;
+  }
+}
+
+.contact__note {
+  @include spacing(bottom);
+
+  img {
+    max-width: 50%;
+  }
+}
+
+.contact__details + .contact__note {
+  @include spacing(top);
+}
+
+.contacts-header.contacts-header {
+  margin-bottom: .25rem;
+  opacity: .8;
+  font-size: 1.125rem;
+}
+
+
+.contact__form {
+  .form__group {
+    width: 100%;
+  }
+}
+
+// Dynamic container
+#map-canvas {
+  width: 100%;
+  height: px(500);
+  display: block;
+
+  img {
+    max-width: none;
+  }
+}
+
+.module.contact {
+  #map-canvas {
+    height: 100%;
+  }
+}
+
+.map__canvas + .module.articles {
+  @include spacing(top, padding, 2);
+}

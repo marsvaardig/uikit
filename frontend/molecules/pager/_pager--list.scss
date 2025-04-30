@@ -1,0 +1,59 @@
+// Prev and next post navigation
+.pager--list {
+  @include clearfix;
+  @include spacing(top, margin, 2);
+  @include spacing(bottom, margin);
+
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1em;
+  width: 100%;
+  max-width: $charlie;
+
+  @include breakpoint($alfa) {
+    display: table;
+  }
+
+  @include breakpoint($charlie + px(80)) {
+    @include spacing(top, padding);
+    padding-left: 0;
+    padding-right: 0;
+
+    border-top: 1px solid $color-grey-medium;
+  }
+
+  // Links get other colors
+  a {
+    color: $color-link;
+
+    &:hover,
+    &:active {
+      color: $color-link--hover;
+    }
+  }
+}
+
+.pager__previous,
+.pager__next {
+  margin: 1em 0;
+  text-align: center;
+
+  @include breakpoint($alfa) {
+    display: table-cell;
+  }
+}
+
+.pager__previous {
+  padding-right: px(10);
+
+  @include breakpoint($alfa) {
+    float: left;
+  }
+}
+.pager__next {
+  padding-left: px(10);
+
+  @include breakpoint($alfa) {
+    float: right;
+  }
+}

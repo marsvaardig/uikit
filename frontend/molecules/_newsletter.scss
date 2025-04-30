@@ -1,0 +1,32 @@
+.newsletter {
+  @include clearfix();
+  @include spacing(vertical, padding, 2);
+
+  background-color: $newsletter-color-background;
+
+  @if $newsletter-color-border {
+    border-top: 1px solid $newsletter-color-border;
+  }
+}
+
+// @TODO: Double class to override `.content h2` styling, refactor this, see /nieuwsbrief on websites
+.newsletter__title.newsletter__title {
+  color: white;
+  margin: 0 0 calc($line-height / 3);
+}
+
+.newsletter__intro {
+  color: white;
+}
+
+.newsletter__form {
+  padding-top: $spacing-l;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.newsletter__button {
+  @include button-variant($newsletter-color-background, $newsletter-color-text, darken($newsletter-color-background, 5%));
+}

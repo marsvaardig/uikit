@@ -1,0 +1,179 @@
+@if $feature != false {
+
+  /* ================= Feature ================== */
+
+  .feature {
+    font-size: $feature-font-size;
+    line-height: $feature-line-height;
+    overflow: hidden;
+    @include content-block(1.5rem, bottom);
+  }
+
+  .feature--horizontal {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .feature--vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .feature__icon {
+    flex: 0 0 $feature-icon-background-size;
+    width: $feature-icon-background-size;
+    height: $feature-icon-background-size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+
+    svg {
+      width: $feature-icon-size;
+      height: $feature-icon-size;
+    }
+  }
+
+  .feature__icon--square,
+  .feature__icon--round {
+    background: $feature-icon-background-color;
+
+    @if ($feature-icon-color) {
+      color: $feature-icon-color;
+    } @else {
+      @include color(false, $feature-icon-background-color);
+    }
+  }
+
+  .feature__icon--round {
+    border-radius: 50%;
+  }
+
+  @if ($feature-icon-custom-shape) {
+    .feature__icon {
+      @include svg-mask($feature-icon-custom-shape, $feature-icon-background-color, 100%, 100%, $feature-icon-custom-shape-viewbox-width, $feature-icon-custom-shape-viewbox-height);
+    }
+  }
+
+  .feature__image {
+    .article__outset {
+      margin: 0;
+      width: 100%;
+    }
+  }
+
+  .feature--horizontal .feature__image {
+    flex: 0 0 $feature-horizontal-image-size;
+    width: $feature-horizontal-image-size;
+    min-width: $feature-horizontal-image-min-width;
+    max-width: $feature-horizontal-image-max-width;
+  }
+
+  .feature .feature__body {
+    flex: 1 1 auto;
+    width: 100%;
+
+    & > * {
+      margin: 0;
+
+      & + *:not(.feature__content) {
+        margin-top: 1em;
+      }
+    }
+  }
+
+  .feature--horizontal .feature__body {
+    margin-left: 1.5em;
+  }
+
+  .feature--vertical .feature__body {
+    margin-top: 1.5em;
+  }
+
+  .feature .feature__title {
+    color: $feature-title-color;
+    font-size: $feature-title-font-size;
+    @include property(line-height, $feature-title-line-height);
+    @include property(font-weight, $feature-title-font-weight);
+    text-wrap: balance;
+  }
+
+  .feature .feature__content {
+    @include property(margin-right, $feature-content-margin-right);
+    @include property(margin-left, $feature-content-margin-left);
+    @include property(margin-top, $feature-content-margin-top);
+    @include property(max-width, $feature-content-max-width);
+
+    & > * {
+      margin: 0;
+
+      & + * {
+        margin-top: 1em;
+      }
+    }
+  }
+
+  .feature .feature__title {
+    & + .feature__content {
+      & > *:first-child {
+        margin-top: .5em;
+      }
+    }
+  }
+
+  .feature[data-link-type="button"] {
+    .feature__link {
+      @include button-base();
+      @include button-variant($feature-button-color, $feature-button-background, $feature-button-border);
+      text-decoration: none;
+      @include property(font-weight, $feature-button-font-weight);
+    }
+  }
+
+  .feature[data-link-type="block"] {
+    color: $feature-block-color;
+    background: $feature-block-background;
+    box-shadow: $feature-block-box-shadow;
+    padding: $feature-block-padding;
+    border-radius: $feature-block-border-radius;
+    @include transition(box-shadow);
+
+    &.feature--vertical .feature__image {
+      flex: 0 0 100%;
+      margin: -1em -1em 0 -1em;
+      width: calc(100% + 2em);
+
+      .article__figure {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+
+        * {
+          border-radius: inherit;
+        }
+      }
+    }
+
+    .feature__image {
+      [href] {
+        pointer-events: none;
+      }
+    }
+
+    .feature__link {
+      text-decoration: none;
+    }
+  }
+
+  .is-clickable-card {
+    cursor: pointer;
+    @include transition(box-shadow);
+
+    @include hover(true) {
+      box-shadow: $feature-block-hover-box-shadow;
+    }
+  }
+}

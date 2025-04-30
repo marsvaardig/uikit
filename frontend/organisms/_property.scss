@@ -1,0 +1,123 @@
+@if $extension--properties {
+  .property-default {
+    // Article grid
+    .article_grid--3-2 > .article_grid__inner > .article_grid__item1 {
+      min-width: calc(((60% - #{$article-grid-gap})));
+
+      & > * {
+        max-width: px(600);
+      }
+    }
+
+    .header .header__overlay {
+      border-bottom: none;
+    }
+
+    .breadcrumb {
+      padding-bottom: 0;
+      background-color: $color-light-shade;
+    }
+
+    .product {
+      .article__title {
+        text-align: left;
+        color: $body-color;
+      }
+
+      .product__price {
+        margin-left: 0;
+      }
+
+      & > .article_grid:first-child {
+        @include spacing(top, margin, -1);
+        @include spacing(bottom, margin, 2);
+      }
+
+      h2 {
+        text-align: left;
+      }
+    }
+
+    @include breakpoint($delta) {
+      .product__top {
+        .product__top--right {
+          width: calc(50% - (#{$grid-padding}));
+        }
+      }
+    }
+  }
+
+  .property-address {
+    font-size: 1.125em;
+    margin-top: -.5em;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+      vertical-align: baseline;
+      margin-right: .25rem;
+    }
+  }
+
+  .property_card__title.property_card__title {
+    font-family: $font-family;
+    color: $body-color;
+
+    span {
+      margin-top: $spacing-s;
+    }
+  }
+
+  .property_card__price {
+    color: $color-brand;
+  }
+
+  .property__features {
+    background: $color-light-accent;
+    padding: 2rem;
+    @include spacing(bottom, margin, 1.5);
+
+    h2 {
+      color: $body-color;
+      margin-top: 0;
+    }
+
+    svg {
+      font-size: px(32);
+    }
+
+    .dl--stripped {
+      div {
+        padding: .5em 0;
+      }
+
+      dt {
+        font-weight: $weight-bold;
+      }
+    }
+  }
+
+  .property-feature-title {
+    font-weight: $weight-bold;
+    font-size: px(21);
+  }
+
+  .css-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(px(160), 1fr));
+    grid-gap: $grid-padding;
+
+    .stack {
+      & > * + * {
+        margin-top: 1rem;
+      }
+    }
+
+    .cluster {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+}

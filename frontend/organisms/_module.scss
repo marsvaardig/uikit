@@ -1,0 +1,152 @@
+.module {
+  &:not(.products) {
+    @include spacing(bottom, padding, 2);
+  }
+
+  // Avoid spacing overload
+  & + .module h2 {
+    margin-top: 0;
+  }
+
+  .media--clickable {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.module__description {
+  &:nth-child(n) {
+    @include spacing(bottom, margin);
+  }
+
+  max-width: $bravo;
+
+  @if($module-position-title == center) {
+    text-align: $module-position-title;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.module__title {
+  @include spacing(bottom);
+
+  // Override .content__inner h2
+  &.module__title {
+    text-align: $module-position-title;
+    margin-bottom: 0;
+    max-width: px(700);
+    margin-left: auto;
+    margin-right: auto;
+
+    @if($module-position-title == left) {
+        max-width: none;
+    }
+  }
+}
+
+.module.contact {
+
+  @if ($contact-color-background) {
+    background-color: $contact-color-background;
+    @include spacing(vertical, padding, 2);
+  }
+
+  @if ($contact-color-text) {
+    color: $contact-color-text;
+
+    @if (lightness($contact-color-text) > 50) {
+      @include font-smoothing;
+    }
+  }
+
+  @include breakpoint(0, $charlie) {
+    padding-bottom: 0;
+  }
+
+  h2 {
+    margin-bottom: $grid-padding * 2;
+  }
+
+  .grid {
+    max-width: none;
+
+    .address {
+      @include span(6 of 12, $charlie);
+    }
+
+    .map {
+      @include span(6 of 12);
+    }
+
+    @include breakpoint($charlie) {
+      padding: 0 $grid-padding * 2 0;
+    }
+  }
+
+  .map {
+    $height: px(250);
+
+    height: $height + px(1); // Add border to height
+
+    border-top: 1px solid $wrapper-color-border;
+
+    @include breakpoint(0, $charlie) {
+      @include spacing(top, margin);
+
+      margin-left: -$grid-padding;
+      margin-right: -$grid-padding;
+    }
+
+    @include breakpoint($charlie) {
+      height: $height + px(2); // Add border to height
+
+      border: 1px solid $wrapper-color-border;
+      border-radius: px(4);
+    }
+  }
+}
+
+.module.reviews {
+  .grid {
+    max-width: $charlie;
+  }
+}
+
+.module.module--card-deck,
+.module.projects,
+.module.clients {
+  .card-deck-wrapper {
+    @include spacing(bottom);
+  }
+}
+
+.module.menus {
+  @include spacing(vertical, padding, 2);
+
+  border-top: 1px solid $reviews-color-background;
+  background-color: lighten($reviews-color-background, 5%);
+
+  img {
+    border: 1px solid darken($reviews-color-background, 10%);
+  }
+}
+
+.article__content + .module {
+  @include spacing(top, margin, 2);
+}
+
+@if $extension--products {
+.module.products {
+  .module__footer {
+    @include spacing(bottom, padding, 2);
+  }
+}
+}
+
+@if $module-footer-margin-top {
+  .module__footer {
+    @include spacing(top, margin, $module-footer-margin-top);
+  }
+}

@@ -1,0 +1,20 @@
+.highlight {
+  background-color: $highlight-color-background;
+  @include property(border, $highlight-border);
+  @include property(border-radius, $highlight-border-radius);
+
+  padding: $highlight-padding;
+
+  margin-left: -$grid-padding;
+  margin-right: -$grid-padding;
+
+  color: $highlight-color-text;
+
+  font-size: $highlight-size-text;
+  font-weight: $highlight-font-weight;
+  line-height: 1.5em;
+
+  b, strong {
+    font-weight: $weight-bold;
+  }
+}

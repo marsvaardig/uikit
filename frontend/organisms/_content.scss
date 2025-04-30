@@ -1,0 +1,100 @@
+.content {
+  @include property('background-color', $content-color-background);
+  @include property('background', $content-background-override);
+  @if $article-grid-style-none-fullwidth != false {
+    overflow: hidden;
+  }
+}
+
+.content__inner {
+  @include spacing(top, padding, $content-inner-spacing-top-amount);
+  @include clearfix;
+
+  @include breakpoint($width-maximum-content) {
+    @if $content-inner-color-background {
+      background-color: $content-inner-color-background;
+    }
+
+    @if $content-inner-border {
+      border: $content-inner-border;
+    }
+
+    @if $content-inner-border-radius {
+      border-radius: $content-inner-border-radius;
+    }
+  }
+
+  // Reset grid used in modules
+  .module .grid {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  flex-grow: 1;
+
+  width: 100%;
+  max-width: $width-maximum-content;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-left: $grid-padding;
+  padding-right: $grid-padding;
+
+  .spacing--above {
+    @include spacing(top, margin, 2);
+  }
+
+  .spacing--below {
+    @include spacing(bottom, margin, 2);
+  }
+
+  .group {
+    @include spacing(bottom, margin, 2);
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  h1, .h1 {
+    color: $color-h1;
+    margin: $margin-h1;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  h2, .h2 {
+    color: $color-h2;
+    margin: $margin-h2;
+  }
+
+  h3, .h3 {
+    color: $color-h3;
+    margin: $margin-h3;
+  }
+
+  @if ($color-h4 != $color-heading)
+  {
+    h4, .h4 {
+      color: $color-h4;
+    }
+  }
+
+  h2 + h3 {
+    margin-top: 0;
+  }
+
+  // Avoid spacing overload
+  > .module h2 {
+    margin-top: 0;
+  }
+}
+
+@if $content-inner-color-background == false {
+  .breadcrumb + .content__inner {
+    @include spacing(top, padding, 1);
+  }
+}

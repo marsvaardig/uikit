@@ -1,0 +1,138 @@
+.person {
+  @include spacing(bottom, margin, 2);
+  margin-right: auto;
+  margin-left: auto;
+
+  @include breakpoint($bravo) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // Links get other colors
+  a {
+    color: $color-link;
+
+    &:hover,
+    &:active {
+      color: $color-link--hover;
+    }
+  }
+}
+
+.person__contact {
+  margin-right: $grid-padding;
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  // Override .content__inner h2
+  &.person__contact h2 {
+    margin-top: 0;
+  }
+
+  @include breakpoint(0, $bravo-min) {
+    p:last-child {
+      @include spacing(bottom, margin, 2);
+    }
+  }
+}
+
+.person__image {
+  img {
+    border-radius: px(20);
+  }
+  .lazyload__wrapper {
+    width: 100%;
+
+    @if $person-image-max-width {
+      max-width: $person-image-max-width;
+    }
+  }
+}
+
+@if $person-shape == 'circle' {
+  .person__image {
+    text-align: center;
+
+    .lazyload__wrapper {
+      display: inline-block;
+      vertical-align: middle;
+      @if $person-image-max-width == false {
+        max-width: px(320);
+      }
+
+      @include pseudo(after) {
+        @include coverall();
+        border-radius: 50%;
+        border: px(8) solid rgba(black, 0.1);
+      }
+
+      img {
+        border-radius: 100%;
+      }
+    }
+  }
+}
+
+@if $person-alignment == 'left' {
+  .person-default {
+    .person {
+      @include spacing(bottom, margin, 1, 0 to $charlie);
+    }
+
+    .person__contact.text--center,
+    .article__header {
+      text-align: left;
+    }
+
+    .person__image {
+      display: flex;
+      justify-content: center;
+
+      @include breakpoint($bravo) {
+        justify-content: flex-end;
+      }
+
+      .lazyload__wrapper {
+        width: 100%;
+      }
+    }
+
+    .article__content {
+      margin-left: 0;
+    }
+  }
+}
+
+@if $person-max-width != false {
+  .person-default {
+    .person {
+      max-width: $person-max-width;
+    }
+  }
+}
+
+@if $people-card-layout == 'horizontal' {
+  .people-default {
+    @include breakpoint($bravo) {
+      .card {
+        .card__content {
+          flex-direction: row;
+        }
+
+        .card__image {
+          padding: $grid-padding;
+          flex-shrink: 0;
+        }
+
+        .card-block {
+          justify-content: center;
+          align-items: flex-start;
+          text-align: left;
+        }
+      }
+    }
+  }
+}

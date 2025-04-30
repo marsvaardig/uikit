@@ -1,0 +1,49 @@
+/* Root
+   ========================================================================== */
+
+:root {
+  --spacing: #{ms(1, rem)};
+  $min-value: calc($root-font-size-s / 16) * 1em;
+  $max-value: calc($root-font-size / 16) * 1em;
+  $min-screen: $narrow-width;
+  $max-screen: $site-width;
+  font-size: $min-value;
+  line-height: 1.5;
+
+  // When site has a growing font-size
+  @if ($root-font-size-s != $root-font-size) {
+
+    // Set the max value on specified breakpoint
+    @media (min-width: $max-screen) {
+      font-size: $max-value;
+    }
+
+    // Fluid typography using clamp
+    @supports (top: clamp(1em, 1vw, 2em)) {
+      font-size: clamp(#{$min-value}, calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * ((100vw - #{$min-screen}) / #{strip-unit($max-screen - $min-screen)})), #{$max-value});
+    }
+
+    // Should the font keep growing after reaching the site width?
+    @if ($root-font-growing != false) {
+      @include breakpoint($site-width) {
+        font-size: calc(#{$max-value} + #{strip-unit($max-value - $min-value)} * ((100vw - #{$max-screen}) / #{strip-unit(($max-screen * 2) - $max-screen)}));
+      }
+    }
+  }
+
+  @include breakpoint($narrow-width) {
+    --spacing: calc(#{ms(1, rem)} + 1vw);
+  }
+
+  @include breakpoint($site-width) {
+    --spacing: #{ms(2, rem)};
+  }
+}
+
+// No outline for mouse/tap focus
+:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+// No motion for reduced motion

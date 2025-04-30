@@ -1,0 +1,123 @@
+.video__content {
+  $text-color: #FFF;
+
+  position: absolute;
+  bottom: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  text-align: center;
+
+  padding: $grid-padding;
+
+  @if $header-color-background-overlay {
+    background: $header-color-background-overlay;
+  }
+
+  color: $text-color;
+
+  @if (lightness($text-color) > 50) {
+    @include font-smoothing;
+  }
+}
+
+.video__title {
+  @include spacing(bottom, margin, 0.5);
+}
+
+.video__description {
+  max-width: px(800);
+}
+
+.video__description--no-title {
+  font-size: $font-size-base;
+}
+
+@if ($video-toggle) {
+.video-toggle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  display: none;
+  width: px(32);
+  height: px(32);
+  overflow: hidden;
+  margin: .25em;
+  padding: 0;
+  border: none;
+  background: #d6e0e5;
+  border-radius: .125em;
+
+  &:focus,
+  &:hover {
+    background: white;
+  }
+}
+
+.video-toggle__icon {
+  position: absolute;
+  top: px(8);
+  left: px(6);
+  width: px(20);
+  height: px(20);
+  font-size: 0;
+  white-space: nowrap;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: content-box;
+
+  &:before,
+  &:after {
+    content: " ";
+  }
+
+  &,
+  &:before,
+  &:after {
+    display: inline-block;
+    vertical-align: middle;
+    transition: border 0.2s, width 0.2s, height 0.2s, margin 0.2s;
+    transition-timing-function: cubic-bezier(1, 0, 0, 1);
+  }
+}
+
+.video-toggle.is-playing {
+  .video-toggle__icon:before,
+  .video-toggle__icon:after {
+      margin: 0;
+      border-left: 5px solid #222222;
+      border-top: 0 solid transparent;
+      border-bottom: 0 solid transparent;
+      height: px(16);
+  }
+
+  .video-toggle__icon:before {
+      border-right: px(4) solid transparent;
+  }
+}
+
+.video-toggle.is-paused {
+  .video-toggle__icon:before {
+      margin-left: px(2);
+      border-left: px(9) solid #222222;
+      border-top: px(5) solid transparent;
+      border-bottom: px(5) solid transparent;
+      border-right: 0 solid transparent;
+      height: px(8);
+  }
+  .video-toggle__icon:after {
+      margin: 0;
+      border-left: px(7) solid #222222;
+      border-top: px(4) solid transparent;
+      border-bottom: px(4) solid transparent;
+      height: 0;
+  }
+}
+}

@@ -1,0 +1,127 @@
+// Paper
+$voucher: false !default;
+$voucher-paper-width: 21cm !default;
+$voucher-paper-height: 29.7cm !default;
+
+// Voucher
+$voucher-width: 12cm !default;
+$voucher-height: 12cm !default;
+$voucher-design: "/theme/wepo/images/sites/#{$site}/voucher.jpg";
+$voucher-family: sans-serif !default;
+
+// Code
+$voucher-label-y: 999pt !default;
+$voucher-label-x: 999pt !default;
+$voucher-label-size: 12pt !default;
+$voucher-label-background: white !default;
+$voucher-label-height: 2.3cm !default;
+$voucher-label-width: 4.4cm !default;
+
+// QR
+$voucher-qr-size: 1.2cm !default;
+
+// Amount
+$voucher-amount-y: 999pt !default;
+$voucher-amount-x: 999pt !default;
+$voucher-amount-size: 12pt !default;
+$voucher-amount-weight: 800 !default;
+$voucher-amount-color: false !default;
+$voucher-amount-align: false !default;
+$voucher-amount-background: false !default;
+$voucher-amount-width: false !default;
+
+// Date
+$voucher-date-y: 999pt !default;
+$voucher-date-x: 999pt !default;
+$voucher-date-size: 12pt !default;
+$voucher-date-weight: 800 !default;
+$voucher-date-color: false !default;
+
+// Code
+$voucher-code-y: 999pt !default;
+$voucher-code-x: 999pt !default;
+$voucher-code-size: 12pt !default;
+$voucher-code-weight: 800 !default;
+$voucher-code-color: false !default;
+
+@if($voucher)
+{
+  .voucher {
+    width: $voucher-width;
+    height: $voucher-height;
+    background: if($voucher-design, URL($voucher-design), #eee) no-repeat center;
+    background-size: contain;
+    position: relative;
+    top: calc($voucher-paper-height / 2) - calc($voucher-height / 2);
+    left: calc($voucher-paper-width / 2) - calc($voucher-width / 2);
+    overflow: hidden;
+  }
+
+  .voucher__amount {
+    position: absolute;
+    top: $voucher-amount-y;
+    left: $voucher-amount-x;
+    font-size: $voucher-amount-size;
+    font-weight: $voucher-amount-weight;
+
+    @if($voucher-amount-color) { color: $voucher-amount-color; }
+    @if($voucher-amount-align) { text-align: $voucher-amount-align; }
+    @if($voucher-amount-background) { background-color: $voucher-amount-background; }
+    @if($voucher-amount-width) { width: $voucher-amount-width; }
+  }
+
+  .voucher__date {
+    position: absolute;
+    top: $voucher-date-y;
+    left: $voucher-date-x;
+    font-size: $voucher-date-size;
+    font-weight: $voucher-date-weight;
+
+    @if($voucher-date-color) { color: $voucher-date-color; }
+  }
+
+  .voucher__code {
+    position: absolute;
+    top: $voucher-code-y;
+    left: $voucher-code-x;
+    font-size: $voucher-code-size;
+    font-weight: $voucher-code-weight;
+
+    @if($voucher-code-color) { color: $voucher-code-color; }
+  }
+
+  .voucher__label {
+    background-color: $voucher-label-background;
+    padding: 4px;
+    position: absolute;
+    top: $voucher-label-y;
+    left: $voucher-label-x;
+    font-size: $voucher-label-size;
+    width: $voucher-label-width;
+    height: $voucher-label-height;
+
+    .voucher__label_top {
+      display: flex;
+      align-items: center;
+      height: $voucher-qr-size;
+    }
+
+    .voucher__label_code {
+      font-weight: 800;
+    }
+
+    .voucher__label_note {
+      font-size: $voucher-label-size - 3pt;
+      line-height: $voucher-label-size;
+    }
+
+    .voucher__label_qr {
+      display: block;
+      float: right;
+      width: $voucher-qr-size;
+      height: $voucher-qr-size;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+  }
+}

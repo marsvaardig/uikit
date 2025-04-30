@@ -1,0 +1,109 @@
+@if $article-accordion != false {
+  .ag-collapsible .article_grid {
+    margin: 0;
+  }
+
+  .houdini {
+    display: none;
+    visibility: hidden;
+  }
+
+  .houdini[tabindex="-1"]:focus {
+    outline: none;
+  }
+
+  .houdini.is-expanded {
+    display: block;
+    visibility: visible;
+  }
+
+  .accordion__title,
+  .houdini-heading .houdini-toggle {
+    background: inherit;
+    border: none;
+    display: block;
+    font: inherit;
+    padding: 0;
+    text-align: inherit;
+  }
+
+  .houdini-heading .houdini-toggle {
+    width: 100%;
+  }
+
+  .houdini-toggle-icon {
+    padding: 0 0.5em;
+  }
+
+  .accordion__title.accordion__title,
+  .houdini-heading.houdini-heading {
+    margin: 0;
+    @include property(font-family, $article-accordion-heading-font-family);
+    font-size: $article-accordion-heading-font-size;
+    font-weight: $article-accordion-heading-font-weight;
+  }
+
+  .accordion__title,
+  .houdini-heading .houdini-toggle {
+    position: relative;
+    font-size: inherit;
+    font-weight: inherit;
+    @include property(background, $article-accordion-heading-background);
+    border-bottom: $article-accordion-heading-border;
+    padding: $article-accordion-heading-padding;
+    @include property(color, $article-accordion-heading-color);
+    cursor: pointer;
+
+    &:focus,
+    &:hover {
+      background: $article-accordion-heading-hover-background;
+    }
+
+    &::before {
+      position: absolute;
+      top: calc(50% - 0.5em);
+      left: 0.5em;
+      content: " ";
+      width: 1em;
+      height: 1em;
+      @include svg-mask($article-accordion-heading-icon-before, $article-accordion-heading-icon-before-color, $article-accordion-heading-icon-before-width, $article-accordion-heading-icon-before-height, $article-accordion-heading-icon-before-viewbox-width, $article-accordion-heading-icon-before-viewbox-height);
+    }
+
+    &::after {
+      position: absolute;
+      top: calc(50% - 0.5em);
+      right: 0.75em;
+      content: " ";
+      width: 0.8em;
+      height: 0.8em;
+      border-right: 3px solid;
+      border-bottom: 3px solid;
+      transform: rotate(45deg);
+    }
+  }
+
+  // Unknown difference between accordion & houdini
+  .accordion__title {
+    &::after {
+      width: 0.65em;
+      height: 0.65em;
+    }
+
+    &::-webkit-details-marker {
+      display:none;
+    }
+  }
+
+  .accordion[open] .accordion__title,
+  .houdini-heading .houdini-toggle[aria-expanded="true"] {
+    &::after {
+      top: calc(50% - 0.2em);
+      transform: rotate(-135deg);
+    }
+  }
+
+  .accordion__content,
+  .houdini {
+    padding: $article-accordion-content-padding;
+  }
+}

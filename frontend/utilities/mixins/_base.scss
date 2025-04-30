@@ -1,0 +1,10 @@
+// Fallback
+// ==========================================================================
+// When the $fallback variable is set to true you can preview how older
+// browsers behave. Always test on real old browser to be 100% sure
+
+@mixin fallback() {
+  @if ($fallback == false) {
+    @content;
+  }
+}

@@ -1,0 +1,48 @@
+.metaheader {
+  @include spacing(bottom, margin, 0.5);
+
+  display: flex;
+  align-items: center;
+
+  &--image {
+    @include spacing(bottom, margin, 1);
+  }
+}
+
+// Double class definition so (1) wins from .article img:not(.card-image)
+.metaheader__image.metaheader__image {
+  flex: 0 0 auto;
+  width: $metaheader-image-width;
+  margin-right: $metaheader-image-margin-right;
+
+  img {
+    border-radius: $metaheader-img-border-radius; // (1)
+    border:$metaheader-img-border;
+    padding: $metaheader-img-padding;
+  }
+}
+
+// Testimonials have a title inside (overwrite .content__inner h2)
+.metaheader__name.metaheader__name h2 {
+  margin: 0;
+
+  @include breakpoint($delta) {
+    margin-bottom: $spacing-xs;
+  }
+}
+
+.metaheader__date {
+  color: $color-muted;
+}
+
+.article__title + .metaheader {
+  justify-content: center;
+}
+
+.article__content + .metaheader {
+  @include spacing(top);
+
+  max-width: $article-size-content;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,35 @@
+.card--middle {
+  border: 0 none;
+  color: $card--image-color-text;
+
+  @if (lightness($card--image-color-text) > 50) {
+    @include font-smoothing;
+  }
+
+  .card-block {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: px(22);
+    line-height: 1.5em;
+
+    @if (lightness($card--image-color-text) > 50) {
+      text-shadow: $card--image-text-shadow;
+    }
+
+    & {
+      @include property("background", $card--image-overlay);
+    }
+  }
+}
+
+// Fix in card so we don't overlay a card image with a full background
+.card--middle.card--image {
+  a {
+    @include hover {
+      .card-block {
+        @include property(background, $card--image-overlay);
+      }
+    }
+  }
+}

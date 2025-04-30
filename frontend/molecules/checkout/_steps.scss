@@ -1,0 +1,77 @@
+@if $extension--products {
+.checkout-steps {
+  display: flex;
+  justify-content: center;
+}
+
+.checkout-steps ul {
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  counter-reset: steps;
+  margin-bottom: 2.25rem;
+  gap: 1rem;
+  font-size: 14px;
+}
+
+@media (min-width: 48em) {
+  .checkout-steps ul {
+    gap: 1.5rem;
+  }
+}
+
+.checkout-steps li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  counter-increment: steps;
+  column-gap: .5em;
+}
+
+@media (min-width: 48em) {
+  .checkout-steps li {
+    flex-direction: row;
+  }
+}
+
+.checkout-steps li::before {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  content: counter(steps);
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 100%;
+  background: #fff;
+  border: 2px solid #44a343;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 0;
+}
+
+.checkout-steps .active {
+  font-weight: bold;
+}
+
+.checkout-steps .active a {
+  text-decoration: none;
+}
+
+.checkout-steps .active::before {
+  color: #fff;
+  background-color: #44a343;
+}
+
+.checkout-steps .completed {
+  font-weight: bold;
+}
+
+.checkout-steps .completed::before {
+  color: #fff;
+  background-color: #44a343;
+  content: "✓";
+}
+}

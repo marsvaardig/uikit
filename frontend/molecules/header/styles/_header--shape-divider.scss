@@ -1,0 +1,58 @@
+@if $header-style and str-index($header-style, 'shape-divider') {
+  $shape-height: 5vw;
+
+.header:has(.custom-shape-divider) {
+  padding-bottom: $shape-height;
+}
+
+.custom-shape-divider {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider svg {
+  position: relative;
+  left: -40%;
+  display: block;
+  width: 140%;
+  height: $shape-height;
+}
+
+.custom-shape-divider .shape-fill {
+  @if $content-color-background {
+    fill: $content-color-background;
+  } @else {
+    fill: #FFFFFF;
+  }
+}
+
+  @if $site == 'umor' or $site == 'rietmoesen' {
+    // Only show custom shape divider after hero
+    .custom-shape-divider {
+      display: none;
+    }
+
+    .header:not(.header__hero) {
+      padding-bottom: 0;
+    }
+
+    .header__hero + .custom-shape-divider {
+      display: block;
+    }
+  }
+
+  @if $site == 'umor' {
+    // Show gradient when shape divider is hidden
+    .header .header__overlay {
+      &:nth-last-child(2) {
+        box-shadow: 0 1px 40px rgba($color-brand, .2), 0 1px 4px rgba($color-brand, .1);
+      }
+    }
+  }
+}

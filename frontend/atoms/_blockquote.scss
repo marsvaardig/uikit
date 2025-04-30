@@ -1,0 +1,31 @@
+blockquote:not(.testimonial) {
+  @include spacing($blockquote-spacing-sides, padding, $blockquote-spacing-amount);
+
+  color: $blockquote-color-text;
+  border-left: 4px solid $blockquote-color-border;
+  margin-left: 0;
+
+  @if $blockquote-font-family {
+    font-family: $blockquote-font-family;
+  }
+
+  @if $blockquote-font-weight {
+    font-weight: $blockquote-font-weight;
+  }
+
+  @if $blockquote-color-background {
+    background: $blockquote-color-background;
+  }
+
+  @if $blockquote-style {
+    font-style: $blockquote-style;
+  }
+
+  p {
+    @include content-block(.5em);
+  }
+
+  @include breakpoint($bravo) {
+    margin-left: 1em;
+  }
+}

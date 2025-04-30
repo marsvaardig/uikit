@@ -1,0 +1,245 @@
+@if $extension--cookies != false {
+
+  // Make sure the cookiebar is always on the bottom part of the viewport
+  .wrapper {
+    min-height: 100vh;
+
+    & > footer {
+      flex: 1 1 auto;
+    }
+  }
+
+  .cookieconsent {
+    position: sticky;
+    bottom: 0;
+    z-index: 2147483647; // Always on top of 3rd party UI elements (like chat etc.). very important that the user can select which cookies to accept. This is the highest z-index number possible.
+    color: $consent-color;
+    background: $consent-background;
+    padding: $consent-spacing;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    backface-visibility: hidden;
+    max-height: 100vh;
+    overflow: auto;
+    margin-top: $consent-bottom;
+
+    @include breakpoint($bravo) {
+      @if $consent-style == 'float' {
+        bottom: $consent-bottom;
+        width: calc(100vw - (2 * #{$consent-spacing}));
+        max-width: $article-size-content;
+        margin-right: auto;
+        margin-left: auto;
+        border-radius: $consent-radius;
+        box-shadow: $consent-shadow;
+      }
+      @if $consent-float-position == 'left' {
+        margin-left: $consent-bottom;
+      }
+      @if $consent-float-position == 'right' {
+        margin-right: $consent-bottom;
+      }
+    }
+  }
+
+  .cookieconsent__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: $width-maximum-content;
+    margin-right: auto;
+    margin-left: auto;
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: px(15);
+      font-weight: $weight-bold;
+      line-height: 1.5em;
+      border: none;
+      border-radius: .5em;
+      color: $consent-button-color;
+      background: $consent-button-background;
+      padding: .4em .8em;
+      cursor: pointer;
+
+      @include hover() {
+        background: $consent-button-hover-background;
+      }
+    }
+  }
+
+  .cookieconsent__body {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding-left: 3.5rem;
+
+    @include pseudo(before) {
+      width: 2rem;
+      height: 2rem;
+      top: 0;
+      left: 0;
+      @include svg-mask('<path d="M7.01567 1.51875C6.64067 1.46562 6.2563 1.53437 5.9188 1.7125L3.6063 2.94687C3.27192 3.125 3.00005 3.40625 2.8313 3.75L1.68442 6.1125C1.51567 6.45625 1.46255 6.84687 1.52817 7.225L1.9813 9.8125C2.04692 10.1906 2.2313 10.5375 2.5063 10.8031L4.39067 12.6281C4.66567 12.8938 5.01567 13.0656 5.39067 13.1187L7.98442 13.4844C8.35942 13.5375 8.7438 13.4687 9.0813 13.2906L11.3938 12.0562C11.7282 11.875 12 11.5938 12.1688 11.25L13.3157 8.89062C13.4844 8.54688 13.5375 8.15625 13.4719 7.77812L13.0188 5.1875C12.9532 4.80937 12.7688 4.4625 12.4938 4.19687L10.6094 2.37187C10.3344 2.10625 9.98442 1.93437 9.60942 1.88125L7.01567 1.51562V1.51875ZM5.21255 0.3875C5.82817 0.0593746 6.53442 -0.0656254 7.22505 0.0312496L9.8188 0.396875C10.5094 0.49375 11.1532 0.809375 11.6532 1.29375L13.5375 3.11875C14.0407 3.60625 14.375 4.2375 14.4969 4.92812L14.9532 7.51562C15.075 8.20625 14.975 8.91562 14.6688 9.54375L13.5188 11.9062C13.2125 12.5344 12.7157 13.05 12.1 13.3813L9.78755 14.6156C9.17192 14.9438 8.46567 15.0688 7.77505 14.9719L5.1813 14.6062C4.49067 14.5094 3.84692 14.1938 3.34692 13.7094L1.46255 11.8813C0.962549 11.3938 0.625049 10.7594 0.506299 10.0719L0.0500493 7.48437C-0.0718257 6.79375 0.0281743 6.08437 0.334424 5.45625L1.4813 3.09375C1.78755 2.46562 2.28442 1.95 2.90005 1.61875L5.21255 0.384375V0.3875ZM8.50005 3.5C8.50005 3.23478 8.60541 2.98043 8.79294 2.79289C8.98048 2.60536 9.23483 2.5 9.50005 2.5C9.76527 2.5 10.0196 2.60536 10.2072 2.79289C10.3947 2.98043 10.5 3.23478 10.5 3.5C10.5 3.76522 10.3947 4.01957 10.2072 4.20711C10.0196 4.39464 9.76527 4.5 9.50005 4.5C9.23483 4.5 8.98048 4.39464 8.79294 4.20711C8.60541 4.01957 8.50005 3.76522 8.50005 3.5ZM8.50005 6.5C8.76527 6.5 9.01962 6.60536 9.20716 6.79289C9.39469 6.98043 9.50005 7.23478 9.50005 7.5C9.50005 7.76522 9.39469 8.01957 9.20716 8.20711C9.01962 8.39464 8.76527 8.5 8.50005 8.5C8.23483 8.5 7.98048 8.39464 7.79294 8.20711C7.60541 8.01957 7.50005 7.76522 7.50005 7.5C7.50005 7.23478 7.60541 6.98043 7.79294 6.79289C7.98048 6.60536 8.23483 6.5 8.50005 6.5ZM5.50005 9.5C5.76527 9.5 6.01962 9.60536 6.20716 9.79289C6.39469 9.98043 6.50005 10.2348 6.50005 10.5C6.50005 10.7652 6.39469 11.0196 6.20716 11.2071C6.01962 11.3946 5.76527 11.5 5.50005 11.5C5.23483 11.5 4.98048 11.3946 4.79294 11.2071C4.60541 11.0196 4.50005 10.7652 4.50005 10.5C4.50005 10.2348 4.60541 9.98043 4.79294 9.79289C4.98048 9.60536 5.23483 9.5 5.50005 9.5ZM4.50005 4.5C4.76527 4.5 5.01962 4.60536 5.20716 4.79289C5.39469 4.98043 5.50005 5.23478 5.50005 5.5C5.50005 5.76522 5.39469 6.01957 5.20716 6.20711C5.01962 6.39464 4.76527 6.5 4.50005 6.5C4.23483 6.5 3.98048 6.39464 3.79294 6.20711C3.60541 6.01957 3.50005 5.76522 3.50005 5.5C3.50005 5.23478 3.60541 4.98043 3.79294 4.79289C3.98048 4.60536 4.23483 4.5 4.50005 4.5ZM9.50005 10.5C9.50005 10.2348 9.60541 9.98043 9.79294 9.79289C9.98048 9.60536 10.2348 9.5 10.5 9.5C10.7653 9.5 11.0196 9.60536 11.2072 9.79289C11.3947 9.98043 11.5 10.2348 11.5 10.5C11.5 10.7652 11.3947 11.0196 11.2072 11.2071C11.0196 11.3946 10.7653 11.5 10.5 11.5C10.2348 11.5 9.98048 11.3946 9.79294 11.2071C9.60541 11.0196 9.50005 10.7652 9.50005 10.5Z"/>', currentcolor, 100%, 100%, 15, 15);
+    }
+
+    @include breakpoint($charlie) {
+      flex-direction: row;
+
+      @if ($consent-style == 'float') {
+        flex-direction: column;
+      }
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .cookieconsent__initial {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5em;
+    margin-left: -3.5rem;
+
+    @include breakpoint($bravo) {
+      align-self: flex-start;
+      margin-left: 0;
+    }
+
+    @include breakpoint($charlie) {
+      flex-wrap: nowrap;
+    }
+  }
+
+  .cookieconsent__form {
+    display: inline-flex;
+    flex-direction: column;
+    padding-left: 4rem;
+
+    .form-toggle {
+      flex: 0 0 auto;
+    }
+
+    .button-wrapper {
+      margin-top: .5em;
+      flex: 1 1 auto;
+    }
+
+    .form-wrapper {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      text-align: left;
+
+      & > * + * {
+        margin-top: .5em;
+      }
+    }
+  }
+
+  .is-hidden {
+    display: none;
+  }
+
+
+  /* Form toggle (checkbox)
+   ========================================================================== */
+
+  .form-toggle {
+    display: inline-block;
+    margin-right: 1em;
+
+    [type="checkbox"]{
+      @include visually-hidden();
+    }
+
+    label {
+      backface-visibility: hidden;
+      position: relative;
+      display: block;
+      width: 100%;
+      min-width: 3.2em;
+      padding-left: 3.6em;
+      cursor: pointer;
+      font-weight: bold;
+
+      &::before,
+      &::after {
+        cursor: inherit;
+      }
+    }
+
+    label::before {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      display: block;
+      width: 3.2em;
+      height: 1.6em;
+      content: " ";
+      background-color: rgba(black, .15);
+      @if ($consent-style == 'float') {
+        background-color: rgba(black, .65);
+      }
+      @include svg-background('<path d="M24 5.655L8.468 21.187 0 12.72l2.842-2.843 5.626 5.626 12.69-12.69L24 5.655z"/>', #fff, 12, 12);
+      background-position: center left 10px;
+      border-radius: 1.6em;
+      box-shadow: inset 0 0 2px rgba(#000, .2);
+      transform: translateY(-50%);
+      @include transition(background);
+    }
+
+    label::after {
+      position: absolute;
+      top: 50%;
+      left: calc(1.75em);
+      width: 1.28em;
+      height: 1.28em;
+      content: " ";
+      background: #fff;
+      border-radius: 1em;
+      box-shadow: 0 0 2px rgba(#000, .33);
+      transform: translate(-1.6em, -50%);
+      @include transition(transform);
+    }
+
+    input:checked + label::before {
+      background-color: $color-success;
+    }
+
+    input:checked + label::after {
+      transform: translate(0, -50%);
+    }
+
+    input:disabled + label {
+      cursor: not-allowed;
+      color: rgba(#000, .6);
+
+      &::before {
+        background-color: #96cbac;
+      }
+    }
+
+    p {
+      margin-top: .25em;
+      padding-left: 3.6em;
+      margin-bottom: .5em;
+    }
+  }
+
+  .consent-message {
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(0,0,0,.2);
+    padding: 1.5rem;
+    background: rgba(0,0,0,.05);
+    text-align: center;
+  }
+}

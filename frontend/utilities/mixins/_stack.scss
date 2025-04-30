@@ -1,0 +1,36 @@
+// Stack
+
+@mixin stack($spacing, $heading-spacing, $section-spacing, $section-spacing-fallback) {
+  & > * {
+    // Reset margin on all direct children
+    margin: 0 auto;
+
+    // Space items using top-margin
+    & + * {
+      margin-top: $spacing;
+    }
+
+    // Space divs and sections differently
+    & + div,
+    & + section {
+      @include supports('margin-top: #{$section-spacing}', #{$section-spacing-fallback});
+
+      & + * {
+        @include supports('margin-top: #{$section-spacing}', #{$section-spacing-fallback});
+      }
+    }
+  }
+
+  // Space headings differently
+  h1,
+  .h2,
+  h2,
+  .h3,
+  h3,
+  .h4,
+  h4 {
+    & + *:not([class*="article_grid"]) {
+      margin-top: $heading-spacing;
+    }
+  }
+}

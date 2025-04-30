@@ -1,0 +1,93 @@
+.breadcrumb {
+  @include spacing(vertical, padding, 0.5);
+
+  @if($breadcrumb-color-background) {
+    background-color: $breadcrumb-color-background;
+  }
+
+  a {
+    color: $breadcrumb-color-link;
+
+    @if($breadcrumb-color-link--hover) {
+      &:hover {
+        color: $breadcrumb-color-link--hover;
+      }
+    }
+  }
+
+  @if($breadcrumb-max-width) {
+    .grid {
+      max-width: none;
+
+      @include breakpoint($breadcrumb-max-width) {
+        max-width: $breadcrumb-max-width + ($grid-padding * 2);
+
+        @if($header-max-width == $breadcrumb-max-width)
+        {
+          padding-left: $grid-padding;
+          padding-right: $grid-padding;
+        }
+      }
+    }
+  } @else if($wrapper-framed and $header == 'row') {
+    .grid {
+      max-width: none;
+    }
+  }
+}
+
+.breadcrumb__list {
+  @include reset();
+  font-size: $font-size-small;
+
+  li, .breadcrumb__divider {
+    display: inline-block;
+    margin-right: .25em;
+  }
+
+  .breadcrumb__divider {
+    color: $breadcrumb-color-divider;
+  }
+}
+
+
+// Sticky breadcrumbs
+// ==================
+
+@mixin stickyHeight($property) {
+  $extra: '0px';
+
+  @if ($property == 'top') {
+    $extra: '2px';
+  }
+
+  // Calculate responsive padding + line-height
+  #{$property}: calc((1rem + 1.5em) - #{$extra});
+
+  @include breakpoint($bravo) {
+    #{$property}: calc((1.5rem + 1.5em) - #{$extra});
+  }
+
+  @include breakpoint($delta) {
+    #{$property}: calc((2rem + 1.5em) - #{$extra});
+  }
+}
+
+@if($breadcrumb-sticky) {
+  .breadcrumb {
+    position: sticky;
+    top: -1px;
+    z-index: 9;
+    @include stickyHeight('min-height');
+  }
+
+  .breadcrumb-shade {
+    position: sticky;
+    @include stickyHeight('top');
+    z-index: 8;
+    height: 1px;
+    margin-top: -10px;
+    background: $breadcrumb-color-background;
+    box-shadow: 0 2px 5px 0 rgba(#000, 1);
+  }
+}

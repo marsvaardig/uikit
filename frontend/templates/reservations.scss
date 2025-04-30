@@ -1,0 +1,16 @@
+.reservations-default .content__inner {
+  max-width: px(1024);
+}
+
+.reservation-form .content__inner {
+  max-width: px(570);
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reservations--time {
+    .radiobutton__label {
+        margin-bottom: calc($grid-padding / 4);
+    }
+}

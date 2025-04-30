@@ -1,0 +1,250 @@
+@if $extension--carte {
+.dish {
+  display: flex;
+  flex-direction: column;
+
+  border-top: 1px dotted $dish-color-border;
+  @include spacing(top, padding, 0.5);
+  @include spacing(top, margin, 0.5);
+
+  &:first-child {
+    margin-top: 0;
+    border-top: 0 none;
+  }
+
+  .note {
+    margin-top: .25em;
+    text-align: left;
+  }
+
+  p {
+    margin-bottom: .75em;
+  }
+}
+
+// Increase spacing for view with shopping cart buttons
+.products-carte .dish {
+  @include spacing(top, padding);
+  @include spacing(top, margin);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.dish__inner {
+  display: flex;
+  align-items: center;
+
+  @include breakpoint(0, $alfa--plus) {
+    flex-direction: column;
+  }
+}
+
+.dish__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%; // Fix for IE10
+}
+
+.dish__image {
+  margin-bottom: $grid-padding;
+
+  @include breakpoint($alfa--plus) {
+    width: 20vw;
+    max-width: px(150);
+    margin-bottom: 0;
+    margin-right: $grid-padding;
+  }
+}
+
+.dish__header {
+  display: flex;
+  align-items: center;
+}
+
+.dish__header + .dish__description {
+  margin-top: $spacing-s;
+}
+
+.dish__title {
+  flex: 1 1 auto;
+  margin-bottom: 0;
+}
+
+
+.dish__subtitle {
+  margin-bottom: .5em;
+}
+
+.dish__description {
+  flex: 1 1 auto;
+  font-size: 0.9375em;
+  color: $color-muted;
+
+  p:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.dish__description,
+.dish__details {
+  font-size: 0.9375em;
+  color: $color-muted;
+}
+
+.dish__price {
+  text-align: center;
+  margin-left: $grid-padding;
+  white-space: nowrap;
+
+  span + span {
+    padding-left: .5em;
+    margin-left: .25em;
+
+    @include pseudo(before) {
+      top: 0;
+      left: 0;
+
+      width: 1px;
+      height: 100%;
+
+      border-left: 1px dotted $color-muted;
+    }
+  }
+}
+
+.dish__quantity {
+  $height: px(38);
+
+  display: flex;
+  flex-direction: row;
+
+  height: $height;
+
+  margin-top: calc($grid-padding / 2);
+
+  .form-control {
+    line-height: $height;
+    text-align: center;
+    width: px(35);
+    border-radius: 0;
+    padding: 0;
+    border-color: $btn-primary-border;
+    border-left: 0 none;
+    border-right: 0 none;
+  }
+
+  .btn {
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+  }
+
+  .btn:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .btn:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.dish__details {
+  dl {
+    display: flex;
+    flex-direction: column;
+
+    div {
+      display: flex;
+    }
+
+    dt, dd {
+      margin: 0;
+    }
+
+    dt {
+      padding-right: .25em;
+    }
+
+    @include breakpoint($alfa--plus) {
+      dt {
+        &::after {
+          content: ":";
+        }
+      }
+
+      dd {
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
+@supports (display: grid) and (grid-template-columns: auto) {
+  .dishes--columns:not(.dishes--images) {
+    @include breakpoint($charlie) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: $grid-padding * 1.5;
+
+      .dish {
+        // Select the two first 2 elements
+        &:nth-child(-n+2) {
+          margin-top: 0;
+          border-top: 0 none;
+        }
+      }
+    }
+  }
+
+  // Keep single column longer when dishes have images
+  .dishes--columns.dishes--images {
+    @include breakpoint($delta) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: $grid-padding * 1.5;
+
+      .dish {
+        // Select the two first 2 elements
+        &:nth-child(-n+2) {
+          margin-top: 0;
+          border-top: 0 none;
+        }
+      }
+    }
+  }
+}
+
+.dish__allergens {
+  margin-top: .5em;
+
+  @supports (display: grid) and (grid-template-columns: repeat(auto-fill, 2em)) {
+    display: grid;
+    grid-gap: .25em;
+    grid-template-columns: repeat(auto-fill, 2em);
+  }
+}
+
+.dish__allergens_icon {
+  border-radius: 100%;
+  color: white;
+  display: inline-block;
+  background-color: red;
+
+  .icon {
+    padding: .25em;
+    font-size: 2em;
+  }
+}
+
+.dish__allergens_icon {
+  @each $element, $color in $color-allergens {
+    &--allergens_#{$element} {
+      background-color: $color;
+    }
+  }
+}
+}

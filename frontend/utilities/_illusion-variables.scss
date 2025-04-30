@@ -1,0 +1,101 @@
+// Illusion overrides
+// Right now we can't override these settings inside separate sites
+$font-size: px(16);
+$line-height: px(24);
+$spacing-xs: px(4);
+$spacing-s: px(8);
+$spacing-m: px(16);
+$spacing-l: px(24);
+$spacing-xl: px(32);
+$alfa: px(320);
+$alfa--plus: px(440);
+$bravo: px(560);
+$charlie: px(768);
+$delta: px(1024);
+$echo: px(1112);
+$alfa--plus-min: $alfa--plus - px(1);
+$bravo-min: $bravo - px(1);
+$charlie-min: $charlie - px(1);
+$delta-min: $delta - px(1);
+$echo-min: $echo - px(1);
+$illusion-grid-default-width: px(0);
+$illusion-grid-default-gutter: px(16);
+$illusion-grid-bravo-width: $bravo;
+$illusion-grid-bravo-gutter: px(24);
+$illusion-grid-delta-width: $delta;
+$illusion-grid-delta-gutter: px(32);
+$illusion-grid-breakpoints: (
+    default: (
+        width: $illusion-grid-default-width,
+        gutter: $illusion-grid-default-gutter
+    ),
+    bravo: (
+        width: $illusion-grid-bravo-width,
+        gutter: $illusion-grid-bravo-gutter
+    ),
+    delta: (
+        width: $illusion-grid-delta-width,
+        gutter: $illusion-grid-delta-gutter
+    )
+);
+$illusion-breakpoint-type: em;
+$illusion-form-border-width: px(2);
+$illusion-multiple-choice-unit: px(40);
+$illusion-fluid-property-max-value: px(20);
+$illusion-fluid-property-min-screen: $bravo;
+$illusion-fluid-property-max-screen: $delta;
+
+$illusion-form-focus-color:                                   $color-focus;
+
+$illusion-form-input-line-height:                             $line-height + $spacing-xs;
+$illusion-form-input-border:                                  $illusion-form-border-width solid;
+$illusion-form-input-font-family:                             inherit;
+$illusion-form-input-font-weight:                             inherit;
+$illusion-form-input-color:                                   inherit;
+$illusion-form-input-focus-outline:                           3px solid $illusion-form-focus-color;
+
+$illusion-custom-select:                                      true;
+$illusion-custom-select-selector:                             ".custom-select";
+$illusion-custom-select-theme:                                inherit;
+$illusion-custom-select-position:                             relative;
+$illusion-custom-select-display:                              block;
+$illusion-custom-select-background:                           #FFF;
+
+$illusion-custom-select-width:                                100%;
+$illusion-custom-select-margin:                               0;
+$illusion-custom-select-padding:                              ($spacing-xs - ($illusion-form-border-width * 2)) ($spacing-s - ($illusion-form-border-width * 2));
+$illusion-custom-select-outline:                              none;
+$illusion-custom-select-height:                               $illusion-form-input-line-height + ($spacing-xs * 2) + ($illusion-form-border-width * 2);
+$illusion-custom-select-multiple-height:                      $illusion-custom-select-height * 2;
+$illusion-custom-select-box-sizing:                           border-box;
+$illusion-custom-select-font-size:                            16px;
+$illusion-custom-select-border:                               $illusion-form-input-border;
+$illusion-custom-select-font-family:                          $illusion-form-input-font-family;
+$illusion-custom-select-font-weight:                          $illusion-form-input-font-weight;
+$illusion-custom-select-color:                                $illusion-form-input-color;
+$illusion-custom-select-line-height:                          $illusion-form-input-line-height + $illusion-form-border-width;
+$illusion-custom-select-padding-top:                          $spacing-xs;
+$illusion-custom-select-padding-bottom:                       $spacing-xs;
+$illusion-custom-select-padding-left:                         $spacing-s;
+
+$illusion-custom-select-arrow-content:                        " ";
+$illusion-custom-select-arrow-position:                       absolute;
+$illusion-custom-select-arrow-top:                            50%;
+$illusion-custom-select-arrow-right:                          $spacing-s;
+$illusion-custom-select-arrow-z-index:                        2;
+$illusion-custom-select-arrow-pointer-events:                 none;
+$illusion-custom-select-arrow-width:                          0;
+$illusion-custom-select-arrow-height:                         0;
+$illusion-custom-select-arrow-size:                           px(6);
+$illusion-custom-select-arrow-border-horizontal:              $illusion-custom-select-arrow-size solid transparent;
+$illusion-custom-select-arrow-border-top:                     $illusion-custom-select-arrow-size solid;
+$illusion-custom-select-arrow-margin-top:                     -(calc($illusion-custom-select-arrow-size / 2));
+$illusion-custom-select-arrow-display:                        block;
+
+$illusion-custom-select-padding-right:                        ($illusion-custom-select-arrow-right * 2) + ($illusion-custom-select-arrow-size * 2);
+
+$illusion-custom-select-ms-focus-background:                  none;
+$illusion-custom-select-ms-focus-color:                       inherit;
+
+$illusion-custom-select-focus-outline:                        $illusion-form-input-focus-outline;
+$illusion-custom-select-focus-outline-offset:                 $illusion-form-border-width;

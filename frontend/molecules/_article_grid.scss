@@ -1,0 +1,533 @@
+@mixin gridRadius($radius, $margin) {
+  // Only round the corners when the grid is not pushed to the sides
+  // This unfortunately doesn't work with always visible scrollbars since custom properties can't be used in media queries
+  @if ($radius != false) {
+    &.article_grid--outer-widest-width {
+      @media (min-width: calc($article-grid-widest-width + 2px)) {
+        border-radius: $radius;
+      }
+    }
+    &.article_grid--outer-wider-width {
+      @media (min-width: calc($article-grid-wider-width + 2px)) {
+        border-radius: $radius;
+      }
+    }
+    &.article_grid--default-width {
+      @media (min-width: calc($article-size-content - ($margin * 2))) {
+        border-radius: $radius;
+      }
+    }
+
+    // Style separate when found inside another inner width
+    @at-root .article_grid--inner-widest-width & {
+      border-radius: 0;
+
+      @container article-grid (min-width: calc(#{$article-grid-widest-width} + 2px)) {
+        border-radius: $radius;
+      }
+    }
+
+    @at-root .article_grid--inner-wider-width & {
+      border-radius: 0;
+
+      @container article-grid (min-width: calc(#{$article-grid-wider-width} + 2px)) {
+        border-radius: $radius;
+      }
+    }
+
+    @at-root .article_grid--inner-default-width & {
+      border-radius: 0;
+
+      @container article-grid (min-width: calc(#{$article-size-content} + 2px)) {
+        border-radius: $radius;
+      }
+    }
+  }
+}
+
+@if $article-grid != false {
+
+  // Default article grid settings
+  // =============================
+
+  .article_grid {
+    container: article-grid / inline-size;
+
+    &:not(:first-child) {
+      margin-top: $article-grid-margin-top;
+    }
+    &:not(:last-child) {
+      margin-bottom: $article-grid-margin-bottom;
+    }
+  }
+
+
+  // The inner container
+  // ===================
+
+  .article_grid__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: -(calc($article-grid-gap / 2));
+
+    // Use supports to test for flex gap support
+    @supports (gap: 1rem) {
+      margin: 0;
+      gap: $article-grid-gap;
+    }
+  }
+
+  .article_grid__fixer {
+    display: none !important;
+  }
+
+
+  // Individual items
+  // ================
+
+  [class^="article_grid__item"] {
+    flex: 999 1 auto;
+    flex-basis: $article-grid-basis;
+    margin: calc($article-grid-gap / 2);
+
+    // Use supports to test for flex gap support
+    @supports (gap: 1rem) {
+      margin: 0;
+    }
+
+    // Extra, just to be sure
+    &[hidden] {
+      display: none!important;
+    }
+
+    // No margin-top for immediate first children
+    & > *:not(div):not(section):first-child {
+      margin-top: 0;
+    }
+  }
+
+
+  // Flex basis for different grid sizes
+  // -----------------------------------
+
+  @if ($article-grid-basis-third) {
+    /* Adjusted spacing for thirds */
+    .article_grid--1-2 > .article_grid__inner > [class^="article_grid__item"],
+    .article_grid--2-1 > .article_grid__inner > [class^="article_grid__item"] {
+      flex-basis: $article-grid-basis-third;
+    }
+  }
+
+  /* Grid 1-1 */
+  .article_grid--1-1 > .article_grid__inner > [class^="article_grid__item"] {
+    min-width: calc(49.99% - (#{$article-grid-gap})); // Not 50% to give browsers some sub-pixel breath when using responsive (vw) font-size
+  }
+
+  /* Grid 1-2 */
+  .article_grid--1-2 > .article_grid__inner > .article_grid__item2 {
+    min-width: calc(((#{$article-grid-two-thirds} - #{$article-grid-gap})));
+  }
+
+  /* Grid 2-1 */
+  .article_grid--2-1 > .article_grid__inner > .article_grid__item1 {
+    min-width: calc(((#{$article-grid-two-thirds} - #{$article-grid-gap})));
+  }
+
+  /* Grid 1-1-1 */
+  .article_grid--1-1-1 > .article_grid__inner > [class^="article_grid__item"] {
+    min-width: 0;
+    flex-basis: calc((#{($article-grid-basis-thirds + $article-grid-gap) * 3} - (100%)) * 999);
+    flex-grow: 1;
+  }
+
+  /* Grid 1-1-1-1 */
+  .article_grid--1-1-1-1 > .article_grid__inner > [class^="article_grid__item"] {
+    min-width: 0;
+    flex-basis: 100%;
+    flex-grow: 1;
+
+    @include breakpoint($content-width) {
+      flex-basis: calc(50% - (#{$article-grid-gap}));
+    }
+
+    @include breakpoint($wider-width) {
+      flex-wrap: nowrap;
+      flex-basis: calc(25% - (#{$article-grid-gap}));
+    }
+  }
+
+
+  // Special cases
+  // =============
+
+  .article_grid {
+    .article__outset {
+      @include reset();
+      width: 100%;
+
+      &:not(:only-child) {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+
+  .article {
+    img:not(.no-srcset):not([width]) {
+      width: 100%;
+    }
+  }
+
+
+  // Article grid styling
+  // ====================
+
+  @if ($article-grid-style1 != false) {
+    /* Grid style 1 */
+    .article_grid--style1 {
+      overflow: hidden;
+      @if ($article-grid-style1-color != false) {
+        @if ($article-grid-style1-color != default) {
+          color: $article-grid-style1-color;
+        } @else if ($article-grid-style1-background != false) {
+          @include color(false, $article-grid-style1-background);
+        }
+        h1, h2, h3, h4, h5, a {
+          color: inherit;
+        }
+      }
+      @include property(background-color, $article-grid-style1-background);
+      @include property(padding, $article-grid-style1-padding);
+      @if ($article-grid-style1-margin != false) {
+        margin-right: $article-grid-style1-margin;
+        margin-left: $article-grid-style1-margin;
+      }
+      @include gridRadius($article-grid-style1-border-radius, $article-grid-style1-margin);
+    }
+  }
+
+  @if ($article-grid-style2 != false) {
+    /* Grid style 2 */
+    .article_grid--style2 {
+      overflow: hidden;
+      @if ($article-grid-style2-color != false) {
+        @if ($article-grid-style2-color != default) {
+          color: $article-grid-style2-color;
+        } @else if ($article-grid-style2-background != false) {
+          @include color(false, $article-grid-style2-background);
+        }
+        h1, h2, h3, h4, h5, a {
+          color: inherit;
+        }
+      }
+      @include property(background-color, $article-grid-style2-background);
+      @include property(padding, $article-grid-style2-padding);
+      @if ($article-grid-style2-margin != false) {
+        margin-right: $article-grid-style2-margin;
+        margin-left: $article-grid-style2-margin;
+      }
+      @include gridRadius($article-grid-style2-border-radius, $article-grid-style2-margin);
+    }
+  }
+
+  @if ($article-grid-style3 != false) {
+    /* Grid style 3 */
+    .article_grid--style3 {
+      overflow: hidden;
+      @if ($article-grid-style3-color != false) {
+        @if ($article-grid-style3-color != default) {
+          color: $article-grid-style3-color;
+        } @else if ($article-grid-style3-background != false) {
+          @include color(false, $article-grid-style3-background);
+        }
+        h1, h2, h3, h4, h5, a {
+          color: inherit;
+        }
+      }
+      @include property(background-color, $article-grid-style3-background);
+      @include property(padding, $article-grid-style3-padding);
+      @if ($article-grid-style3-margin != false) {
+        margin-right: $article-grid-style3-margin;
+        margin-left: $article-grid-style3-margin;
+      }
+      @include gridRadius($article-grid-style3-border-radius, $article-grid-style3-margin);
+    }
+  }
+
+
+  // Article grid column styling
+  // ===========================
+
+  @if ($article-grid-column-style1 != false) {
+    /* Grid style 1 */
+    .article_grid--column-style1 {
+      & > * > [class*="article_grid__item"] {
+        color: $article-grid-column-style1-color;
+        background: $article-grid-column-style1-background;
+        border: $article-grid-column-style1-border;
+        border-radius: $article-grid-column-style1-border-radius;
+        box-shadow: $article-grid-column-style1-box-shadow;
+        padding: $article-grid-column-style1-padding;
+      }
+    }
+  }
+  @if ($article-grid-column-style2 != false) {
+    /* Grid style 2 */
+    .article_grid--column-style2 {
+      & > * > [class*="article_grid__item"] {
+        color: $article-grid-column-style2-color;
+        background: $article-grid-column-style2-background;
+        border: $article-grid-column-style2-border;
+        border-radius: $article-grid-column-style2-border-radius;
+        box-shadow: $article-grid-column-style2-box-shadow;
+        padding: $article-grid-column-style2-padding;
+      }
+    }
+  }
+  @if ($article-grid-column-style3 != false) {
+    /* Grid style 3 */
+    .article_grid--column-style3 {
+      & > * > [class*="article_grid__item"] {
+        color: $article-grid-column-style3-color;
+        background: $article-grid-column-style3-background;
+        border: $article-grid-column-style3-border;
+        border-radius: $article-grid-column-style3-border-radius;
+        box-shadow: $article-grid-column-style3-box-shadow;
+        padding: $article-grid-column-style3-padding;
+      }
+    }
+  }
+
+
+  // Width settings
+  // ==============
+
+  @if ($article-grid-style-none-fullwidth != false) {
+    // @TODO: Remove this when all grids are update to the new outer / inner styling
+    /* Fullwidth grid for none-styled 1 column grid items */
+    .article_grid--1.article_grid--style-none {
+      margin-right: calc(-50vw + 50%);
+      margin-left: calc(-50vw + 50%);
+    }
+  }
+
+  /* Make sure that nested grids follow their parent styling */
+  [class*="article_grid--outer"]:not(.ag-legacy) {
+    [class*="article_grid--outer"]:not(.ag-legacy) {
+      width: calc(100% + #{$grid-padding * 2});
+      margin-right: -($grid-padding * 2);
+    }
+  }
+
+  /* Outer widths */
+  .article_grid--outer-full-width,
+  .article_grid--outer-widest-width,
+  .article_grid--outer-wider-width {
+    &:not(.ag-legacy) {
+      position: relative;
+      top: 0;
+      left: 50%;
+      width: calc(100vw - var(--scrollbar-width));
+      margin-right: 0;
+      margin-left: 0;
+      transform: translateX(-50%);
+      padding-left: $grid-padding;
+      padding-right: $grid-padding;
+      display: flex;
+      justify-content: center;
+
+      & > * {
+        width: calc(100% + #{$article-grid-gap});
+        max-width: calc(#{$article-size-content});
+      }
+
+      &.article_grid--inner-wider-width {
+        & > * {
+          width: calc(100% + #{$article-grid-gap});
+          max-width: $article-grid-wider-width;
+        }
+      }
+    }
+  }
+
+  /* Full + widest */
+  .article_grid--outer-full-width,
+  .article_grid--outer-widest-width {
+    &.article_grid--inner-widest-width {
+      &:not(.ag-legacy) > * {
+        width: calc(100% + #{$article-grid-gap});
+        max-width: $article-grid-widest-width;
+      }
+    }
+  }
+
+  /* Full width */
+  .article_grid--outer-full-width:not(.ag-legacy) {
+    max-width: calc(100vw - var(--scrollbar-width));
+
+    @if $wrapper-framed {
+      max-width: calc(#{$width-maximum});
+    }
+
+    &.article_grid--inner-full-width {
+      & > * {
+        width: calc(100% + #{($grid-padding * 2)});
+        max-width: calc(100% + #{($grid-padding * 2)});
+      }
+    }
+  }
+
+  /* Widest */
+  .article_grid--outer-widest-width:not(.ag-legacy) {
+    max-width: $article-grid-widest-width;
+  }
+
+  /* Wider */
+  .article_grid--outer-wider-width:not(.ag-legacy) {
+    max-width: $article-grid-wider-width;
+  }
+
+
+  // For full-width styled grids
+  // ===========================
+  // We actually want to set bigger margins and vertical paddings by default
+  // If you do not want that for a particular site; set the variable to false
+
+  @if ($article-grid-styled-full-spacing) == true {
+    [class*="article_grid--outer-"][class*="article_grid--style"]:not([class*="grid--style-none"]):not(.ag-legacy) {
+      @at-root .article__content > &, .module > & {
+        // Top margin
+        // ----------
+        &.article_grid--margin-top-default:not(:first-child) {
+          @if $article-grid-big-margin-top == false {
+            @include spacing(top, margin, $content-inner-spacing-top-amount);
+          } @else {
+            margin-top: $article-grid-big-margin-top;
+          }
+        }
+
+        // Bottom margin
+        // -------------
+        &.article_grid--margin-bottom-default:not(:last-child) {
+          @if $article-grid-big-margin-bottom == false {
+            @include spacing(bottom, margin, $content-inner-spacing-top-amount);
+          } @else {
+            margin-bottom: $article-grid-big-margin-bottom;
+          }
+        }
+
+        // Padding
+        // -------
+        &.article_grid--padding-vertical-default:not(:first-child) {
+          @if $article-grid-big-padding-vertical == false {
+            @include spacing(vertical, padding, $content-inner-spacing-top-amount);
+          } @else {
+            padding-top: $article-grid-big-padding-vertical;
+            padding-bottom: $article-grid-big-padding-vertical;
+          }
+        }
+
+        &.article_grid--padding-vertical-default {
+          @if $article-grid-big-padding-vertical == false {
+            @include spacing(vertical, padding, $content-inner-spacing-top-amount);
+          } @else {
+            padding-top: $article-grid-big-padding-vertical;
+            padding-bottom: $article-grid-big-padding-vertical;
+          }
+        }
+      }
+    }
+  }
+
+
+  // Margin settings
+  // ===============
+
+  /* Margin top */
+  .article_grid--margin-top-none:not(.ag-legacy) {
+    margin-top: 0;
+  }
+
+  .article_grid--margin-top-medium:not(.ag-legacy) {
+    @if $article-grid-medium-margin-top == false {
+      margin-top: clamp(1.5rem, calc(1rem + 2vw), 2.5rem);
+    } @else {
+      margin-top: $article-grid-medium-margin-top;
+    }
+  }
+
+  .article_grid--margin-top-big:not(.ag-legacy) {
+    @if $article-grid-big-margin-top == false {
+      @include spacing(top, margin, $content-inner-spacing-top-amount);
+    } @else {
+      margin-top: $article-grid-big-margin-top;
+    }
+  }
+
+  /* Margin bottom */
+  .article_grid--margin-bottom-none:not(.ag-legacy) {
+    margin-bottom: 0;
+  }
+
+  .article_grid--margin-bottom-medium:not(.ag-legacy) {
+    @if $article-grid-medium-margin-bottom == false {
+      margin-bottom: clamp(1.5rem, calc(1rem + 2vw), 2.5rem);
+    } @else {
+      margin-bottom: $article-grid-medium-margin-bottom;
+    }
+  }
+
+  .article_grid--margin-bottom-big:not(.ag-legacy) {
+    @if $article-grid-big-margin-bottom == false {
+      @include spacing(bottom, margin, $content-inner-spacing-top-amount);
+    } @else {
+      margin-bottom: $article-grid-big-margin-bottom;
+    }
+  }
+
+
+  // Padding settings
+  // ================
+
+  .article_grid--padding-vertical-none:not(.ag-legacy) {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .article_grid--padding-vertical-small:not(.ag-legacy) {
+    padding-top: $article-grid-small-padding-vertical;
+    padding-bottom: $article-grid-small-padding-vertical;
+  }
+
+  .article_grid--padding-vertical-big:not(.ag-legacy) {
+    @if $article-grid-big-padding-vertical == false {
+      @include spacing(vertical, padding, $content-inner-spacing-top-amount);
+    } @else {
+      padding-top: $article-grid-big-padding-vertical;
+      padding-bottom: $article-grid-big-padding-vertical;
+    }
+  }
+
+  /* Padding inline */
+  .article_grid--padding-inline-none:not(.ag-legacy) {
+    & > .article_grid__inner > [class*="article_grid__item"] {
+      padding: 0;
+    }
+  }
+
+  .article_grid--padding-inline-small:not(.ag-legacy) {
+    & > .article_grid__inner > [class*="article_grid__item"] {
+      padding: $article-grid-small-padding-inline;
+    }
+  }
+
+  .article_grid--padding-inline-big:not(.ag-legacy) {
+    & > .article_grid__inner > [class*="article_grid__item"] {
+      @if $article-grid-big-padding-inline == false {
+        @include spacing(all, padding, 1);
+      } @else {
+        padding: $article-grid-big-padding-inline;
+      }
+    }
+  }
+}

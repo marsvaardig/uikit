@@ -1,0 +1,377 @@
+// Global CTA styles
+// =================
+
+.cta__title,
+.cta__info {
+  text-align: inherit;
+
+  @include spacing(bottom, margin);
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.cta--horizontal {
+  .grid {
+    @include breakpoint($charlie) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .cta__info {
+    @include breakpoint($charlie) {
+      margin-right: $grid-padding;
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+// CTA in the content area
+// =======================
+
+.content {
+  .cta {
+    @include spacing(vertical, padding, $cta-spacing-amount);
+
+    // If the cta-color-background variable is of type color
+    @if (type-of($cta-color-background) == color) {
+      background-color: $cta-color-background;
+    } @else {
+      background: $cta-color-background;
+    }
+    @include property('background-size', $cta-background-size);
+
+    @if $cta-color-border {
+      border-top: 1px solid $cta-color-border;
+    }
+
+    @if $cta-margin {
+      margin: $cta-margin;
+    }
+
+    .grid {
+      text-align: center;
+      max-width: none;
+    }
+  }
+
+  .cta__title,
+  .cta__info {
+    color: $cta-color-text;
+  }
+
+  .cta__title {
+    font-weight: $cta-title-font-weight;
+    font-size: $size-h2;
+    line-height: 1.2em;
+  }
+
+  .cta__info {
+    font-weight: $cta-info-font-weight;
+    font-size: $cta-info-font-size;
+    line-height: $cta-info-line-height;
+  }
+
+  .cta__button {
+    a {
+      @include button-variant($cta-button-color, $cta-button-background, $cta-button-border);
+      @include property('font-size', $cta-button-font-size);
+      @include property('font-weight', $cta-button-font-weight);
+
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+
+      @include hover() {
+        @include property('background-color', $cta-button-hover-background);
+      }
+    }
+  }
+}
+
+
+// CTA in the header area
+// ======================
+
+.header {
+
+  /* On top of possible header::pseudo elements */
+  .cta {
+    @include property(position, $cta-header-position);
+    @include property(z-index, $cta-header-z-index);
+    display: flex;
+    align-items: center;
+    @include property(background, $cta-header-background);
+    @include property(border-bottom, $cta-header-border-bottom);
+    @include property(font-family, $cta-header-font-family);
+  }
+
+  .cta__inner {
+    display: flex;
+    flex-wrap: wrap;
+    color: $header-color-text;
+    background: transparent;
+    border: none;
+    width: 100%;
+    max-width: $cta-header-inner-max-width;
+    margin-right: auto;
+    margin-left: auto;
+    overflow: $cta-header-inner-overflow;
+    @include property(padding-right, $cta-header-inner-padding-right);
+    @include property(padding-left, $cta-header-inner-padding-left);
+
+    @if (lightness($header-color-text) > 50) {
+      @include font-smoothing;
+    }
+
+    @if ($cta-header-align == 'center') {
+      justify-content: center;
+      text-align: center;
+    }
+
+    @if ($cta-header-align == 'right') {
+      justify-content: flex-end;
+    }
+
+    .grid,
+    .cta__image {
+      flex: 999 1 auto;
+      flex-basis: $cta-header-grid-flex-basis;
+    }
+
+    .grid {
+      /* On top of possible pseudo elements */
+      position: relative;
+      z-index: 2;
+      margin: auto 0;
+      @include spacing(vertical, padding, $cta-header-grid-padding-amount);
+      @include property(padding-right, $cta-header-grid-padding-right);
+      @include property(padding-left, $cta-header-grid-padding-left);
+
+      @if ($cta-header-max-width) {
+        max-width: $cta-header-max-width;
+      }
+
+      // Animation
+      @if ($cta-header-animate == true) {
+        & > * {
+          opacity: 0;
+          animation: slide-in $cta-header-animate-duration ease-out forwards;
+          animation-delay: $cta-header-animate-delay;
+
+          &:nth-child(2) {
+            animation-delay: ($cta-header-animate-delay + $cta-header-animate-delay-repeat);
+          }
+
+          &:nth-child(3) {
+            animation-delay: ($cta-header-animate-delay + ($cta-header-animate-delay-repeat * 2));
+          }
+        }
+
+        @keyframes slide-in {
+          0% {
+            opacity: 0;
+            transform: translateX(-4rem);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0rem);
+          }
+        }
+      }
+    }
+  }
+
+  // Text shadow
+  @if ($cta-header-text-shadow != false) {
+    .cta__title,
+    .cta__info {
+      color: inherit;
+      text-shadow: $cta-header-text-shadow;
+    }
+  }
+
+  .cta__title {
+    @include fluid-property(font-size, px($cta-header-title-min-font-size), px($cta-header-title-max-font-size));
+    line-height: 1.2em;
+    font-weight: $cta-header-font-weight;
+
+    @if ($cta-header-title-color) {
+      color: $cta-header-title-color;
+    }
+  }
+
+  .cta__info {
+    @include fluid-property(font-size, px($cta-header-info-min-font-size), px($cta-header-info-max-font-size));
+    font-weight: $cta-info-font-weight;
+    line-height: $cta-info-line-height;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  /* Buttons */
+  .btn {
+    margin-right: .5em;
+    margin-bottom: .5em;
+    border: 2px solid $cta-header-button-color;
+    background-color: $cta-header-button-color;
+    @include property('font-size', $cta-header-button-font-size);
+    @include property('font-weight', $cta-header-button-font-weight);
+    @include color($cta-header-button-color-text, $cta-header-button-color);
+    @include box-shadow($cta-header-button-box-shadow);
+
+    @include transition(background, border);
+    @include hover {
+      border-color: $cta-header-button-hover-color;
+      background-color: $cta-header-button-hover-color;
+      @include color($cta-header-button-hover-color-text, $cta-header-button-hover-color);
+    }
+  }
+
+  .btn-secondary {
+    @include color($cta-header-secondary-button-color-text, $cta-header-secondary-button-color);
+    background-color: $cta-header-secondary-button-color;
+    @include property('border', $cta-header-secondary-button-border);
+
+    @include hover {
+      @include property('border-color', $cta-header-secondary-button-hover-color);
+      @include property('background-color', $cta-header-secondary-button-hover-color);
+      @include property('color', $cta-header-secondary-button-hover-color-text);
+    }
+  }
+
+  /* Image */
+  .cta__image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $grid-padding;
+
+    @if ($cta-header-animate == true) {
+      opacity: 0;
+      animation: slide-up 700ms ease-out forwards;
+      animation-delay: 600ms;
+
+      @keyframes slide-up {
+        0% {
+          opacity: 0;
+          transform: translateY(4rem);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0rem);
+        }
+      }
+    }
+
+    .lazyload__wrapper {
+      position: relative;
+      width: 100%;
+      max-width: $cta-header-image-max-width;
+      overflow: visible;
+
+      @if ($cta-header-image-pseudo != false) {
+        margin-left: -13%;
+
+        &::before,
+        &::after {
+          @include coverall();
+          display: block;
+          content: " ";
+          transform-origin: 50% 50%;
+          background: #fff;
+          border-radius: $cta-header-image-radius;
+        }
+
+        &::before {
+          transform: translate(13%, 0) rotate(5deg) scaleY(.88);
+          opacity: .2;
+        }
+
+        &::after {
+          transform: translate(8%, -12%) rotate(5deg) scaleY(.88);
+          opacity: .1;
+        }
+      }
+
+      img {
+        position: relative;
+        z-index: 2;
+        border-radius: $cta-header-image-radius;
+      }
+    }
+  }
+
+  // Put image above text
+  @if $cta-header-image-first {
+    @include breakpoint(0, $charlie) {
+      .cta {
+        .cta__inner {
+          flex-direction: column-reverse;
+        }
+
+        .grid,
+        .cta__image {
+          padding-top: 0;
+          flex: 1;
+          flex-basis: auto;
+        }
+
+        .cta__image {
+          padding-top: $grid-padding;
+        }
+      }
+    }
+  }
+}
+
+
+// CTA maximum width
+// =================
+
+@if $cta-max-width {
+  .cta.cta {
+    .grid {
+      max-width: $cta-max-width;
+      margin-right: auto;
+
+      @if $cta-align == 'center' {
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+
+// CTA auto width
+// =================
+
+@if $cta-auto-width {
+  .header {
+    .cta__inner {
+      padding: $cta-auto-width-padding;
+    }
+
+    .cta__title {
+      margin-bottom: .5em;
+    }
+
+    .cta .grid {
+      background: $cta-auto-width-background;
+      display: inline-block;
+      width: auto;
+      min-width: 50%;
+      flex: 0 1 auto;
+      padding: 2.5rem;
+      backdrop-filter: blur(5px);
+      @include property('border', $cta-auto-width-border);
+      @include property('border-radius', $cta-auto-width-border-radius);
+    }
+  }
+}

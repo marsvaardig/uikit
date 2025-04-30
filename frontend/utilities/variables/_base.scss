@@ -1,0 +1,112 @@
+$font-family: 'Open Sans', Helvetica !default;
+$font-family-heading: false;
+$font-family-navigation: false;
+
+@import "../../../../../../../../node_modules/illusion/scss/tools/variables/breakpoints";
+@import "../../../../../../../../node_modules/illusion/scss/tools/variables/spacing";
+@import "../../../../../../../../node_modules/illusion/scss/tools/variables/type";
+@import "../../../../../../../../node_modules/illusion/scss/tools/variables/color";
+
+// Import functions here so we can use the px function in sites variables.
+// px function should be removed when template transformation is complete
+@import "../functions";
+@import "../illusion-variables";
+
+$grid-padding: px(24) !default;
+
+// Base color palette - http://colormind.io
+$color-brand: #61963E !default;
+
+$color-dark-accent: #aaaa54 !default;
+$color-dark-shade: #292929 !default;
+
+$color-light-accent: #82859D !default;
+$color-light-shade: lighten($color-dark-accent, 47%) !default;
+
+// Colors
+$body-color: $color-dark-shade !default;
+
+$color-grey-light:      #f7f7f9 !default;
+$color-grey-medium:     #eceeef !default;
+$color-grey:            #ddd !default;
+$color-grey-dark:       #999 !default;
+$color-grey-darker:     #444 !default;
+
+// Illusion
+$illusion-extendalize: true !default;
+$illusion-form: true !default;
+
+// Change defaults after upgrade to v3.0.0 to keep same output for now
+$illusion-extendalize-address-margin-bottom: $spacing-l !default;
+$illusion-extendalize-paragraph-margin-bottom: $spacing-l !default;
+$illusion-extendalize-list-margin-bottom: $spacing-l !default;
+$illusion-form-group-margin: $spacing-l !default;
+$illusion-multiple-choice-label-before-background: #FFF !default;
+
+
+// New template style Modular Scale settings
+// ==========================================================================
+// Use these variables to "translate" design pixel units to fluid units
+// 1. Optimal site width
+// 2. Optimal font-size (mobile)
+// 3. Optimal font-size (desktop) when viewport is as wide as above site-width
+// 4. Keep the font-size growing when max size is reached?
+// 5. Default modular scale (1* 1.5 * 1.5)
+
+$root-site-width:           1184 !default; // 1 *
+$root-font-size-s:          16 !default; // 2 *
+$root-font-size:            16 !default; // 3 *
+$root-font-growing:         false !default; // 4 *
+$root-grid-spacing:         2.25 !default; // 5 *
+
+
+// Fallback settings
+// ==========================================================================
+
+$fallback:                  false !default; // Set to true to test on older browsers
+$fallback-amount:           1.5 !default; // Amount to calculate with for old browsers
+
+
+// Calculated values
+// ==========================================================================
+// You don't need to change these
+
+$design-width:              (calc($root-site-width / 16) * 1em) !default;
+$mobile-font-size:          (calc($root-site-font-size-s / 16) * 1em) !default;
+$site-width:                calculatewidth(12) !default;
+$wider-width:               calculatewidth(10) !default;
+$content-width:             calculatewidth(8) !default;
+$narrow-width:              calculatewidth(7) !default;
+
+// Modular scale
+// ==========================================================================
+
+// Default ratio
+$ratio: 1.5 !default;
+
+// Default scale
+$ms0:                       1 !default;
+
+// Smaller scales
+$ms-1:                      calc($ms0 / $ratio) !default;
+$ms-2:                      calc($ms-1 / $ratio) !default;
+$ms-3:                      calc($ms-2 / $ratio) !default;
+$ms-4:                      calc($ms-3 / $ratio) !default;
+
+// Bigger scales
+$ms1:                       $ms0 * $ratio !default;
+$ms2:                       $ms1 * $ratio !default;
+$ms3:                       $ms2 * $ratio !default;
+$ms4:                       $ms3 * $ratio !default;
+
+$sizes: (
+    -4: $ms-4,
+    -3: $ms-3,
+    -2: $ms-2,
+    -1: $ms-1,
+    0: $ms0,
+    1: $ms1,
+    2: $ms2,
+    3: $ms3,
+    4: $ms4,
+) !default;

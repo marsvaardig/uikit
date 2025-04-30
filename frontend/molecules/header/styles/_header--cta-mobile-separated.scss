@@ -1,0 +1,51 @@
+@if ($header-cta-mobile-separated != false) {
+  .header {
+    @include breakpoint(0, $width-header-switch-min) {
+      padding: 0;
+    }
+
+    .header__overlay {
+      @include breakpoint(0, $width-header-switch-min) {
+        border-radius: 0;
+      }
+    }
+
+    .header__visual {
+      @include breakpoint(0, $width-header-switch-min) {
+        position: relative;
+        order: -1;
+        overflow: hidden;
+      }
+
+      & ~ .header__visual {
+        display: none;
+      }
+    }
+
+    // On capable browsers; display the video
+    .header__hero:has(.header__visual + .header__visual--video) {
+      @include breakpoint(0, $width-header-switch-min) {
+        .header__visual--responsive {
+          display: none;
+        }
+      }
+
+      .header__visual--video {
+        display: block;
+      }
+    }
+
+    .cta__inner {
+      @include breakpoint(0, $width-header-switch-min) {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .cta .grid {
+      @include breakpoint(0, $width-header-switch-min) {
+        max-width: none;
+      }
+    }
+  }
+}

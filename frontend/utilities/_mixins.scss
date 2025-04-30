@@ -1,0 +1,130 @@
+// WebKit-style focus
+
+@mixin tab-focus() {
+  // WebKit-specific. Other browsers will keep their default outline style.
+  // (Initially tried to also force default via `outline: initial`,
+  // but that seems to erroneously remove the outline in Firefox altogether.)
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+
+// Tables
+
+@mixin table-row-variant($state, $background) {
+  // Exact selectors below required to override `.table-striped` and prevent
+  // inheritance to nested tables.
+  .table-#{$state} {
+    &,
+    > th,
+    > td {
+      background-color: $background;
+    }
+  }
+
+  // Hover states for `.table-hover`
+  // Note: this is not available for cells or rows within `thead` or `tfoot`.
+  .table-hover {
+    $hover-background: darken($background, 5%);
+
+    .table-#{$state} {
+      @include hover() {
+        background-color: $hover-background;
+
+        > td,
+        > th {
+          background-color: $hover-background;
+        }
+      }
+    }
+  }
+}
+
+@mixin box-shadow($shadow...) {
+  @if $enable-shadows {
+    box-shadow: $shadow;
+  }
+}
+
+@mixin border-radius($radius: $border-radius) {
+  @if $enable-rounded {
+    border-radius: $radius;
+  }
+}
+
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+
+@mixin button-variant($color, $background, $border) {
+  $active-background: darken($background, 10%);
+  $active-border: darken($border, 12%);
+
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+
+  @include box-shadow($button-box-shadow);
+
+  @include hover() {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+
+    @include box-shadow($button-box-shadow--hover);
+  }
+
+  &.focus {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  &:active,
+  &.active {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+    // Remove the gradient for the pressed/active state
+    background-image: none;
+
+    @include box-shadow($button-box-shadow--active);
+  }
+
+  &.disabled,
+  &:disabled {
+    &:focus,
+    &.focus {
+      background-color: $background;
+      border-color: $border;
+    }
+    &:hover {
+      background-color: $background;
+      border-color: $border;
+    }
+  }
+}
+
+// Button sizes
+@mixin button-size($padding-y, $padding-x, $font-size, $border-radius) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+  @include border-radius($border-radius);
+}
+
+// Tags
+
+@mixin tag-variant($color) {
+  background-color: $color;
+
+  @if (lightness($color) > 65) {
+    color: $color-grey-darker;
+  }
+
+  &[href] {
+    @include hover() {
+      background-color: darken($color, 10%);
+    }
+  }
+}

@@ -1,0 +1,84 @@
+@use "sass:math";
+
+@function set-text-color($color) {
+  @if (lightness($color) > 50) {
+    @return #000000; // Lighter backgorund, return dark color
+  } @else {
+    @return #ffffff; // Darker background, return light color
+  }
+}
+
+/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return math.div($number, $number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+
+// Modular scale
+// ==========================================================================
+// Function to be used in combination with the modular scale variables.
+// Defaults to em to make sure larger fonts have a larger scale
+// Possible to set to rem if you want to ignore the current element size
+
+@function ms($size: 0, $type: em) {
+  $ms-size: map-get($sizes, $size);
+  // Support for non default values
+  @if ($ms-size == null) {
+    $ms-size: $size;
+  }
+  $value: #{$ms-size}#{$type};
+  @return $value;
+}
+
+
+// Calculate width
+// ==========================================================================
+// Calculates which width to set for an element using the root settings
+
+@function calculatewidth($span) {
+  $spanAmount: calc(12 / $span);
+  $columnGutter: ($spanAmount - 1) * $root-grid-spacing;
+  $columnWidth: math.div(($design-width - $columnGutter), $spanAmount);
+  @return $columnWidth;
+}
+
+
+// Pixels to rem
+// ==========================================================================
+// Actually only correct on a 0px wide viewport. Based on rem which itself is
+// growing. Makes it possible to add interface components based on a default
+// pixel size
+
+@function px($size, $type: rem) {
+  $value: false;
+  $root: 16;
+  @if variable-exists(root-font-size-s) {
+    $root: $root-font-size-s;
+  }
+  @if ($type == 'rem') {
+    $value: calc($size / $root) * 1rem;
+  }
+  @if ($type == 'em') {
+    $value: calc($size / $root) * 1em;
+  }
+  @return $value;
+}
+
+
+// Function to generate the full URL to marsvaardig.photo dynamically
+// ==========================================================================
+@function marsvaardig-photo($domain, $site, $filename) {
+  $base-url: "https://marsvaardig.photo/?url=https://{{domain}}/theme/wepo/images/sites/{{site}}/{{filename}}&output=webp";
+
+  $updated-url: str-replace($base-url, "{{domain}}", $domain);
+  $updated-url: str-replace($updated-url, "{{site}}", $site);
+  $updated-url: str-replace($updated-url, "{{filename}}", $filename);
+
+  @return "#{$updated-url}";
+}

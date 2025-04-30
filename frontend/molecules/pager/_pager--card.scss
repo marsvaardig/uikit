@@ -1,0 +1,23 @@
+.pager--card {
+  @if $pager-color-background {
+    background-color: $pager-color-background;
+
+    @include spacing(top, padding, 2);
+    @include spacing(top, margin);
+  }
+
+  @if $pager-color-border {
+    border-top: 1px solid $pager-color-border;
+  }
+
+  .module--pager {
+    @include clearfix;
+
+    max-width: $width-maximum-content;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-left: $grid-padding;
+    padding-right: $grid-padding;
+  }
+}

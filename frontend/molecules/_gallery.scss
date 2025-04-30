@@ -1,0 +1,166 @@
+$gallery-size-width: px(800);
+
+.gallery {
+  @include spacing($gallery-spacing-direction, $gallery-spacing-type, $gallery-spacing-amount);
+  background-color: $gallery-color-background;
+
+  @if($gallery-color-background != transparent)
+  {
+    border-top: 1px solid darken($gallery-color-background, 3%);
+  }
+}
+
+.gallery--cards {
+  @include spacing();
+
+  .attachments__images {
+    margin-top: 0;
+  }
+}
+
+.gallery__container {
+  @include clearfix;
+  @include reset();
+
+  figure {
+    margin: 0;
+  }
+
+  img {
+    border-radius: $size-border-radius;
+  }
+
+  picture {
+    display: block;
+
+    &:not(:first-child) {
+      display: none;
+    }
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  &:not(.flickity-enabled) {
+    display: inline-block;
+    position: relative;
+  }
+
+  // Hide navigation (arrows) when gallery has only 1 cell
+  &[data-cells='1'] {
+    .flickity-button {
+      display: none;
+    }
+  }
+}
+
+// Override the default
+.flickity-viewport {
+  .carousel-cell {
+    width: 80%;
+    max-width: $gallery-size-width;
+    @include spacing(right, margin);
+  }
+}
+
+.gallery__nav {
+  @include spacing(top, margin, 0.5);
+
+  .flickity-viewport {
+    height: px(64);
+  }
+
+  .flickity-viewport .carousel-cell {
+    width: 15%;
+    max-width: px(64);
+    @include spacing(right, margin, 0.5);
+  }
+
+  .carousel-cell {
+    @include pseudo(after) {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      border-radius: $size-border-radius;
+      border: 1px solid rgba(100,100,100,0.3);
+    }
+
+    &.is-selected {
+      @include pseudo(after) {
+        border-color: $color-brand;
+      }
+    }
+  }
+}
+
+.flickity-prev-next-button.flickity-prev-next-button {
+  padding: 0;
+
+  @include breakpoint(0, $bravo) {
+    width: px(32);
+    height: px(32);
+  }
+
+  .flickity-button-icon {
+    position: static;
+    width: 50%;
+    height: 50%;
+  }
+}
+
+.flickity-page-dots.flickity-page-dots {
+  display: flex;
+  justify-content: center;
+
+  @include spacing(bottom, margin, -0.5);
+  bottom: -2px;
+  line-height: 0;
+
+  .dot {
+    flex-shrink: 1;
+
+    vertical-align: middle;
+
+    background: rgba(100,100,100,0.8);
+    height: px(4);
+    width: px(40);
+    margin: 0;
+    border-radius: 0;
+  }
+}
+
+.photoswipe-zoom {
+  font-size: px(12);
+  text-decoration: none;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  z-index: 100;
+  overflow: hidden;
+  margin: px(8);
+  padding: px(2) px(4);
+  border: none;
+  background: hsla(0, 0%, 95%, .9);
+  border-radius: px(4);
+  color: black;
+
+  &:focus,
+  &:hover {
+    background: $color-brand;
+
+    @if (lightness($color-brand) < 50) {
+      color: white;
+      @include font-smoothing;
+    }
+  }
+
+  .icon {
+    vertical-align: middle;
+  }
+}

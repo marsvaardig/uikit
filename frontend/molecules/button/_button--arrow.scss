@@ -1,0 +1,8 @@
+@if $button-arrow {
+.btn--arrow {
+  @include pseudo(after, false, false, "\2192", false) {
+    margin-left: .5em;
+    speak: none;
+  }
+}
+}

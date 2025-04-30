@@ -1,0 +1,102 @@
+@if $extension--portfolio {
+  .subnavigation {
+    // Prevent floats from breaking the navbar
+    @include clearfix();
+    @include spacing(bottom);
+
+    width: 100%;
+
+    display: flex;
+
+    color: $subnavigation-color-link;
+
+    @if (lightness($subnavigation-color-link) > 50) {
+      @include font-smoothing;
+    }
+  }
+
+  .subnavigation__list {
+    @extend .clearfix;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    justify-content: center;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @include breakpoint($alfa) {
+      flex-direction: row;
+      flex-flow: wrap;
+    }
+
+    @include breakpoint($bravo) {
+      display: table; // Flexbox fallback
+      display: flex;
+    }
+  }
+
+  .subnavigation__list li {
+    display: block; // Flexbox fallback
+    display: flex;
+    flex-grow: 0;
+    justify-content: center;
+    align-items: center;
+
+    margin: $spacing-xs;
+    padding: 0;
+
+    // Active nav items
+    a:hover {
+      color: $subnavigation-color-link--hover;
+      background-color: $subnavigation-color-background--hover;
+      text-decoration: none;
+    }
+
+    &.active a,
+    &.active a:hover,
+    &.active a:focus {
+      color: $subnavigation-color-link--active;
+      background-color: $subnavigation-color-background--active;
+      text-decoration: none;
+    }
+
+    @include breakpoint($alfa) {
+      float: left; // Flexbox fallback
+    }
+
+    @include breakpoint($bravo) {
+      float: left;
+    }
+
+    @include breakpoint($charlie) {
+      float: none; // Reset float
+      display: table-cell; // Flexbox fallback
+      display: flex;
+    }
+  }
+
+  .subnavigation__list a {
+    display: block;
+    display: flex;
+    flex-grow: 1;
+
+    align-items: center;
+
+    padding: $spacing-s;
+
+    text-decoration: none;
+
+    @include breakpoint($bravo) {
+      text-align: center;
+      justify-content: center;
+    }
+
+    @include breakpoint($delta) {
+      flex-grow: 0;
+    }
+  }
+}

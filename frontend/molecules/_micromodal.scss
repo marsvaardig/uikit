@@ -1,0 +1,138 @@
+.micromodal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, .8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.micromodal__container {
+  background-color: #fff;
+  max-width: 500px;
+  max-height: 100vh;
+  border-radius: 4px;
+  overflow: auto;
+}
+
+.micromodal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+}
+
+.micromodal__title {
+  margin: 0;
+  font-weight: $weight-bold;
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+.micromodal__close {
+  background: transparent;
+  border: 0;
+}
+
+.micromodal__header .micromodal__close:before {
+  content: "\2715";
+}
+
+.micromodal__content {
+  color: rgba(0,0,0,.8);
+}
+
+.micromodal__content iframe {
+  display: block;
+  width: 80vw;
+  max-width: 100%;
+  border: none;
+  height: 80vh;
+  max-height: 800px;
+}
+
+.micromodal__footer {
+  padding: 1em;
+}
+
+.micromodal__btn {
+  font-size: .875rem;
+  padding: .5rem 1rem;
+  background-color: #e6e6e6;
+  color: rgba(0, 0, 0, .8);
+  border-radius: .25rem;
+  border-style: none;
+  border-width: 0;
+  cursor: pointer;
+  -webkit-appearance: button;
+  text-transform: none;
+  overflow: visible;
+  line-height: 1.15;
+  margin: 0;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform .25s ease-out;
+}
+
+.micromodal__btn:focus,
+.micromodal__btn:hover {
+  transform: scale(1.05);
+}
+
+
+/**************************\
+  Demo Animation Style
+\**************************/
+@keyframes mmfadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes mmfadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes mmslideIn {
+  from { transform: translateY(15%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes mmslideOut {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10%); }
+}
+
+.micromodal {
+  display: none;
+}
+
+.micromodal.is-open {
+  display: block;
+}
+
+.micromodal[aria-hidden="false"] .micromodal__overlay {
+  animation: mmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.micromodal[aria-hidden="false"] .micromodal__container {
+  animation: mmslideIn .3s cubic-bezier(0, 0, .2, 1);
+}
+
+.micromodal[aria-hidden="true"] .micromodal__overlay {
+  animation: mmfadeOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.micromodal[aria-hidden="true"] .micromodal__container {
+  animation: mmslideOut .3s cubic-bezier(0, 0, .2, 1);
+}
+
+.micromodal .micromodal__container,
+.micromodal .micromodal__overlay {
+  will-change: transform;
+}

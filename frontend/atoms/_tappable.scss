@@ -1,0 +1,5 @@
+// Elements that should disable double-tap to zoom
+
+button {
+  touch-action: manipulation;
+}

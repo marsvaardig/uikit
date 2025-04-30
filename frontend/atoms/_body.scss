@@ -1,0 +1,42 @@
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  height: 100%;
+  color: $body-color;
+  @if ($body-background-override) {
+    background: $body-background-override;
+  } @else {
+    background: $body-background-color
+  }
+
+  @if $wrapper-position == 'middle' {
+    border-top: 4px solid $color-brand;
+
+    @include breakpoint($charlie) {
+      display: flex;
+
+      padding: $grid-padding;
+    }
+  }
+}
+
+* {
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    transition-duration: 0s !important;
+    animation: none !important;
+  }
+}

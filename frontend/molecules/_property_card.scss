@@ -1,0 +1,169 @@
+// Extends Bootstrap Card layout
+
+@if $extension--properties {
+.property_card-deck-wrapper {
+  margin: 0 auto;
+}
+
+.property_card {
+  border: 1px solid $card-color-border;
+  border-radius: $size-border-radius;
+
+  @if $property_card-color-background {
+    background-color: $property_card-color-background;
+  }
+
+  text-decoration: none;
+
+  @if $card-shadow {
+    box-shadow: $button-box-shadow;
+    transition: all 150ms ease;
+
+    &:hover {
+      box-shadow: $button-box-shadow--hover;
+    }
+  }
+
+  // Image transition
+  img.lazyloaded {
+    transition: transform 150ms ease;
+  }
+
+  &:hover {
+
+    &,
+    & * {
+      border-color: $card-color-border--hover;
+    }
+
+    background-color: $property_card-color-background--hover;
+
+    img {
+      transform: scale(1.1);
+    }
+
+    .property_card__details {
+      background-color: darken($property_card_details-color-background, 5%);
+
+      li {
+        border-color: darken($property_card_details-color-background, 10%);
+      }
+    }
+  }
+}
+
+.property_card-block {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.property_card__title {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column; // Fix for IE 10
+
+  // Override .content__inner h2
+  &.property_card__title {
+    margin: 0;
+  }
+
+  padding: 1em .5em;
+  font-size: $font-size;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.property_card__image {
+  @include ratio-block(3 to 2);
+
+  border-bottom: 1px solid darken($property_card_details-color-background, 5%);
+  border-radius: $size-border-radius $size-border-radius 0 0;
+
+  img {
+    // IE11 - http://stackoverflow.com/questions/36822370/flexbox-on-ie11-image-stretched-for-no-reason
+    max-width: 100%;
+    flex-shrink: 0;
+
+    transition: all 0.3s;
+
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    @include ratio-block(3 to 2);
+  }
+}
+
+.property_card-block {
+  text-align: center;
+}
+
+.property_card__details {
+  display: flex;
+  justify-content: center;
+
+  padding: px(16) 0;
+
+  background-color: $property_card_details-color-background;
+  border-top: 1px solid darken($property_card_details-color-background, 5%);
+
+  border-bottom-left-radius: $size-border-radius;
+  border-bottom-right-radius: $size-border-radius;
+
+  ul {
+    display: flex;
+    flex: 1;
+
+    max-width: px(300);
+    line-height: 1.25em;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    &:not(:first-child) {
+      border-left: 1px solid darken($property_card_details-color-background, 2.5%);
+    }
+  }
+}
+
+.property_card__price {
+  padding: 0 px(8) px(16);
+
+  del {
+    margin-right: px(8);
+  }
+}
+
+.property_card-deck {
+  $gutter: $grid-padding;
+
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: -($gutter);
+
+  .property_card {
+    float: left; // Flexbox fallback
+    width: 100%;
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: column;
+    margin-bottom: $gutter;
+
+    @include gallery(6, $bravo, $gutter: $gutter);
+    @include gallery(4, $delta, $gutter: $gutter);
+  }
+}
+}

@@ -1,0 +1,47 @@
+@if $overlay-grid != false {
+  .overlay-grid-container {
+    position: fixed;
+    top: -1px;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    z-index: 999;
+    box-sizing: border-box;
+    height: calc(100% + 2px);
+    pointer-events: none;
+    padding-inline: $grid-padding;
+    display: none;
+  }
+
+  .overlay-grid,
+  .overlay-grid__item {
+    box-sizing: border-box;
+    height: 100%
+  }
+
+  .overlay-grid {
+    display: grid;
+    width: 100%;
+    max-width: $width-maximum;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    outline: #f0f solid 1px;
+    outline-offset: -1px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: calc(1.5rem * 1.5);
+    grid-template-areas: ". . . . . . . . . . . ."
+  }
+
+  @supports (--css: variables) {
+    .overlay-grid {
+      gap: $grid-padding;
+    }
+  }
+
+  .overlay-grid__item {
+    background: rgba(255,0,255,.1);
+    outline: #f0f solid 1px
+  }
+}

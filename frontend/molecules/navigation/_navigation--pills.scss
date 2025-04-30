@@ -1,0 +1,36 @@
+@if $navigation == 'pills' {
+.navigation--header {
+  @include breakpoint($header-breakpoint) {
+    border-top: 0 none;
+    border-bottom: 0 none;
+  }
+
+  .navigation__item {
+    @include breakpoint($header-breakpoint) {
+      margin: $navigation-item-margin;
+
+      a {
+        background-color: $navigation-color-background;
+
+        border-radius: $navigation-pill-radius;
+        padding: .5em .75em;
+
+        &:hover {
+          background-color: $navigation-color-background--hover;
+        }
+      }
+
+      &.active a,
+      &.active a:hover,
+      &.active a:focus {
+        background-color: $navigation-color-background--active;
+      }
+    }
+  }
+
+  .navigation__link {
+    text-align: center;
+    justify-content: center;
+  }
+}
+}

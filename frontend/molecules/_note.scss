@@ -1,0 +1,38 @@
+.note {
+  color: $note-color-text;
+  font-size: $font-size - px(1);
+  text-align: center;
+
+  padding: calc($line-height / 2);
+
+  border: 1px solid $note-color-border;
+  border-radius: px(4);
+  background-color: $note-color-background;
+
+  a {
+    color: $note-color-link;
+    font-weight: $weight-bold;
+  }
+
+  &.balance-text {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+div.note {
+  text-align: left;
+
+  p:only-child {
+    text-align: center;
+  }
+}
+
+.note--small {
+  padding: px(6) px(12);
+  font-size: $font-size-small;
+}
+
+.note--margin {
+  @include spacing(top, margin, 2);
+}

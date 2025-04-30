@@ -1,0 +1,132 @@
+// For now - only enable the hamburger when variable is set.
+@if ($navigation-hamburger) {
+  .mainmenu-toggle {
+    display: none;
+  }
+
+  body.js-hamburger {
+    @media (min-width: 0) and (max-width: calc($header-breakpoint - 1px)) {
+      .header__inner {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: auto auto;
+      }
+
+      .organization {
+        padding-left: $grid-padding;
+        justify-content: flex-start;
+      }
+    }
+
+    .navigation--header {
+      @media (min-width: 0) and (max-width: calc($header-breakpoint - 1px)) {
+        display: none;
+      }
+    }
+
+    .navigation--show {
+      display: flex;
+    }
+
+    .mainmenu-toggle {
+      background: transparent;
+      border: none;
+      padding: 0 $grid-padding 0;
+      font-size: px(15);
+      cursor: pointer;
+
+      @if($navigation-color-background == transparent)
+      {
+        @include color($navigation-color-link, $header-color-background, white);
+      } @else {
+        @include color($navigation-color-link, $navigation-color-background, white);
+      }
+
+      display: flex;
+      align-items: center;
+      justify-content: right;
+      gap: px(6);
+
+      @include breakpoint($header-breakpoint) {
+        display: none;
+      }
+
+      + .navigation {
+        grid-column: 1 / -1; // Full width navigation
+      }
+    }
+
+    .hamburger {
+      position: relative;
+      z-index: 3;
+      display: inline-block;
+      width: $navigation-hamburger-button-size;
+      height: $navigation-hamburger-button-size;
+      padding: 0;
+      color: $navigation-hamburger-button-color;
+      vertical-align: middle;
+      border: none;
+
+
+      /**
+       * Styling the hamburger bars
+       */
+
+      .bar1,
+      .bar2,
+      .bar3 {
+        position: absolute;
+        top: ($navigation-hamburger-button-size * .5) - ($navigation-hamburger-bar-height * .5);
+        left: ($navigation-hamburger-button-size - $navigation-hamburger-bar-width) * .5;
+        display: block;
+        width: $navigation-hamburger-bar-width;
+        height: $navigation-hamburger-bar-height;
+        vertical-align: middle;
+        background: $navigation-hamburger-button-color;
+        border-radius: 1px;
+        transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
+      }
+
+      .bar1 {
+        transform: translateY(-($navigation-hamburger-button-size) * .25) rotate(0deg);
+
+        &.is-open {
+          transform: translateY(0) rotate(135deg);
+        }
+      }
+
+      .bar2 {
+        opacity: 1;
+        transform: scale(1);
+
+        &.is-open {
+          opacity: 0;
+          transform: scale(0);
+        }
+      }
+
+      .bar3 {
+        transform: translateY($navigation-hamburger-button-size * .25) rotate(0deg);
+
+        &.is-open {
+          transform: rotate(-135deg);
+        }
+      }
+    }
+
+    .mainmenu-toggle[aria-expanded="true"] .hamburger {
+      .bar1 {
+        transform: translateY(0) rotate(135deg);
+      }
+
+      .bar2 {
+        opacity: 0;
+        transform: scale(0);
+      }
+
+      .bar3 {
+        transform: rotate(-135deg);
+      }
+    }
+  }
+}

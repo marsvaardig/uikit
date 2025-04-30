@@ -1,0 +1,76 @@
+@if $navigation == 'cards' or $navigation-style == 'cards' {
+  .navigation__list--cards {
+    @include spacing(bottom, padding, 2);
+    @include spacing(bottom, margin);
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 2rem;
+
+    @include breakpoint($bravo) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoint($charlie) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .navigation__item.navigation__item {
+      justify-content: flex-start;
+      border: none;
+      width: 100%;
+    }
+
+    @if ($navigation-cards-link-active-color != $navigation-color-link--active) {
+      .navigation__item.active {
+        a {
+          color: $navigation-cards-link-active-color;
+        }
+      }
+    }
+
+    .navigation__link {
+      padding: 0;
+      flex-direction: column;
+      flex: 1 1 auto;
+      justify-content: flex-start;
+      align-items: flex-start;
+      color: $navigation-cards-link-color;
+      font-weight: $weight-bold;
+      font-size: 1.3rem;
+      height: 100%;
+
+      @include pseudo(after) {
+        top: 0;
+        left: -1rem;
+        width: 4px;
+        height: 100%;
+        opacity: 0;
+        transform: scaleY(.5);
+        transform-origin: 0 0;
+        background: $color-brand;
+        backface-visibility: visible;
+        @include transition(opacity, transform);
+      }
+
+      span {
+        display: block;
+        width: 100%;
+        font-weight: $weight-normal;
+        color: initial;
+        margin-top: .75em;
+        font-size: 1rem;
+        flex: 1 1 auto;
+        margin-bottom: auto;
+      }
+
+      @include hover() {
+        color: $navigation-cards-link-hover-color;
+
+        &::after {
+          opacity: 1;
+          transform: scaleY(1);
+        }
+      }
+    }
+  }
+}

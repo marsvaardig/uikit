@@ -1,0 +1,49 @@
+@if $extension--door {
+.door {
+  @include coverall($position: fixed);
+  z-index: 100;
+  background-color: $door-color-background;
+
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.js-enabled .door {
+  display: flex;
+
+  &.is-shown ~ .wrapper {
+    display: none;
+  }
+
+  &.js-door:not(.is-shown) {
+    display: none;
+  }
+
+  // No cookie consent on top of the door
+  &.js-door.is-shown ~ .cookieconsent {
+    display: none;
+  }
+}
+
+.door__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.door__picture {
+  @include spacing(bottom, margin, 2);
+}
+
+.door__toolbar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  white-space: nowrap;
+
+  .btn {
+    margin: .5em;
+  }
+}
+}

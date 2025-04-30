@@ -1,0 +1,81 @@
+@if $extension--instagram {
+.module.instagram {
+  // Override default module padding
+  @if $instagram-padding-bottom != inherit {
+    &.module {
+      padding-bottom: $instagram-padding-bottom;
+    }
+  }
+
+  .attachments__images {
+    margin-top: 0;
+  }
+
+  .instagram__deck {
+    display: grid;
+    grid-gap: $instagram-grid-gap;
+    grid-auto-rows: 1fr;
+
+    @if $instagram-color-background {
+      background-color: $instagram-color-background;
+
+      @if $instagram-grid-gap == 1px {
+        border-top: 1px solid $instagram-color-background;
+      }
+    }
+
+    &[data-childs="4"] {
+      @include breakpoint($alfa) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include breakpoint($charlie) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    &[data-childs="5"] {
+      @include breakpoint($alfa) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include breakpoint($charlie) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      @include breakpoint($delta) {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    &[data-childs="6"] {
+      @include breakpoint($alfa) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @include breakpoint($delta) {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+  }
+
+  .instagram__thumbnail {
+    width: 100%; // Fallback when srcset keeps image too small
+  }
+
+  .instagram__cta {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: $weight-bold;
+    font-size: $font-size-small;
+    
+    padding: $spacing-m;
+
+    color: white;
+    background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+  }
+}
+}
+

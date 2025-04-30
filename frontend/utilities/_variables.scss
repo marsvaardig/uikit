@@ -1,0 +1,816 @@
+$site: 'casaiberico' !default;
+
+$molecule--compare: false !default;
+
+$extension--carte: false !default;
+$extension--cookies: false !default;
+$extension--reviews: false !default;
+$extension--instagram: false !default;
+$extension--organizations: false !default;
+$extension--properties: false !default;
+$extension--products: false !default;
+$extension--products-search: false !default;
+$extension--portfolio: false !default;
+$extension--hero: false !default;
+$extension--login: false !default;
+$extension--door: false !default;
+$extension--conversion: false !default;
+$extension--reservation: false !default;
+$extension--highlightdeck: false !default;
+$extension--pager-toc: false !default;
+
+$large-animate-duration: 700ms !default;
+$large-animate-delay: 300ms !default;
+$large-animate-delay-repeat: 100ms !default;
+
+$width-maximum: px(804) !default;
+$width-maximum-content: $width-maximum !default;
+
+$h1-selectors-base: 'h1, .h1';
+$h1-selectors: '' !default;
+$h2-selectors-base: 'h2, .h2, .table caption';
+$h2-selectors: '' !default;
+$h3-selectors-base: 'h3, .h3';
+$h3-selectors: '' !default;
+$h4-selectors-base: 'h4';
+$h4-selectors: '' !default;
+$size-h1: px(30) !default;
+$size-h2: px(24) !default;
+$size-h3: px(20) !default;
+$size-h4: $font-size + px(2) !default;
+
+$margin-h1: $line-height * 1.5 0 $line-height !default;
+$margin-h2: $line-height * 1.5 0 $line-height !default;
+$margin-h3: $line-height 0 calc($line-height / 2) !default;
+
+$font-family-h1: false !default;
+$font-family-h2: false !default;
+$font-family-h3: false !default;
+$font-family-h4: false !default;
+
+$font-size-large: px(18) !default;
+$font-size-small: px(14) !default;
+$line-height-large: 1.4em !default;
+
+$weight-semibold: 600 !default;
+$weight-heading: 400 !default;
+
+$size-border-radius: px(4) !default;
+$size-border-radius-large: px(8) !default;
+
+$color-link: $color-brand !default;
+$color-link--hover: darken($color-link, 15%) !default;
+$color-heading: inherit !default;
+$body-background-color: darken($color-brand, 10%) !default;
+$body-background-override: false !default;
+$body-border-top: false !default;
+$body-border-bottom: false !default;
+$color-muted: #6E7881 !default;
+$color-accent: false !default;
+
+$color-facebook: #3B5998 !default;
+$color-instagram: #e53566 !default;
+$color-linkedin: #0077B5 !default;
+$color-pinterest: #bd091b !default;
+$color-twitter: #00aced !default;
+$color-vimeo: #19b7ea !default;
+$color-youtube: #ff0002 !default;
+$color-spotify: #1ed761 !default;
+$color-tripadvisor: #00af87 !default;
+$color-google: #4285f4 !default;
+$color-whatsapp: #25D366 !default;
+
+$color-h1: $color-heading !default;
+$color-h2: $color-heading !default;
+$color-h3: $color-heading !default;
+$color-h4: $color-heading !default;
+
+$address-max-width: $charlie !default;
+
+$readmore: false !default;
+$readmore-align: center !default;
+
+$list-style-type: false !default;
+$list-style-weight: false !default;
+$list-style-padding-left: 0.5 !default;
+$list-style-radius: 100% !default;
+$list-style-border-color: $color-brand !default;
+$list-style-background: transparent !default;
+$list-style-size: $font-size !default;
+$list-style-custom-size: px(3) !default;
+$list-style-custom-light-size: px(2) !default;
+$list-check-margin: px(8) 0 !default;
+$list-check-font-family: false !default;
+$list-check-font-size: px(16) !default;
+
+// Skip to content link
+$skiplink-maxwidth: $width-maximum !default;
+$skiplink-color: #000 !default;
+$skiplink-background: #fff !default;
+$skiplink-outline: px(4) solid #000 !default;
+
+// Wrapper
+$wrapper-framed: false !default;
+$wrapper-position: 'center' !default;
+$wrapper-color-border: $color-grey-medium !default;
+$wrapper-color-background: #FFF !default;
+$wrapper-border-radius: false !default;
+$wrapper-box-shadow: 0 0 0 1px $wrapper-color-border !default;
+
+// Features
+$enable-shadows: true !default;
+
+// Bootstrap
+$brand-primary: $color-brand !default;
+
+// Headings
+$headings-position: center !default; // `left` or `center`
+$headings-max-width: px(700) !default;
+
+// Button
+$button-arrow: true !default;
+$button-color-background: $color-brand !default;
+$button-color-text: white !default;
+$button-color-border: darken($button-color-background, 5%) !default;
+$button-border-radius: $size-border-radius !default;
+$button-border-radius-large: $size-border-radius-large !default;
+$button-box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08) !default;
+$button-box-shadow--hover: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08) !default;
+$button-box-shadow--active: $button-box-shadow !default;
+$button-collapsible-background: rgba(0, 0, 0, 0.15) !default;
+$button-text-transform: false !default;
+$button-cta-color-background: $color-dark-accent !default;
+$button-cta-color-text: white !default;
+$button-cta-color-border: darken($color-dark-accent, 5%) !default;
+
+// Article
+$article-size-content: px(600) !default;
+$article-size-outset: $charlie !default;
+$article-size-image: px(680) !default;
+$article-image-border-radius: $size-border-radius !default;
+$article-position-title: center !default;
+$article-position-title-width: $article-size-content !default;
+$article-spacing-bottom-amount: 2 !default;
+$article-figure-zoom-images-overlay: false !default;
+$article-figure-zoom-images-overlay-background: #fff !default;
+$article-figure-zoom-images-overlay-selectors: '.article__figure' !default;
+$article-grid-widest-width: calc(#{$width-maximum-content} - #{($grid-padding * 2)}) !default;
+$article-grid-wider-width: calc((#{$article-size-content} + ((#{$width-maximum-content} - #{$article-size-content}) / 2))) !default;
+$article-grid: false !default;
+$article-grid-gap: $grid-padding !default; // 0px is valid, 0 or false won't work
+$article-grid-margin-top: $grid-padding !default; // 0px is valid, 0 or false won't work
+$article-grid-margin-bottom: $grid-padding !default; // 0px is valid, 0 or false won't work
+$article-grid-medium-margin-top: false !default;
+$article-grid-medium-margin-bottom: false !default;
+$article-grid-big-margin-top: false !default;
+$article-grid-big-margin-bottom: false !default;
+$article-grid-small-padding-vertical: 1em !default;
+$article-grid-big-padding-vertical: false !default;
+$article-grid-small-padding-inline: .5em !default;
+$article-grid-big-padding-inline: false !default;
+$article-grid-basis: calc($article-size-content / 4) !default;
+$article-grid-basis-third: false !default;
+$article-grid-basis-thirds: $article-grid-basis !default;
+$article-grid-basis-fourths: $article-grid-basis * .75 !default;
+$article-grid-one-third: 33.333% !default;
+$article-grid-two-thirds: 66.666% !default;
+$article-grid-style1: default !default;
+$article-grid-style1-color: default !default;
+$article-grid-style1-background: $color-brand !default;
+$article-grid-style1-margin: -($article-grid-gap) !default;
+$article-grid-style1-padding: $article-grid-gap !default;
+$article-grid-style1-border-radius: false !default;
+$article-grid-style2: default !default;
+$article-grid-style2-color: default !default;
+$article-grid-style2-background: $color-light-accent !default;
+$article-grid-style2-margin: -($article-grid-gap) !default;
+$article-grid-style2-padding: $article-grid-gap !default;
+$article-grid-style2-border-radius: false !default;
+$article-grid-style3: default !default;
+$article-grid-style3-color: default !default;
+$article-grid-style3-background: $color-light-shade !default;
+$article-grid-style3-margin: -($article-grid-gap) !default;
+$article-grid-style3-padding: $article-grid-gap !default;
+$article-grid-style3-border-radius: false !default;
+$article-grid-style-none-fullwidth: false !default;
+$article-grid-column-style1: default !default;
+$article-grid-column-style1-color: $body-color !default;
+$article-grid-column-style1-background: $wrapper-color-background !default;
+$article-grid-column-style1-border: none !default;
+$article-grid-column-style1-border-radius: 0 !default;
+$article-grid-column-style1-box-shadow: none !default;
+$article-grid-column-style1-padding: 1em !default;
+$article-grid-column-style2: default !default;
+$article-grid-column-style2-color: $body-color !default;
+$article-grid-column-style2-background: $wrapper-color-background !default;
+$article-grid-column-style2-border: 1px solid rgba(#000, .1) !default;
+$article-grid-column-style2-border-radius: .5rem !default;
+$article-grid-column-style2-box-shadow: none !default;
+$article-grid-column-style2-padding: 1em !default;
+$article-grid-column-style3: default !default;
+$article-grid-column-style3-color: $body-color !default;
+$article-grid-column-style3-background: $wrapper-color-background !default;
+$article-grid-column-style3-border: 1px solid rgba(#000, .075) !default;
+$article-grid-column-style3-border-radius: .5rem !default;
+$article-grid-column-style3-box-shadow: 0 0 4px 0 rgba(#000, .075), 0 0 24px 0 rgba(#000, .075) !default;
+$article-grid-column-style3-padding: 1em !default;
+$article-grid-styled-full-spacing: true !default;
+
+// FAQ
+$article-accordion: false !default;
+$article-accordion-content-padding: 1em 0 !default;
+$article-accordion-heading-font-family: false !default;
+$article-accordion-heading-font-size: inherit !default;
+$article-accordion-heading-font-weight: $weight-bold !default;
+$article-accordion-heading-background: false !default;
+$article-accordion-heading-hover-background: rgba(0, 0, 0, 0.05) !default;
+$article-accordion-heading-border: 1px solid rgba(0, 0, 0, 0.65) !default;
+$article-accordion-heading-padding: 0.75em 2em !default;
+$article-accordion-heading-color: false !default;
+$article-accordion-heading-icon-before: '<path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM168 184c0-30.9 25.1-56 56-56h56.9c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4V272v24H232V272 250.5 236.6l12.1-6.9 44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H224c-4.4 0-8 3.6-8 8l0 6.5-48 0V184zm64 152h48v48H232V336z"/>' !default;
+$article-accordion-heading-icon-before-color: $color-brand !default;
+$article-accordion-heading-icon-before-width: 16 !default;
+$article-accordion-heading-icon-before-height: 16 !default;
+$article-accordion-heading-icon-before-viewbox-width: 512 !default;
+$article-accordion-heading-icon-before-viewbox-height: 512 !default;
+
+// Header
+$header: 'row' !default;
+$header-style: false !default;
+$header-position: false !default;
+$header-max-width: false !default;
+$header-background-image: false !default;
+$header-background-override: false !default;
+$header-background-image-position: center !default;
+$header-background-image-repeat: no-repeat !default;
+$header-background-image-size: cover !default;
+$header-color-background: $color-brand !default;
+$header-border: false !default;
+$header-color-background-overlay: transparentize(#000, 0.7) !default;
+$header-color-text: white !default;
+$header-text-border-radius: $size-border-radius-large !default;
+$header-text-width: $bravo !default;
+$header-text-font-size: false !default; // Options: `h1` Increase the max fluid font-size from h2 to h1
+$header-breakpoint: $delta !default; // $charlie or $delta
+$header-breakpoint-min: $delta-min !default; // $charlie-min or $delta-min
+$header-cta: false !default; // Displays the header image as full background (if image is available)
+$header-cta-full: false !default; // Displays the header image below menu as well (if image is available)
+$header-cta-overlay-background: $header-color-background-overlay !default; // Adds a completely covering background on top of the image pseudo element
+$header-cta-overlay-only-child-background: true !default; // Apply background when visual is only child? Or only when CTA is present for example
+$header-cta-absolute-breakpoint: 0 !default;
+$header-cta-mobile-separated: false !default;
+$header-inner-padding: 0 $grid-padding !default;
+$header-image-after: false !default;
+$header-overlay-box-shadow: false !default;
+$header-float-block-shadow: 0 4px 8px rgba(black, 0.2), 0 2px 16px rgba(black, 0.1) !default;
+$header-float-block-after-opacity: .85 !default;
+$header-float-block-border-radius: false !default;
+$header-float-block-width: calc(#{$width-maximum-content} - #{px(32)}) !default;
+$header-float-block-margin: px(32) auto !default;
+$header-feature-list-margin: 1em 0 0 !default;
+$header-feature-list-check-color: currentcolor !default;
+
+// Hamburger menu
+$navigation-hamburger: false !default;
+$navigation-hamburger-button-size: px(32) !default;
+$navigation-hamburger-button-background: #fff !default;
+$navigation-hamburger-button-color: currentColor !default;
+$navigation-hamburger-button-radius: px(3) !default;
+$navigation-hamburger-bar-width: px(22) !default;
+$navigation-hamburger-bar-height: px(2) !default;
+
+// Hero
+$hero-background: false !default;
+$hero-border: true !default;
+$hero-video-ratio: 56.25% !default;
+$hero-video-background: darken($color-brand, 25%) !default;
+$hero-background-keep-ratio: false !default;
+$video-toggle: false !default;
+
+// Banner
+$banner-color-background: false !default;
+$banner-color-border: darken($header-color-background, 5%) !default;
+$banner-color-text: false !default;
+$banner-sticky: false !default;
+
+// Breadcrumb
+$breadcrumb-color-background: false !default;
+$breadcrumb-color-link: inherit !default;
+$breadcrumb-color-link--hover: false !default;
+$breadcrumb-color-divider: $color-grey !default;
+$breadcrumb-max-width: false !default;
+$breadcrumb-sticky: false !default;
+
+// Content
+$content-inner-spacing-top-amount: 2 !default;
+$content-color-background: false !default;
+$content-background-override: false !default;
+$content-inner-color-background: false !default;
+$content-inner-border: false !default;
+$content-inner-border-radius: false !default;
+$content-inner-spacing-top-amount: 2 !default;
+
+// Feature
+$feature: false !default;
+$feature-font-size: inherit !default;
+$feature-line-height: inherit !default;
+$feature-icon-size: px(40) !default;
+$feature-icon-background-size: px(64) !default;
+$feature-icon-background-color: $color-brand !default;
+$feature-icon-color: false !default;
+$feature-icon-custom-shape: false !default;
+$feature-icon-custom-shape-viewbox-width: 24 !default;
+$feature-icon-custom-shape-viewbox-height: 24 !default;
+$feature-horizontal-image-size: 25% !default;
+$feature-horizontal-image-min-width: px(64) !default;
+$feature-horizontal-image-max-width: px(240) !default;
+$feature-title-color: $color-brand !default;
+$feature-title-font-size: 1.25em !default;
+$feature-title-font-weight: false !default;
+$feature-title-line-height: false !default;
+$feature-button-color: $button-color-text !default;
+$feature-button-background: $button-color-background !default;
+$feature-button-border: $button-color-border !default;
+$feature-button-font-weight: false !default;
+$feature-content-max-width: false !default;
+$feature-content-margin-right: auto !default;
+$feature-content-margin-left: auto !default;
+$feature-content-margin-top: false !default;
+$feature-block-color: $body-color !default;
+$feature-block-background: #fff !default;
+$feature-block-box-shadow: 0 0 4px rgba(#000, .15), 0 0 24px rgba(#000, .15) !default;
+$feature-block-padding: 1rem !default;
+$feature-block-border-radius: .33rem !default;
+$feature-block-hover-box-shadow: 0 0 4px rgba(#000, .25), 0 0 24px rgba(#000, .25) !default;
+
+// Dynamic
+$dynamic: false !default;
+$dynamic-grid-col: 15rem !default;
+$dynamic-grid-spacing: 1rem !default;
+$dynamic-grid-background: transparent !default;
+$dynamic-font-size: 1rem !default;
+$dynamic-border-radius: .25rem !default;
+$dynamic-border: 1px solid rgba(0, 0, 0, .2) !default;
+$dynamic-image-basis: 8rem !default;
+$dynamic-grid-image-ratio: 16 by 9 !default;
+$dynamic-body-basis: 16rem !default;
+$dynamic-padding: 1rem !default;
+$dynamic-heading-font-size: 1.25em !default;
+
+// Form
+$form-color-multiple-choice--active: false !default;
+
+// Table
+$table-color-background-accent: $color-light-shade !default;
+$table-breakpoint: $charlie !default; // Values: $bravo, $charlie
+$table-breakpoint-min: $charlie-min !default; // Values: $bravo-min, $charlie-min
+$table-size-grow-to: false !default;
+$table-first-row-border: true !default;
+$table-products-layout: false !default;
+$table-products-layout-image-width: px(120) !default;
+
+// Highlight
+$highlight-color-background: $table-color-background-accent !default;
+$highlight-color-text: $body-color !default;
+$highlight-padding: $grid-padding !default;
+$highlight-size-text: $font-size-large !default;
+$highlight-font-weight: $weight-light !default;
+$highlight-border: false !default;
+$highlight-border-radius: false !default;
+
+// Blockquote
+$blockquote-color-border: rgba(180, 180, 180, .5) !default;
+$blockquote-color-text: $body-color !default;
+$blockquote-color-background: false !default;
+$blockquote-style: false !default;
+$blockquote-font-family: false !default;
+$blockquote-font-weight: false !default;
+$blockquote-spacing-sides: all !default;
+$blockquote-spacing-amount: .5 !default;
+
+// Navigation
+$navigation: border !default; // Values: border, bar, pills, vertical, cards
+$navigation-style: false !default; // Values: cards, mobile-clean
+$navigation-max-width: 100% !default;
+$navigation-margin: 0 0 $grid-padding 0 !default;
+$navigation-color-link: false !default;
+$navigation-color-link--active: $navigation-color-link !default;
+$navigation-color-link--hover: $navigation-color-link !default;
+$navigation-color-background: transparent !default;
+$navigation-color-background--active: transparent !default;
+$navigation-color-background--hover: transparent !default;
+$navigation-color-border: $color-grey-medium !default;
+$navigation-color-border--hover: $color-brand !default;
+$navigation-color-border--active: $color-brand !default;
+$navigation-font-weight--active: false !default;
+$navigation-width-border: 1px !default;
+$navigation-text-transform: false !default;
+$navigation-letter-spacing: false !default;
+$navigation-item-padding: calc($grid-padding / 2) !default;
+$navigation-item-breakpoint-padding: 0 !default;
+$navigation-item-margin: 0 $grid-padding !default;
+$navigation-item-height: false !default; // Values: false, 100%
+$navigation-item-flex-grow: 1 !default;
+$navigation-size-border: 3px !default;
+$navigation-pill-radius: px(6) !default;
+$navigation-font-family: false !default;
+$navigation-font-size: false !default;
+$navigation-font-weight: false !default;
+$navigation-line-height: false !default;
+$navigation-highlight-last-of-type: false !default;
+$navigation-highlight-padding: .5em 1em !default;
+$navigation-highlight-color: default !default;
+$navigation-highlight-font-weight: false !default;
+$navigation-highlight-box-shadow: false !default;
+$navigation-highlight-background: $color-brand !default;
+$navigation-highlight-radius: $size-border-radius-large !default;
+$navigation-highlight-hover-background: lighten($color-brand, 10%) !default;
+$ma-menu-selector: ".navigation--header .navigation__list"; // No "!default", setting variable for menu animation repo
+
+// Navigation
+$subnavigation-color-link: $body-color !default;
+$subnavigation-color-link--active: #FFF !default;
+$subnavigation-color-link--hover: #FFF !default;
+$subnavigation-color-background: transparent !default;
+$subnavigation-color-background--active: $color-brand !default;
+$subnavigation-color-background--hover: $color-brand !default;
+$subnavigation-color-border: #222 !default;
+$subnavigation-color-border--active: #222 !default;
+
+// Mobile clean navigation
+$navigation-style-mobile-clean-background: rgba(#000, .2) !default;
+$navigation-style-mobile-clean-box-shadow: inset 0 2px 2px rgba(#000, .1), inset 0 -2px 2px rgba(#000, .1) !default;
+
+// Cards navigation
+$navigation-cards-link-color: $color-brand !default;
+$navigation-cards-link-hover-color: $navigation-cards-link-color !default;
+$navigation-cards-link-active-color: $navigation-color-link--active !default;
+
+// Top bar
+$top_bar-color-background: false !default;
+$top_bar-color-border: darken($header-color-background, 5%) !default;
+$top_bar-color-color: false !default;
+$top_bar-color-accent: false !default;
+$top_bar-max-width: $navigation-max-width !default;
+$top_bar-breakpoint: $charlie;
+$top_bar-position: false !default;
+$top_bar-padding: default !default;
+
+// Organization
+$organization-color-background: false !default;
+$organization-color-border: false !default;
+$organization-padding: 0 !default; // Values: padding or 'responsive'
+$organization-padding-multiplier: 2 !default;
+$organization-logo-radius: false !default;
+$organization-logo-radius: false !default;
+$organization-logo-height: false !default;
+$organization-logo-width: false !default;
+$organization-logo-padding: 0 !default;
+$organization-logo-overflow: hidden !default;
+$organization-color-title: $body-color !default;
+$organization-color-subtitle: lighten($body-color, 25%) !default;
+$organization-font-family: false !default;
+
+// Card
+$card-deck-gutter: calc($grid-padding / 2) !default;
+$card-deck-justify: center !default;
+$card-border: true !default;
+$card-transform: false !default;
+$card-overlay-block: true !default;
+$card-animation-time: false !default;
+$card-transition: false !default;
+$card-shadow: false !default;
+$card-size-border: 1px !default;
+$card-size-border-radius: $size-border-radius !default;
+$card-size-block-font: $font-size !default; // Values: px or 'responsive'
+$card-size-title-font: $font-size-large !default;
+$card-size-subtitle-font: $font-size-small !default;
+$card-size-block-padding: .25em 0 !default;
+$card-size-block-spacing: .25em !default; // Values: px or 'responsive'
+$card-size-block-radius: $card-size-border-radius !default;
+$card-size-media-radius: 100% !default;
+$card-size-icon: px(40) !default;
+$card-size-icon-background: px(80) !default;
+$card-block-backdrop-filter: false !default;
+$card-color-border: lighten($color-brand, 35%) !default;
+$card-color-border--hover: $color-brand !default;
+$card-color-background: transparent !default;
+$card-color-background--hover: rgba($color-brand, .85) !default;
+$card-color-text: $body-color !default;
+$card-color-text--hover: $body-color !default;
+$card-color-icon: #FFF !default;
+$card-color-icon--hover: false !default;
+$card-color-icon-background: $color-brand !default;
+$card-color-icon-background--hover: false !default;
+$card-color-icon-background-type: 'default' !default;
+$card-color-subtitle: $card-color-text !default;
+$card-color-subtitle--hover: $card-color-text--hover !default;
+$card-text-transform-title: false !default;
+$card-text-transform-subtitle: false !default;
+$card-title-font-weight: false !default;
+$card-title-font-size: false !default;
+$card-title-line-height: false !default;
+$card-title-color: false !default;
+$card-title-text-shadow: false !default;
+$card-title-hover-color: false !default;
+$card-subtitle-line-height: false !default;
+$card-subtitle-margin-top: false !default;
+$card-box-shadow: $button-box-shadow !default;
+$card-box-shadow--hover: $button-box-shadow--hover !default;
+$card-text-decoration-title: false !default;
+$card-text-decoration-title--hover: false !default;
+$card-title-font-family: false !default;
+$card-circle-background: false !default;
+$card-circle-border: false !default;
+$card-anchor-overflow: false !default;
+$card-link-shadow: $button-box-shadow !default;
+$card-link-shadow--hover: $button-box-shadow--hover !default;
+
+// Card modifiers
+$card--image-color-text: #FFF !default;
+$card--image-color-text--hover: $card--image-color-text !default;
+$card--image-color-subtitle: transparentize($card-color-subtitle, 0.20) !default;
+$card--image-color-title: false !default;
+$card--image-overlay: false !default;
+$card--image-overlay-hover-background-color: transparent !default;
+$card--image-text-shadow: 0 1px rgba(black, 0.5) !default;
+
+// Media
+$media-clickable: false !default;
+$media-date: false !default;
+$media-color-link: $color-link !default;
+$media-color-link--hover: $color-link--hover !default;
+$media-color-background: false !default;
+$media-color-border: false !default;
+$media-color-border--hover: $card-color-border--hover !default;
+$media-color-subtitle: $color-muted !default;
+$media-figure-position: left !default; // `left` or `right`
+$media-figure-align-self: false !default;
+$media-figure-width: 30% !default;
+$media-margin-multiplier: 2 !default;
+$media-padding-multiplier: 1 !default;
+$media-breakpoint: $bravo !default; // Values: $bravo or $charlie
+$media-size-border-radius: $card-size-border-radius !default;
+$media-box-shadow: $card-box-shadow !default;
+$media-box-shadow--hover: $card-box-shadow--hover !default;
+$media-box-background--hover: false !default;
+$media-title-font-size: false !default;
+$media-subtitle-font-size: false !default;
+
+// Product card
+$product_card-passepartout: true !default;
+$product_card-border-radius: $size-border-radius !default;
+$product_card-color-border: $color-grey !default;
+$product-card-deck-spacing: 3rem !default;
+
+$radiobutton-color-text: $body-color !default;
+$radiobutton-color-background: false !default;
+$radiobutton-color-background--hover: $color-brand !default;
+$radiobutton-color-background--disabled: $color-grey-light !default;
+$radiobutton-color-border: $color-grey !default;
+$radiobutton-box-shadow: 0 2px 4px rgba(50,50,93,.06), 0 1px 2px rgba(0,0,0,.04) !default;
+$radiobutton-box-shadow--hover: 0 7px 14px rgba(50,50,93,.06), 0 3px 6px rgba(0,0,0,.04) !default;
+$radiobutton-box-shadow--active: $button-box-shadow !default;
+
+// Property card
+$property_card-color-background: false !default;
+$property_card-color-background--hover: transparent !default;
+$property_card_details-color-background: $color-grey-light !default;
+
+// Filter
+$filter-color-heading: inherit !default;
+$filter-color-link: $body-color !default;
+$filter-color-link--hover: #FFF !default;
+$filter-color-link--active: $color-link !default;
+$filter-color-background: transparent !default;
+$filter-color-background--hover: $color-link !default;
+$filter-color-background--active: transparent !default;
+$filter-color-border: $color-grey-medium !default;
+$filter-size: px(13) !default;
+
+// Module
+$module-position-title: $article-position-title !default;
+$module-footer-margin-top: false !default;
+
+// Dish
+$dish-color-border: $color-grey !default;
+$dish__description-color-text: $color-grey-dark !default;
+
+// Pagination
+$pagination-color-border: $color-grey !default;
+$pagination-color-link--active: $color-grey;
+$pagination-color-background: false !default;
+$pagination-color-background--active: transparent !default;
+$pagination-color-background--hover: lighten($color-brand, 49%) !default;
+
+// Gallery
+$gallery-spacing-direction: vertical !default;
+$gallery-spacing-type: padding !default;
+$gallery-spacing-amount: 1 !default;
+$gallery-color-background: $color-light-shade !default;
+
+// Note
+$note-color-background: $color-light-shade !default;
+$note-color-border: darken($note-color-background, 15%) !default;
+$note-color-text: $color-dark-accent !default;
+$note-color-link: $note-color-text !default;
+
+// Pager
+$pager-color-background: false !default;
+$pager-color-border: false !default;
+
+// Pager toc
+$pager-toc-height: px(64);
+$pager-toc-page-max-width: $width-maximum;
+$pager-toc-width1: px(240);
+$pager-toc-width2: px(320);
+$pager-toc-margin-right: 2rem;
+$pager-toc-background: #ffffff;
+$pager-toc-accent: $color-light-shade;
+$pager-toc-darker-accent: darken($pager-toc-accent, 5%);
+$pager-toc-hover: $pager-toc-accent;
+
+// CTA
+$cta-spacing-amount: 2 !default;
+$cta-color-background: $color-brand !default;
+$cta-background-size: false !default;
+$cta-color-border: darken($cta-color-background, 3%) !default;
+$cta-color-text: white !default;
+$cta-button-color: $cta-color-background !default;
+$cta-button-font-size: false !default;
+$cta-button-font-weight: false !default;
+$cta-button-background: $cta-color-text !default;
+$cta-button-hover-background: false !default;
+$cta-button-border: darken($cta-color-background, 5%) !default;
+$cta-title-font-weight: $weight-light !default;
+$cta-info-font-weight: $weight-light !default;
+$cta-info-font-size: 1.25em !default;
+$cta-info-line-height: 1.3em !default;
+$cta-margin: false !default;
+$cta-max-width: false !default;
+$cta-align: 'center' !default;
+$cta-header-position: relative !default;
+$cta-header-z-index: 2 !default;
+$cta-header-max-width: $cta-max-width !default;
+$cta-header-inner-max-width: $header-max-width !default;
+$cta-header-inner-overflow: hidden !default; // Hide overflowing pseudo image elements by default
+$cta-header-align: left !default;
+$cta-header-background: false !default;
+$cta-header-border-bottom: false !default;
+$cta-header-inner-padding-right: false !default;
+$cta-header-inner-padding-left: false !default;
+$cta-header-grid-padding-amount: 2 !default;
+$cta-header-grid-padding-right: false !default;
+$cta-header-grid-padding-left: false !default;
+$cta-header-grid-flex-basis: $article-grid-basis * 1.5 !default;
+$cta-header-font-family: false !default;
+$cta-header-font-weight: $weight-bold !default;
+$cta-header-button-font-size: false !default;
+$cta-header-button-font-weight: false !default;
+$cta-header-button-color-text: false !default;
+$cta-header-button-hover-color-text: false !default;
+$cta-header-button-color: $color-light-accent !default;
+$cta-header-button-hover-color: lighten($cta-header-button-color, 10%) !default;
+$cta-header-button-box-shadow: $button-box-shadow !default;
+$cta-header-secondary-button-border: false !default;
+$cta-header-secondary-button-color: transparent !default;
+$cta-header-secondary-button-color-text: $header-color-text !default;
+$cta-header-secondary-button-hover-color: false !default;
+$cta-header-secondary-button-hover-color-text: false !default;
+$cta-header-image-first: false !default;
+$cta-header-image-radius: 1rem !default;
+$cta-header-image-max-width: px(360) !default;
+$cta-header-image-pseudo: false !default;
+$cta-header-animate: false !default;
+$cta-header-animate-duration: $large-animate-duration !default;
+$cta-header-animate-delay: $large-animate-delay !default;
+$cta-header-animate-delay-repeat:$large-animate-delay-repeat !default;
+$cta-header-title-color: false !default;
+$cta-header-title-min-font-size: 24 !default;
+$cta-header-title-max-font-size: 48 !default;
+$cta-header-info-min-font-size: 20 !default;
+$cta-header-info-max-font-size: 32 !default;
+$cta-header-text-shadow: 1px 1px 3px rgba(#000, .5) !default;
+$cta-auto-width: false !default;
+$cta-auto-width-padding: 2rem !default;
+$cta-auto-width-background: rgba($color-dark-shade, .8) !default;
+$cta-auto-width-border: false !default;
+$cta-auto-width-border-radius: false !default;
+
+// Contact
+$contact-color-background: false !default;
+$contact-color-text: false !default;
+$contact-form: 'normal' !default;
+
+// Newsletter
+$newsletter-color-background: darken($color-brand, 5%) !default;
+$newsletter-color-border: darken($newsletter-color-background, 3%) !default;
+$newsletter-color-text: white !default;
+
+// Instagram
+$instagram-color-background: false !default;
+$instagram-grid-gap: 1px !default;
+$instagram-padding-bottom: inherit !default;
+
+// Reviews
+$reviews-color-background: $color-dark-accent !default;
+
+// Testimonial
+$testimonial-breakpoint-columns: 6 !default;
+$testimonial-quotes: true !default;
+$testimonial-heading-font-size: false !default;
+$testimonial-heading-font-weight: false !default;
+$testimonial-heading-color: false !default;
+$testimonial-font-size: inherit !default;
+
+// Metaheader
+$metaheader-image-width: px(60) !default;
+$metaheader-image-margin-right: $spacing-m !default;
+$metaheader-img-border-radius: 100% !default;
+$metaheader-img-border: 1px solid $color-grey !default;
+$metaheader-img-padding: 2px !default;
+
+// Door
+$door-color-background: $body-background-color !default;
+
+// Footer
+//
+// Style footer molecule.
+
+$footer-color-background: $body-background-color !default;
+$footer-color-border: darken($footer-color-background, 4%) !default;
+$footer-color-text: false !default;
+$footer-color-link: false !default;
+$footer-color-link--hover: false !default;
+$footer-color-link--active: false !default;
+$footer-color-icon: inherit !default;
+$footer-size-icon: px(24) !default;
+$footer-list-color-background: lighten($body-background-color, 5%) !default;
+$footer-list-color-border: darken($footer-color-background, 4%) !default;
+$footer-list-color-text: false !default;
+$footer-list-color-link: false !default;
+$footer-list-color-link--hover: false !default;
+$footer-list-color-link--active: false !default;
+
+// Allergens
+$color-allergens: (
+  celery: #6eb74e,
+  crustaceans: #f86b6a,
+  egg: #f59e1e,
+  fish: #40bbd4,
+  gluten: #edc600,
+  lupine: #edc600,
+  milk: #928eb1,
+  molluscs: #f86b6a,
+  mustard: #f59e1e,
+  nuts: #ca7f59,
+  peanut: #ca7f59,
+  sesame: #928eb1,
+  soy: #6eb74e,
+  sulfur: #40bbd4
+) !default;
+
+// Conversion
+$conversion-max-width: $article-size-content !default;
+$conversion-border-radius: .5em !default;
+$conversion-box-shadow: 0 0 10px rgba(#000, .2), 0 0 20px rgba(#000, .1) !default;
+$conversion-title-background: $color-brand !default;
+$conversion-description-background: #fff !default;
+
+// Person
+$person-shape: false !default;
+$person-alignment: center !default;
+$person-max-width: false !default;
+$person-image-max-width: false !default;
+$people-card-layout: 'vertical' !default;
+
+// Calendar
+$calendar: false !default;
+$calendar-event-background: $color-brand !default;
+$calendar-event-color: set-text-color($color-brand) !default;
+$calendar-event-hover: darken($color-brand, 5%) !default;
+$calendar-today-color: #78bbe8 !default;
+$calendar-breakpoint-max: 699px !default;
+$calendar-breakpoint-min: 700px !default;
+
+// Overlay grid for development purposes
+$overlay-grid: false !default;
+
+// Consent
+$consent-style: 'full' !default; // 'full' | 'float'
+$consent-float-position: 'center' !default; // 'center' | 'left' | 'right'
+$consent-bottom: 1rem !default;
+$consent-color: #000 !default;
+$consent-background: #ebebeb !default;
+$consent-spacing: 1.5rem !default;
+$consent-radius: 1rem !default;
+$consent-shadow: 0 0 3px rgba(0,0,0,.125), 0 0 30px rgba(0,0,0,.125) !default;
+$consent-button-color: #fff !default;
+$consent-button-background: $color-brand !default;
+$consent-button-hover-background: darken($consent-button-background, 5%) !default;
+
+// Aggregate rating
+$aggregate-rating-justify: center !default;
+
+// Animations
+$animation-rotate: false !default;

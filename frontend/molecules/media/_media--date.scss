@@ -1,0 +1,89 @@
+@if $media-date {
+.media__figure--date {
+  $color-text: white !default;
+
+  @if (lightness($color-brand) > 50) {
+    $color-text: $body-color;
+  }
+
+  position: relative;
+
+  .media__date-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $color-brand;
+    color: $color-text;
+    text-shadow: 1px 1px 1px rgba(black, 0.1);
+    @include ratio-block();
+
+    svg {
+      vertical-align: middle;
+    }
+
+    @if (lightness($color-text) > 50) {
+      @include font-smoothing;
+    }
+  }
+
+  .media__date {
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* position absolute when date container comes after an image */
+  .lazyload__wrapper + .media__date-container {
+    @include coverall();
+    background: rgba($color-brand, 0.8);
+  }
+
+  .media__date-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: .25em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .media__date-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .media__date-day {
+    font-size: round($font-size * 2);
+    font-weight: $weight-bold;
+    line-height: 1;
+  }
+
+  .media__date-month {
+    margin-top: $spacing-s;
+    font-size: round($font-size * 1.25);
+  }
+
+  .media__date-hour {
+    margin-top: $spacing-m;
+    font-size: $font-size + px(2);
+  }
+
+  .media__date-location {
+    margin-top: $spacing-m;
+    color: rgba($color-text, .75);
+  }
+
+  .media__date-year--small {
+    font-size: $font-size-small;
+  }
+
+  .media__date-separator {
+    font-size: 1.5em;
+    padding-left: .75em;
+    padding-right: .75em;
+  }
+}
+}

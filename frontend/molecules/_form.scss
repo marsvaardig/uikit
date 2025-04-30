@@ -1,0 +1,129 @@
+.form__title {
+  text-align: center;
+}
+
+.form__toolbar {
+  @include spacing(top, margin);
+
+  .btn {
+    margin: calc($grid-padding / 2) calc($grid-padding / 2);
+  }
+}
+
+.form__label {
+  margin-bottom: 0; // Reset when applied to fieldset legend element
+}
+
+.form__select {
+  background-color: white;
+}
+
+.form__multiple-choice {
+  padding-bottom: 0;
+}
+
+@include breakpoint($bravo) {
+  .form__group {
+    @include clearfix;
+    max-width: px(456);
+  }
+
+  .form__group .form__group {
+    float: left;
+    margin-bottom: 0;
+
+    width: calc(50% - #{calc($spacing-m / 2)});
+
+    &:not(:first-child) {
+      margin-left: $spacing-m;
+    }
+
+    &:only-child {
+      width: 100%;
+    }
+  }
+}
+
+.form__box {
+  display: inline-block;
+  width: px(24);
+  height: px(24);
+  border: 2px solid black;
+}
+
+.form__honey-pot {
+  display: none;
+}
+
+// @TODO: Add to Illusion
+.multiple-choice input[name=newsletter] + label {
+  span {
+    display: contents; // Improve newsletter signup
+  }
+}
+
+@if ($form-color-multiple-choice--active) {
+  .multiple-choice [type=radio] + label:after,
+  .multiple-choice [type=checkbox] + label:after {
+    color: $form-color-multiple-choice--active;
+  }
+}
+
+// Override Illusion to style a separator element
+.multiple-choice--separator {
+  padding: 0;
+  font-weight: $weight-bold;
+}
+
+
+textarea.form__input {
+  resize: vertical;
+}
+
+@if $extension--products {
+.form--search {
+  display: flex;
+  gap: $spacing-s;
+
+  // Reset spacing
+  .form__group,
+  .form__label {
+    @include reset($list-style: false, $background: false, $border: false);
+  }
+
+  .form__group {
+    display: flex;
+    gap: $spacing-s;
+  }
+
+  .form__group--search,
+  .form__group--sort_by .custom-select--sort_by {
+    flex-grow: 1;
+  }
+
+  // Override default
+  .form__group--search,
+  .form__group--order_by {
+    @include clearfix(true);
+    max-width: none;
+  }
+
+  @include breakpoint(0, ($alfa--plus-min)) {
+    .form__group {
+      flex-direction: column;
+    }
+  }
+
+  @include breakpoint(0, ($bravo-min)) {
+    flex-direction: column;
+  }
+
+  @include breakpoint($alfa--plus) {
+    .form__group--sort_by {
+      flex-shrink: 0;
+      align-items: center;
+      margin-left: auto;
+    }
+  }
+}
+}

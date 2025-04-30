@@ -1,0 +1,89 @@
+@include selectors($h1-selectors-base + ', ' + $h2-selectors-base + ', ' + $h3-selectors-base + ', ' + $h4-selectors-base + ', ' + $h1-selectors + ', ' + $h2-selectors + ', ' + $h3-selectors + ', ' + $h4-selectors) {
+  font-weight: $weight-heading;
+  line-height: 1.5;
+  color: $color-heading;
+
+  @if ($font-family-heading)
+  {
+    font-family: $font-family-heading;
+  }
+}
+
+@include selectors($h1-selectors-base + ', ' + $h1-selectors) {
+  font-size: $size-h1 - px(6); // 24px
+  text-align: $headings-position;
+  line-height: 1.25;
+
+  @include breakpoint($bravo) {
+    font-size: $size-h1 - px(4);
+  }
+
+  @include breakpoint($charlie) {
+    font-size: $size-h1 - px(2);
+  }
+
+  @include breakpoint($delta) {
+    font-size: $size-h1;
+  }
+
+  @if $font-family-h1 {
+    font-family: $font-family-h1;
+  }
+}
+
+@include selectors($h2-selectors-base + ', ' + $h2-selectors) {
+  font-size: $size-h2 - px(4); // 20px
+
+  @include breakpoint($bravo) {
+    font-size: $size-h2 - px(2);
+  }
+
+  @include breakpoint($charlie) {
+    font-size: $size-h2 - px(1);
+  }
+
+  @include breakpoint($delta) {
+    font-size: $size-h2;
+    line-height: 1.25;
+  }
+
+  @if $font-family-h2 {
+    font-family: $font-family-h2;
+  }
+}
+
+@include selectors($h3-selectors-base + ', ' + $h3-selectors) {
+  font-size: $size-h3 - px(3); // 17px
+
+  @include breakpoint($bravo) {
+    font-size: $size-h3 - px(2);
+  }
+
+  @include breakpoint($charlie) {
+    font-size: $size-h3 - px(1);
+  }
+
+  @include breakpoint($delta) {
+    font-size: $size-h3;
+  }
+
+  @if $font-family-h3 {
+    font-family: $font-family-h3;
+  }
+}
+
+@include selectors($h4-selectors-base + ', ' + $h4-selectors) {
+  font-size: $size-h4 - px(2);
+
+  @include breakpoint($bravo) {
+    font-size: $size-h4 - px(1);
+  }
+
+  @include breakpoint($charlie) {
+    font-size: $size-h4;
+  }
+
+  @if $font-family-h4 {
+    font-family: $font-family-h4;
+  }
+}

@@ -1,0 +1,133 @@
+@if $extension--hero {
+.header__visual.header__visual--video {
+  height: auto;
+}
+
+.hero__video {
+  width: 100%;
+  min-height: px(150);
+  padding-top: 33%;
+  transition: padding 1s ease;
+
+  position: relative;
+  z-index: 2;
+  background: $hero-video-background;
+  background-size: cover;
+  background-position: center;
+
+  .lazyload__wrapper {
+    @include coverall();
+  }
+
+  iframe {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.hero__video--has-text {
+  background-position: center;
+
+  padding-top: 0;
+
+  .play-button {
+    z-index: 100;
+  }
+
+  .video__content {
+    position: initial;
+    @include spacing(vertical, padding, 1);
+  }
+
+  @include breakpoint($header-breakpoint) {
+    padding-top: 33%;
+    background-position: bottom;
+
+    &:after {
+      content: "";
+      background-color: transparentize($color-brand, 0.75);
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .video__content {
+      position: absolute;
+
+      @include spacing(vertical, padding, 0.5);
+    }
+  }
+}
+
+.hero__video.is-playing {
+  position: relative;
+  padding-top: $hero-video-ratio;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+
+  background: none;
+
+  &:after {
+    display: none;
+  }
+}
+
+.hero__video iframe,
+.hero__video object,
+.hero__video embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.play-button {
+  background-image: none;
+  background-color: #FFF;
+  border-radius: .25em;
+  position: initial;
+  margin: 0;
+  color: $body-color;
+  height: auto;
+  width: auto;
+  padding: .5em 1em;
+
+  transition: none;
+
+  box-shadow: $button-box-shadow;
+
+  &:before {
+    content: "\25B6";
+    margin-right: .5em;
+    color: $color-brand;
+  }
+
+  &:after {
+    content: "Play";
+  }
+
+  &:hover {
+    transform: none;
+    cursor: pointer;
+
+    box-shadow: $button-box-shadow--hover;
+    background-color: $color-grey-light;
+  }
+}
+
+#video-iframe {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.no-js .hero__video {
+  display: none;
+}
+}

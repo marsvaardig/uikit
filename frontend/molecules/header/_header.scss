@@ -1,0 +1,427 @@
+.header {
+  @extend .clearfix;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: $header-color-background;
+  background-repeat: $header-background-image-repeat;
+  background-size: $header-background-image-size;
+  background-position: $header-background-image-position;
+
+  @if ($header-background-override) {
+    background: $header-background-override;
+  }
+  @else if ($header-background-image) {
+    @if ($header-background-image != true) {
+      background-image: $header-background-image;
+    }
+    @else if ($header-background-image-repeat != no-repeat) {
+      background-image: var(--header-background-base);
+    }
+    @else {
+      background-image: var(--header-background-alfa);
+
+      @include breakpoint($alfa + px(1)) {
+        background-image: var(--header-background-bravo);
+      }
+
+      @include breakpoint($bravo + px(1)) {
+        background-image: var(--header-background-charlie);
+      }
+
+      @include breakpoint($charlie + px(1)) {
+        background-image: var(--header-background-base);
+      }
+    }
+
+    @if $header-color-background-overlay {
+      .header__overlay {
+        @include clearfix;
+        background: $header-color-background-overlay;
+      }
+    }
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .hero-feature-list {
+    margin: $header-feature-list-margin;
+
+    ul {
+      display: inline-flex;
+      flex-direction: column;
+    }
+
+    li {
+      text-align: left;
+
+      &::before {
+        background: $header-feature-list-check-color;
+      }
+    }
+  }
+}
+
+.header__overlay {
+  flex-shrink: 0; // Fix for Safari 9.1 (div being 0px in height)
+  @include property(box-shadow, $header-overlay-box-shadow);
+}
+
+@if $header-max-width {
+  .header__inner {
+    @include breakpoint($delta) {
+      max-width: $header-max-width;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+.header__visual {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  @if($hero-background)
+  {
+    background-color: $hero-background;
+  }
+
+  min-height: calc(100vw / 3);
+
+  @include breakpoint($width-maximum) {
+    min-height: auto;
+    height: calc(#{$width-maximum} / 3);
+  }
+
+  @include breakpoint($alfa--plus) {
+    align-items: center;
+  }
+
+  @if ($header-image-after) {
+    @include pseudo(after, false, false) {
+      @include coverall();
+      @each $property, $value in $header-image-after {
+        #{$property}: $value;
+      }
+    }
+  }
+}
+
+.header__visual--2-to-1 {
+  min-height: calc(100vw / 2);
+
+  @if ($hero-background-keep-ratio != true) {
+    @include breakpoint($width-maximum) {
+      min-height: auto;
+      height: calc(#{$width-maximum} / 2);
+    }
+  }
+}
+
+.header__visual--3-to-1 {
+  min-height: calc(100vw / 3);
+
+  &.header__visual--responsive {
+    min-height: calc(100vw / 2);
+
+    @include breakpoint($charlie) {
+      min-height: calc(100vw / 3);
+    }
+  }
+
+  @if ($hero-background-keep-ratio != true) {
+    &,
+    &.header__visual--responsive {
+      @include breakpoint($width-maximum) {
+        min-height: auto;
+        height: calc(#{$width-maximum} / 3);
+      }
+    }
+  }
+}
+
+.header__visual--4-to-1 {
+  min-height: calc(100vw / 4);
+
+  @include breakpoint($charlie) {
+    min-height: calc(100vw / 4);
+  }
+
+  @if ($hero-background-keep-ratio != true) {
+    @include breakpoint($width-maximum) {
+      min-height: auto;
+      height: calc(#{$width-maximum} / 4);
+    }
+  }
+}
+
+.header__visual--8-to-1 {
+  min-height: calc(100vw / 8);
+
+  @include breakpoint($charlie) {
+    min-height: calc(100vw / 8);
+  }
+
+  @if ($hero-background-keep-ratio != true) {
+    @include breakpoint($width-maximum) {
+      min-height: auto;
+      height: calc(#{$width-maximum} / 8);
+    }
+  }
+}
+
+.header__visual--5-to-2 {
+  min-height: calc(100vw / (5/2));
+
+  &.header__visual--responsive {
+    min-height: calc(100vw / 2);
+
+    @include breakpoint($charlie) {
+      min-height: calc(100vw / (5/2));
+    }
+  }
+
+  @if ($hero-background-keep-ratio != true) {
+    &,
+    &.header__visual--responsive {
+      @include breakpoint($width-maximum) {
+        min-height: auto;
+        height: calc(#{$width-maximum} / (5/2));
+      }
+    }
+  }
+}
+
+.header__visual--16-to-9 {
+  min-height: calc(100vw / (16/9));
+
+  &.header__visual--responsive {
+    min-height: calc(100vw / 2);
+
+    @include breakpoint($charlie) {
+      min-height: calc(100vw / (16/9));
+    }
+  }
+
+  @if ($hero-background-keep-ratio != true) {
+    &,
+    &.header__visual--responsive {
+      @include breakpoint($width-maximum) {
+        min-height: auto;
+        height: calc(#{$width-maximum} / (16/9));
+      }
+    }
+  }
+}
+
+.header__text {
+  /* Put the text back on top of the pseudo elements */
+  position: relative;
+  z-index: 2;
+
+  @include spacing(all);
+
+  @if $header-color-background-overlay {
+    background: $header-color-background-overlay;
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  flex-direction: column;
+
+  @if $header-text-font-size == 'h1' {
+    .header__text__title {
+      @include fluid-property(font-size, $size-h3, $size-h1);
+      line-height: 1.5;
+    }
+  }
+
+  .article__timestamp.article__timestamp {
+    margin-bottom: 0;
+    font-size: $font-size;
+  }
+
+  .article__timestamp.article__timestamp,
+  .header__text__title {
+    color: $header-color-text;
+    text-align: center;
+
+    @if (lightness($header-color-text) > 50) {
+      @include font-smoothing;
+    }
+  }
+
+  @include breakpoint($alfa--plus) {
+    @include spacing(horizontal, margin, 2);
+
+    max-width: $header-text-width;
+    border-radius: $header-text-border-radius;
+    flex-grow: 0;
+  }
+}
+
+
+// When header has a transparent background (marsvaardig, johanalen)
+.header__visual,
+.header__overlay {
+  position: relative;
+  z-index: 1;
+}
+
+/* Using real image for header image */
+.hero__video,
+.header__visual {
+  & > noscript,
+  & > .lazyload__wrapper {
+    @include coverall();
+    overflow: hidden;
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      max-width: none;
+      min-height: 100%;
+
+      @supports (object-fit: cover) {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        object-fit: cover;
+        object-position: center;
+        transform: none;
+        min-height: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.hero__outer,
+.header__visual {
+  position: relative;
+}
+
+@if ($header-cta != false) {
+  /**
+   * Full image background header using the images from the admin instead of a CSS loaded image
+   */
+
+  .header {
+    position: relative;
+  }
+
+  .header__hero {
+    position: relative; // To hold the image in place
+    display: flex; // So we can position the header__visual when a CTA is present
+    flex-wrap: wrap; // So we can position the header__visual when a CTA is present
+    flex-direction: row; // So we can position the header__visual when a CTA is present
+
+    @if ($header-cta-full != false) {
+      position: static; // To use the header position relative
+    }
+
+    // Make everything span the complete header so flex-wrap will come into play
+    & > * {
+      flex: 1 1 auto;
+      width: 100%;
+
+      /* Put everything on top of the image */
+      &:not(.header__visual) {
+        @include property(z-index, $cta-header-z-index);
+      }
+    }
+  }
+
+  @if ($header-cta-full != false) {
+    .header__overlay {
+      position: relative;
+      z-index: 2;
+      background: $header-color-background-overlay;
+    }
+  }
+
+  .header__visual {
+    /* Static so pseudo element will cover the entire header element */
+    position: static;
+    z-index: initial;
+
+    /* Cover entire header layers */
+    &::before,
+    &::after {
+      position: absolute;
+      display: block;
+      content: " ";
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    /* Copy original background */
+    &::before {
+      background: inherit;
+    }
+
+    @if ($header-cta-overlay-background) {
+      /* Add optional colored layer */
+      &::after {
+        background: $header-cta-overlay-background;
+
+      }
+
+      @if ($header-cta-overlay-only-child-background == false) {
+        &:only-child {
+          &::after {
+            display: none;
+          }
+        }
+      }
+
+      .header__text {
+        background: transparent;
+      }
+    }
+
+    @include breakpoint(0, $header-breakpoint) {
+      min-height: 0;
+    }
+  }
+
+  // Remove the header__visual width so the CTA will span the entire header but image min-height is preserved
+  .cta + .header__visual,
+  .header__visual:not(:only-child) {
+    @if ($header-cta-absolute-breakpoint == 0) {
+      max-width: 0;
+    }
+
+    @if ($header-cta-absolute-breakpoint != 0) {
+      position: relative;
+
+      @include breakpoint($header-cta-absolute-breakpoint){
+        position: static;
+        max-width: 0;
+      }
+    }
+  }
+
+  .cta {
+    max-width: 100%;
+  }
+}

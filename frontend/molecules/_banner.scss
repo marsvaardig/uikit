@@ -1,0 +1,92 @@
+.banner {
+  font-size: px(14);
+  line-height: px(21);
+
+  @if $banner-color-text {
+    color: $banner-color-text;
+
+    @if (lightness($banner-color-text) < 50) {
+      @include font-smoothing;
+    }
+  }
+
+  @if $banner-color-background {
+    background-color: $banner-color-background;
+  }
+
+  @if $banner-color-border {
+    border-bottom: 1px solid $banner-color-border;
+  }
+
+  @if ($banner-sticky) {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    //background-color: $banner-color-background;
+  }
+}
+
+.banner__inner {
+  position: relative; // To hold the close button in place on larger screens
+  max-width: $navigation-max-width;
+  margin: 0 auto;
+  @include spacing(all, padding, 0.5);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    line-height: 1.5rem;
+    margin: 0;
+
+    strong:first-child:not(:last-child) {
+      padding-right: .5em;
+    }
+
+    & > span:not(:last-child) {
+      padding-right: .5em;
+    }
+  }
+}
+
+.banner--close {
+  .banner__inner {
+    padding-right: 2.5rem;
+  }
+
+  button {
+    position: absolute;
+    top: -.25rem;
+    right: .5rem;
+    width: 2rem;
+    height: 0;
+    color: currentColor;
+    background: rgba(#000, .04);
+    padding: 2rem 0 0;
+    @include spacing(top, margin, 0.5);
+    border: 1px solid rgba(#000, .1);
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 200ms ease-out;
+    border-radius: .25em;
+
+    @include hover() {
+      background: rgba(#000, .2);
+    }
+
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      content: "✕";
+      line-height: 1em;
+      vertical-align: middle;
+    }
+  }
+}

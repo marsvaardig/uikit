@@ -1,0 +1,80 @@
+@if $extension--highlightdeck {
+  .highlight-deck-wrapper {
+    padding-left: 0;
+    list-style: none;
+
+    li {
+      margin-bottom: 1em;
+    }
+
+    @include breakpoint($charlie) {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1rem 1rem;
+      grid-template-areas: "highlighted second" "highlighted third";
+
+      li {
+        width: 100%;
+        max-width: 100%;
+
+        &:nth-child(1) {
+          grid-area: highlighted;
+        }
+
+        &:nth-child(2) {
+          grid-area: second;
+        }
+
+        &:nth-child(3) {
+          grid-area: third;
+        }
+
+        @include after-first(3) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .highlight__item {
+    display: flex;
+
+    &:first-child {
+      @include breakpoint($charlie) {
+        .highlight__image {
+          min-width: px(120);
+        }
+
+        .highlight__text {
+          display: block;
+        }
+      }
+
+      @include breakpoint($delta) {
+        .highlight__image {
+          flex-basis: 35%;
+          min-width: 35%;
+        }
+      }
+    }
+  }
+
+  .highlight__image {
+    margin-right: 1rem;
+    flex-basis: 20%;
+    min-width: px(80);
+    flex-grow: 0;
+  }
+
+  .highlight__body {
+    time + h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+  }
+
+  .highlight__text {
+    display: none;
+  }
+}

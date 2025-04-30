@@ -1,0 +1,112 @@
+//
+// Pagination (multiple pages)
+// --------------------------------------------------
+
+// Space out pagination from surrounding content
+.pagination {
+  @include spacing(vertical, padding, 2);
+}
+
+.pagination__list {
+  // Allow for text-based alignment
+  display: inline-block;
+  // Reset default ul styles
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.pagination__item {
+  display: inline; // Remove list-style and block-level defaults
+}
+
+.pagination__link {
+  float: left; // Collapse white-space
+  padding: 0.3em 1em;
+  text-decoration: none;
+  border: 1px solid $pagination-color-border;
+  @include border-radius(5px);
+
+  @if $pagination-color-background {
+    background-color: $pagination-color-background;
+  }
+
+  &:hover,
+  &:focus {
+    color: set-text-color($pagination-color-background--hover);
+    background-color: $pagination-color-background--hover;
+  }
+}
+
+.pagination__item.active {
+  .pagination__link,
+  .pagination__link:hover,
+  .pagination__link:focus {
+    color: $pagination-color-link--active;
+    cursor: default;
+    background-color: $pagination-color-background--active;
+  }
+}
+
+.pagination__item.disabled {
+  .pagination__link,
+  .pagination__link:hover,
+  .pagination__link:focus {
+    color: $pagination-color-link--active;
+    background-color: transparent;
+    cursor: default;
+  }
+}
+
+.pagination__previous {
+  float: left;
+}
+
+.pagination__next {
+  float: right;
+}
+
+.pagination__offset {
+  display: none;
+}
+
+@include breakpoint($charlie) {
+  .pagination {
+    text-align: center;
+  }
+
+  .pagination__list {
+    width: auto;
+    border: 1px solid $pagination-color-border;
+    @include border-radius(5px);
+  }
+
+  .pagination__link {
+    border: 0 none;
+    @include border-radius(0);
+    border-right: 1px solid $pagination-color-border;
+  }
+
+  .pagination__item:first-child .pagination__link {
+    @include border-radius(5px 0 0 5px);
+  }
+
+  .pagination__item:last-child .pagination__link {
+    border-right: 0 none;
+    @include border-radius(0 5px 5px 0);
+  }
+
+  .pagination__next,
+  .pagination__previous {
+    float: none;
+  }
+
+  .pagination__offset {
+    display: inline;
+  }
+}
+
+.article + .pagination,
+.group + .pagination {
+  padding-top: 0;
+}

@@ -1,0 +1,52 @@
+.grid {
+  @include clearfix;
+
+  max-width: $width-maximum-content;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-right: $grid-padding;
+  padding-left: $grid-padding;
+}
+
+.grid--narrow {
+  @include clearfix;
+  max-width: $bravo;
+}
+
+.grid--wide {
+  @include clearfix;
+  max-width: $width-maximum;
+}
+
+.grid--center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grid__one-half {
+  @include gallery(6, $bravo);
+}
+
+// @TODO: I don't believe we stil use this
+//.grid__one-third {
+//  @include gallery(4, $charlie);
+//}
+//
+//.grid__two-third {
+//  @include gallery(8, $charlie);
+//}
+// @TODO END
+
+.media__grid--columns-two {
+  .media {
+    @include gallery(6, $charlie);
+  }
+}
+
+.media__grid--columns-three {
+  .media {
+    @include gallery(6, $charlie);
+    @include gallery(4, $delta);
+  }
+}

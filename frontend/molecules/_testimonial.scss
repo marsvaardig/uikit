@@ -1,0 +1,66 @@
+@if $extension--portfolio {
+.testimonials {
+  @include clearfix();
+
+  @include breakpoint($charlie) {
+    .testimonial {
+      @include gallery($testimonial-breakpoint-columns);
+    }
+  }
+}
+
+.testimonial {
+  @include spacing(bottom, $lastchildnone: true);
+
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.testimonial__text {
+  @if ($testimonial-quotes != false) {
+    quotes: "“" "”" "‘" "’";
+
+    p:before, p:after {
+      font-size: 1.25em;
+    }
+
+    p:first-of-type:before {
+      content: open-quote;
+      margin-right: $spacing-xs;
+    }
+
+    p:last-of-type:after {
+      content: close-quote;
+      margin-left: $spacing-xs;
+    }
+  }
+}
+
+.article__content {
+  .testimonial {
+    @extend .highlight;
+
+    .testimonial__title {
+      color: inherit;
+    }
+
+    font-size: $testimonial-font-size;
+
+    &:last-child {
+      padding-bottom: $grid-padding;
+    }
+  }
+}
+
+  .testimonial {
+    @if $testimonial-font-size != inherit {
+      @include property('font-size', $testimonial-font-size);
+    }
+
+    .testimonial__title {
+      @include property('font-size', $testimonial-heading-font-size);
+      @include property('font-weight', $testimonial-heading-font-weight);
+      @include property('color', $testimonial-heading-color);
+    }
+  }
+}

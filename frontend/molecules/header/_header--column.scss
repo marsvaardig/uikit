@@ -1,0 +1,34 @@
+@if $header == 'column' {
+.header {
+
+  @include breakpoint($charlie) {
+    @if $header-border and $header-position != left {
+      .header__overlay {
+        border-bottom: $header-border;
+      }
+    }
+
+    @if $hero-border and $header-border and $header-position != left {
+      .header__visual {
+        border-bottom: $header-border;
+      }
+    }
+  }
+
+  .navigation {
+    align-items: center;
+    justify-content: center;
+
+    @include breakpoint($delta) {
+      margin: $navigation-margin;
+    }
+
+  }
+
+  @if($organization-color-background and $header-position == left) {
+    .organization {
+      background-color: $organization-color-background;
+    }
+  }
+}
+}

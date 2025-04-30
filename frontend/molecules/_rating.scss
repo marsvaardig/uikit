@@ -1,0 +1,29 @@
+.aggregaterating {
+  margin-top: 1em;
+  font-size: px(16);
+
+  .aggregaterating__content {
+    display: flex;
+    align-items: center;
+    justify-content: $aggregate-rating-justify;
+    gap: .5em;
+  }
+
+  [itemprop="name"],
+  .aggregaterating__title {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .aggregaterating__stars {
+    color: currentColor;
+    display: flex;
+    gap: .25em;
+  }
+}
+
+.header {
+  .aggregaterating__stars {
+    color: #FFC800;
+  }
+}

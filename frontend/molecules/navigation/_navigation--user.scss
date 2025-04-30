@@ -1,0 +1,58 @@
+@if $extension--login {
+.navigation--user {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+
+  @include breakpoint($header-breakpoint) {
+    flex-direction: row;
+  }
+
+  .navigation__list {
+    justify-content: flex-end;
+
+    @include breakpoint($header-breakpoint) {
+      width: auto;
+    }
+  }
+
+  .navigation__item {
+    flex-grow: 0;
+
+    &.current {
+      font-weight: $weight-bold;
+
+      .navigation__link {
+        text-decoration: none;
+      }
+    }
+
+    .navigation__link {
+      text-decoration: underline;
+
+      @include hover() {
+        text-decoration: none;
+      }
+    }
+  }
+
+  &.navigation--logged-in {
+    .parent {
+      flex-grow: 1;
+      justify-content: flex-end;
+
+      > .navigation__link {
+        display: none;
+      }
+    }
+  }
+
+  // Level 2
+  .navigation__list ul {
+    display: flex;
+    padding-left: 0;
+  }
+}
+}
+
+

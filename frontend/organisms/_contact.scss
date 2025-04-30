@@ -1,0 +1,12 @@
+.contact-default {
+  .article__image {
+    max-width: $charlie;
+    @include spacing(bottom, padding, .5);
+  }
+
+  .article {
+    a:not(.article__button) {
+      color: $link-color;
+    }
+  }
+}

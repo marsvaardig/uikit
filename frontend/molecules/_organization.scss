@@ -1,0 +1,138 @@
+.organization {
+  @extend .clearfix;
+
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+  align-items: center;
+
+  @if $organization-padding == 'responsive' {
+    @include spacing('all', 'padding', $organization-padding-multiplier);
+  } @else {
+    padding: $organization-padding;
+  }
+
+  text-align: center;
+}
+
+.organization__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  $border: 0;
+
+  @if $organization-color-background {
+    background: $organization-color-background;
+  }
+
+  @if $organization-color-border {
+    border: $organization-color-border;
+    $border: px(2);
+  }
+
+  @if $organization-logo-radius {
+    border-radius: $organization-logo-radius;
+  }
+
+  @if ($organization-logo-height and $organization-logo-width) {
+    @include ratio-block($organization-logo-width to $organization-logo-height, $organization-logo-overflow);
+
+    width: 100%;
+    max-width: #{$organization-logo-width + $border};
+  }
+
+  @if $organization-logo-padding == 0 {
+    padding: 0;
+  }
+  @else if(map-get($organization-logo-padding, responsive))
+  {
+    padding: $spacing-m;
+
+    @if ($organization-logo-width)
+    {
+      max-width: #{$organization-logo-width + ($spacing-m * 2) + $border};
+    }
+
+    @include breakpoint($bravo)
+    {
+      padding: $spacing-l;
+
+      @if ($organization-logo-width)
+      {
+        max-width: #{$organization-logo-width + ($spacing-l * 2) + $border};
+      }
+    }
+
+    @include breakpoint($delta) {
+      padding: map-get($organization-logo-padding, top) map-get($organization-logo-padding, right) map-get($organization-logo-padding, bottom) map-get($organization-logo-padding, left);
+
+      @if ($organization-logo-height and $organization-logo-width)
+      {
+        max-width: #{$organization-logo-width + map-get($organization-logo-padding, right) + map-get($organization-logo-padding, left) + $border};
+      }
+    }
+  }
+  @else
+  {
+    padding: map-get($organization-logo-padding, top) map-get($organization-logo-padding, right) map-get($organization-logo-padding, bottom) map-get($organization-logo-padding, left);
+
+    @if ($organization-logo-height and $organization-logo-width)
+    {
+      max-width: #{$organization-logo-width + map-get($organization-logo-padding, right) + map-get($organization-logo-padding, left) + $border}
+    }
+  }
+
+  &,
+  &:active,
+  &:visited,
+  &:focus,
+  &:hover {
+    text-decoration: none;
+    color: $body-color;
+  }
+}
+
+.organization__picture {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+
+  @include breakpoint($header-breakpoint) {
+    @if ($organization-logo-height and $organization-logo-width) {
+
+      @include ratio-block($organization-logo-width to $organization-logo-height, $organization-logo-overflow);
+
+      width: $organization-logo-width;
+    }
+  }
+}
+
+.organization__title {
+  font-size: 1.5em;
+  color: $organization-color-title;
+
+  @if ($organization-font-family) {
+    font-family: $organization-font-family;
+  }
+
+  @include breakpoint($bravo) {
+    font-size: 2em;
+  }
+}
+
+.organization__subtitle {
+  font-size: 1.25em;
+  margin-top: px(10);
+
+  color: $organization-color-subtitle;
+
+  @if ($organization-font-family) {
+    font-family: $organization-font-family;
+  }
+
+  @include breakpoint($bravo) {
+    font-size: 1.5em;
+    margin-top: px(20);
+  }
+}
