@@ -5,7 +5,6 @@
 {% set viewType = viewType|default('item') %} {# table | item | dashboard - set in page, not here #}
 <body id="page-id-345"> {# @TODO: set dynamic page id #}
 <div class="uikit" data-uikit>
-    <script src="{{ siteUrl }}/assets/js/settings.js"></script>
     {% include "../partials/header.twig" with {
         brand: brand|default(true),
         search: search|default(true),
@@ -72,6 +71,7 @@
         } %}
     </div>
 </div>
+<script src="{{ siteUrl }}/assets/js/settings.js"></script>
 <script src="{{ siteUrl }}/assets/js/scripts.js" defer></script>
 </body>
 </html>
