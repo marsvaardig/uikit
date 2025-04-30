@@ -1,9 +1,9 @@
 // Normalize
 @import "normalize";
 
-@import "../../../../../../node_modules/illusion/scss/tools/tools";
+@import "illusion/scss/tools/tools";
 
-@import "../../../../../../node_modules/family.scss/source/src/family";
+@import "family.scss/source/src/family";
 
 @import "utilities/illusion/illusion";
 
@@ -21,24 +21,24 @@
 
 @import "atoms/root";
 
-@import "../../../../../../node_modules/illusion/scss/molecules/custom-select";
-@import "../../../../../../node_modules/illusion/scss/molecules/form";
-@import "../../../../../../node_modules/illusion/scss/molecules/multiple-choice";
+@import "illusion/scss/molecules/custom-select";
+@import "illusion/scss/molecules/form";
+@import "illusion/scss/molecules/multiple-choice";
 
 @import "utilities/misc";
 
 // Atoms
-@import "../../../../../../node_modules/illusion/scss/atoms/boxsizing";
-@import "../../../../../../node_modules/illusion/scss/atoms/a";
-@import "../../../../../../node_modules/illusion/scss/atoms/address";
-@import "../../../../../../node_modules/illusion/scss/atoms/body";
-@import "../../../../../../node_modules/illusion/scss/atoms/fieldset";
-@import "../../../../../../node_modules/illusion/scss/atoms/h1-h6";
-@import "../../../../../../node_modules/illusion/scss/atoms/img";
-@import "../../../../../../node_modules/illusion/scss/atoms/list";
-@import "../../../../../../node_modules/illusion/scss/atoms/p";
-@import "../../../../../../node_modules/illusion/scss/atoms/picture";
-@import "../../../../../../node_modules/illusion/scss/atoms/svg";
+@import "illusion/scss/atoms/boxsizing";
+@import "illusion/scss/atoms/a";
+@import "illusion/scss/atoms/address";
+@import "illusion/scss/atoms/body";
+@import "illusion/scss/atoms/fieldset";
+@import "illusion/scss/atoms/h1-h6";
+@import "illusion/scss/atoms/img";
+@import "illusion/scss/atoms/list";
+@import "illusion/scss/atoms/p";
+@import "illusion/scss/atoms/picture";
+@import "illusion/scss/atoms/svg";
 
 @import "atoms/address";
 @import "atoms/audio";

@@ -2,10 +2,10 @@ $font-family: 'Open Sans', Helvetica !default;
 $font-family-heading: false;
 $font-family-navigation: false;
 
-@import "../../../../../../../../node_modules/illusion/scss/tools/variables/breakpoints";
-@import "../../../../../../../../node_modules/illusion/scss/tools/variables/spacing";
-@import "../../../../../../../../node_modules/illusion/scss/tools/variables/type";
-@import "../../../../../../../../node_modules/illusion/scss/tools/variables/color";
+@import "illusion/scss/tools/variables/breakpoints";
+@import "illusion/scss/tools/variables/spacing";
+@import "illusion/scss/tools/variables/type";
+@import "illusion/scss/tools/variables/color";
 
 // Import functions here so we can use the px function in sites variables.
 // px function should be removed when template transformation is complete
