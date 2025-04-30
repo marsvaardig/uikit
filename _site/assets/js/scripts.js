@@ -434,6 +434,7 @@
     let activeSidebar = null;
     let isHorizontalSwipe = null;
     const swipeThreshold = 10;
+    let scrollIntent = null;
     let swipeWidths;
     function handleTouchStart(e) {
       const touch = e.touches[0];
@@ -456,6 +457,19 @@
           }
         }
       });
+      if (activeSidebar) {
+        const $el = e.target.closest(".overflow");
+        if ($el && isHorizontallyScrollable($el)) {
+          scrollIntent = {
+            canScrollLeft: $el.scrollLeft > 0,
+            canScrollRight: $el.scrollLeft + $el.clientWidth < $el.scrollWidth
+          };
+        } else {
+          scrollIntent = null;
+        }
+      } else {
+        scrollIntent = null;
+      }
       if (!activeSidebar) {
         isDragging = false;
         return;
@@ -482,18 +496,13 @@
       const deltaY = currentY - startY;
       let el = e.target;
       allowHorizontalScroll = false;
-      const $el = el.closest(".overflow");
-      if ($el) {
-        if (isHorizontallyScrollable($el)) {
-          const canScrollLeft = $el.scrollLeft > 0;
-          const canScrollRight = $el.scrollLeft + $el.clientWidth < $el.scrollWidth;
-          const isSwipingLeft = deltaX < 0;
-          const isSwipingRight = deltaX > 0;
-          if (isSwipingLeft && canScrollRight || isSwipingRight && canScrollLeft) {
-            allowHorizontalScroll = true;
-            blockSwipeForCurrentTouch = true;
-            return;
-          }
+      if (scrollIntent) {
+        const isSwipingLeft = deltaX < 0;
+        const isSwipingRight = deltaX > 0;
+        if (isSwipingLeft && scrollIntent.canScrollRight || isSwipingRight && scrollIntent.canScrollLeft) {
+          allowHorizontalScroll = true;
+          blockSwipeForCurrentTouch = true;
+          return;
         }
       }
       if (isHorizontalSwipe === null) {

@@ -100,6 +100,7 @@
   background: #fff;
   border-radius: var(--ui-radius-s);
   opacity: calc(0.75 - var(--ui-sidebar-component-progress) * 0.75);
+  will-change: background, opacity;
 
   @include transition(background $chrome-transition-duration $chrome-transition-easing, opacity $chrome-transition-duration $chrome-transition-easing);
 
@@ -133,6 +134,7 @@
   background: #fff;
   border-radius: var(--ui-radius-s);
   opacity: calc(var(--ui-sidebar-component-progress) * 0.75);
+  will-change: opacity;
 
   @include transition(opacity $chrome-transition-duration $chrome-transition-easing);
 

@@ -17,6 +17,6 @@ $chrome-breakpoint2: px(960) !default;
 $chrome-breakpoint2-min: px(959) !default;
 
 // Transition
-$chrome-transition-duration: 250ms !default;
-$chrome-transition-easing: ease-out !default;
+$chrome-transition-duration: 300ms !default;
+$chrome-transition-easing: cubic-bezier(0.25, 1, 0.7, 1) !default;
 $component-transition-duration: 300ms !default;

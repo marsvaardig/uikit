@@ -573,6 +573,9 @@
   let activeSidebar = null;
   let isHorizontalSwipe = null; // Nieuw: weten of we horizontaal zijn
   const swipeThreshold = 10; // pixels voordat we bepalen
+  
+  // Scroll intentie tracking
+  let scrollIntent = null;
 
 // Max swipe afstand
   let swipeWidths;
@@ -607,6 +610,21 @@
         }
       }
     });
+    
+    if (activeSidebar) {
+      // Nieuw: scroll intentie bepalen
+      const $el = e.target.closest('.overflow');
+      if ($el && isHorizontallyScrollable($el)) {
+        scrollIntent = {
+          canScrollLeft: $el.scrollLeft > 0,
+          canScrollRight: $el.scrollLeft + $el.clientWidth < $el.scrollWidth,
+        };
+      } else {
+        scrollIntent = null;
+      }
+    } else {
+      scrollIntent = null;
+    }
     
     if (!activeSidebar) {
       isDragging = false;
@@ -645,22 +663,18 @@
     
     allowHorizontalScroll = false; // reset standaard
     
-    const $el = el.closest('.overflow');
-    if ($el) {
-      if (isHorizontallyScrollable($el)) {
-        const canScrollLeft = $el.scrollLeft > 0;
-        const canScrollRight = $el.scrollLeft + $el.clientWidth < $el.scrollWidth;
-        const isSwipingLeft = deltaX < 0;
-        const isSwipingRight = deltaX > 0;
-        
-        if (
-          (isSwipingLeft && canScrollRight) ||
-          (isSwipingRight && canScrollLeft)
-        ) {
-          allowHorizontalScroll = true;
-          blockSwipeForCurrentTouch = true; // STOP swipe permanent
-          return;
-        }
+    // Nieuw scrollIntent blok
+    if (scrollIntent) {
+      const isSwipingLeft = deltaX < 0;
+      const isSwipingRight = deltaX > 0;
+
+      if (
+        (isSwipingLeft && scrollIntent.canScrollRight) ||
+        (isSwipingRight && scrollIntent.canScrollLeft)
+      ) {
+        allowHorizontalScroll = true;
+        blockSwipeForCurrentTouch = true;
+        return;
       }
     }
     

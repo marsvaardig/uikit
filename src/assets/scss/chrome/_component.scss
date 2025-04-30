@@ -13,6 +13,7 @@
   background: var(--ui-background-primary);
   border-radius: var(--ui-chrome-radius-m);
   transition: opacity $chrome-transition-duration $chrome-transition-easing;
+  will-change: opacity;
 
   @include breakpoint(0, $chrome-breakpoint2-min) {
     opacity: calc(1 - var(--ui-sidebar-left-progress) * .5);

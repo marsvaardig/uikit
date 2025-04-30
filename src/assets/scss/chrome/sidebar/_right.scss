@@ -11,6 +11,7 @@
   max-inline-size: calc((100vw - (env(safe-area-inset-right) + env(safe-area-inset-left))) - #{px(96)});
   transition: transform $chrome-transition-duration $chrome-transition-easing, inline-size $chrome-transition-duration $chrome-transition-easing, margin $chrome-transition-duration $chrome-transition-easing;
   transform: translateX(100%);
+  will-change: transform, inline-size, margin;
 
   @include state('has', 'toggled-sidebar-right') {
     transform: translateX(0);
