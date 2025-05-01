@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html lang="en" dir="ltr" class="no-js">
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <script>!function(){"use strict";function e(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent&&e.attachEvent("on"+t,n)}function t(e){return window.localStorage&&localStorage.font_css_cache&&localStorage.font_css_cache_file===e}function n(){if(window.localStorage&&window.XMLHttpRequest)if(t(o))c(localStorage.font_css_cache);else{var n=new XMLHttpRequest;n.open("GET",o,!0),e(n,"load",function(){4===n.readyState&&(c(n.responseText),localStorage.font_css_cache=n.responseText,localStorage.font_css_cache_file=o)}),n.send()}else{var a=document.createElement("link");a.href=o,a.rel="stylesheet",a.type="text/css",document.getElementsByTagName("head")[0].appendChild(a),document.cookie="font_css_cache"}}function c(e){var t=document.createElement("style");t.innerHTML=e,document.getElementsByTagName("head")[0].appendChild(t)}var o="css/ubuntu.css";window.localStorage&&localStorage.font_css_cache||document.cookie.indexOf("font_css_cache")>-1?n():e(window,"load",n)}();</script>
+</head>
+ 
+<body id="page-id-345"> 
+<div class="uikit" data-uikit>
+                <form class="login" wire:submit="login">
+        <input type="hidden" name="_token" value="1VyiwLuslsoDbDy2rUp8TGGt47lhWQC4njPQXM1d" autocomplete="off">
+        <div class="stack">
+            <div class="login__brand">
+                Dialbox
+            </div>
+            <!-- Email Address -->
+            <div class="form-group">
+                <label for="email">
+                    Email
+                </label>
+                <input wire:model="form.email" id="email" type="email" name="email" required="required" autofocus="autofocus" autocomplete="username">
+                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+            </div>
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password">
+                    Password
+                </label>
+                <input wire:model="form.password" id="password" type="password" name="password" required="required" autocomplete="current-password">
+                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+            </div>
+
+            <!-- Remember Me -->
+            <div class="form-group">
+                <div class="cluster cluster--fill">
+                    <label for="remember" class="">
+                        <input wire:model="form.remember" id="remember" type="checkbox" name="remember">
+                        <span class="">Remember me</span>
+                    </label>
+                    <a  href="https://janss.app.dialbox.eu/forgot-password" wire:navigate="">
+                        Forgot your password?
+                    </a>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="button button--large" type="submit" >
+                    Log in
+                </button>
+            </div>
+        </div>
+
+        <div class="divider">
+            <div class="divider__content">Of</div>
+        </div>
+
+        <a href="https://central.dialbox.eu/auth/google?tenant=janss" class="button button--google button--large">
+            <svg  fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>                Inloggen met Google
+        </a>
+    </form>
+    </div>
+<script src="/assets/js/settings.js"></script>
+<script src="/assets/js/scripts.js" defer></script>
+</body>
+</html>

@@ -144,6 +144,11 @@
                                     <span class="navigation__item">Item</span>
                                 </a>
                             </li>
+                            <li {% if '/lgin' in page.url %}class="is:active"{% endif %}>
+                                <a href="{{ siteUrl }}/login">
+                                    <span class="navigation__item">Login</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <hr>
