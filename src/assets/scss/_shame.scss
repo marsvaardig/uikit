@@ -136,14 +136,18 @@ table {
 .box {
   padding: var(--ui-content-box-padding);
   background: #fff;
-  border: 1px solid #B7CAD7;
+  border: 1px solid #c8d6e1;
   border-radius: var(--ui-chrome-radius-s);
+  box-shadow: 0 1px 4px rgba(#c8d6e1, .5);
 }
 
 .box--grow {
   block-size: 100%;
 }
 
+.box-padding {
+  padding: var(--ui-content-box-padding);
+}
 
 
 
@@ -238,7 +242,13 @@ svg:not([height]) {
 
 .stack {
   & > * + * {
-    margin-block-start: 1.5em;
+    margin-block-start: 1.5rem;
+  }
+}
+
+.stack--small {
+  & > * + * {
+    margin-block-start: .5rem;
   }
 }
 
@@ -300,4 +310,67 @@ svg:not([height]) {
 .divider__content {
   padding: 0 .66em;
   background: #fff;
+}
+
+.flag-object {
+  display: flex;
+  align-items: center;
+  gap: .75rem
+}
+
+.flag-object__aside {
+  flex: 0 0 auto;
+}
+
+.flag-object__body {
+  flex: 1 1 auto;
+  min-inline-size: 50%;
+}
+
+.text\:big {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.text\:medium {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.text\:bold {
+  font-weight: 700;
+}
+
+.align\:right {
+  text-align: right;
+}
+
+.color\:brand {
+  color: $brand;
+}
+
+.color\:success {
+  color: #42cb6f;
+}
+
+.color\:error {
+  color: #ef4546;
+}
+
+.color\:warning {
+  color: #c89e23;
+}
+
+.color\:neutral {
+  color: #2463eb;
+}
+
+.box__heading {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--ui-content-box-padding);
+  margin: calc(var(--ui-content-box-padding) * -1) calc(var(--ui-content-box-padding) * -1) var(--ui-chrome-spacing-m);
+  border-bottom: 1px solid #B7CAD7;
+  font-size: 1rem;
+  font-weight: bold;
 }
