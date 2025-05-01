@@ -2122,16 +2122,14 @@ svg:not([height]) {
   flex-direction: column;
   gap: 0.5rem;
 }
-
-label {
+.form-group label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: var(--ui-font-size-xl);
   color: #333;
 }
-
-input:not([type=checkbox]):not([type=radio]) {
+.form-group input:not([type=checkbox]):not([type=radio]) {
   inline-size: 100%;
   block-size: 100%;
   padding: 0.5rem;
@@ -2143,7 +2141,7 @@ input:not([type=checkbox]):not([type=radio]) {
   font-size: var(--ui-font-size-m);
   line-height: var(--ui-line-height-m);
 }
-input:not([type=checkbox]):not([type=radio]):focus {
+.form-group input:not([type=checkbox]):not([type=radio]):focus {
   outline: none;
   border-color: #1daaff;
   box-shadow: inset 0 0 0 0.125rem #1daaff;
