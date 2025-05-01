@@ -9,7 +9,7 @@
   hr {
     inline-size: 100%;
     block-size: 1px;
-    margin: 1rem 0;
+    margin: px(24) 0;
     background: rgba(#fff, .2);
     border: none;
   }
@@ -20,7 +20,7 @@
 }
 
 .navigation__heading {
-  padding: var(--ui-spacing-m);
+  padding: var(--ui-spacing-xs) var(--ui-spacing-m) var(--ui-spacing-m);
   font-size: var(--ui-font-size-m);
   font-weight: 400;
   color: #ACC6D9;
@@ -95,9 +95,10 @@
   }
 
   a {
-    display: flex;
+    display: inline-flex; // this combi works better on iOs
     align-items: center;
     gap: px(16);
+    inline-size: 100%; // this combi works better on iOs
     padding: px(9) px(8);
     overflow: hidden;
     font-size: var(--ui-font-size-xl);

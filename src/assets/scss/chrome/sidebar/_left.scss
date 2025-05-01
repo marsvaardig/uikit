@@ -5,6 +5,7 @@
   flex: 0 0 auto;
   min-inline-size: min(calc(100vw - (env(safe-area-inset-left) + env(safe-area-inset-right) + #{px(16)})),#{px(400)});
   max-block-size: 100%;
+  padding-block-start: px(16);
   margin-inline-start: calc(var(--ui-chrome-spacing-s) * -1);
   overflow: visible;
   transition: min-inline-size $chrome-transition-duration $chrome-transition-easing, inline-size $chrome-transition-duration $chrome-transition-easing;
