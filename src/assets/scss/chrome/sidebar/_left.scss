@@ -3,8 +3,7 @@
 .sidebar--left {
   display: flex;
   flex: 0 0 auto;
-  inline-size: px(48);
-  min-inline-size: calc(#{px(48)} + min((calc((100vw - (env(safe-area-inset-right) + env(safe-area-inset-left))) - #{px(16)}) - #{px(48)}), #{px(400)}) * var(--ui-sidebar-left-progress));
+  min-inline-size: min(calc(100vw - (env(safe-area-inset-left) + env(safe-area-inset-right) + #{px(16)})),#{px(400)});
   max-block-size: 100%;
   margin-inline-start: calc(var(--ui-chrome-spacing-s) * -1);
   overflow: visible;
