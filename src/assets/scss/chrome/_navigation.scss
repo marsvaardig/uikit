@@ -92,12 +92,15 @@
   }
 
   li {
+    position: relative;
+    min-block-size: px(36);
     padding-inline-start: px(10);
 
     @include pseudo(before) {
-      inset-block: px(6);
+      inset-block: px(4);
       inset-inline-start: 0;
       inline-size: px(4);
+      block-size: calc(#{px(36)} - #{px(8)});
       background: #40b2ff;
       border-radius: 3px;
       opacity: 0;
@@ -109,6 +112,7 @@
     align-items: center;
     gap: px(16);
     padding: px(9) px(8);
+    overflow: hidden;
     font-size: var(--ui-font-size-xl);
     border: 1px solid transparent;
     border-radius: var(--ui-radius-s);
@@ -126,19 +130,80 @@
     }
   }
 
+  .navigation__item {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .is\:active {
     &::before {
       opacity: 1;
     }
 
-    a {
+    & > a {
       background: #283b65;
       border-color: #3d5075;
     }
+
+    & > ul {
+      display: block;
+    }
+
+    & > .nav-toggle {
+      transform: rotate(90deg);
+    }
+  }
+
+  .is\:toggled {
+    & > ul {
+      display: block;
+    }
+
+    &.is\:active {
+      & > ul {
+        display: none;
+      }
+    }
+  }
+
+  // Deeper levels
+  ul {
+    display: none;
+    padding-left: px(6);
+    margin-top: px(4);
+    margin-left: px(16);
+    list-style: none;
+    border-left: 2px solid #3d5075;
   }
 }
 
 // @TODO: Want to make this re-usable for other sidebars as well?
 .navigation--stick-to-bottom {
   flex: 0 0 auto;
+}
+
+.nav-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: px(36);
+  height: px(36);
+  cursor: pointer;
+
+  &::before {
+    display: inline-block;
+    inline-size: 8px;
+    block-size: 8px;
+    font-size: 10px;
+    color: #A7D8F3;
+    content: " ";
+    transition: transform 0.2s;
+    transform: rotate(-90deg);
+
+    @include svg-mask('<path d="M3.71027 5.88255C3.86985 6.03915 4.1279 6.03915 4.28578 5.88255L7.54702 2.68388C7.7066 2.52728 7.7066 2.27405 7.54702 2.11912C7.38744 1.96418 7.12939 1.96252 6.97151 2.11912L4.00057 5.03457L1.02794 2.11745C0.868356 1.96085 0.610309 1.96085 0.452425 2.11745C0.29454 2.27405 0.292843 2.52728 0.452425 2.68222L3.71027 5.88255Z"/>', currentcolor, 100%, 100%, 8, 8);
+  }
 }

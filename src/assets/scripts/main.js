@@ -466,6 +466,16 @@
   
   
   
+  document.querySelectorAll('.nav-toggle').forEach((el) => {
+    el.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const $nav = el.closest('li');
+      $nav.classList.toggle('is:toggled');
+    });
+  });
+  
+  
+  
   // Table
   
   if ($tables.length > 0) {

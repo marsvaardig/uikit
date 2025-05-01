@@ -361,6 +361,13 @@
         });
       });
     }
+    document.querySelectorAll(".nav-toggle").forEach((el) => {
+      el.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        const $nav = el.closest("li");
+        $nav.classList.toggle("is:toggled");
+      });
+    });
     if ($tables.length > 0) {
       $tables.forEach(($table) => {
         const $rows = $table.querySelectorAll("tbody tr");
