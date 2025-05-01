@@ -1671,8 +1671,14 @@ svg {
 .navigation__list .is\:toggled > ul {
   display: block;
 }
+.navigation__list .is\:toggled > .nav-toggle {
+  transform: rotate(90deg);
+}
 .navigation__list .is\:toggled.is\:active > ul {
   display: none;
+}
+.navigation__list .is\:toggled.is\:active > .nav-toggle {
+  transform: rotate(0deg);
 }
 .navigation__list ul {
   position: relative;
@@ -1682,10 +1688,6 @@ svg {
   list-style: none;
   pointer-events: none;
 }
-.uikit.has\:toggled-sidebar-left .navigation__list ul {
-  pointer-events: auto;
-}
-
 .navigation__list ul {
   position: relative;
 }
@@ -1698,6 +1700,21 @@ svg {
   left: 1rem;
   inline-size: 0.125rem;
   background: rgba(255, 255, 255, 0.2);
+}
+.uikit.has\:toggled-sidebar-left .navigation__list ul {
+  pointer-events: auto;
+}
+
+@media screen and (min-width: 60rem) {
+  .navigation__list ul {
+    pointer-events: auto;
+  }
+}
+.navigation__list ul ul {
+  padding-left: 0.75rem;
+}
+.navigation__list ul ul::before {
+  left: 0.625rem;
 }
 
 .navigation--stick-to-bottom {
