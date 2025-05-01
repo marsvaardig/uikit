@@ -101,39 +101,18 @@
     }
   }
 
-  .navigation-rename {
-    @include state('has', 'toggled-sidebar-left') {
-      & > *:not(.navigation--persistent) {
-        pointer-events: auto;
+  &:has(.navigation__list li ul:hover) {
+    @include breakpoint($chrome-breakpoint2) {
+      --ui-sidebar-left-progress: 1;
 
-        @include breakpoint($chrome-breakpoint2) {
-          pointer-events: none;
+      .navigation__heading {
+        text-indent: 0;
+
+        &::before {
+          display: none;
         }
       }
-    }
-  }
 
-  @include state('has', 'toggled-sidebar-left|not(resizing)') {
-    @include hover {
-      @include breakpoint($chrome-breakpoint2) {
-        --ui-sidebar-left-progress: 1;
-
-        .navigation-rename {
-          & > *  {
-            pointer-events: auto;
-          }
-        }
-
-        .navigation--persistent {
-          .navigation__heading {
-            text-indent: 0;
-
-            &::before {
-              display: none;
-            }
-          }
-        }
-      }
     }
   }
 
