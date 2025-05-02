@@ -1762,7 +1762,7 @@ svg {
   transform: translate(-50%, -50%);
   opacity: 0;
 }
-.nav-toggle:hover::after, .nav-toggle:focus::after {
+.nav-toggle:hover::after {
   opacity: 1;
 }
 

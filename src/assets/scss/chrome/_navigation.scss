@@ -241,7 +241,7 @@
     opacity: 0;
   }
 
-  @include hover {
+  &:hover {
     &::after {
       opacity: 1;
     }
