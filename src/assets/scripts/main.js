@@ -153,6 +153,7 @@
       
       $sidebar.setAttribute('data-resizing', direction);
       ev.preventDefault();
+      ev.stopImmediatePropagation();
       
       isResizing = true;
       resizeDirection = direction;

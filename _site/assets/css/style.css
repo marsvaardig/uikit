@@ -2270,7 +2270,7 @@ svg:not([height]) {
   font-weight: bold;
 }
 
-.box {
+.box:not(.overflow) {
   overflow: hidden;
 }
 
