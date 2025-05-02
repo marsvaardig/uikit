@@ -667,17 +667,6 @@ svg {
   }
 }
 
-@media screen and (min-width: 60rem) {
-  .sidebar--left:has(.navigation__list li ul:hover) {
-    --ui-sidebar-left-progress: 1;
-  }
-  .sidebar--left:has(.navigation__list li ul:hover) .navigation__heading {
-    text-indent: 0;
-  }
-  .sidebar--left:has(.navigation__list li ul:hover) .navigation__heading::before {
-    display: none;
-  }
-}
 .sidebar--left .sidebar__swiper {
   position: absolute;
   top: 0;

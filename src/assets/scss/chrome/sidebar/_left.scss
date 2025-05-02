@@ -93,21 +93,6 @@
     }
   }
 
-  &:has(.navigation__list li ul:hover) {
-    @include breakpoint($chrome-breakpoint2) {
-      --ui-sidebar-left-progress: 1;
-
-      .navigation__heading {
-        text-indent: 0;
-
-        &::before {
-          display: none;
-        }
-      }
-
-    }
-  }
-
   .sidebar__swiper {
     position: absolute;
     top: 0;

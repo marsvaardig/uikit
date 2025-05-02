@@ -227,12 +227,15 @@
     });
   }
   
-  // When clicking the left sidebar navigation on mobile
+  // When clicking the left sidebar navigation on mobile/desktop
   
   if ($navigationWrapper) {
     $navigationWrapper.addEventListener('click', (ev) => {
       if (isMobile() && (ev.target.closest('.navigation__heading') || !ev.target.closest('.navigation__list > li > a'))) {
         $ui.classList.add('has:toggled-sidebar-left');
+      } else if (!isMobile() && (ev.target.closest('.navigation__heading') || !ev.target.closest('.navigation__list > li > a'))) {
+        $ui.classList.remove('has:toggled-sidebar-left');
+        setToggleStorage('left', false);
       }
     });
   }
