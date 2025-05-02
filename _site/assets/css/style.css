@@ -1749,6 +1749,22 @@ svg {
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
 }
+.nav-toggle::after {
+  position: absolute;
+  inset: 50%;
+  z-index: -1;
+  inline-size: 24px;
+  block-size: 24px;
+  content: " ";
+  background: #283b65;
+  border: 1px solid #3d5075;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+.nav-toggle:hover::after, .nav-toggle:focus::after {
+  opacity: 1;
+}
 
 .cluster {
   display: flex;
