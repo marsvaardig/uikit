@@ -61,25 +61,21 @@
         return { clientX: ev.clientX, clientY: ev.clientY };
       }
     }
-    function initResizing($resizer) {
-      let startX2, startY2, startWidth, minWidth, maxWidth, startHeight, minHeight, maxHeight, resizeDirection, isResizing = false;
-      const sidebarType = $resizer.getAttribute("data-sidebar-resizer");
-      const className = `has:toggled-sidebar-${sidebarType}`;
-      let $sidebar;
+    function initResizing($ui2) {
+      let startX2, startY2, startWidth, startHeight;
+      let minWidth, maxWidth, minHeight, maxHeight;
+      let resizeDirection, isResizing = false;
+      let $sidebar, sidebarType;
       function onMove(ev) {
         if (!resizeDirection || !isResizing) return;
         const { clientX, clientY } = getClientCoords(ev);
         let newWidth, newHeight;
         if (resizeDirection === "horizontal") {
-          if (sidebarType === "left") {
-            newWidth = startWidth + (clientX - startX2);
-          } else {
-            newWidth = startWidth - (clientX - startX2);
-          }
-          if ($ui.classList.contains(className) && newWidth > minWidth) {
+          newWidth = sidebarType === "left" ? startWidth + (clientX - startX2) : startWidth - (clientX - startX2);
+          if ($ui2.classList.contains(`has:toggled-sidebar-${sidebarType}`) && newWidth > minWidth) {
             setWidth(newWidth, sidebarType);
             if (sidebarType === "left") {
-              $ui.classList.remove(className);
+              $ui2.classList.remove(`has:toggled-sidebar-${sidebarType}`);
             }
           } else if (newWidth > minWidth && newWidth < maxWidth) {
             setWidth(newWidth, sidebarType);
@@ -87,26 +83,26 @@
         }
         if (resizeDirection === "vertical") {
           newHeight = startHeight - (clientY - startY2);
-          if ($ui.classList.contains(className) && newHeight > minHeight) {
+          if ($ui2.classList.contains(`has:toggled-sidebar-${sidebarType}`) && newHeight > minHeight) {
             setHeight(newHeight, sidebarType);
             if (sidebarType === "left") {
-              $ui.classList.remove(className);
+              $ui2.classList.remove(`has:toggled-sidebar-${sidebarType}`);
             }
           } else if (newHeight > minHeight && newHeight < maxHeight) {
             setHeight(newHeight, sidebarType);
           }
         }
       }
-      function onEnd(ev) {
+      function onEnd() {
         isResizing = false;
         resizeDirection = null;
         document.removeEventListener("mousemove", onMove);
         document.removeEventListener("mouseup", onEnd);
         document.removeEventListener("touchmove", onMove);
         document.removeEventListener("touchend", onEnd);
-        $ui.classList.remove("has:resizing");
-        $sidebar.removeAttribute("data-resizing");
-        if (!$ui.classList.contains(className) && sidebarType !== "right" || sidebarType === "right" && $ui.classList.contains(className)) {
+        $ui2.classList.remove("has:resizing");
+        $sidebar?.removeAttribute("data-resizing");
+        if (!$ui2.classList.contains(`has:toggled-sidebar-${sidebarType}`) && sidebarType !== "right" || sidebarType === "right" && $ui2.classList.contains(`has:toggled-sidebar-${sidebarType}`)) {
           const state = getChromeState();
           state.sidebarWidths = state.sidebarWidths || {};
           state.sidebarHeights = state.sidebarHeights || {};
@@ -115,13 +111,14 @@
           setChromeState(state);
         }
       }
-      function getWidthValueInPixels($sidebar2, type) {
-        const val = getComputedStyle($sidebar2).getPropertyValue(type);
-        return val.includes("%") ? parseFloat(val) / 100 * $sidebar2.parentElement.getBoundingClientRect().width : parseFloat(val);
+      function getWidthValueInPixels($el, prop) {
+        const val = getComputedStyle($el).getPropertyValue(prop);
+        return val.includes("%") ? parseFloat(val) / 100 * $el.parentElement.getBoundingClientRect().width : parseFloat(val);
       }
-      function initResize(ev, direction) {
-        $sidebar = ev.target.closest("[data-sidebar]");
+      function initResize(ev, direction, resizer) {
+        $sidebar = resizer.closest("[data-sidebar]");
         if (!$sidebar) return;
+        sidebarType = resizer.getAttribute("data-sidebar-resizer");
         const { clientX, clientY } = getClientCoords(ev);
         $sidebar.setAttribute("data-resizing", direction);
         ev.preventDefault();
@@ -136,38 +133,37 @@
         minHeight = getWidthValueInPixels($sidebar, "min-height");
         maxWidth = getWidthValueInPixels($sidebar, "max-width");
         minWidth = getWidthValueInPixels($sidebar, "min-width");
-        $ui.classList.add("has:resizing");
+        $ui2.classList.add("has:resizing");
         document.addEventListener("mousemove", onMove);
         document.addEventListener("mouseup", onEnd);
         document.addEventListener("touchmove", onMove, { passive: false });
         document.addEventListener("touchend", onEnd);
       }
-      $ui.addEventListener("mousedown", (ev) => {
-        if (ev.target.closest("[data-sidebar-resizer]") !== $resizer) return;
+      $ui2.addEventListener("mousedown", (ev) => {
+        const $resizer = ev.target.closest("[data-sidebar-resizer]");
+        if (!$resizer) return;
         const rect = $resizer.getBoundingClientRect();
         const direction = rect.height > rect.width ? "horizontal" : "vertical";
-        initResize(ev, direction);
+        initResize(ev, direction, $resizer);
       });
-      $ui.addEventListener("touchstart", (ev) => {
-        if (ev.target.closest("[data-sidebar-resizer]") !== $resizer) return;
+      $ui2.addEventListener("touchstart", (ev) => {
+        const $resizer = ev.target.closest("[data-sidebar-resizer]");
+        if (!$resizer) return;
         const rect = $resizer.getBoundingClientRect();
         const direction = rect.height > rect.width ? "horizontal" : "vertical";
-        initResize(ev, direction);
+        initResize(ev, direction, $resizer);
       }, { passive: false });
-      $ui.addEventListener("dblclick", (ev) => {
-        if (ev.target.closest("[data-sidebar-resizer]") !== $resizer) return;
-        resetWidth(sidebarType);
-        resetHeight(sidebarType);
-        removeFromChromeState("sidebarWidths", sidebarType);
-        removeFromChromeState("sidebarHeights", sidebarType);
+      $ui2.addEventListener("dblclick", (ev) => {
+        const $resizer = ev.target.closest("[data-sidebar-resizer]");
+        if (!$resizer) return;
+        const type = $resizer.getAttribute("data-sidebar-resizer");
+        resetWidth(type);
+        resetHeight(type);
+        removeFromChromeState("sidebarWidths", type);
+        removeFromChromeState("sidebarHeights", type);
       });
     }
-    ["left", "right", "component", "split"].forEach((side) => {
-      const $el = document.querySelector(`[data-sidebar-resizer="${side}"]`);
-      if ($el) {
-        initResizing($el);
-      }
-    });
+    initResizing($ui);
     if ($sidebarToggles.length > 0) {
       $sidebarToggles.forEach(($el) => {
         $el.addEventListener("click", (ev) => {
