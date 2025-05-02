@@ -504,13 +504,14 @@
   
   
   
-  // TODO: TEMP
-  $toggleSplits.forEach(($el) => {
-    $el.addEventListener('click', (ev) => {
-      const className = `has:toggled-sidebar-split`;
-      ev.preventDefault();
-      $ui.classList.toggle(className);
-    });
+  
+  $ui.addEventListener('click', (ev) => {
+    const toggleTarget = ev.target.closest('[data-toggle-split]');
+    if (!toggleTarget) return;
+ 
+    // Toggle splits
+    ev.preventDefault();
+    $ui.classList.toggle('has:toggled-sidebar-split');
   });
   
   
