@@ -640,6 +640,10 @@ svg {
   transition: border 100ms ease-in-out 120ms;
   transform: translate(-50%, -50%);
 }
+.uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left .sidebar__resizer {
+  display: none;
+}
+
 .sidebar--left .sidebar__resizer:hover::after, .sidebar--left .sidebar__resizer:focus::after {
   border-color: #000;
 }
