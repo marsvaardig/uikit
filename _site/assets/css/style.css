@@ -2166,7 +2166,7 @@ svg:not([height]) {
   border-radius: var(--ui-chrome-radius-s);
   background: #fff;
   color: #333;
-  font-size: var(--ui-font-size-m);
+  font-size: 16px;
   line-height: var(--ui-line-height-m);
 }
 .form-group input:not([type=checkbox]):not([type=radio]):focus {
