@@ -17,6 +17,7 @@
   // Transitions
   --ui-sidebar-left-progress: 0;
   --ui-sidebar-component-progress: 0;
+  --ui-sidebar-split-progress: 0;
   --ui-sidebar-right-progress: 0;
 
   // Styling
@@ -36,6 +37,7 @@
   @include breakpoint($chrome-breakpoint2) {
     --ui-sidebar-left-progress: 1;
     --ui-sidebar-component-progress: 1;
+    --ui-sidebar-split-progress: 1;
     --ui-sidebar-right-progress: 1;
   }
 
@@ -56,6 +58,16 @@
     // 'Revert' on desktop
     @include breakpoint($chrome-breakpoint2) {
       --ui-sidebar-component-progress: 0;
+    }
+  }
+
+  // 'Open' on toggle class
+  &.has\:toggled-sidebar-split {
+    --ui-sidebar-split-progress: 1;
+
+    // 'Revert' on desktop
+    @include breakpoint($chrome-breakpoint2) {
+      --ui-sidebar-split-progress: 0;
     }
   }
 

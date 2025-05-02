@@ -12,6 +12,7 @@
   inline-size: min(100% - var(--ui-content-min-width) - var(--ui-chrome-spacing-m), var(--ui-sidebar-split-width));
   min-inline-size: var(--ui-sidebar-split-min-width);
   max-inline-size: var(--ui-sidebar-split-max-width);
+  transform: translateX(calc((var(--ui-sidebar-split-progress, 0)) * -100%));
 
   @include transition(all $chrome-transition-duration $chrome-transition-easing);
 
@@ -19,21 +20,23 @@
     @include breakpoint(0, $chrome-breakpoint2-min) {
       inline-size: 100%;
       max-inline-size: 100%;
-      transform: translateX(-100%);
     }
   }
 
   @include state('has', 'split-vertical') {
-    inline-size: 100%;
-    max-inline-size: 100%;
-    block-size: var(--ui-sidebar-split-height);
-    min-block-size: px(200);
-    max-block-size: 75%;
+    @include breakpoint($chrome-breakpoint2) {
+      inline-size: 100%;
+      max-inline-size: 100%;
+      block-size: var(--ui-sidebar-split-height);
+      min-block-size: px(200);
+      max-block-size: 75%;
+    }
   }
 
   @include breakpoint($chrome-breakpoint2) {
     position: relative;
     left: auto;
+    transform: none;
   }
 
   .sidebar__content {
@@ -93,6 +96,19 @@
     .sidebar__resizer::after {
       border-color: #000;
     }
+  }
+
+  .sidebar__swiper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    width: 200vw;
+    pointer-events: none;
+    background: yellow;
+    opacity: 0;
   }
 }
 

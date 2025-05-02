@@ -83,12 +83,7 @@
         }
         if (resizeDirection === "vertical") {
           newHeight = startHeight - (clientY - startY2);
-          if ($ui2.classList.contains(`has:toggled-sidebar-${sidebarType}`) && newHeight > minHeight) {
-            setHeight(newHeight, sidebarType);
-            if (sidebarType === "left") {
-              $ui2.classList.remove(`has:toggled-sidebar-${sidebarType}`);
-            }
-          } else if (newHeight > minHeight && newHeight < maxHeight) {
+          if (newHeight > minHeight && newHeight < maxHeight) {
             setHeight(newHeight, sidebarType);
           }
         }
@@ -463,6 +458,7 @@
       swipeWidths = {
         left: Math.min(window.innerWidth * 0.8, 400),
         component: Math.max(getSidebarWidth("--ui-sidebar-component-width", window.innerWidth * 0.8), minMoveValue),
+        split: Math.max(getSidebarWidth("--ui-sidebar-split-width", window.innerWidth * 0.8), minMoveValue),
         right: Math.max(getSidebarWidth("--ui-sidebar-right-width", window.innerWidth * 0.8), minMoveValue)
       };
       const swipeAreas = document.querySelectorAll("[data-swipe]");
@@ -471,7 +467,7 @@
         const rect = $area.getBoundingClientRect();
         if (startX >= rect.left && startX <= rect.right && startY >= rect.top && startY <= rect.bottom) {
           const type = $area.getAttribute("data-swipe");
-          if (type === "sidebar-left" || type === "sidebar-component" || type === "sidebar-right") {
+          if (type === "sidebar-left" || type === "sidebar-component" || type === "sidebar-split" || type === "sidebar-right") {
             activeSidebar = type.replace("sidebar-", "");
           }
         }
@@ -536,9 +532,9 @@
         if (!$ui.classList.contains("is:resizing")) {
           $ui.classList.add("is:resizing");
         }
-        let adjustedDeltaX = deltaX;
-        if (activeSidebar === "component" || activeSidebar === "right") {
-          adjustedDeltaX = startX - currentX;
+        let adjustedDeltaX = startX - currentX;
+        if (activeSidebar === "left") {
+          adjustedDeltaX = deltaX;
         }
         let progress = startProgress + adjustedDeltaX / swipeWidths[activeSidebar];
         progress = Math.min(Math.max(progress, 0), 1);
@@ -564,7 +560,7 @@
       isDragging = false;
       const finalProgress = parseFloat(getComputedStyle($ui2).getPropertyValue(`--ui-sidebar-${activeSidebar}-progress`)) || 0;
       const progressDifference = Math.abs(finalProgress - startProgress);
-      const shouldToggle = isFlick ? activeSidebar === "left" && progressDifference > 0.05 || activeSidebar === "component" && progressDifference > 0.05 || activeSidebar === "right" && progressDifference > 0.05 : startProgress === 0 ? finalProgress > 0.5 : finalProgress < 0.5;
+      const shouldToggle = isFlick ? activeSidebar === "left" && progressDifference > 0.05 || activeSidebar === "component" && progressDifference > 0.05 || activeSidebar === "right" && progressDifference > 0.05 || activeSidebar === "split" && progressDifference > 0.05 : startProgress === 0 ? finalProgress > 0.5 : finalProgress < 0.5;
       if (shouldToggle && !$ui2.classList.contains(`has:toggled-sidebar-${activeSidebar}`)) {
         $ui2.classList.add(`has:toggled-sidebar-${activeSidebar}`);
       } else if (shouldToggle && $ui2.classList.contains(`has:toggled-sidebar-${activeSidebar}`)) {

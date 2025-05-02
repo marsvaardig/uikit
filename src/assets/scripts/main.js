@@ -103,12 +103,7 @@
       
       if (resizeDirection === 'vertical') {
         newHeight = startHeight - (clientY - startY);
-        if ($ui.classList.contains(`has:toggled-sidebar-${sidebarType}`) && newHeight > minHeight) {
-          setHeight(newHeight, sidebarType);
-          if (sidebarType === 'left') {
-            $ui.classList.remove(`has:toggled-sidebar-${sidebarType}`);
-          }
-        } else if (newHeight > minHeight && newHeight < maxHeight) {
+        if (newHeight > minHeight && newHeight < maxHeight) {
           setHeight(newHeight, sidebarType);
         }
       }
@@ -618,6 +613,7 @@
     swipeWidths = {
       left: Math.min(window.innerWidth * 0.8, 400),
       component: Math.max(getSidebarWidth('--ui-sidebar-component-width', window.innerWidth * 0.8), minMoveValue),
+      split: Math.max(getSidebarWidth('--ui-sidebar-split-width', window.innerWidth * 0.8), minMoveValue),
       right: Math.max(getSidebarWidth('--ui-sidebar-right-width', window.innerWidth * 0.8), minMoveValue)
     };
     
@@ -633,7 +629,7 @@
         startY <= rect.bottom
       ) {
         const type = $area.getAttribute('data-swipe');
-        if (type === 'sidebar-left' || type === 'sidebar-component' || type === 'sidebar-right') {
+        if (type === 'sidebar-left' || type === 'sidebar-component' || type === 'sidebar-split' || type === 'sidebar-right') {
           activeSidebar = type.replace('sidebar-', '');
         }
       }
@@ -720,9 +716,9 @@
         $ui.classList.add('is:resizing');
       }
       
-      let adjustedDeltaX = deltaX;
-      if (activeSidebar === 'component' || activeSidebar === 'right') {
-        adjustedDeltaX = startX - currentX;
+      let adjustedDeltaX = startX - currentX;
+      if (activeSidebar === 'left') {
+        adjustedDeltaX = deltaX;
       }
       
       let progress = startProgress + adjustedDeltaX / swipeWidths[activeSidebar];
@@ -761,7 +757,8 @@
     const shouldToggle = isFlick
       ? (activeSidebar === 'left' && progressDifference > 0.05) ||
       (activeSidebar === 'component' && progressDifference > 0.05) ||
-      (activeSidebar === 'right' && progressDifference > 0.05)
+      (activeSidebar === 'right' && progressDifference > 0.05) ||
+      (activeSidebar === 'split' && progressDifference > 0.05)
       : startProgress === 0 ? finalProgress > 0.5 : finalProgress < 0.5;
     
     if (shouldToggle && !$ui.classList.contains(`has:toggled-sidebar-${activeSidebar}`)) {
