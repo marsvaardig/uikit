@@ -175,19 +175,24 @@
       document.addEventListener('touchend', onEnd);
     }
     
-    $resizer.addEventListener('mousedown', (ev) => {
+    $ui.addEventListener('mousedown', (ev) => {
+      if (ev.target.closest('[data-sidebar-resizer]') !== $resizer) return;
+      
       const rect = $resizer.getBoundingClientRect();
       const direction = rect.height > rect.width ? 'horizontal' : 'vertical';
       initResize(ev, direction);
     });
     
-    $resizer.addEventListener('touchstart', (ev) => {
+    $ui.addEventListener('touchstart', (ev) => {
+      if (ev.target.closest('[data-sidebar-resizer]') !== $resizer) return;
+      
       const rect = $resizer.getBoundingClientRect();
       const direction = rect.height > rect.width ? 'horizontal' : 'vertical';
       initResize(ev, direction);
     }, { passive: false });
     
-    $resizer.addEventListener('dblclick', () => {
+    $ui.addEventListener('dblclick', (ev) => {
+      if (ev.target.closest('[data-sidebar-resizer]') !== $resizer) return;
       resetWidth(sidebarType);
       resetHeight(sidebarType);
       removeFromChromeState('sidebarWidths', sidebarType);
