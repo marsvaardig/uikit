@@ -188,6 +188,30 @@
       pointer-events: auto;
     }
 
+    li {
+      &::before {
+        inset-inline-start: px(-8);
+        inline-size: px(2);
+        border-radius: 0;
+      }
+
+      &.is\:active {
+        a {
+          background: transparent;
+          border-color: transparent;
+          font-weight: bold;
+        }
+      }
+    }
+
+    a {
+      //@include hover {
+      //  background: transparent;
+      //  border-color: transparent;
+      //  text-decoration: underline;
+      //}
+    }
+
     ul {
       padding-left: px(12);
 
