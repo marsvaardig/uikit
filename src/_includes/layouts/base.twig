@@ -22,6 +22,7 @@
                 } %}
             {% endif %}
             <div class="component">
+                <div class="sidebar-overlay-toggle" data-sidebar-toggle="left" data-swipe="sidebar-left"></div>
                 {% if viewType == 'table' or viewType == 'split' or viewType == 'item' %}
                     {% include "../partials/toolbar.twig" with {
                         toolbarBody: toolbarBody|default(''),

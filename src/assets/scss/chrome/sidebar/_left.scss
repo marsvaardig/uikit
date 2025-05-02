@@ -114,9 +114,5 @@
     pointer-events: none;
     background: yellow;
     opacity: 0;
-
-    @include breakpoint($chrome-breakpoint2) {
-      display: none;
-    }
   }
 }

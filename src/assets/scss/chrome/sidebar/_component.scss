@@ -17,15 +17,22 @@
   @include state('has', 'toggled-sidebar-component') {
     @include breakpoint($chrome-breakpoint2) {
       inline-size: var(--ui-sidebar-component-hide);
-      min-inline-size: 0;
+      min-inline-size: var(--ui-sidebar-component-hide);
     }
   }
 
   @include breakpoint($chrome-breakpoint2) {
     position: relative;
     left: 0;
+    inline-size: calc((var(--ui-sidebar-component-width) * var(--ui-sidebar-component-progress)));
     min-inline-size: var(--ui-sidebar-component-min-width);
     max-inline-size: min(33vw, var(--ui-sidebar-component-max-width));
+
+    // When we are resizing with touch
+    .uikit.is\:resizing & {
+      inline-size: calc(var(--ui-sidebar-component-hide) + ((var(--ui-sidebar-component-width) - var(--ui-sidebar-component-hide)) * var(--ui-sidebar-component-progress)));
+      min-inline-size: var(--ui-sidebar-component-hide);
+    }
   }
 
   .sidebar__content {
@@ -82,10 +89,6 @@
     pointer-events: none;
     background: yellow;
     opacity: 0;
-
-    @include breakpoint($chrome-breakpoint2) {
-      display: none;
-    }
   }
 }
 

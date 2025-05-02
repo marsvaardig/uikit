@@ -282,6 +282,7 @@ svg {
   --ui-chrome-radius-m: var(--ui-radius-m);
   --ui-sidebar-left-progress: 0;
   --ui-sidebar-component-progress: 0;
+  --ui-sidebar-right-progress: 0;
   display: flex;
   flex-direction: column;
   block-size: 100vh;
@@ -299,6 +300,7 @@ svg {
   .uikit {
     --ui-sidebar-left-progress: 1;
     --ui-sidebar-component-progress: 1;
+    --ui-sidebar-right-progress: 1;
   }
 }
 .uikit.has\:toggled-sidebar-left {
@@ -315,6 +317,14 @@ svg {
 @media screen and (min-width: 60rem) {
   .uikit.has\:toggled-sidebar-component {
     --ui-sidebar-component-progress: 0;
+  }
+}
+.uikit.has\:toggled-sidebar-right {
+  --ui-sidebar-right-progress: 1;
+}
+@media screen and (min-width: 60rem) {
+  .uikit.has\:toggled-sidebar-right {
+    --ui-sidebar-right-progress: 0;
   }
 }
 .uikit.is\:initializing *, .uikit.is\:resizing *, .uikit.has\:resizing * {
@@ -675,11 +685,6 @@ svg {
   background: yellow;
   opacity: 0;
 }
-@media screen and (min-width: 60rem) {
-  .sidebar--left .sidebar__swiper {
-    display: none;
-  }
-}
 
 .sidebar--component {
   position: absolute;
@@ -699,7 +704,7 @@ svg {
 @media screen and (min-width: 60rem) {
   .uikit.has\:toggled-sidebar-component .sidebar--component {
     inline-size: var(--ui-sidebar-component-hide);
-    min-inline-size: 0;
+    min-inline-size: var(--ui-sidebar-component-hide);
   }
 }
 
@@ -707,8 +712,13 @@ svg {
   .sidebar--component {
     position: relative;
     left: 0;
+    inline-size: calc(var(--ui-sidebar-component-width) * var(--ui-sidebar-component-progress));
     min-inline-size: var(--ui-sidebar-component-min-width);
     max-inline-size: min(33vw, var(--ui-sidebar-component-max-width));
+  }
+  .uikit.is\:resizing .sidebar--component {
+    inline-size: calc(var(--ui-sidebar-component-hide) + (var(--ui-sidebar-component-width) - var(--ui-sidebar-component-hide)) * var(--ui-sidebar-component-progress));
+    min-inline-size: var(--ui-sidebar-component-hide);
   }
 }
 .sidebar--component .sidebar__content {
@@ -760,11 +770,6 @@ svg {
   pointer-events: none;
   background: yellow;
   opacity: 0;
-}
-@media screen and (min-width: 60rem) {
-  .sidebar--component .sidebar__swiper {
-    display: none;
-  }
 }
 
 .sidebar-overlay-toggle {
@@ -839,13 +844,14 @@ svg {
   inline-size: var(--ui-sidebar-right-width);
   max-inline-size: calc(100vw - (env(safe-area-inset-right) + env(safe-area-inset-left)) - 6rem);
   transition: transform 300ms cubic-bezier(0.25, 1, 0.7, 1), inline-size 300ms cubic-bezier(0.25, 1, 0.7, 1), margin 300ms cubic-bezier(0.25, 1, 0.7, 1);
-  transform: translateX(100%);
+  transform: translateX(calc((1 - var(--ui-sidebar-right-progress, 0)) * 100%));
   will-change: transform, inline-size, margin;
 }
-.uikit.has\:toggled-sidebar-right .sidebar--right {
-  transform: translateX(0);
+@media screen and (min-width: 60rem) {
+  .sidebar--right {
+    transform: translateX(calc((var(--ui-sidebar-right-progress, 0)) * 100%));
+  }
 }
-
 .sidebar--right .sidebar__body {
   min-block-size: 100%;
   color: var(--ui-text-primary);
@@ -944,6 +950,17 @@ svg {
   .sidebar--right {
     min-inline-size: 3rem;
   }
+}
+.sidebar--right .sidebar__swiper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  width: 100vw;
+  pointer-events: none;
+  background: yellow;
+  opacity: 0;
 }
 
 @keyframes slide-out-right {
@@ -1106,13 +1123,8 @@ svg {
   color: var(--ui-text-primary);
   background: var(--ui-background-primary);
   border-radius: var(--ui-chrome-radius-m);
-  transition: opacity 300ms cubic-bezier(0.25, 1, 0.7, 1), transform 300ms cubic-bezier(0.25, 1, 0.7, 1);
-  will-change: opacity, transform;
-}
-@media screen and (min-width: 0) and (max-width: 59.9375rem) {
-  .component {
-    opacity: calc(1 - var(--ui-sidebar-left-progress) * 0.5);
-  }
+  transition: transform 300ms cubic-bezier(0.25, 1, 0.7, 1);
+  will-change: transform;
 }
 @media screen and (min-width: 60rem) {
   .component {
@@ -1121,7 +1133,7 @@ svg {
 }
 .uikit:has(.sidebar--left) .component {
   min-inline-size: calc(100vw - (env(safe-area-inset-right) + env(safe-area-inset-left)) - 3rem - 0.5rem);
-  transform: translateX(max(-100% + 0.5rem * (1 - var(--ui-sidebar-left-progress)), -22rem * (1 - var(--ui-sidebar-left-progress))));
+  transform: translateX(max(max(-22rem, -100% + 0.5rem) * (1 - var(--ui-sidebar-left-progress))));
 }
 @media screen and (min-width: 60rem) {
   .uikit:has(.sidebar--left) .component {
@@ -1130,13 +1142,39 @@ svg {
   }
 }
 
-.uikit.has\:toggled-sidebar-left .component {
+.uikit.has\:toggled-sidebar-left .component > *:not(.sidebar-overlay-toggle) {
   pointer-events: none;
 }
 @media screen and (min-width: 60rem) {
-  .uikit.has\:toggled-sidebar-left .component {
+  .uikit.has\:toggled-sidebar-left .component > *:not(.sidebar-overlay-toggle) {
     pointer-events: auto;
   }
+}
+
+.component > .sidebar-overlay-toggle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  display: none;
+  inline-size: 2.5rem;
+  cursor: pointer;
+  background: #fff;
+  border-radius: var(--ui-radius-s);
+  opacity: calc(0.75 - var(--ui-sidebar-left-progress) * 0.75);
+  will-change: background, opacity;
+}
+.component > .sidebar-overlay-toggle {
+  transition: background 300ms cubic-bezier(0.25, 1, 0.7, 1) 0ms, opacity 300ms cubic-bezier(0.25, 1, 0.7, 1) 0ms;
+}
+@media screen and (min-width: 60rem) {
+  .component > .sidebar-overlay-toggle {
+    pointer-events: none;
+  }
+}
+.uikit.has\:toggled-sidebar-left .component > .sidebar-overlay-toggle {
+  display: block;
 }
 
 .toolbar {

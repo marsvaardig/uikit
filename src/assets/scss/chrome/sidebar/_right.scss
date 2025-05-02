@@ -10,11 +10,11 @@
   inline-size: var(--ui-sidebar-right-width);
   max-inline-size: calc((100vw - (env(safe-area-inset-right) + env(safe-area-inset-left))) - #{px(96)});
   transition: transform $chrome-transition-duration $chrome-transition-easing, inline-size $chrome-transition-duration $chrome-transition-easing, margin $chrome-transition-duration $chrome-transition-easing;
-  transform: translateX(100%);
+  transform: translateX(calc((1 - var(--ui-sidebar-right-progress, 0)) * 100%));
   will-change: transform, inline-size, margin;
 
-  @include state('has', 'toggled-sidebar-right') {
-    transform: translateX(0);
+  @include breakpoint($chrome-breakpoint2) {
+    transform: translateX(calc((var(--ui-sidebar-right-progress, 0)) * 100%));
   }
 
   .sidebar__body {
@@ -132,6 +132,18 @@
 
   @include breakpoint($chrome-breakpoint2) {
     min-inline-size: px(48);
+  }
+
+  .sidebar__swiper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    width: 100vw;
+    pointer-events: none;
+    background: yellow;
+    opacity: 0;
   }
 }
 

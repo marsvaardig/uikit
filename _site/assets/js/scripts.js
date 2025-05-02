@@ -459,7 +459,8 @@
       const minMoveValue = 240;
       swipeWidths = {
         left: Math.min(window.innerWidth * 0.8, 400),
-        component: Math.max(getSidebarWidth("--ui-sidebar-component-width", window.innerWidth * 0.8), minMoveValue)
+        component: Math.max(getSidebarWidth("--ui-sidebar-component-width", window.innerWidth * 0.8), minMoveValue),
+        right: Math.max(getSidebarWidth("--ui-sidebar-right-width", window.innerWidth * 0.8), minMoveValue)
       };
       const swipeAreas = document.querySelectorAll("[data-swipe]");
       activeSidebar = null;
@@ -467,7 +468,7 @@
         const rect = $area.getBoundingClientRect();
         if (startX >= rect.left && startX <= rect.right && startY >= rect.top && startY <= rect.bottom) {
           const type = $area.getAttribute("data-swipe");
-          if (type === "sidebar-left" || type === "sidebar-component") {
+          if (type === "sidebar-left" || type === "sidebar-component" || type === "sidebar-right") {
             activeSidebar = type.replace("sidebar-", "");
           }
         }
@@ -533,7 +534,7 @@
           $ui.classList.add("is:resizing");
         }
         let adjustedDeltaX = deltaX;
-        if (activeSidebar === "component") {
+        if (activeSidebar === "component" || activeSidebar === "right") {
           adjustedDeltaX = startX - currentX;
         }
         let progress = startProgress + adjustedDeltaX / swipeWidths[activeSidebar];
@@ -557,17 +558,16 @@
       const velocity = Math.abs(deltaX / (timeDelta || 1));
       const flickThreshold = 0.5;
       const isFlick = velocity > flickThreshold && Math.abs(deltaX) > 30;
-      const isFlickDirection = deltaX > 0 ? "right" : "left";
       isDragging = false;
       const finalProgress = parseFloat(getComputedStyle($ui2).getPropertyValue(`--ui-sidebar-${activeSidebar}-progress`)) || 0;
-      const shouldOpen = isFlick ? activeSidebar === "left" && isFlickDirection === "right" || activeSidebar === "component" && isFlickDirection === "left" : finalProgress > 0.5;
-      if (shouldOpen) {
+      const progressDifference = Math.abs(finalProgress - startProgress);
+      const shouldToggle = isFlick ? activeSidebar === "left" && progressDifference > 0.05 || activeSidebar === "component" && progressDifference > 0.05 || activeSidebar === "right" && progressDifference > 0.05 : startProgress === 0 ? finalProgress > 0.5 : finalProgress < 0.5;
+      if (shouldToggle && !$ui2.classList.contains(`has:toggled-sidebar-${activeSidebar}`)) {
         $ui2.classList.add(`has:toggled-sidebar-${activeSidebar}`);
-        $ui2.style.removeProperty(`--ui-sidebar-${activeSidebar}-progress`);
-      } else {
+      } else if (shouldToggle && $ui2.classList.contains(`has:toggled-sidebar-${activeSidebar}`)) {
         $ui2.classList.remove(`has:toggled-sidebar-${activeSidebar}`);
-        $ui2.style.removeProperty(`--ui-sidebar-${activeSidebar}-progress`);
       }
+      $ui2.style.removeProperty(`--ui-sidebar-${activeSidebar}-progress`);
       activeSidebar = null;
       isHorizontalSwipe = null;
       blockSwipeForCurrentTouch = false;

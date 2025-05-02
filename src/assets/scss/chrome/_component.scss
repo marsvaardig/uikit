@@ -12,12 +12,8 @@
   color: var(--ui-text-primary);
   background: var(--ui-background-primary);
   border-radius: var(--ui-chrome-radius-m);
-  transition: opacity $chrome-transition-duration $chrome-transition-easing, transform $chrome-transition-duration $chrome-transition-easing;
-  will-change: opacity, transform;
-
-  @include breakpoint(0, $chrome-breakpoint2-min) {
-    opacity: calc(1 - var(--ui-sidebar-left-progress) * .5);
-  }
+  transition: transform $chrome-transition-duration $chrome-transition-easing;
+  will-change: transform;
 
   @include breakpoint($chrome-breakpoint2) {
     min-inline-size: 0;
@@ -25,7 +21,7 @@
 
   @include has(".sidebar--left") {
     min-inline-size: calc((100vw - (env(safe-area-inset-right) + env(safe-area-inset-left))) - #{px(48)} - #{px(8)});
-    transform: translateX(max(calc((-100% + px(8) * (1 - var(--ui-sidebar-left-progress)))), calc(#{px(-400) + px(48)} * (1 - var(--ui-sidebar-left-progress)))));
+    transform: translateX(max(calc(max(#{px(-400) + px(48)}, (-100% + #{px(8)})) * (1 - var(--ui-sidebar-left-progress)))));
 
     @include breakpoint($chrome-breakpoint2) {
       min-inline-size: 0;
@@ -34,10 +30,37 @@
   }
 
   @include state("has", "toggled-sidebar-left") {
-    pointer-events: none;
+    & > *:not(.sidebar-overlay-toggle) {
+      pointer-events: none;
+
+      @include breakpoint($chrome-breakpoint2) {
+        pointer-events: auto;
+      }
+    }
+  }
+
+  & > .sidebar-overlay-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    display: none;
+    inline-size: px(40);
+    cursor: pointer;
+    background: #fff;
+    border-radius: var(--ui-radius-s);
+    opacity: calc(0.75 - var(--ui-sidebar-left-progress) * 0.75);
+    will-change: background, opacity;
+
+    @include transition(background $chrome-transition-duration $chrome-transition-easing, opacity $chrome-transition-duration $chrome-transition-easing);
 
     @include breakpoint($chrome-breakpoint2) {
-      pointer-events: auto;
+      pointer-events: none;
+    }
+
+    @include state('has', 'toggled-sidebar-left') {
+      display: block;
     }
   }
 }
