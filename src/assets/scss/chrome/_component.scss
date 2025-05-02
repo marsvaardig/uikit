@@ -55,12 +55,16 @@
 
     @include transition(background $chrome-transition-duration $chrome-transition-easing, opacity $chrome-transition-duration $chrome-transition-easing);
 
-    @include breakpoint($chrome-breakpoint2) {
-      pointer-events: none;
-    }
-
     @include state('has', 'toggled-sidebar-left') {
       display: block;
+
+      @include breakpoint($chrome-breakpoint2) {
+        display: none;
+      }
+    }
+
+    @include breakpoint($chrome-breakpoint2) {
+      display: none;
     }
   }
 }
