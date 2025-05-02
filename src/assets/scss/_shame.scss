@@ -380,3 +380,12 @@ svg:not([height]) {
 .box:not(.overflow) {
   overflow: hidden;
 }
+
+.dashboard {
+  block-size: 100%;
+  padding: var(--ui-chrome-spacing-l);
+
+  .component:has(&) {
+    padding: 0;
+  }
+}

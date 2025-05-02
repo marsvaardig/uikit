@@ -35,19 +35,14 @@
   }
 
   .sidebar__resizer {
-    inset-inline-end: calc((var(--ui-chrome-spacing-m) / 2) * -1);
+    inset-inline-start: 100%;
 
-    @include pseudo(before, false) {
-      inset-block-start: 50%;
-      inset-inline-start: 50%;
-      inline-size: px(12);
-      block-size: px(56);
-      background-color: #fff;
-      border-radius: 4px;
-      box-shadow: 0 0 12px rgb(0 0 0 / 15%), 0 0 24px rgb(0 0 0 / 25%);
-      opacity: 0;
-      transition: opacity 100ms ease-in-out 120ms;
-      transform: translateX(-50%) translateY(-50%);
+    @include state('has', 'toggled-sidebar-split') {
+      display: none;
+
+      @include breakpoint($chrome-breakpoint2) {
+        display: block;
+      }
     }
 
     @include pseudo(after, false) {
@@ -55,30 +50,22 @@
       inset-inline-start: 50%;
       inline-size: 3px;
       block-size: 1rem;
-      border-inline: 1px solid #555;
-      opacity: 0;
-      transition: opacity 100ms ease-in-out 120ms;
+      border-inline-end: 1px solid #b7c9de;
+      border-inline-start: 1px solid #b7c9de;
+      transition: border 100ms ease-in-out 120ms;
       transform: translate(-50%, -50%);
     }
 
-    @include state('has', 'toggled-sidebar-left|not(resizing)') {
-      display: none;
-    }
-
     @include hover {
-      &::before,
       &::after {
-        opacity: 1;
+        border-color: #000;
       }
     }
   }
 
   &[data-resizing] {
-    .sidebar__resizer {
-      &::before,
-      &::after {
-        opacity: 1;
-      }
+    .sidebar__resizer::after {
+      border-color: #000;
     }
   }
 

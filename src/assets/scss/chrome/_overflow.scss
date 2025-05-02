@@ -25,9 +25,9 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: inherit;
   border: none;
-  border-radius: 8px;
+  border-radius: 0 px(4) px(4) 0;
 }
 
 ::-webkit-scrollbar-thumb {
