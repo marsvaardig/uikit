@@ -66,6 +66,24 @@
                                         </svg>
                                         <span class="navigation__item">Contacten</span>
                                     </a>
+                                    <button class="nav-toggle" type="button" aria-label="Toggle submenu"></button>
+                                    <ul>
+                                        <li>
+                                            <a href="{{ siteUrl }}/dialbox/contacten">
+                                                <span class="navigation__item">Sub item 1</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ siteUrl }}/dialbox/organisaties">
+                                                <span class="navigation__item">Sub item 2</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ siteUrl }}/dialbox/organisaties">
+                                                <span class="navigation__item">Sub item 3</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li {% if '/dialbox/organisaties' in page.url %}class="is:active"{% endif %}>
                                     <a href="{{ siteUrl }}/dialbox/organisaties">
@@ -74,6 +92,60 @@
                                         </svg>
                                         <span class="navigation__item">Organisaties</span>
                                     </a>
+                                    <button class="nav-toggle" type="button" aria-label="Toggle submenu"></button>
+                                    <ul>
+                                        <li>
+                                            <a href="{{ siteUrl }}/dialbox/contacten">
+                                                <span class="navigation__item">Sub item 1</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ siteUrl }}/dialbox/organisaties">
+                                                <span class="navigation__item">Sub item 2</span>
+                                            </a>
+                                            <button class="nav-toggle" type="button" aria-label="Toggle submenu"></button>
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ siteUrl }}/dialbox/contacten">
+                                                        <span class="navigation__item">Sub item 1</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ siteUrl }}/dialbox/organisaties">
+                                                        <span class="navigation__item">Sub item 2</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ siteUrl }}/dialbox/organisaties">
+                                                        <span class="navigation__item">Sub item 3</span>
+                                                    </a>
+                                                    <button class="nav-toggle" type="button" aria-label="Toggle submenu"></button>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="{{ siteUrl }}/dialbox/contacten">
+                                                                <span class="navigation__item">Sub item 1</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{ siteUrl }}/dialbox/organisaties">
+                                                                <span class="navigation__item">Sub item 2</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{ siteUrl }}/dialbox/organisaties">
+                                                                <span class="navigation__item">Sub item 3</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="{{ siteUrl }}/dialbox/organisaties">
+                                                <span class="navigation__item">Sub item 3</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
@@ -142,6 +214,11 @@
                             <li {% if '/item' in page.url %}class="is:active"{% endif %}>
                                 <a href="{{ siteUrl }}/item">
                                     <span class="navigation__item">Item</span>
+                                </a>
+                            </li>
+                            <li {% if '/lgin' in page.url %}class="is:active"{% endif %}>
+                                <a href="{{ siteUrl }}/login">
+                                    <span class="navigation__item">Login</span>
                                 </a>
                             </li>
                         </ul>

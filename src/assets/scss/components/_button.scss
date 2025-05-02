@@ -3,9 +3,11 @@
 .button {
   display: flex;
   align-items: center;
+  justify-content: center;
   min-block-size: var(--ui-spacing-xl);
   padding: var(--ui-spacing-xs) var(--ui-spacing-s);
   font-weight: 700;
+  color: inherit;
   cursor: pointer;
   background: #D4E3ED;
   border: 1px solid #9bbacf;
@@ -16,5 +18,31 @@
   @include hover {
     background: #A7D8F3;
     border-color: #1daaff;
+  }
+
+  svg:first-child {
+    margin-inline-end: var(--ui-spacing-xs);
+  }
+}
+
+.button--large {
+  min-block-size: px(40);
+  font-size: var(--ui-font-size-xl);
+}
+
+.button--white {
+  background: #fff;
+  border-color: #162446;
+}
+
+.button--google {
+  color: #fff;
+  text-decoration: none;
+  background: #4285f4;
+  border-color: #1c56b5;
+
+  @include hover {
+    background: #1c56b5;
+    border-color: #1c56b5;
   }
 }

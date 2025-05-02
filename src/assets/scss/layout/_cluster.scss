@@ -4,5 +4,10 @@
   display: flex;
   flex: 1 1 auto;
   flex-wrap: wrap;
+  align-items: center;
   gap: var(--ui-cluster-gap);
+}
+
+.cluster--fill {
+  justify-content: space-between;
 }

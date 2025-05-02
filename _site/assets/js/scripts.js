@@ -125,6 +125,7 @@
         const { clientX, clientY } = getClientCoords(ev);
         $sidebar.setAttribute("data-resizing", direction);
         ev.preventDefault();
+        ev.stopImmediatePropagation();
         isResizing = true;
         resizeDirection = direction;
         startX2 = clientX;
@@ -176,7 +177,7 @@
     }
     if ($navigationWrapper) {
       $navigationWrapper.addEventListener("click", (ev) => {
-        if (isMobile() && (ev.target.closest(".navigation__heading") || !ev.target.closest(".navigation--persistent"))) {
+        if (isMobile() && (ev.target.closest(".navigation__heading") || !ev.target.closest(".navigation__list > li > a"))) {
           $ui.classList.add("has:toggled-sidebar-left");
         }
       });
@@ -361,6 +362,13 @@
         });
       });
     }
+    document.querySelectorAll(".nav-toggle").forEach((el) => {
+      el.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        const $nav = el.closest("li");
+        $nav.classList.toggle("is:toggled");
+      });
+    });
     if ($tables.length > 0) {
       $tables.forEach(($table) => {
         const $rows = $table.querySelectorAll("tbody tr");
