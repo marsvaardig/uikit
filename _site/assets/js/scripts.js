@@ -112,13 +112,22 @@
         }
       }
       function getWidthValueInPixels($el, prop) {
-        const val = getComputedStyle($el).getPropertyValue(prop);
-        return val.includes("%") ? parseFloat(val) / 100 * $el.parentElement.getBoundingClientRect().width : parseFloat(val);
+        const val = getComputedStyle($el).getPropertyValue(prop).trim();
+        function getFirstNonZeroParentWidth(el) {
+          let current = el.parentElement;
+          while (current && current.getBoundingClientRect().width === 0) {
+            current = current.parentElement;
+          }
+          return current?.getBoundingClientRect().width || 0;
+        }
+        const parentWidth = getFirstNonZeroParentWidth($el);
+        return val.includes("%") ? parseFloat(val) / 100 * parentWidth : parseFloat(val);
       }
       function initResize(ev, direction, resizer) {
         $sidebar = resizer.closest("[data-sidebar]");
         if (!$sidebar) return;
         sidebarType = resizer.getAttribute("data-sidebar-resizer");
+        if (!sidebarType) return;
         const { clientX, clientY } = getClientCoords(ev);
         $sidebar.setAttribute("data-resizing", direction);
         ev.preventDefault();
@@ -134,10 +143,10 @@
         maxWidth = getWidthValueInPixels($sidebar, "max-width");
         minWidth = getWidthValueInPixels($sidebar, "min-width");
         $ui2.classList.add("has:resizing");
-        document.addEventListener("mousemove", onMove);
-        document.addEventListener("mouseup", onEnd);
-        document.addEventListener("touchmove", onMove, { passive: false });
-        document.addEventListener("touchend", onEnd);
+        $ui2.addEventListener("mousemove", onMove);
+        $ui2.addEventListener("mouseup", onEnd);
+        $ui2.addEventListener("touchmove", onMove, { passive: false });
+        $ui2.addEventListener("touchend", onEnd);
       }
       $ui2.addEventListener("mousedown", (ev) => {
         const $resizer = ev.target.closest("[data-sidebar-resizer]");
