@@ -8,6 +8,20 @@
   padding: 0 var(--ui-chrome-spacing-m);
 }
 
+.sidebar-left-width-imitator {
+  display: inherit;
+  align-items: inherit;
+  gap: inherit;
+
+  @include breakpoint($chrome-breakpoint2) {
+    inline-size: calc(#{px(48)} + (calc(var(--ui-sidebar-left-width)) - #{px(48)}) * var(--ui-sidebar-left-progress));
+    min-inline-size: var(--ui-sidebar-left-min-width);
+    max-inline-size: min(33vw, var(--ui-sidebar-left-max-width));
+    padding-inline: var(--ui-chrome-spacing-m);
+    margin-inline: calc(var(--ui-chrome-spacing-m) * -1);
+  }
+}
+
 .header__brand {
   display: flex;
   flex: 1 1 auto;
