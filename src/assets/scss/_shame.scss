@@ -68,6 +68,7 @@ table {
     padding-block: px(16);
     background: #e7eff4;
     box-shadow: inset 0 -1px 0 #BFD0DB;
+    white-space: nowrap;
   }
 
   tr:not(:first-child) {

@@ -1413,12 +1413,13 @@ svg {
    ========================================================================== */
 ::-webkit-scrollbar {
   width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: inherit;
+  background: transparent;
   border: none;
-  border-radius: 0 0.25rem 0.25rem 0;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -2127,6 +2128,7 @@ table th {
   padding-block: 1rem;
   background: #e7eff4;
   box-shadow: inset 0 -1px 0 #BFD0DB;
+  white-space: nowrap;
 }
 table tr:not(:first-child) th,
 table tr:not(:first-child) td {
