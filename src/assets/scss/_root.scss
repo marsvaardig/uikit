@@ -70,8 +70,8 @@
 html, body {
   width: 100%;
 
-  @supports (height: 100vh) {
-    height: 100vh;
+  @supports (height: 100dvh) {
+    height: 100dvh;
   }
 }
 

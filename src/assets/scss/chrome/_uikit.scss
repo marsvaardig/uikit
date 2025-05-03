@@ -23,7 +23,7 @@
   // Styling
   display: flex;
   flex-direction: column;
-  block-size: 100vh;
+  block-size: 100%;
   min-block-size: $uikit-min-height;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   overflow: hidden;
