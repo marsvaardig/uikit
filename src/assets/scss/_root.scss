@@ -68,7 +68,7 @@
 }
 
 html, body {
-  position: fixed;
+  //position: fixed;
   width: 100%;
 }
 
@@ -77,8 +77,8 @@ html {
   height: 100%;
   overflow: hidden;
 
-  @supports (height: 100dvh) {
-    height: 100dvh;
+  @supports (height: 100vh) {
+    height: 100vh;
   }
 }
 
@@ -89,8 +89,8 @@ body {
   color: #fff;
   background: var(--ui-background-invert) linear-gradient(180deg, var(--ui-background-invert) 0%, var(--ui-background-invert-gradient) 100%);
 
-  @supports (height: 100dvh) {
-    height: 100dvh;
+  @supports (height: 100vh) {
+    height: 100vh;
   }
 }
 

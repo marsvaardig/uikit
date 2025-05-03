@@ -29,9 +29,9 @@
   overflow: hidden;
   font-size: var(--ui-font-size-m);
 
-  @supports (height: 100dvh) {
-    block-size: 100dvh;
-  }
+  //@supports (height: 100dvh) {
+  //  block-size: 100dvh;
+  //}
 
   // 'Open' on desktop
   @include breakpoint($chrome-breakpoint2) {

@@ -236,7 +236,6 @@ summary {
 }
 
 html, body {
-  position: fixed;
   width: 100%;
 }
 
@@ -245,9 +244,9 @@ html {
   height: 100%;
   overflow: hidden;
 }
-@supports (height: 100dvh) {
+@supports (height: 100vh) {
   html {
-    height: 100dvh;
+    height: 100vh;
   }
 }
 
@@ -258,9 +257,9 @@ body {
   color: #fff;
   background: var(--ui-background-invert) linear-gradient(180deg, var(--ui-background-invert) 0%, var(--ui-background-invert-gradient) 100%);
 }
-@supports (height: 100dvh) {
+@supports (height: 100vh) {
   body {
-    height: 100dvh;
+    height: 100vh;
   }
 }
 
@@ -291,11 +290,6 @@ svg {
   padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
   overflow: hidden;
   font-size: var(--ui-font-size-m);
-}
-@supports (height: 100dvh) {
-  .uikit {
-    block-size: 100dvh;
-  }
 }
 @media screen and (min-width: 60rem) {
   .uikit {
