@@ -188,7 +188,6 @@
     padding-left: px(24);
     margin-top: px(4);
     list-style: none;
-    pointer-events: none; // so we can click on non icon items on mobile
 
     @include pseudo(before) {
       top: px(3);
@@ -196,14 +195,6 @@
       left: px(16);
       inline-size: px(2);
       background: rgba(#fff, .2);
-    }
-
-    @include state('has', 'toggled-sidebar-left') {
-      pointer-events: auto;
-    }
-
-    @include breakpoint($chrome-breakpoint2) {
-      pointer-events: auto;
     }
 
     li {
@@ -258,6 +249,15 @@
 
     ul {
       padding-left: px(12);
+      pointer-events: none; // so we can click on non icon items on mobile
+
+      @include state('has', 'toggled-sidebar-left') {
+        pointer-events: auto;
+      }
+
+      @include breakpoint($chrome-breakpoint2) {
+        pointer-events: auto;
+      }
 
       a {
         $padding-amount: (px(16) + px(10));
