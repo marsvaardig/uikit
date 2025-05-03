@@ -1407,7 +1407,7 @@ svg {
   scrollbar-width: thin;
 }
 .overflow:has(> table) {
-  scrollbar-color: #1daaff #bfd0db;
+  scrollbar-color: #1daaff #e7eff4;
 }
 
 .overflow--fill {
