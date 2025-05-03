@@ -2105,6 +2105,10 @@ table {
   font-size: var(--ui-font-size-l);
   border-collapse: collapse;
 }
+.box > table {
+  inline-size: calc(100% + var(--ui-content-box-padding) * 2);
+  margin: calc(var(--ui-content-box-padding) * -1);
+}
 table th,
 table td {
   padding: 0.75rem;

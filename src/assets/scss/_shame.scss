@@ -42,6 +42,11 @@ table {
   font-size: var(--ui-font-size-l);
   border-collapse: collapse;
 
+  .box > & {
+    inline-size: calc(100% + var(--ui-content-box-padding) * 2);
+    margin: calc(var(--ui-content-box-padding) * -1);
+  }
+
   th,
   td {
     padding: px(12);
