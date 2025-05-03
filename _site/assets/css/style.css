@@ -1375,11 +1375,13 @@ svg {
   transition: transform 300ms cubic-bezier(0.25, 1, 0.7, 1);
   will-change: transform;
 }
-.uikit:has(.sidebar--component) .main > * {
+.uikit:has(.sidebar--component) .main .content,
+.uikit:has(.sidebar--component) .main .sidebar--component {
   transform: translateX(calc((min(var(--ui-sidebar-component-width), 100%) - var(--ui-sidebar-component-hide)) * -1 * var(--ui-sidebar-component-progress)));
 }
 @media screen and (min-width: 60rem) {
-  .uikit:has(.sidebar--component) .main > * {
+  .uikit:has(.sidebar--component) .main .content,
+  .uikit:has(.sidebar--component) .main .sidebar--component {
     transform: none;
   }
 }
