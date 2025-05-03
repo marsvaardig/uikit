@@ -1788,8 +1788,10 @@ svg {
   justify-content: center;
   width: 1rem;
   height: 1rem;
-  margin-left: calc((2.125rem - 0.125rem) * -1);
+  margin-left: calc((2.125rem - 0.125rem) * (1 - var(--ui-sidebar-left-progress)) * -1);
   background: var(--ui-background-invert);
+  transition: margin-left 300ms cubic-bezier(0.25, 1, 0.7, 1);
+  will-change: margin-left;
 }
 .navigation__list ul a .icon-wrapper svg {
   width: 0.75rem;
