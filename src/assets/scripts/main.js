@@ -6,7 +6,6 @@
   const $trees = document.querySelectorAll("[data-tree-uid]");
   const $splitSwitch = document.querySelector('[data-table-switch]');
   const $main = document.querySelector('[data-main]');
-  const $toggleSplits = document.querySelectorAll('[data-toggle-split]');
   const $tables = document.querySelectorAll('[data-table]');
   const $toggles = document.querySelectorAll('[data-filter-toggle]');
   const $sidebarToggles = document.querySelectorAll('[data-sidebar-toggle]');
@@ -209,18 +208,6 @@
   }
   
   initResizing($ui);
-  
-  // The toggle buttons for sidebars
-  if ($sidebarToggles.length > 0) {
-    $sidebarToggles.forEach(($el) => {
-      $el.addEventListener('click', (ev) => {
-        ev.preventDefault();
-        const direction = $el.getAttribute('data-sidebar-toggle');
-        const toggled = $ui.classList.toggle(`has:toggled-sidebar-${direction}`);
-        setToggleStorage(direction, toggled);
-      });
-    });
-  }
   
   // When clicking the left sidebar navigation on mobile/desktop
   
@@ -517,11 +504,23 @@
   
   $ui.addEventListener('click', (ev) => {
     const toggleTarget = ev.target.closest('[data-toggle-split]');
-    if (!toggleTarget) return;
- 
+    const sidebarToggle = ev.target.closest('[data-sidebar-toggle]');
+    if (!toggleTarget && !sidebarToggle) return;
+    
     // Toggle splits
     ev.preventDefault();
-    $ui.classList.toggle('has:toggled-sidebar-split');
+    
+    // Split
+    if (toggleTarget) {
+      $ui.classList.toggle('has:toggled-sidebar-split');
+    }
+    
+    // Toggle
+    if (sidebarToggle) {
+      const direction = sidebarToggle.getAttribute('data-sidebar-toggle');
+      const toggled = $ui.classList.toggle(`has:toggled-sidebar-${direction}`);
+      setToggleStorage(direction, toggled);
+    }
   });
   
   

@@ -6,7 +6,6 @@
     const $trees = document.querySelectorAll("[data-tree-uid]");
     const $splitSwitch = document.querySelector("[data-table-switch]");
     const $main = document.querySelector("[data-main]");
-    const $toggleSplits = document.querySelectorAll("[data-toggle-split]");
     const $tables = document.querySelectorAll("[data-table]");
     const $toggles = document.querySelectorAll("[data-filter-toggle]");
     const $sidebarToggles = document.querySelectorAll("[data-sidebar-toggle]");
@@ -168,16 +167,6 @@
       });
     }
     initResizing($ui);
-    if ($sidebarToggles.length > 0) {
-      $sidebarToggles.forEach(($el) => {
-        $el.addEventListener("click", (ev) => {
-          ev.preventDefault();
-          const direction = $el.getAttribute("data-sidebar-toggle");
-          const toggled = $ui.classList.toggle(`has:toggled-sidebar-${direction}`);
-          setToggleStorage(direction, toggled);
-        });
-      });
-    }
     if ($navigationWrapper) {
       $navigationWrapper.addEventListener("click", (ev) => {
         if (isMobile() && (ev.target.closest(".navigation__heading") || !ev.target.closest(".navigation__list > li > a"))) {
@@ -396,9 +385,17 @@
     }
     $ui.addEventListener("click", (ev) => {
       const toggleTarget = ev.target.closest("[data-toggle-split]");
-      if (!toggleTarget) return;
+      const sidebarToggle = ev.target.closest("[data-sidebar-toggle]");
+      if (!toggleTarget && !sidebarToggle) return;
       ev.preventDefault();
-      $ui.classList.toggle("has:toggled-sidebar-split");
+      if (toggleTarget) {
+        $ui.classList.toggle("has:toggled-sidebar-split");
+      }
+      if (sidebarToggle) {
+        const direction = sidebarToggle.getAttribute("data-sidebar-toggle");
+        const toggled = $ui.classList.toggle(`has:toggled-sidebar-${direction}`);
+        setToggleStorage(direction, toggled);
+      }
     });
     if ($splitSwitch && $main) {
       $splitSwitch.addEventListener("click", (ev) => {
