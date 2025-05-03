@@ -238,16 +238,18 @@ summary {
 html, body {
   width: 100%;
 }
+@supports (height: 100vh) {
+  html, body {
+    height: 100vh;
+  }
+}
 
 html {
   display: flex;
-  height: 100%;
   overflow: hidden;
 }
 
 body {
-  position: fixed;
-  height: 100%;
   overflow: auto;
   font-family: Ubuntu, sans-serif;
   color: #fff;
