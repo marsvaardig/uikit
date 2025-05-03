@@ -45,6 +45,10 @@ table {
   .box > & {
     inline-size: calc(100% + var(--ui-content-box-padding) * 2);
     margin: calc(var(--ui-content-box-padding) * -1);
+
+    th {
+      top: calc(var(--ui-chrome-spacing-m) * -1);
+    }
   }
 
   th,
@@ -63,7 +67,7 @@ table {
 
   th {
     position: sticky;
-    top: calc(var(--ui-chrome-spacing-m) * -1);
+    top: 0;
     z-index: 1;
     padding-block: px(16);
     background: #e7eff4;

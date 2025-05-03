@@ -8,32 +8,14 @@
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
+  scrollbar-color: $brand transparent;
+  scrollbar-width: thin;
+
+  &:has(> table) {
+    scrollbar-color: $brand #bfd0db;
+  }
 }
 
 .overflow--fill {
   block-size: 100%;
-}
-
-
-/* Scrollbar
-   ========================================================================== */
-
-// We use actual px values here since the scrollbar is a native element
-
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: $brand;
-  background-clip: content-box;
-  border: 3px solid transparent;
-  border-radius: 8px;
 }

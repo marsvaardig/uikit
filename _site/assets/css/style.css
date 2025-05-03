@@ -1403,30 +1403,15 @@ svg {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
+  scrollbar-color: #1daaff transparent;
+  scrollbar-width: thin;
+}
+.overflow:has(> table) {
+  scrollbar-color: #1daaff #bfd0db;
 }
 
 .overflow--fill {
   block-size: 100%;
-}
-
-/* Scrollbar
-   ========================================================================== */
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #1daaff;
-  background-clip: content-box;
-  border: 3px solid transparent;
-  border-radius: 8px;
 }
 
 .toggle-wrapper {
@@ -2110,6 +2095,9 @@ table {
   inline-size: calc(100% + var(--ui-content-box-padding) * 2);
   margin: calc(var(--ui-content-box-padding) * -1);
 }
+.box > table th {
+  top: calc(var(--ui-chrome-spacing-m) * -1);
+}
 table th,
 table td {
   padding: 0.75rem;
@@ -2123,7 +2111,7 @@ table tr:hover td {
 }
 table th {
   position: sticky;
-  top: calc(var(--ui-chrome-spacing-m) * -1);
+  top: 0;
   z-index: 1;
   padding-block: 1rem;
   background: #e7eff4;
