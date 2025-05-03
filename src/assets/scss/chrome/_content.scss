@@ -6,7 +6,7 @@
   overflow: hidden; // We need this for the .overflow container and vertical split
   transition: all $chrome-transition-duration $chrome-transition-easing;
 
-  &:has(~.sidebar--component) {
+  .main:has(.sidebar--component) & {
     margin-inline-end: calc(var(--ui-sidebar-component-hide) + var(--ui-chrome-spacing-m));
 
     @include breakpoint($chrome-breakpoint2) {
