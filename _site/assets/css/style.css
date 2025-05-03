@@ -2158,14 +2158,11 @@ table .is\:selected td, table .is\:selected:hover td {
   user-select: none;
 }
 
-.grid {
+.grid.grid {
   display: flex;
   flex-direction: column;
   gap: var(--ui-chrome-spacing-m);
   inline-size: 100%;
-}
-[data-theme=claude] .grid {
-  display: grid;
 }
 
 .grid--grow {

@@ -96,16 +96,12 @@ table {
   user-select: none;
 }
 
-.grid {
+// win over tailwind
+.grid.grid {
   display: flex;
   flex-direction: column;
   gap: var(--ui-chrome-spacing-m);
   inline-size: 100%;
-
-  // @TODO: remove this; this is only there for the tailwind dash demo
-  [data-theme="claude"] & {
-    display: grid;
-  }
 }
 
 .grid--grow {
