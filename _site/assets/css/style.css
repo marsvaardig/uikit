@@ -244,23 +244,14 @@ html {
   height: 100%;
   overflow: hidden;
 }
-@supports (height: 100vh) {
-  html {
-    height: 100vh;
-  }
-}
 
 body {
+  position: fixed;
   height: 100%;
   overflow: auto;
   font-family: Ubuntu, sans-serif;
   color: #fff;
   background: var(--ui-background-invert) linear-gradient(180deg, var(--ui-background-invert) 0%, var(--ui-background-invert-gradient) 100%);
-}
-@supports (height: 100vh) {
-  body {
-    height: 100vh;
-  }
 }
 
 a {
