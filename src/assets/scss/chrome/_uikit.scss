@@ -25,13 +25,9 @@
   flex-direction: column;
   block-size: 100vh;
   min-block-size: $uikit-min-height;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   overflow: hidden;
   font-size: var(--ui-font-size-m);
-
-  //@supports (height: 100dvh) {
-  //  block-size: 100dvh;
-  //}
 
   // 'Open' on desktop
   @include breakpoint($chrome-breakpoint2) {
