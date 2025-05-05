@@ -193,8 +193,6 @@
     margin-top: px(4);
     list-style: none;
 
-
-
     @include pseudo(before) {
       top: px(3);
       bottom: px(3);
@@ -243,7 +241,6 @@
         height: px(16);
         background: rgba($brand-dark-shade1, calc((1 - var(--ui-sidebar-left-progress))));
 
-
         svg {
           width: px(12);
           height: px(12);
@@ -260,9 +257,6 @@
     ul {
       padding-left: px(12);
       pointer-events: none; // so we can click on non icon items on mobile
-      transition: transform $chrome-transition-duration $chrome-transition-easing;
-      transform: translateX(calc((#{$padding-amount} - #{px(2)}) * (1 - min(calc(var(--ui-sidebar-left-progress) * 2), 1)) * -1));
-      will-change: transform;
 
       @include state('has', 'toggled-sidebar-left') {
         pointer-events: auto;
@@ -280,8 +274,9 @@
         padding-left: calc(#{$padding-amount} + #{px(6)});
         margin-left: calc(#{$padding-amount} * -1);
 
-        .icon-wrapper {
-          margin-left: calc((#{$padding-amount}) * -1);
+        &:has(.icon-wrapper) {
+          //transform: translateX(calc((#{$padding-amount} + #{px(18)}) * (1 - min(calc(var(--ui-sidebar-left-progress) * 2), 1)) * -1));
+          transform: none;
         }
       }
 
