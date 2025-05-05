@@ -1785,7 +1785,7 @@ svg {
 }
 .navigation__list ul a:has(.icon-wrapper) {
   transition: transform 300ms cubic-bezier(0.25, 1, 0.7, 1);
-  transform: translateX(calc((2.125rem - 0.125rem) * (1 - min(var(--ui-sidebar-left-progress) * 2, 1)) * -1));
+  transform: translateX(calc((2.125rem - 0.125rem) * (1 - min(var(--ui-sidebar-left-progress) * 1.33, 1)) * -1));
   will-change: transform;
 }
 .navigation__list ul a .icon-wrapper {

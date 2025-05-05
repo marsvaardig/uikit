@@ -229,7 +229,7 @@
 
       &:has(.icon-wrapper) {
         transition: transform $chrome-transition-duration $chrome-transition-easing;
-        transform: translateX(calc((#{$padding-amount} - #{px(2)}) * (1 - min(calc(var(--ui-sidebar-left-progress) * 2), 1)) * -1));
+        transform: translateX(calc((#{$padding-amount} - #{px(2)}) * (1 - min(calc(var(--ui-sidebar-left-progress) * 1.33), 1)) * -1));
         will-change: transform;
       }
 
