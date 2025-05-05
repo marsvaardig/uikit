@@ -181,6 +181,8 @@
     }
   }
 
+  $padding-amount: (px(24) + px(10));
+
   // Deeper levels
   ul {
     position: relative;
@@ -190,6 +192,8 @@
     padding-left: px(24);
     margin-top: px(4);
     list-style: none;
+
+
 
     @include pseudo(before) {
       top: px(3);
@@ -221,11 +225,15 @@
     }
 
     a {
-      $padding-amount: (px(24) + px(10));
-
       width: calc(100% + #{$padding-amount});
       padding-left: calc(#{$padding-amount} + #{px(6)});
       margin-left: calc(#{$padding-amount} * -1);
+
+      &:has(.icon-wrapper) {
+        transition: transform $chrome-transition-duration $chrome-transition-easing;
+        transform: translateX(calc((#{$padding-amount} - #{px(2)}) * (1 - min(calc(var(--ui-sidebar-left-progress) * 2), 1)) * -1));
+        will-change: transform;
+      }
 
       .icon-wrapper {
         display: flex;
@@ -233,10 +241,8 @@
         justify-content: center;
         width: px(16);
         height: px(16);
-        margin-left: calc((#{$padding-amount} - #{px(2)}) * (1 - var(--ui-sidebar-left-progress)) * -1);
         background: rgba($brand-dark-shade1, calc((1 - var(--ui-sidebar-left-progress))));
-        transition: margin-left $chrome-transition-duration $chrome-transition-easing;
-        will-change: margin-left;
+
 
         svg {
           width: px(12);
@@ -254,6 +260,9 @@
     ul {
       padding-left: px(12);
       pointer-events: none; // so we can click on non icon items on mobile
+      transition: transform $chrome-transition-duration $chrome-transition-easing;
+      transform: translateX(calc((#{$padding-amount} - #{px(2)}) * (1 - min(calc(var(--ui-sidebar-left-progress) * 2), 1)) * -1));
+      will-change: transform;
 
       @include state('has', 'toggled-sidebar-left') {
         pointer-events: auto;

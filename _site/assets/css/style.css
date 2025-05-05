@@ -1783,16 +1783,18 @@ svg {
   padding-left: calc(2.125rem + 0.375rem);
   margin-left: calc(2.125rem * -1);
 }
+.navigation__list ul a:has(.icon-wrapper) {
+  transition: transform 300ms cubic-bezier(0.25, 1, 0.7, 1);
+  transform: translateX(calc((2.125rem - 0.125rem) * (1 - min(var(--ui-sidebar-left-progress) * 2, 1)) * -1));
+  will-change: transform;
+}
 .navigation__list ul a .icon-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 1rem;
   height: 1rem;
-  margin-left: calc((2.125rem - 0.125rem) * (1 - var(--ui-sidebar-left-progress)) * -1);
   background: rgba(29, 28, 65, calc(1 - var(--ui-sidebar-left-progress)));
-  transition: margin-left 300ms cubic-bezier(0.25, 1, 0.7, 1);
-  will-change: margin-left;
 }
 .navigation__list ul a .icon-wrapper svg {
   width: 0.75rem;
@@ -1804,6 +1806,9 @@ svg {
 .navigation__list ul ul {
   padding-left: 0.75rem;
   pointer-events: none;
+  transition: transform 300ms cubic-bezier(0.25, 1, 0.7, 1);
+  transform: translateX(calc((2.125rem - 0.125rem) * (1 - min(var(--ui-sidebar-left-progress) * 2, 1)) * -1));
+  will-change: transform;
 }
 .uikit.has\:toggled-sidebar-left .navigation__list ul ul {
   pointer-events: auto;
