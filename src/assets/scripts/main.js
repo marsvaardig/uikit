@@ -1,15 +1,13 @@
 (() => {
   
   // Chrome elements
+  const $body = document.body;
   const $ui = document.querySelector('[data-uikit]');
-  const $navigationWrapper = document.querySelector('[data-navigation-wrapper]');
   const $trees = document.querySelectorAll("[data-tree-uid]");
   const $splitSwitch = document.querySelector('[data-table-switch]');
   const $main = document.querySelector('[data-main]');
   const $tables = document.querySelectorAll('[data-table]');
   const $toggles = document.querySelectorAll('[data-filter-toggle]');
-  const $sidebarToggles = document.querySelectorAll('[data-sidebar-toggle]');
-  const $sidebarTypeToggles = document.querySelectorAll('[data-sidebar-type-toggle]')
   const $searchToggle = document.querySelector('[data-toggle-search]');
   const $profileToggle = document.querySelector('[data-toggle-profile]');
   const $tabList = document.querySelectorAll('[data-tabs]');
@@ -171,13 +169,13 @@
       
       $ui.classList.add('has:resizing');
       
-      $ui.addEventListener('mousemove', onMove);
-      $ui.addEventListener('mouseup', onEnd);
-      $ui.addEventListener('touchmove', onMove, { passive: false });
-      $ui.addEventListener('touchend', onEnd);
+      $body.addEventListener('mousemove', onMove);
+      $body.addEventListener('mouseup', onEnd);
+      $body.addEventListener('touchmove', onMove, { passive: false });
+      $body.addEventListener('touchend', onEnd);
     }
     
-    $ui.addEventListener('mousedown', (ev) => {
+    $body.addEventListener('mousedown', (ev) => {
       const $resizer = ev.target.closest('[data-sidebar-resizer]');
       if (!$resizer) return;
       
@@ -186,7 +184,7 @@
       initResize(ev, direction, $resizer);
     });
     
-    $ui.addEventListener('touchstart', (ev) => {
+    $body.addEventListener('touchstart', (ev) => {
       const $resizer = ev.target.closest('[data-sidebar-resizer]');
       if (!$resizer) return;
       
@@ -195,7 +193,7 @@
       initResize(ev, direction, $resizer);
     }, { passive: false });
     
-    $ui.addEventListener('dblclick', (ev) => {
+    $body.addEventListener('dblclick', (ev) => {
       const $resizer = ev.target.closest('[data-sidebar-resizer]');
       if (!$resizer) return;
       
@@ -211,16 +209,16 @@
   
   // When clicking the left sidebar navigation on mobile/desktop
   
-  if ($navigationWrapper) {
-    $navigationWrapper.addEventListener('click', (ev) => {
+  $body.addEventListener('click', (ev) => {
+    if (ev.target.closest('[data-navigation-wrapper]')) {
       if (isMobile() && (ev.target.closest('.navigation__heading'))) {
         $ui.classList.add('has:toggled-sidebar-left');
       } else if (!isMobile() && (ev.target.closest('.navigation__heading'))) {
         $ui.classList.remove('has:toggled-sidebar-left');
         setToggleStorage('left', false);
       }
-    });
-  }
+    }
+  });
   
   // Toggle search
   
@@ -240,24 +238,22 @@
   }
   
   // toggle the sidebar type
-  if ($sidebarTypeToggles.length > 0) {
-    $sidebarTypeToggles.forEach(($el) => {
-      $el.addEventListener('click', (ev) => {
-        ev.preventDefault();
-        const sidebar = $el.closest('[data-sidebar]');
-        const type = $el.getAttribute('data-sidebar-type-toggle');
-        sidebar.setAttribute('data-sidebar-type', type);
-        
-        // Save in localStorage
-        const sidebarId = sidebar.getAttribute('data-sidebar'); // bijvoorbeeld 'right'
-        const state = getChromeState();
-        state.sidebarTypes = state.sidebarTypes || {};
-        state.sidebarTypes[sidebarId] = type;
-        setChromeState(state);
-      });
-    });
-  }
-  
+  $body.addEventListener('click', (ev) => {
+    const $el = ev.target.closest('[data-sidebar-type-toggle]');
+    if (!el) return;
+    ev.preventDefault();
+    const sidebar = $el.closest('[data-sidebar]');
+    const type = $el.getAttribute('data-sidebar-type-toggle');
+    sidebar.setAttribute('data-sidebar-type', type);
+    
+    // Save in localStorage
+    const sidebarId = sidebar.getAttribute('data-sidebar'); // bijvoorbeeld 'right'
+    const state = getChromeState();
+    state.sidebarTypes = state.sidebarTypes || {};
+    state.sidebarTypes[sidebarId] = type;
+    setChromeState(state);
+  });
+
   
   // Profile toggle
   if ($profileToggle) {
@@ -502,7 +498,7 @@
   
   
   
-  $ui.addEventListener('click', (ev) => {
+  $body.addEventListener('click', (ev) => {
     const toggleTarget = ev.target.closest('[data-toggle-split]');
     const sidebarToggle = ev.target.closest('[data-sidebar-toggle]');
     if (!toggleTarget && !sidebarToggle) return;
@@ -682,8 +678,6 @@
     const deltaX = currentX - startX;
     const deltaY = currentY - startY;
     
-    let el = e.target;
-    
     allowHorizontalScroll = false; // reset standaard
     
     // Nieuw scrollIntent blok
@@ -710,6 +704,7 @@
     if (isHorizontalSwipe) {
       if (e.cancelable) {
         e.preventDefault();
+        e.stopImmediatePropagation();
       }
       if (!$ui.classList.contains('is:resizing')) {
         $ui.classList.add('is:resizing');

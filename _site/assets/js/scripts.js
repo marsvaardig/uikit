@@ -1,15 +1,13 @@
 (() => {
   // src/assets/scripts/main.js
   (() => {
+    const $body = document.body;
     const $ui = document.querySelector("[data-uikit]");
-    const $navigationWrapper = document.querySelector("[data-navigation-wrapper]");
     const $trees = document.querySelectorAll("[data-tree-uid]");
     const $splitSwitch = document.querySelector("[data-table-switch]");
     const $main = document.querySelector("[data-main]");
     const $tables = document.querySelectorAll("[data-table]");
     const $toggles = document.querySelectorAll("[data-filter-toggle]");
-    const $sidebarToggles = document.querySelectorAll("[data-sidebar-toggle]");
-    const $sidebarTypeToggles = document.querySelectorAll("[data-sidebar-type-toggle]");
     const $searchToggle = document.querySelector("[data-toggle-search]");
     const $profileToggle = document.querySelector("[data-toggle-profile]");
     const $tabList = document.querySelectorAll("[data-tabs]");
@@ -107,8 +105,8 @@
       }
       function getWidthValueInPixels($el, prop) {
         const val = getComputedStyle($el).getPropertyValue(prop).trim();
-        function getFirstNonZeroParentWidth(el) {
-          let current = el.parentElement;
+        function getFirstNonZeroParentWidth(el2) {
+          let current = el2.parentElement;
           while (current && current.getBoundingClientRect().width === 0) {
             current = current.parentElement;
           }
@@ -137,26 +135,26 @@
         maxWidth = getWidthValueInPixels($sidebar, "max-width");
         minWidth = getWidthValueInPixels($sidebar, "min-width");
         $ui2.classList.add("has:resizing");
-        $ui2.addEventListener("mousemove", onMove);
-        $ui2.addEventListener("mouseup", onEnd);
-        $ui2.addEventListener("touchmove", onMove, { passive: false });
-        $ui2.addEventListener("touchend", onEnd);
+        $body.addEventListener("mousemove", onMove);
+        $body.addEventListener("mouseup", onEnd);
+        $body.addEventListener("touchmove", onMove, { passive: false });
+        $body.addEventListener("touchend", onEnd);
       }
-      $ui2.addEventListener("mousedown", (ev) => {
+      $body.addEventListener("mousedown", (ev) => {
         const $resizer = ev.target.closest("[data-sidebar-resizer]");
         if (!$resizer) return;
         const rect = $resizer.getBoundingClientRect();
         const direction = rect.height > rect.width ? "horizontal" : "vertical";
         initResize(ev, direction, $resizer);
       });
-      $ui2.addEventListener("touchstart", (ev) => {
+      $body.addEventListener("touchstart", (ev) => {
         const $resizer = ev.target.closest("[data-sidebar-resizer]");
         if (!$resizer) return;
         const rect = $resizer.getBoundingClientRect();
         const direction = rect.height > rect.width ? "horizontal" : "vertical";
         initResize(ev, direction, $resizer);
       }, { passive: false });
-      $ui2.addEventListener("dblclick", (ev) => {
+      $body.addEventListener("dblclick", (ev) => {
         const $resizer = ev.target.closest("[data-sidebar-resizer]");
         if (!$resizer) return;
         const type = $resizer.getAttribute("data-sidebar-resizer");
@@ -167,16 +165,16 @@
       });
     }
     initResizing($ui);
-    if ($navigationWrapper) {
-      $navigationWrapper.addEventListener("click", (ev) => {
+    $body.addEventListener("click", (ev) => {
+      if (ev.target.closest("[data-navigation-wrapper]")) {
         if (isMobile() && ev.target.closest(".navigation__heading")) {
           $ui.classList.add("has:toggled-sidebar-left");
         } else if (!isMobile() && ev.target.closest(".navigation__heading")) {
           $ui.classList.remove("has:toggled-sidebar-left");
           setToggleStorage("left", false);
         }
-      });
-    }
+      }
+    });
     if ($searchToggle) {
       $searchToggle.addEventListener("click", (ev) => {
         ev.preventDefault();
@@ -189,21 +187,19 @@
         }
       });
     }
-    if ($sidebarTypeToggles.length > 0) {
-      $sidebarTypeToggles.forEach(($el) => {
-        $el.addEventListener("click", (ev) => {
-          ev.preventDefault();
-          const sidebar = $el.closest("[data-sidebar]");
-          const type = $el.getAttribute("data-sidebar-type-toggle");
-          sidebar.setAttribute("data-sidebar-type", type);
-          const sidebarId = sidebar.getAttribute("data-sidebar");
-          const state = getChromeState();
-          state.sidebarTypes = state.sidebarTypes || {};
-          state.sidebarTypes[sidebarId] = type;
-          setChromeState(state);
-        });
-      });
-    }
+    $body.addEventListener("click", (ev) => {
+      const $el = ev.target.closest("[data-sidebar-type-toggle]");
+      if (!el) return;
+      ev.preventDefault();
+      const sidebar = $el.closest("[data-sidebar]");
+      const type = $el.getAttribute("data-sidebar-type-toggle");
+      sidebar.setAttribute("data-sidebar-type", type);
+      const sidebarId = sidebar.getAttribute("data-sidebar");
+      const state = getChromeState();
+      state.sidebarTypes = state.sidebarTypes || {};
+      state.sidebarTypes[sidebarId] = type;
+      setChromeState(state);
+    });
     if ($profileToggle) {
       $profileToggle.addEventListener("click", (ev) => {
         ev.preventDefault();
@@ -357,10 +353,10 @@
         });
       });
     }
-    document.querySelectorAll(".nav-toggle").forEach((el) => {
-      el.addEventListener("click", (ev) => {
+    document.querySelectorAll(".nav-toggle").forEach((el2) => {
+      el2.addEventListener("click", (ev) => {
         ev.preventDefault();
-        const $nav = el.closest("li");
+        const $nav = el2.closest("li");
         $nav.classList.toggle("is:toggled");
       });
     });
@@ -383,7 +379,7 @@
         }
       });
     }
-    $ui.addEventListener("click", (ev) => {
+    $body.addEventListener("click", (ev) => {
       const toggleTarget = ev.target.closest("[data-toggle-split]");
       const sidebarToggle = ev.target.closest("[data-sidebar-toggle]");
       if (!toggleTarget && !sidebarToggle) return;
@@ -492,8 +488,8 @@
       isDragging = true;
       e.currentTarget._touchStartTime = e.timeStamp;
     }
-    function isHorizontallyScrollable(el) {
-      return el && el.scrollWidth > el.clientWidth;
+    function isHorizontallyScrollable(el2) {
+      return el2 && el2.scrollWidth > el2.clientWidth;
     }
     let allowHorizontalScroll = false;
     let blockSwipeForCurrentTouch = false;
@@ -506,7 +502,6 @@
       const currentY = e.touches[0].clientY;
       const deltaX = currentX - startX;
       const deltaY = currentY - startY;
-      let el = e.target;
       allowHorizontalScroll = false;
       if (scrollIntent) {
         const isSwipingLeft = deltaX < 0;
@@ -525,6 +520,7 @@
       if (isHorizontalSwipe) {
         if (e.cancelable) {
           e.preventDefault();
+          e.stopImmediatePropagation();
         }
         if (!$ui.classList.contains("is:resizing")) {
           $ui.classList.add("is:resizing");
