@@ -105,8 +105,8 @@
       }
       function getWidthValueInPixels($el, prop) {
         const val = getComputedStyle($el).getPropertyValue(prop).trim();
-        function getFirstNonZeroParentWidth(el2) {
-          let current = el2.parentElement;
+        function getFirstNonZeroParentWidth(el) {
+          let current = el.parentElement;
           while (current && current.getBoundingClientRect().width === 0) {
             current = current.parentElement;
           }
@@ -189,7 +189,7 @@
     }
     $body.addEventListener("click", (ev) => {
       const $el = ev.target.closest("[data-sidebar-type-toggle]");
-      if (!el) return;
+      if (!$el) return;
       ev.preventDefault();
       const sidebar = $el.closest("[data-sidebar]");
       const type = $el.getAttribute("data-sidebar-type-toggle");
@@ -353,10 +353,10 @@
         });
       });
     }
-    document.querySelectorAll(".nav-toggle").forEach((el2) => {
-      el2.addEventListener("click", (ev) => {
+    document.querySelectorAll(".nav-toggle").forEach((el) => {
+      el.addEventListener("click", (ev) => {
         ev.preventDefault();
-        const $nav = el2.closest("li");
+        const $nav = el.closest("li");
         $nav.classList.toggle("is:toggled");
       });
     });
@@ -488,8 +488,8 @@
       isDragging = true;
       e.currentTarget._touchStartTime = e.timeStamp;
     }
-    function isHorizontallyScrollable(el2) {
-      return el2 && el2.scrollWidth > el2.clientWidth;
+    function isHorizontallyScrollable(el) {
+      return el && el.scrollWidth > el.clientWidth;
     }
     let allowHorizontalScroll = false;
     let blockSwipeForCurrentTouch = false;

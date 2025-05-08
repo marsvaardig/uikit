@@ -240,7 +240,7 @@
   // toggle the sidebar type
   $body.addEventListener('click', (ev) => {
     const $el = ev.target.closest('[data-sidebar-type-toggle]');
-    if (!el) return;
+    if (!$el) return;
     ev.preventDefault();
     const sidebar = $el.closest('[data-sidebar]');
     const type = $el.getAttribute('data-sidebar-type-toggle');
