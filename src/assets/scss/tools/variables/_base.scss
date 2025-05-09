@@ -2,19 +2,22 @@
 
 // Primitive colors as SCSS variables
 $brand: #1daaff !default;
-//$brand: purple !default;
 $brand-light-shade: #A7D8F3 !default;
-//$brand-light-shade: green !default;
-//$brand-lighter-shade: #d4e3ed !default;
 $brand-lighter-shade: #d4e3ed !default;
-//$brand-dark-shade1: #1D1C41 !default;
+$brand-lightest-shade: #e7eff4 !default;
 $brand-dark-shade1: #1D1C41 !default;
-//$brand-dark-shade2: #142848 !default;
 $brand-dark-shade2: #142848 !default;
-//$brand-light-accent1: #F6F6F9 !default;
 $brand-light-accent1: #F6F6F9 !default;
-//$brand-light-accent2: #FFF !default;
-$brand-light-accent2: #fff !default;
+$brand-light-accent2: #FFF !default;
+
+//$brand: #ff961d;
+//$brand-light-shade: #f3d2a7;
+//$brand-lighter-shade: #ede1d4;
+//$brand-lightest-shade: #f4eee7;
+//$brand-dark-shade1: #412b1c;
+//$brand-dark-shade2: #483314;
+//$brand-light-accent1: #f9f8f6;
+//$brand-light-accent2: #fff;
 
 // Sizes
 $uikit-min-height: px(560) !default; // So we are usable on not so tall screens

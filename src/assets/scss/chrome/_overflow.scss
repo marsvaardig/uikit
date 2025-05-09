@@ -12,7 +12,7 @@
   scrollbar-width: thin;
 
   &:has(> table) {
-    scrollbar-color: $brand #e7eff4;
+    scrollbar-color: $brand var(--ui-control-tertiary);
   }
 }
 

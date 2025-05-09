@@ -200,11 +200,12 @@ summary {
   --ui-background-invert: #1D1C41;
   --ui-background-invert-gradient: #142848;
   /* Surface */
-  --ui-surface-primary: #fff;
+  --ui-surface-primary: #FFF;
   --ui-surface-secondary: #F6F6F9;
   /* Control */
   --ui-control-primary: #d4e3ed;
-  --ui-control-secondary: #fff;
+  --ui-control-secondary: #FFF;
+  --ui-control-tertiary: #e7eff4;
   --ui-control-brand: #1daaff;
   /* Type */
   --ui-text-primary: #1D1C41;
@@ -371,6 +372,7 @@ svg {
 }
 .header__brand svg {
   flex: 0 0 auto;
+  fill: var(--ui-text-invert-hightlight);
 }
 
 .brand-name {
@@ -1413,7 +1415,7 @@ svg {
   scrollbar-width: thin;
 }
 .overflow:has(> table) {
-  scrollbar-color: #1daaff #e7eff4;
+  scrollbar-color: #1daaff var(--ui-control-tertiary);
 }
 
 .overflow--fill {
@@ -2127,13 +2129,13 @@ table th {
   top: 0;
   z-index: 1;
   padding-block: 1rem;
-  background: #e7eff4;
-  box-shadow: inset 0 -1px 0 #BFD0DB;
+  background: var(--ui-control-tertiary);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
   white-space: nowrap;
 }
 table tr:not(:first-child) th,
 table tr:not(:first-child) td {
-  border-top: 1px solid #BFD0DB;
+  border-top: 1px solid var(--ui-control-primary);
 }
 table .is\:selected td, table .is\:selected:hover td {
   background: #cde7fd;
