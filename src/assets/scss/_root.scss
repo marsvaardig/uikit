@@ -77,10 +77,10 @@
 }
 
 html, body {
-  width: 100%;
+  inline-size: 100%;
 
-  @supports (height: 100dvh) {
-    height: 100dvh;
+  @supports (block-size: 100dvh) {
+    block-size: 100dvh;
   }
 }
 

@@ -2,7 +2,7 @@
 
 .scroll-example-block {
   display: none;
-  min-height: 100vh;
+  min-block-size: 100vh;
   padding: 1rem;
   margin-top: 1rem;
   font-size: 14px;
@@ -15,8 +15,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: px(18);
-  height: px(18);
+  inline-size: px(18);
+  block-size: px(18);
   font-weight: 700;
   color: #fff;
   background: var(--ui-text-brand);
@@ -155,7 +155,7 @@ table {
 .switch-views {
   button {
     display: none;
-    height: 100%;
+    block-size: 100%;
     aspect-ratio: 1 / 1;
     padding: 0;
     background: transparent;
@@ -169,8 +169,8 @@ table {
   }
 
   svg {
-    width: 1rem;
-    height: 1rem;
+    inline-size: 1rem;
+    block-size: 1rem;
   }
 }
 
@@ -197,8 +197,8 @@ table {
   font-size: var(--ui-font-size-3xl);
 
   svg {
-    width: 1em;
-    height: 1em;
+    inline-size: 1em;
+    block-size: 1em;
     margin-right: 1em;
   }
 }
@@ -213,11 +213,11 @@ table {
 
 
 svg:not([width]) {
-  width: 1em;
+  inline-size: 1em;
 }
 
 svg:not([height]) {
-  height: 1em;
+  block-size: 1em;
 }
 
 .login {

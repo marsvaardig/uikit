@@ -100,12 +100,9 @@
 
   .sidebar__swiper {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     z-index: 99;
-    width: 200vw;
+    inline-size: 200vw;
     pointer-events: none;
     background: yellow;
     opacity: 0;

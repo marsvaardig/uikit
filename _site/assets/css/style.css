@@ -245,11 +245,11 @@ summary {
 }
 
 html, body {
-  width: 100%;
+  inline-size: 100%;
 }
-@supports (height: 100dvh) {
+@supports (block-size: 100dvh) {
   html, body {
-    height: 100dvh;
+    block-size: 100dvh;
   }
 }
 
@@ -680,7 +680,7 @@ svg {
   bottom: 0;
   left: 0;
   z-index: 99;
-  width: 100vw;
+  inline-size: 100vw;
   pointer-events: none;
   background: yellow;
   opacity: 0;
@@ -766,7 +766,7 @@ svg {
   bottom: 0;
   left: -100vw;
   z-index: 99;
-  width: 200vw;
+  inline-size: 200vw;
   pointer-events: none;
   background: yellow;
   opacity: 0;
@@ -811,7 +811,7 @@ svg {
   right: calc(100% + var(--ui-chrome-spacing-m));
   bottom: 0;
   z-index: 1;
-  width: 100vw;
+  inline-size: 100vw;
   pointer-events: none;
   cursor: pointer;
   background: var(--ui-surface-primary);
@@ -957,7 +957,7 @@ svg {
   bottom: 0;
   left: 0;
   z-index: 99;
-  width: 100vw;
+  inline-size: 100vw;
   pointer-events: none;
   background: yellow;
   opacity: 0;
@@ -1103,12 +1103,9 @@ svg {
 }
 .sidebar--split .sidebar__swiper {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: 99;
-  width: 200vw;
+  inline-size: 200vw;
   pointer-events: none;
   background: yellow;
   opacity: 0;
@@ -1224,8 +1221,8 @@ svg {
   block-size: 2.5rem;
 }
 .filters__icon svg {
-  width: 1rem;
-  height: 1rem;
+  inline-size: 1rem;
+  block-size: 1rem;
   color: var(--ui-text-brand);
 }
 
@@ -1711,8 +1708,8 @@ svg {
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  width: 1rem;
-  height: 1rem;
+  inline-size: 1rem;
+  block-size: 1rem;
   color: var(--ui-text-invert-hightlight);
 }
 .navigation__list .icon-wrapper svg {
@@ -1789,7 +1786,7 @@ svg {
   border-color: transparent;
 }
 .navigation__list ul a {
-  width: calc(100% + 2.125rem);
+  inline-size: calc(100% + 2.125rem);
   padding-left: calc(2.125rem + 0.375rem);
   margin-left: calc(2.125rem * -1);
 }
@@ -1802,13 +1799,13 @@ svg {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1rem;
-  height: 1rem;
+  inline-size: 1rem;
+  block-size: 1rem;
   background: rgba(29, 28, 65, calc(1 - var(--ui-sidebar-left-progress)));
 }
 .navigation__list ul a .icon-wrapper svg {
-  width: 0.75rem;
-  height: 0.75rem;
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
 }
 .navigation__list ul a:hover .icon-wrapper, .navigation__list ul a:focus .icon-wrapper {
   background: transparent;
@@ -1828,7 +1825,7 @@ svg {
 }
 .navigation__list ul ul a {
   gap: 0.625rem;
-  width: calc(100% + 1.625rem);
+  inline-size: calc(100% + 1.625rem);
   padding-left: calc(1.625rem + 0.375rem);
   margin-left: calc(1.625rem * -1);
 }
@@ -1847,8 +1844,8 @@ svg {
   position: absolute;
   top: 0;
   right: 0;
-  width: 2.25rem;
-  height: 2.25rem;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
   padding: 0;
   cursor: pointer;
   background: transparent;
@@ -2060,7 +2057,7 @@ svg {
 
 .scroll-example-block {
   display: none;
-  min-height: 100vh;
+  min-block-size: 100vh;
   padding: 1rem;
   margin-top: 1rem;
   font-size: 14px;
@@ -2073,8 +2070,8 @@ svg {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.125rem;
-  height: 1.125rem;
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
   font-weight: 700;
   color: #fff;
   background: var(--ui-text-brand);
@@ -2198,7 +2195,7 @@ table .is\:selected td, table .is\:selected:hover td {
 
 .switch-views button {
   display: none;
-  height: 100%;
+  block-size: 100%;
   aspect-ratio: 1/1;
   padding: 0;
   background: transparent;
@@ -2212,8 +2209,8 @@ table .is\:selected td, table .is\:selected:hover td {
   }
 }
 .switch-views svg {
-  width: 1rem;
-  height: 1rem;
+  inline-size: 1rem;
+  block-size: 1rem;
 }
 
 .icon-rows {
@@ -2235,8 +2232,8 @@ table .is\:selected td, table .is\:selected:hover td {
   font-size: var(--ui-font-size-3xl);
 }
 .onboarding svg {
-  width: 1em;
-  height: 1em;
+  inline-size: 1em;
+  block-size: 1em;
   margin-right: 1em;
 }
 
@@ -2249,11 +2246,11 @@ table .is\:selected td, table .is\:selected:hover td {
 }
 
 svg:not([width]) {
-  width: 1em;
+  inline-size: 1em;
 }
 
 svg:not([height]) {
-  height: 1em;
+  block-size: 1em;
 }
 
 .login {
