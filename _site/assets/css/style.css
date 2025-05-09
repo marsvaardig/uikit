@@ -605,7 +605,10 @@ svg {
     min-inline-size: var(--ui-sidebar-left-min-width);
     max-inline-size: min(33vw, var(--ui-sidebar-left-max-width));
   }
-  .uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left {
+  .uikit.has\:toggled-sidebar-left .sidebar--left {
+    min-inline-size: 3rem;
+  }
+  .uikit.has\:toggled-sidebar-left .sidebar--left {
     min-inline-size: 3rem;
   }
 }
@@ -647,7 +650,11 @@ svg {
   transition: border 100ms ease-in-out 120ms;
   transform: translate(-50%, -50%);
 }
-.uikit.has\:toggled-sidebar-left:not(.has\:resizing) .sidebar--left .sidebar__resizer {
+.uikit.has\:toggled-sidebar-left .sidebar--left .sidebar__resizer {
+  display: none;
+}
+
+.uikit.has\:toggled-sidebar-left .sidebar--left .sidebar__resizer {
   display: none;
 }
 
@@ -657,6 +664,23 @@ svg {
 .sidebar--left[data-resizing] .sidebar__resizer::after {
   border-color: #000;
 }
+.uikit.has\:toggled-sidebar-left .sidebar--left .sidebar-toggle-left .is\:off {
+  display: none;
+}
+@media screen and (min-width: 60rem) {
+  .uikit.has\:toggled-sidebar-left .sidebar--left .sidebar-toggle-left .is\:off {
+    display: block;
+  }
+}
+.uikit.has\:toggled-sidebar-left .sidebar--left .sidebar-toggle-left .is\:on {
+  display: block;
+}
+@media screen and (min-width: 60rem) {
+  .uikit.has\:toggled-sidebar-left .sidebar--left .sidebar-toggle-left .is\:on {
+    display: none;
+  }
+}
+
 .uikit.has\:toggled-sidebar-left .sidebar--left .sidebar-toggle-left .is\:off {
   display: none;
 }
@@ -1163,6 +1187,15 @@ svg {
   }
 }
 
+.uikit.has\:toggled-sidebar-left .component > *:not(.sidebar-overlay-toggle) {
+  pointer-events: none;
+}
+@media screen and (min-width: 60rem) {
+  .uikit.has\:toggled-sidebar-left .component > *:not(.sidebar-overlay-toggle) {
+    pointer-events: auto;
+  }
+}
+
 .component > .sidebar-overlay-toggle {
   position: absolute;
   top: 0;
@@ -1180,6 +1213,15 @@ svg {
 .component > .sidebar-overlay-toggle {
   transition: background 300ms cubic-bezier(0.25, 1, 0.7, 1) 0ms, opacity 300ms cubic-bezier(0.25, 1, 0.7, 1) 0ms;
 }
+.uikit.has\:toggled-sidebar-left .component > .sidebar-overlay-toggle {
+  display: block;
+}
+@media screen and (min-width: 60rem) {
+  .uikit.has\:toggled-sidebar-left .component > .sidebar-overlay-toggle {
+    display: none;
+  }
+}
+
 .uikit.has\:toggled-sidebar-left .component > .sidebar-overlay-toggle {
   display: block;
 }
@@ -1643,7 +1685,22 @@ svg {
   .uikit.has\:toggled-sidebar-left .navigation__heading::before {
     opacity: 0;
   }
+  .uikit.has\:toggled-sidebar-left .navigation__heading {
+    text-indent: 0;
+  }
+  .uikit.has\:toggled-sidebar-left .navigation__heading::before {
+    opacity: 0;
+  }
 }
+@media screen and (min-width: 60rem) {
+  .uikit.has\:toggled-sidebar-left .navigation__heading {
+    text-indent: -9999px;
+  }
+  .uikit.has\:toggled-sidebar-left .navigation__heading::before {
+    opacity: 1;
+  }
+}
+
 @media screen and (min-width: 60rem) {
   .uikit.has\:toggled-sidebar-left .navigation__heading {
     text-indent: -9999px;
@@ -1814,6 +1871,10 @@ svg {
   padding-left: 0.75rem;
   pointer-events: none;
 }
+.uikit.has\:toggled-sidebar-left .navigation__list ul ul {
+  pointer-events: auto;
+}
+
 .uikit.has\:toggled-sidebar-left .navigation__list ul ul {
   pointer-events: auto;
 }

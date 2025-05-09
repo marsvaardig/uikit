@@ -16,7 +16,7 @@
     min-inline-size: var(--ui-sidebar-left-min-width);
     max-inline-size: min(33vw, var(--ui-sidebar-left-max-width));
 
-    @include state('has', 'toggled-sidebar-left|not(resizing)') {
+    @include state('has', 'toggled-sidebar-left') {
       min-inline-size: px(48);
     }
   }
@@ -56,7 +56,7 @@
       transform: translate(-50%, -50%);
     }
 
-    @include state('has', 'toggled-sidebar-left|not(resizing)') {
+    @include state('has', 'toggled-sidebar-left') {
       display: none;
     }
 
