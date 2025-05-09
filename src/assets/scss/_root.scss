@@ -29,12 +29,18 @@
   --ui-background-invert-gradient: #{$brand-dark-shade2};
 
   /* Surface */
+  --ui-surface-primary: #{$brand-light-accent2};
+  --ui-surface-secondary: #{$brand-light-accent1};
 
   /* Control */
+  --ui-control-primary: #{$brand-lighter-shade};
+  --ui-control-secondary: #{$brand-light-accent2};
+  --ui-control-brand: #{$brand};
 
   /* Type */
   --ui-text-primary: #{$brand-dark-shade1};
   --ui-text-invert: #{$brand-light-accent1};
+  --ui-text-invert-hightlight: #{$brand-light-shade};
 
   /* Components */
   --ui-scrollbar-width: 0;

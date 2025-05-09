@@ -23,7 +23,7 @@
   padding: var(--ui-spacing-xs) var(--ui-spacing-m) var(--ui-spacing-m);
   font-size: var(--ui-font-size-m);
   font-weight: 400;
-  color: #ACC6D9;
+  color: var(--ui-text-invert-hightlight);
   text-transform: uppercase;
   letter-spacing: 0.01em;
 
@@ -88,7 +88,7 @@
       inset-inline-start: 0;
       inline-size: px(4);
       block-size: calc(#{px(36)} - #{px(8)});
-      background: #40b2ff;
+      background: var(--ui-control-brand);
       border-radius: 3px;
       opacity: 0;
     }
@@ -124,7 +124,7 @@
     justify-content: center;
     width: px(16);
     height: px(16);
-    color: #a7d8f3;
+    color: var(--ui-text-invert-hightlight);
 
     svg {
       fill: currentcolor;
@@ -308,7 +308,7 @@
     inline-size: 8px;
     block-size: 8px;
     font-size: 10px;
-    color: #A7D8F3;
+    color: var(--ui-text-invert-hightlight);
     content: " ";
     transition: transform 0.2s;
     transform: rotate(-90deg);
