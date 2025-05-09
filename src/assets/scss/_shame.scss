@@ -19,7 +19,7 @@
   height: px(18);
   font-weight: 700;
   color: #fff;
-  background: $brand;
+  background: var(--ui-text-brand);
   border-radius: 100%;
 }
 
@@ -348,7 +348,7 @@ svg:not([height]) {
 }
 
 .color\:brand {
-  color: $brand;
+  color: var(--ui-text-brand);
 }
 
 .color\:success {

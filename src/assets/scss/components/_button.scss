@@ -17,8 +17,7 @@
   @include transition(all);
 
   @include hover {
-    background: $brand-light-shade;
-    border-color: #1daaff;
+    background: var(--ui-control-primary-hover);
   }
 
   svg:first-child {

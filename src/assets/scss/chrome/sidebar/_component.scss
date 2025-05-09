@@ -118,7 +118,7 @@
       pointer-events: auto;
 
       @include hover {
-        background: $brand;
+        background: var(--ui-control-brand);
         opacity: .5;
       }
     }
@@ -145,7 +145,7 @@
     display: none;
 
     @include hover {
-      background: $brand;
+      background: var(--ui-control-brand);
     }
   }
 

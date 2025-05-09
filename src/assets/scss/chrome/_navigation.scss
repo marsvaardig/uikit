@@ -148,7 +148,7 @@
       border-color: #3d5075;
 
       & > .icon-wrapper {
-        color: $brand;
+        color: var(--ui-text-brand);
       }
     }
 

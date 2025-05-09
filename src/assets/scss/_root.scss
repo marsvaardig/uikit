@@ -34,12 +34,14 @@
 
   /* Control */
   --ui-control-primary: #{$brand-lighter-shade};
+  --ui-control-primary-hover: #{$brand-light-shade};
   --ui-control-secondary: #{$brand-light-accent2};
   --ui-control-tertiary: #{$brand-lightest-shade};
   --ui-control-brand: #{$brand};
 
   /* Type */
   --ui-text-primary: #{$brand-dark-shade1};
+  --ui-text-brand: #{$brand};
   --ui-text-invert: #{$brand-light-accent1};
   --ui-text-invert-hightlight: #{$brand-light-shade};
 
