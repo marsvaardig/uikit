@@ -258,10 +258,10 @@ body {
 html {
   display: flex;
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 body {
-  position: fixed;
   overflow: auto;
   font-family: Ubuntu, sans-serif;
   color: #fff;
