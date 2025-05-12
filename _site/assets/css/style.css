@@ -244,11 +244,13 @@ summary {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   inline-size: 100%;
 }
 @supports (block-size: 100dvh) {
-  html, body {
+  html,
+  body {
     block-size: 100dvh;
   }
 }
@@ -265,6 +267,22 @@ body {
   background: var(--ui-background-invert) linear-gradient(180deg, var(--ui-background-invert) 0%, var(--ui-background-invert-gradient) 100%);
 }
 
+@media (display-mode: standalone) {
+  @supports (block-size: 100vh) {
+    html,
+    body {
+      block-size: 100vh;
+    }
+  }
+}
+@media (display-mode: fullscreen) {
+  @supports (block-size: 100vh) {
+    html,
+    body {
+      block-size: 100vh;
+    }
+  }
+}
 a {
   color: inherit;
   text-decoration: none;

@@ -76,7 +76,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   inline-size: 100%;
 
   @supports (block-size: 100dvh) {
@@ -94,6 +95,24 @@ body {
   font-family: Ubuntu, sans-serif;
   color: #fff;
   background: var(--ui-background-invert) linear-gradient(180deg, var(--ui-background-invert) 0%, var(--ui-background-invert-gradient) 100%);
+}
+
+@media (display-mode: standalone) {
+  html,
+  body {
+    @supports (block-size: 100vh) {
+      block-size: 100vh;
+    }
+  }
+}
+
+@media (display-mode: fullscreen) {
+  html,
+  body {
+    @supports (block-size: 100vh) {
+      block-size: 100vh;
+    }
+  }
 }
 
 a {
