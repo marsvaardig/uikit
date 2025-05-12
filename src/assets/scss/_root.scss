@@ -91,6 +91,7 @@ html {
 }
 
 body {
+  position: fixed; // To make sure we don't have any 'natural iOs scrolling'
   overflow: auto;
   font-family: Ubuntu, sans-serif;
   color: #fff;
