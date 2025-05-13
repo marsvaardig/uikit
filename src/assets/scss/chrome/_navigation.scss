@@ -23,7 +23,7 @@
   padding: var(--ui-spacing-xs) var(--ui-spacing-m) var(--ui-spacing-m);
   font-size: var(--ui-font-size-m);
   font-weight: 400;
-  color: #ACC6D9;
+  color: var(--ui-text-invert-hightlight);
   text-transform: uppercase;
   letter-spacing: 0.01em;
 
@@ -88,7 +88,7 @@
       inset-inline-start: 0;
       inline-size: px(4);
       block-size: calc(#{px(36)} - #{px(8)});
-      background: #40b2ff;
+      background: var(--ui-control-brand);
       border-radius: 3px;
       opacity: 0;
     }
@@ -122,9 +122,9 @@
     flex: 0 0 auto;
     align-items: center;
     justify-content: center;
-    width: px(16);
-    height: px(16);
-    color: #a7d8f3;
+    inline-size: px(16);
+    block-size: px(16);
+    color: var(--ui-text-invert-hightlight);
 
     svg {
       fill: currentcolor;
@@ -148,7 +148,7 @@
       border-color: #3d5075;
 
       & > .icon-wrapper {
-        color: $brand;
+        color: var(--ui-text-brand);
       }
     }
 
@@ -223,7 +223,7 @@
     }
 
     a {
-      width: calc(100% + #{$padding-amount});
+      inline-size: calc(100% + #{$padding-amount});
       padding-left: calc(#{$padding-amount} + #{px(6)});
       margin-left: calc(#{$padding-amount} * -1);
 
@@ -237,13 +237,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: px(16);
-        height: px(16);
+        inline-size: px(16);
+        block-size: px(16);
         background: rgba($brand-dark-shade1, calc((1 - var(--ui-sidebar-left-progress))));
 
         svg {
-          width: px(12);
-          height: px(12);
+          inline-size: px(12);
+          block-size: px(12);
         }
       }
 
@@ -270,7 +270,7 @@
         $padding-amount: (px(16) + px(10));
 
         gap: px(10);
-        width: calc(100% + #{$padding-amount});
+        inline-size: calc(100% + #{$padding-amount});
         padding-left: calc(#{$padding-amount} + #{px(6)});
         margin-left: calc(#{$padding-amount} * -1);
 
@@ -296,8 +296,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: px(36);
-  height: px(36);
+  inline-size: px(36);
+  block-size: px(36);
   padding: 0;
   cursor: pointer;
   background: transparent;
@@ -308,7 +308,7 @@
     inline-size: 8px;
     block-size: 8px;
     font-size: 10px;
-    color: #A7D8F3;
+    color: var(--ui-text-invert-hightlight);
     content: " ";
     transition: transform 0.2s;
     transform: rotate(-90deg);

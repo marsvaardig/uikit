@@ -45,7 +45,7 @@
   align-items: center;
   justify-content: space-between;
   padding: .75rem;
-  background: #fff;
+  background: var(--ui-surface-primary);
   border-block-end: 1px solid #B7CAD7;
 
   .cluster {

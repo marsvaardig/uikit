@@ -46,7 +46,7 @@
     gap: var(--ui-chrome-spacing-m);
     max-inline-size: 100%;
     padding: 1rem;
-    background: #fff;
+    background: var(--ui-surface-primary);
     border: 1px solid #B7CAD7;
     border-radius: var(--ui-chrome-radius-s);
   }
@@ -100,12 +100,9 @@
 
   .sidebar__swiper {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     z-index: 99;
-    width: 200vw;
+    inline-size: 200vw;
     pointer-events: none;
     background: yellow;
     opacity: 0;

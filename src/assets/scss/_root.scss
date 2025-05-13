@@ -29,12 +29,21 @@
   --ui-background-invert-gradient: #{$brand-dark-shade2};
 
   /* Surface */
+  --ui-surface-primary: #{$brand-light-accent2};
+  --ui-surface-secondary: #{$brand-light-accent1};
 
   /* Control */
+  --ui-control-primary: #{$brand-lighter-shade};
+  --ui-control-primary-hover: #{$brand-light-shade};
+  --ui-control-secondary: #{$brand-light-accent2};
+  --ui-control-tertiary: #{$brand-lightest-shade};
+  --ui-control-brand: #{$brand};
 
   /* Type */
   --ui-text-primary: #{$brand-dark-shade1};
+  --ui-text-brand: #{$brand};
   --ui-text-invert: #{$brand-light-accent1};
+  --ui-text-invert-hightlight: #{$brand-light-shade};
 
   /* Components */
   --ui-scrollbar-width: 0;
@@ -67,17 +76,19 @@
   box-sizing: border-box;
 }
 
-html, body {
-  width: 100%;
+html,
+body {
+  inline-size: 100%;
 
-  @supports (height: 100dvh) {
-    height: 100dvh;
+  @supports (block-size: 100dvh) {
+    block-size: 100dvh;
   }
 }
 
 html {
   display: flex;
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 body {
@@ -85,6 +96,24 @@ body {
   font-family: Ubuntu, sans-serif;
   color: #fff;
   background: var(--ui-background-invert) linear-gradient(180deg, var(--ui-background-invert) 0%, var(--ui-background-invert-gradient) 100%);
+}
+
+@media (display-mode: standalone) {
+  html,
+  body {
+    @supports (block-size: 100vh) {
+      block-size: 100vh;
+    }
+  }
+}
+
+@media (display-mode: fullscreen) {
+  html,
+  body {
+    @supports (block-size: 100vh) {
+      block-size: 100vh;
+    }
+  }
 }
 
 a {

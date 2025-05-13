@@ -48,7 +48,7 @@
     display: none;
     inline-size: px(40);
     cursor: pointer;
-    background: #fff;
+    background: var(--ui-surface-primary);
     border-radius: var(--ui-radius-s);
     opacity: calc(0.75 - var(--ui-sidebar-left-progress) * 0.75);
     will-change: background, opacity;

@@ -35,6 +35,7 @@
 
   svg {
     flex: 0 0 auto;
+    fill: var(--ui-text-invert-hightlight)
   }
 }
 
@@ -65,7 +66,7 @@
     block-size: px(40);
     padding: px(6) .5rem;
     color: #333;
-    background: #fff;
+    background: var(--ui-control-secondary);
     border: none;
     border-radius: var(--ui-radius-s);
   }
@@ -123,7 +124,7 @@
   block-size: 100%;
   font-size: 16px;
   font-weight: 700;
-  background: $brand;
+  background: var(--ui-control-brand);
   border-radius: 100%;
 }
 
@@ -149,7 +150,7 @@
   inline-size: px(240);
   overflow: hidden; // for the radius
   color: #000;
-  background: #fff;
+  background: var(--ui-surface-primary);
   border: 1px solid #B7CAD7;
   border-radius: var(--ui-chrome-radius-s);
   box-shadow: 0 0 12px rgba(#000, .15);

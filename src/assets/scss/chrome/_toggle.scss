@@ -41,6 +41,6 @@
 
 .sidebar-toggle-right {
   @include state('has', 'toggled-sidebar-right') {
-    color: $brand;
+    color: var(--ui-control-brand);
   }
 }

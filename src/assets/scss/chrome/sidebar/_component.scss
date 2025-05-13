@@ -38,7 +38,7 @@
   .sidebar__content {
     flex: 1 1 auto;
     padding: 1rem;
-    background: #fff;
+    background: var(--ui-surface-primary);
     border: 1px solid #B7CAD7;
     border-radius: var(--ui-chrome-radius-s);
 
@@ -85,7 +85,7 @@
     bottom: 0;
     left: -100vw;
     z-index: 99;
-    width: 200vw;
+    inline-size: 200vw;
     pointer-events: none;
     background: yellow;
     opacity: 0;
@@ -100,7 +100,7 @@
   left: 0;
   z-index: 1;
   cursor: pointer;
-  background: #fff;
+  background: var(--ui-surface-primary);
   border-radius: var(--ui-radius-s);
   opacity: calc(0.75 - var(--ui-sidebar-component-progress) * 0.75);
   will-change: background, opacity;
@@ -118,7 +118,7 @@
       pointer-events: auto;
 
       @include hover {
-        background: $brand;
+        background: var(--ui-control-brand);
         opacity: .5;
       }
     }
@@ -131,10 +131,10 @@
   right: calc(100% + var(--ui-chrome-spacing-m));
   bottom: 0;
   z-index: 1;
-  width: 100vw;
+  inline-size: 100vw;
   pointer-events: none;
   cursor: pointer;
-  background: #fff;
+  background: var(--ui-surface-primary);
   border-radius: var(--ui-radius-s);
   opacity: calc(var(--ui-sidebar-component-progress) * 0.75);
   will-change: opacity;
@@ -145,7 +145,7 @@
     display: none;
 
     @include hover {
-      background: $brand;
+      background: var(--ui-control-brand);
     }
   }
 

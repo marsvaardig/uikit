@@ -8,11 +8,11 @@
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
-  scrollbar-color: $brand transparent;
+  scrollbar-color: var(--ui-control-brand) transparent;
   scrollbar-width: thin;
 
   &:has(> table) {
-    scrollbar-color: $brand #e7eff4;
+    scrollbar-color: var(--ui-control-brand) var(--ui-control-tertiary);
   }
 }
 

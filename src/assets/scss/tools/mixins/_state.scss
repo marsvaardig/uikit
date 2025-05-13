@@ -5,8 +5,8 @@
     }
   }
 
-  @if $value == 'toggled-sidebar-left|not(resizing)' {
-    @at-root .uikit.#{$type}\:toggled-sidebar-left:not(.has\:resizing) & {
+  @if $value == 'toggled-sidebar-left' {
+    @at-root .uikit.#{$type}\:toggled-sidebar-left & {
       @content
     }
   }

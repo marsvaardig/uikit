@@ -6,7 +6,7 @@
   display: flex;
   flex: 0 0 auto;
   min-block-size: px(40);
-  background: #fff;
+  background: var(--ui-surface-primary);
   border: 1px solid #BFD0DB;
   border-radius: var(--ui-chrome-radius-s);
 }
@@ -20,9 +20,9 @@
   block-size: px(40);
 
   svg {
-    width: 1rem;
-    height: 1rem;
-    color: $brand;
+    inline-size: 1rem;
+    block-size: 1rem;
+    color: var(--ui-text-brand);
   }
 }
 
@@ -40,7 +40,7 @@
     margin: -1px;
     color: inherit;
     cursor: pointer;
-    background: #fff;
+    background: var(--ui-surface-primary);
     border: 1px solid #B7CAD7;
 
     @include hover {
@@ -60,7 +60,7 @@
   inline-size: calc(100vw - (env(safe-area-inset-right) + env(safe-area-inset-left)));
   max-inline-size: px(320);
   padding: 1rem;
-  background: #fff;
+  background: var(--ui-surface-primary);
   border: 1px solid #B7CAD7;
   border-radius: 0 0  var(--ui-chrome-radius-s) var(--ui-chrome-radius-s);
   box-shadow: 0 0 12px rgba(#000, .15);
@@ -161,6 +161,6 @@
   }
 
   &.is\:active {
-    box-shadow: inset 0 -3px 0 $brand;
+    box-shadow: inset 0 -3px 0 var(--ui-text-brand);
   }
 }
