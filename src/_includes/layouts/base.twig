@@ -24,14 +24,18 @@
             <div class="component">
                 <div class="sidebar-overlay-toggle" data-sidebar-toggle="left" data-swipe="sidebar-left"></div>
                 {% if viewType == 'table' or viewType == 'split' or viewType == 'item' %}
-                    {% include "../partials/toolbar.twig" with {
-                        toolbarBody: toolbarBody|default(''),
-                    } %}
+                    {%  if toolbarBody is not empty %}
+                        {% include "../partials/toolbar.twig" with {
+                            toolbarBody: toolbarBody|default(''),
+                        } %}
+                    {% endif %}
                 {% endif %}
                 {% if viewType == 'table' or viewType == 'split' %}
-                    {% include "../partials/filters.twig" with {
-                        filterBody: filterBody|default(''),
-                    } %}
+                    {%  if filterBody is not empty %}
+                        {% include "../partials/filters.twig" with {
+                            filterBody: filterBody|default(''),
+                        } %}
+                    {% endif %}
                 {% endif %}
                 <div class="main" data-main>
                     <div class="content">
