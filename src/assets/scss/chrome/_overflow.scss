@@ -3,6 +3,12 @@
 /* Overflow
    ========================================================================== */
 
+.overflow-wrapper {
+  flex: 1 1 auto;
+  block-size: 100%;
+  overflow: hidden;
+}
+
 .overflow {
   flex: 1 1 auto;
   overflow: auto;
@@ -17,7 +23,7 @@
 }
 
 .overflow--fill {
-  block-size: 100%;
+  min-block-size: 100%;
 }
 
 .overflow--no-style {

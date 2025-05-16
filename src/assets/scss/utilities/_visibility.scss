@@ -1,0 +1,17 @@
+@use "../tools" as *;
+
+.visually\:hidden {
+  @include visually-hidden;
+}
+
+[hidden] {
+  display: none!important;
+}
+
+.is\:on {
+  display: none;
+}
+
+.display-contents {
+  display: contents;
+}

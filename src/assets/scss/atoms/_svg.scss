@@ -1,0 +1,7 @@
+svg:not([width]) {
+  inline-size: 1em;
+}
+
+svg:not([height]) {
+  block-size: 1em;
+}

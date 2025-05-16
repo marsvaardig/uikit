@@ -24,14 +24,14 @@
             <div class="component">
                 <div class="sidebar-overlay-toggle" data-sidebar-toggle="left" data-swipe="sidebar-left"></div>
                 {% if viewType == 'table' or viewType == 'split' or viewType == 'item' %}
-                    {%  if toolbarBody is not empty %}
+                    {% if toolbarBody != 'false' %}
                         {% include "../partials/toolbar.twig" with {
                             toolbarBody: toolbarBody|default(''),
                         } %}
                     {% endif %}
                 {% endif %}
                 {% if viewType == 'table' or viewType == 'split' %}
-                    {%  if filterBody is not empty %}
+                    {% if filterBody != 'false' %}
                         {% include "../partials/filters.twig" with {
                             filterBody: filterBody|default(''),
                         } %}
@@ -63,7 +63,6 @@
                             <div class="box box--grow overflow">
                             {% endif %}
                                 {% block content %}{% endblock %}
-                                <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
                             {% if '/tafelmanager' not in page.url %}
                             </div>
                             {% endif %}

@@ -1,0 +1,26 @@
+.text\:big {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.text\:medium {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.text\:bold {
+  font-weight: 700;
+}
+
+.align\:right {
+  text-align: right;
+}
+
+.heading\:xs {
+  font-size: var(--ui-font-size-l);
+  font-weight: 700;
+}
+
+.text--strong {
+  font-weight: 700;
+}

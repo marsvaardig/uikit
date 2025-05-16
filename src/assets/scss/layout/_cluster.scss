@@ -8,18 +8,18 @@
   gap: var(--ui-cluster-gap);
 }
 
+.cluster--s {
+  gap: var(--ui-cluster-gap-s);
+}
+
+.cluster--l {
+  gap: var(--ui-cluster-gap-l);
+}
+
 .cluster--fill {
   justify-content: space-between;
 }
 
 .cluster--top {
   align-items: flex-start;
-}
-
-.cluster--s {
-  gap: var(--ui-spacing-xs);
-}
-
-.cluster--l {
-  gap: var(--ui-spacing-m);
 }

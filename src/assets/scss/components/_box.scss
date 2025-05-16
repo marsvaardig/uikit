@@ -1,0 +1,35 @@
+@use "../tools" as *;
+
+.box {
+  padding: var(--ui-content-box-padding);
+  background: #fff;
+  border: 1px solid #c8d6e1;
+  border-radius: var(--ui-chrome-radius-s);
+  box-shadow: 0 1px 4px rgba(#c8d6e1, .5);
+}
+
+.box--grow {
+  block-size: 100%;
+}
+
+.box-padding {
+  padding: var(--ui-content-box-padding);
+}
+
+.box__content {
+  margin: calc(var(--ui-content-box-padding) * -1);
+}
+
+.box:not(.overflow) {
+  overflow: hidden;
+}
+
+.box__heading {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--ui-content-box-padding);
+  margin: calc(var(--ui-content-box-padding) * -1) calc(var(--ui-content-box-padding) * -1) var(--ui-chrome-spacing-m);
+  font-size: 1rem;
+  font-weight: bold;
+  border-bottom: 1px solid #B7CAD7;
+}

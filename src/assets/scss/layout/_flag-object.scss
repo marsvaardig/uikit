@@ -1,0 +1,45 @@
+@use "../tools" as *;
+
+.flag-object {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem
+}
+
+.flag-object__aside {
+  flex: 0 0 auto;
+}
+
+.flag-object__aside--stretch {
+  align-self: stretch;
+}
+
+.flag-object__body {
+  flex: 1 1 auto;
+  min-inline-size: 50%;
+}
+
+.flag-object--nowrap {
+  flex-wrap: nowrap;
+}
+
+.flag-object--top {
+  align-items: flex-start;
+}
+
+.flag-object--bottom {
+  align-items: flex-end;
+}
+
+.flag-object--inline-from\:tablet {
+  flex-flow: column nowrap;
+
+  @include breakpoint($chrome-breakpoint1) {
+    flex-direction: row;
+  }
+
+  .test {
+    align-items: flex-start;
+  }
+}

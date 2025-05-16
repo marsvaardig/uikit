@@ -1,16 +1,5 @@
 @use "tools" as *;
 
-.scroll-example-block {
-  display: none;
-  min-block-size: 100vh;
-  padding: 1rem;
-  margin-top: 1rem;
-  font-size: 14px;
-  background: rgba(#000, .05);
-  border: 1px solid rgba(#000, .05);
-  border-radius: .5rem;
-}
-
 .amount-label {
   display: flex;
   align-items: center;
@@ -21,18 +10,6 @@
   color: #fff;
   background: var(--ui-text-brand);
   border-radius: 100%;
-}
-
-.visually\:hidden {
-  @include visually-hidden;
-}
-
-[hidden] {
-  display: none!important;
-}
-
-.is\:on {
-  display: none;
 }
 
 table {
@@ -70,9 +47,9 @@ table {
     top: 0;
     z-index: 1;
     padding-block: px(16);
+    white-space: nowrap;
     background: var(--ui-control-tertiary);
     box-shadow: inset 0 -1px 0 rgba(#000, .1);
-    white-space: nowrap;
   }
 
   tr:not(:first-child) {
@@ -101,56 +78,6 @@ table {
     text-decoration: underline;
   }
 }
-
-* {
-  user-select: none;
-}
-
-// win over tailwind
-.grid.grid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--ui-chrome-spacing-m);
-  inline-size: 100%;
-}
-
-.grid--grow {
-  block-size: 100%;
-
-  & > .row {
-    flex-grow: 1;
-  }
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--ui-chrome-spacing-m);
-  inline-size: 100%;
-
-  & > * {
-    flex-basis: calc((#{px(480)} - 100%) * 999);
-    flex-grow: 1;
-  }
-}
-
-.box {
-  padding: var(--ui-content-box-padding);
-  background: #fff;
-  border: 1px solid #c8d6e1;
-  border-radius: var(--ui-chrome-radius-s);
-  box-shadow: 0 1px 4px rgba(#c8d6e1, .5);
-}
-
-.box--grow {
-  block-size: 100%;
-}
-
-.box-padding {
-  padding: var(--ui-content-box-padding);
-}
-
-
 
 .switch-views {
   button {
@@ -207,27 +134,19 @@ table {
   border: none !important;
 }
 
-.text--strong {
-  font-weight: 700;
-}
 
 
-svg:not([width]) {
-  inline-size: 1em;
-}
 
-svg:not([height]) {
-  block-size: 1em;
-}
+
 
 .login {
   inline-size: 100%;
   max-inline-size: 320px;
+  padding: 1.5rem;
+  margin: auto;
   color: #333;
   background: #fff;
-  padding: 1.5rem;
   border-radius: var(--ui-radius-m);
-  margin: auto;
   box-shadow: 0 0 12px rgba(#000, .15), 0 0 40px rgba(#000, .15);
 
   a:not([class]) {
@@ -236,33 +155,12 @@ svg:not([height]) {
 }
 
 .login__brand {
-  text-align: center;
   font-size: 2rem;
   font-weight: 700;
+  text-align: center;
 }
 
-.stack {
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-left: 0;
-  list-style: none;
 
-  & > * + * {
-    margin-block-start: 1.5rem;
-  }
-}
-
-.stack--small {
-  & > * + * {
-    margin-block-start: .5rem;
-  }
-}
-
-.stack--tiny {
-  & > * + * {
-    margin-block-start: .33rem;
-  }
-}
 
 .form-group {
   display: flex;
@@ -277,21 +175,21 @@ svg:not([height]) {
     color: #333;
   }
 
-  input:not([type="checkbox"]):not([type="radio"]) {
+  input:not([type="checkbox"], [type="radio"]) {
     inline-size: 100%;
     block-size: 100%;
-    padding: .5rem;
-    border: 1px solid #426273;
     min-block-size: px(40);
-    border-radius: var(--ui-chrome-radius-s);
-    background: #fff;
-    color: #333;
+    padding: .5rem;
     font-size: 16px;
     line-height: var(--ui-line-height-m);
+    color: #333;
+    background: #fff;
+    border: 1px solid #426273;
+    border-radius: var(--ui-chrome-radius-s);
 
     &:focus {
-      outline: none;
       border-color: $brand;
+      outline: none;
       box-shadow: inset 0 0 0 px(2) $brand;
       transition: box-shadow $chrome-transition-duration $chrome-transition-easing;
       will-change: box-shadow;
@@ -324,110 +222,6 @@ svg:not([height]) {
   background: #fff;
 }
 
-.flag-object {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: .75rem
-}
-
-.flag-object__aside {
-  flex: 0 0 auto;
-}
-
-.flag-object__aside--stretch {
-  align-self: stretch;
-}
-
-.flag-object__body {
-  flex: 1 1 auto;
-  min-inline-size: 50%;
-}
-
-.flag-object--nowrap {
-  flex-wrap: nowrap;
-}
-
-.flag-object--top {
-  align-items: flex-start;
-}
-
-.flag-object--bottom {
-  align-items: flex-end;
-}
-
-.flag-object--inline-from\:tablet {
-  flex-flow: column nowrap;
-
-  @include breakpoint($chrome-breakpoint1) {
-    flex-direction: row;
-  }
-
-  .test {
-    align-items: flex-start;
-  }
-}
-
-.text\:big {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.text\:medium {
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.text\:bold {
-  font-weight: 700;
-}
-
-.align\:right {
-  text-align: right;
-}
-
-.color\:brand {
-  color: var(--ui-text-brand);
-}
-
-.color\:primary {
-  color: var(--ui-text-primary);
-}
-
-.color\:secondary {
-  color: var(--ui-text-secondary);
-}
-
-.color\:success {
-  color: #42cb6f;
-}
-
-.color\:error {
-  color: #ef4546;
-}
-
-.color\:warning {
-  color: #c89e23;
-}
-
-.color\:neutral {
-  color: #2463eb;
-}
-
-.box__heading {
-  display: flex;
-  justify-content: space-between;
-  padding: var(--ui-content-box-padding);
-  margin: calc(var(--ui-content-box-padding) * -1) calc(var(--ui-content-box-padding) * -1) var(--ui-chrome-spacing-m);
-  border-bottom: 1px solid #B7CAD7;
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-
-.box:not(.overflow) {
-  overflow: hidden;
-}
 
 .dashboard {
   block-size: 100%;
@@ -438,9 +232,6 @@ svg:not([height]) {
   }
 }
 
-.box__content {
-  margin: calc(var(--ui-content-box-padding) * -1);
-}
 
 
 .chip {
@@ -480,10 +271,7 @@ svg:not([height]) {
   }
 }
 
-.heading\:xs {
-  font-size: var(--ui-font-size-l);
-  font-weight: 700;
-}
+
 
 .badge {
   display: inline-flex;
@@ -504,22 +292,13 @@ svg:not([height]) {
 .cards-subheading {
   position: sticky;
   top: 0;
+  padding: 1rem 0 .5em;
   font-weight: bold;
   background: var(--ui-surface-secondary);
-  padding: 1rem 0 .5em 0;
 
   & + * {
     margin-block-start: .25rem;
   }
 }
 
-.overflow-wrapper {
-  flex: 1 1 auto;
-  block-size: 100%;
-  overflow: hidden;
-}
 
-
-.display-contents.display-contents.display-contents.display-contents {
-  display: contents;
-}
