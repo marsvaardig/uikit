@@ -260,7 +260,7 @@ svg:not([height]) {
 
 .stack--tiny {
   & > * + * {
-    margin-block-start: .25rem;
+    margin-block-start: .33rem;
   }
 }
 
@@ -388,6 +388,14 @@ svg:not([height]) {
 
 .color\:brand {
   color: var(--ui-text-brand);
+}
+
+.color\:primary {
+  color: var(--ui-text-primary);
+}
+
+.color\:secondary {
+  color: var(--ui-text-secondary);
 }
 
 .color\:success {

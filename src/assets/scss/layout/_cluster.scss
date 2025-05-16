@@ -15,3 +15,11 @@
 .cluster--top {
   align-items: flex-start;
 }
+
+.cluster--s {
+  gap: var(--ui-spacing-xs);
+}
+
+.cluster--l {
+  gap: var(--ui-spacing-m);
+}
