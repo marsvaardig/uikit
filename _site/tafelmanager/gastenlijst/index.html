@@ -240,11 +240,32 @@
         </div>
                                 <div class="main" data-main>
                     <div class="content">
-                                                                                        <div class="gastenlijst">timing | tafels</div>
-    <div class="overflow">
-        <ul class="stack stack--small">
-            <li class="cards-subheading">17:45</li>
-            <li class="box">
+                                                                                        <div class="content__tabs" role="tablist" aria-label="Sidebar Tabs">
+        <ul data-tabs>
+            <li class="is:active">
+                <a href="#timing" role="tab" aria-selected="true" aria-controls="timing" id="timing-tab" class="cluster">
+                    <svg width="16" height="16" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 3C18.1826 3 21.2348 4.26428 23.4853 6.51472C25.7357 8.76516 27 11.8174 27 15C27 18.1826 25.7357 21.2348 23.4853 23.4853C21.2348 25.7357 18.1826 27 15 27C11.8174 27 8.76516 25.7357 6.51472 23.4853C4.26428 21.2348 3 18.1826 3 15C3 11.8174 4.26428 8.76516 6.51472 6.51472C8.76516 4.26428 11.8174 3 15 3ZM13.875 8.625V15C13.875 15.375 14.0625 15.7266 14.3766 15.9375L18.8766 18.9375C19.3922 19.2844 20.0906 19.1437 20.4375 18.6234C20.7844 18.1031 20.6437 17.4094 20.1234 17.0625L16.125 14.4V8.625C16.125 8.00156 15.6234 7.5 15 7.5C14.3766 7.5 13.875 8.00156 13.875 8.625Z"/>
+                    </svg>
+                    <span>Timing</span>
+                </a>
+            </li>
+            <li>
+                <a href="#tafels" role="tab" aria-selected="false" aria-controls="tafels" id="tafels-tab" class="cluster">
+                    <svg width="16" height="16" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 15V10.5H13.5V15H6ZM6 18H13.5V22.5H6V18ZM16.5 22.5V18H24V22.5H16.5ZM24 15H16.5V10.5H24V15ZM6 4.5C4.34531 4.5 3 5.84531 3 7.5V22.5C3 24.1547 4.34531 25.5 6 25.5H24C25.6547 25.5 27 24.1547 27 22.5V7.5C27 5.84531 25.6547 4.5 24 4.5H6Z" />
+                    </svg>
+                    <span>Tafels</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="overflow-wrapper">
+        <div id="timing" class="tab-content is:active overflow-wrapper" role="tabpanel" aria-labelledby="timing-tab" data-tab-content>
+            <div class="overflow overflow--fill">
+                <ul class="stack stack--small">
+                    <li class="cards-subheading">17:45</li>
+                    <li class="box">
     <div class="flag-object flag-object--top">
         <div class="flag-object__body stack stack--small">
             <a href="#" class="chip chip--success">
@@ -278,8 +299,8 @@
         </div>
     </div>
 </li>
-            <li class="cards-subheading">18:00</li>
-            <li class="box">
+                    <li class="cards-subheading">18:00</li>
+                    <li class="box">
     <div class="flag-object flag-object--top">
         <div class="flag-object__body stack stack--small">
             <a href="#" class="chip chip--success">
@@ -313,7 +334,7 @@
         </div>
     </div>
 </li>
-            <li class="box">
+                    <li class="box">
     <div class="flag-object flag-object--top">
         <div class="flag-object__body stack stack--small">
             <a href="#" class="chip chip--success">
@@ -347,7 +368,7 @@
         </div>
     </div>
 </li>
-            <li class="box">
+                    <li class="box">
     <div class="flag-object flag-object--top">
         <div class="flag-object__body stack stack--small">
             <a href="#" class="chip chip--success">
@@ -381,8 +402,8 @@
         </div>
     </div>
 </li>
-            <li class="cards-subheading">18:30</li>
-            <li class="box">
+                    <li class="cards-subheading">18:30</li>
+                    <li class="box">
     <div class="flag-object flag-object--top">
         <div class="flag-object__body stack stack--small">
             <a href="#" class="chip chip--success">
@@ -416,7 +437,7 @@
         </div>
     </div>
 </li>
-            <li class="box">
+                    <li class="box">
     <div class="flag-object flag-object--top">
         <div class="flag-object__body stack stack--small">
             <a href="#" class="chip chip--success">
@@ -451,7 +472,127 @@
         </div>
     </div>
 </li>
-        </ul>
+                </ul>
+            </div>
+        </div>
+        <div id="tafels" class="tab-content overflow-wrapper" role="tabpanel" aria-labelledby="tafels-tab" data-tab-content hidden>
+            <div class="overflow overflow--fill">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>col1</th>
+                        <th>col1</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        <tr>
+                        <td>col1</td>
+                        <td>col1</td>
+                    </tr>
+                                        </tbody>
+                </table>
+            </div>
+        </div>
     </div>
                                 <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
                                                                         </div>

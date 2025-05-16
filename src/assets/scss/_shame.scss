@@ -489,9 +489,15 @@ svg:not([height]) {
   top: 0;
   font-weight: bold;
   background: var(--ui-surface-secondary);
-  padding: .5em 0;
+  padding: 1rem 0 .5em 0;
 
   & + * {
     margin-block-start: .25rem;
   }
+}
+
+.overflow-wrapper {
+  flex: 1 1 auto;
+  block-size: 100%;
+  overflow: hidden;
 }
