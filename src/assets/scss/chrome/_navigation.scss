@@ -87,9 +87,9 @@
       inset-block: px(4);
       inset-inline-start: 0;
       inline-size: px(4);
-      block-size: calc(#{px(36)} - #{px(8)});
+      block-size: calc(var(--ui-font-size-xl) + #{px(8)});
       background: var(--ui-control-brand);
-      border-radius: 3px;
+      border-radius: 0 3px 3px 0;
       opacity: 0;
     }
   }
@@ -102,6 +102,7 @@
     padding: px(6) px(8);
     overflow: hidden;
     font-size: var(--ui-font-size-xl);
+    line-height: 1em;
     border: 1px solid transparent;
     border-radius: var(--ui-radius-s);
 
@@ -296,8 +297,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  inline-size: px(36);
-  block-size: px(36);
+  inline-size: px(30);
+  block-size: px(30);
   padding: 0;
   cursor: pointer;
   background: transparent;
