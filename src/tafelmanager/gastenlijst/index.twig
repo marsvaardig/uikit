@@ -58,83 +58,81 @@
             </li>
         </ul>
     </div>
-    <div class="overflow-wrapper">
-        <div id="timing" class="tab-content is:active overflow-wrapper" role="tabpanel" aria-labelledby="timing-tab" data-tab-content>
-            <div class="overflow overflow--fill">
-                <ul class="stack stack--small">
-                    <li class="cards-subheading">17:45</li>
-                    {% include '../../_includes/components/table-card.twig' with {
-                        'peopleCount': 15,
-                        'tableNumbers': '37 + 31 + 32 + 33 + 34 + 35 + 36',
-                        'name': 'Vanderbiesen',
-                        'phoneNumber': '0495210063',
-                        'status': 'Bevestigd',
-                    } %}
-                    <li class="cards-subheading">18:00</li>
-                    {% include '../../_includes/components/table-card.twig' with {
-                        'peopleCount': 7,
-                        'tableNumbers': '77 + 78 + 79',
-                        'name': 'Stef Reweghs',
-                        'phoneNumber': '0479090595',
-                        'email': 'stefreweghs@gmail.com',
-                        'status': 'Bevestigd',
-                    } %}
-                    {% include '../../_includes/components/table-card.twig' with {
-                        'peopleCount': 3,
-                        'tableNumbers': '41 + 42',
-                        'name': 'IRIS CLAES',
-                        'phoneNumber': '0479847821',
-                        'email': 'iris.claes@hotmail.com',
-                        'status': 'Bevestigd',
-                    } %}
-                    {% include '../../_includes/components/table-card.twig' with {
-                        'peopleCount': 2,
-                        'tableNumbers': '21',
-                        'name': 'Jeroen Vandevelde',
-                        'phoneNumber': '0474010123',
-                        'email': '180miles77@skynet.be',
-                        'status': 'Bevestigd',
-                    } %}
-                    <li class="cards-subheading">18:30</li>
-                    {% include '../../_includes/components/table-card.twig' with {
-                        'peopleCount': 2,
-                        'tableNumbers': '13',
-                        'name': 'Wuyts',
-                        'phoneNumber': '0474447867',
-                        'email': 'kim_wuyts@live.nle',
-                        'status': 'Bevestigd',
-                    } %}
-                    {% include '../../_includes/components/table-card.twig' with {
-                        'peopleCount': 2,
-                        'tableNumbers': '39',
-                        'name': 'Lou-Emile Grison',
-                        'phoneNumber': '0498458657',
-                        'email': 'louemileg@gmail.com',
-                        'status': 'Bevestigd',
-                        'note': 'Liefst binnen'
-                    } %}
-                </ul>
-            </div>
+    <div id="timing" class="tab-content is:active overflow-wrapper" role="tabpanel" aria-labelledby="timing-tab" data-tab-content>
+        <div class="overflow overflow--fill">
+            <ul class="stack stack--small">
+                <li class="cards-subheading">17:45</li>
+                {% include '../../_includes/components/table-card.twig' with {
+                    'peopleCount': 15,
+                    'tableNumbers': '37 + 31 + 32 + 33 + 34 + 35 + 36',
+                    'name': 'Vanderbiesen',
+                    'phoneNumber': '0495210063',
+                    'status': 'Bevestigd',
+                } %}
+                <li class="cards-subheading">18:00</li>
+                {% include '../../_includes/components/table-card.twig' with {
+                    'peopleCount': 7,
+                    'tableNumbers': '77 + 78 + 79',
+                    'name': 'Stef Reweghs',
+                    'phoneNumber': '0479090595',
+                    'email': 'stefreweghs@gmail.com',
+                    'status': 'Bevestigd',
+                } %}
+                {% include '../../_includes/components/table-card.twig' with {
+                    'peopleCount': 3,
+                    'tableNumbers': '41 + 42',
+                    'name': 'IRIS CLAES',
+                    'phoneNumber': '0479847821',
+                    'email': 'iris.claes@hotmail.com',
+                    'status': 'Bevestigd',
+                } %}
+                {% include '../../_includes/components/table-card.twig' with {
+                    'peopleCount': 2,
+                    'tableNumbers': '21',
+                    'name': 'Jeroen Vandevelde',
+                    'phoneNumber': '0474010123',
+                    'email': '180miles77@skynet.be',
+                    'status': 'Bevestigd',
+                } %}
+                <li class="cards-subheading">18:30</li>
+                {% include '../../_includes/components/table-card.twig' with {
+                    'peopleCount': 2,
+                    'tableNumbers': '13',
+                    'name': 'Wuyts',
+                    'phoneNumber': '0474447867',
+                    'email': 'kim_wuyts@live.nle',
+                    'status': 'Bevestigd',
+                } %}
+                {% include '../../_includes/components/table-card.twig' with {
+                    'peopleCount': 2,
+                    'tableNumbers': '39',
+                    'name': 'Lou-Emile Grison',
+                    'phoneNumber': '0498458657',
+                    'email': 'louemileg@gmail.com',
+                    'status': 'Bevestigd',
+                    'note': 'Liefst binnen'
+                } %}
+            </ul>
         </div>
-        <div id="tafels" class="tab-content overflow-wrapper" role="tabpanel" aria-labelledby="tafels-tab" data-tab-content hidden>
-            <div class="overflow overflow--fill">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>col1</th>
-                        <th>col1</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for i in 0..25 %}
-                    <tr>
-                        <td>col1</td>
-                        <td>col1</td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+    </div>
+    <div id="tafels" class="tab-content overflow-wrapper" role="tabpanel" aria-labelledby="tafels-tab" data-tab-content hidden>
+        <div class="overflow overflow--fill">
+            <table>
+                <thead>
+                <tr>
+                    <th>col1</th>
+                    <th>col1</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in 0..25 %}
+                <tr>
+                    <td>col1</td>
+                    <td>col1</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}

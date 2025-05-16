@@ -344,8 +344,28 @@ svg:not([height]) {
   min-inline-size: 50%;
 }
 
+.flag-object--nowrap {
+  flex-wrap: nowrap;
+}
+
 .flag-object--top {
   align-items: flex-start;
+}
+
+.flag-object--bottom {
+  align-items: flex-end;
+}
+
+.flag-object--inline-from\:tablet {
+  flex-flow: column nowrap;
+
+  @include breakpoint($chrome-breakpoint1) {
+    flex-direction: row;
+  }
+
+  .test {
+    align-items: flex-start;
+  }
 }
 
 .text\:big {
@@ -417,11 +437,10 @@ svg:not([height]) {
 
 .chip {
   display: inline-flex;
-  align-items: center;
   gap: .5rem;
   padding-inline-end: .75rem;
   background: var(--ui-control-tertiary);
-  border-radius: var(--mv-radius-full);
+  border-radius: px(16);
   box-shadow: inset 0 0 0 1px rgba(#000, .1);
 }
 
@@ -431,13 +450,20 @@ svg:not([height]) {
   justify-content: center;
   gap: .65rem;
   inline-size: px(32);
-  block-size: px(32);
+  min-block-size: px(32);
   padding: .5rem;
   font-size: var(--ui-font-size-l);
   font-weight: 700;
   color: var(--ui-text-invert);
   background: var(--ui-control-brand);
-  border-radius: var(--mv-radius-full);
+  border-radius: inherit;
+}
+
+.chip__content {
+  flex: 1 1 auto;
+  padding: .25em 0;
+  margin: auto;
+  line-height: 1em;
 }
 
 .chip--success {
@@ -467,23 +493,6 @@ svg:not([height]) {
   background: #4daf51;
 }
 
-
-.test {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: space-between;
-  min-block-size: 100%;
-
-  & > * {
-    flex: 0 0 auto;
-  }
-
-  & > * + * {
-    margin-block-start: .5rem;
-  }
-}
-
 .cards-subheading {
   position: sticky;
   top: 0;
@@ -500,4 +509,9 @@ svg:not([height]) {
   flex: 1 1 auto;
   block-size: 100%;
   overflow: hidden;
+}
+
+
+.display-contents.display-contents.display-contents.display-contents {
+  display: contents;
 }
