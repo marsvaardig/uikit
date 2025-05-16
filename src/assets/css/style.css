@@ -195,6 +195,7 @@ summary {
   /* Radius */
   --mv-radius-s: 0.375rem;
   --mv-radius-m: 0.75rem;
+  --mv-radius-full: 9999px;
   /* Background */
   --mv-background-primary: #F6F6F9;
   --mv-background-invert: #1D1C41;

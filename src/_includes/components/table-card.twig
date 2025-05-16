@@ -1,0 +1,40 @@
+<li class="box">
+    <div class="flag-object flag-object--top">
+        <div class="flag-object__body stack stack--small">
+            <a href="#" class="chip chip--success">
+                <span class="chip__label">
+                    {{ peopleCount }}
+                </span>
+                <span class="chip__content">
+                    {{ tableNumbers }}
+                </span>
+            </a>
+            <div class="cluster cluster--top">
+                <div class="stack stack--small">
+                    <div class="stack stack--tiny">
+                        <div class="heading:xs">{{ name }}</div>
+                        {% if phoneNumber is defined and phoneNumber is not empty or email is defined and email is not empty %}
+                            <div>
+                                {{ phoneNumber }}
+                                {% if phoneNumber and email %}-{% endif %}
+                                {{ email }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% if note is defined and note is not empty %}
+                        <div>{{ note }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="flag-object__aside flag-object__aside--stretch">
+            <div class="test">
+                <div class="badge badge--success">{{ status }}</div>
+                <div class="cluster">
+                    <button type="button" class="button button--small">Check-in</button>
+                    <button type="button" class="button button--small">Annuleren</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>

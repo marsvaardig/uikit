@@ -242,6 +242,11 @@ svg:not([height]) {
 }
 
 .stack {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+
   & > * + * {
     margin-block-start: 1.5rem;
   }
@@ -250,6 +255,12 @@ svg:not([height]) {
 .stack--small {
   & > * + * {
     margin-block-start: .5rem;
+  }
+}
+
+.stack--tiny {
+  & > * + * {
+    margin-block-start: .25rem;
   }
 }
 
@@ -324,9 +335,17 @@ svg:not([height]) {
   flex: 0 0 auto;
 }
 
+.flag-object__aside--stretch {
+  align-self: stretch;
+}
+
 .flag-object__body {
   flex: 1 1 auto;
   min-inline-size: 50%;
+}
+
+.flag-object--top {
+  align-items: flex-start;
 }
 
 .text\:big {
@@ -393,4 +412,86 @@ svg:not([height]) {
 
 .box__content {
   margin: calc(var(--ui-content-box-padding) * -1);
+}
+
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding-inline-end: .75rem;
+  background: var(--ui-control-tertiary);
+  border-radius: var(--mv-radius-full);
+  box-shadow: inset 0 0 0 1px rgba(#000, .1);
+}
+
+.chip__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  inline-size: px(32);
+  block-size: px(32);
+  padding: .5rem;
+  font-size: var(--ui-font-size-l);
+  font-weight: 700;
+  color: var(--ui-text-invert);
+  background: var(--ui-control-brand);
+  border-radius: var(--mv-radius-full);
+}
+
+.chip--success {
+  .chip__label {
+    background: #4daf51;
+  }
+}
+
+.heading\:xs {
+  font-size: var(--ui-font-size-l);
+  font-weight: 700;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .33em .75em;
+  font-size: var(--ui-font-size-s);
+  font-weight: 700;
+  color: #fff;
+  background: var(--ui-text-brand);
+  border-radius: var(--mv-radius-full);
+}
+
+.badge--success {
+  background: #4daf51;
+}
+
+
+.test {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  min-block-size: 100%;
+
+  & > * {
+    flex: 0 0 auto;
+  }
+
+  & > * + * {
+    margin-block-start: .5rem;
+  }
+}
+
+.cards-subheading {
+  position: sticky;
+  top: 0;
+  font-weight: bold;
+  background: var(--ui-surface-secondary);
+  padding: .5em 0;
+
+  & + * {
+    margin-block-start: .25rem;
+  }
 }
