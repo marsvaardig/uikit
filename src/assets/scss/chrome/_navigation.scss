@@ -227,6 +227,13 @@
       inline-size: calc(100% + #{$padding-amount});
       padding-left: calc(#{$padding-amount} + #{px(6)});
       margin-left: calc(#{$padding-amount} * -1);
+      overflow: unset;
+
+      .navigation__item {
+        overflow: unset;
+        white-space: unset;
+        min-inline-size: px(80);
+      }
 
       &:has(.icon-wrapper) {
         transition: transform $chrome-transition-duration $chrome-transition-easing;
