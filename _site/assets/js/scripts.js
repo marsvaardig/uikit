@@ -412,7 +412,7 @@
         setToggleStorage(direction, toggled);
       }
       if (filtersPrev || filtersNext) {
-        const scrollContainer = ev.target.closest(".filters").querySelector(".overflow__items");
+        const scrollContainer = ev.target.closest(".filters").querySelector(".filters__overflow");
         const scrollWidth = scrollContainer.offsetWidth;
         scrollContainer.scrollBy({
           left: scrollWidth * (filtersPrev ? 1 : -1),

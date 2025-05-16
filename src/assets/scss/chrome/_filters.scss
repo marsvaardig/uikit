@@ -154,7 +154,6 @@
   align-items: center;
   block-size: px(42);
   padding: 0 1rem;
-  font-weight: 700;
   white-space: nowrap;
 
   &:not(:first-child) {
@@ -166,6 +165,7 @@
   }
 
   &.is\:active {
+    font-weight: 700;
     box-shadow: inset 0 -3px 0 var(--ui-text-brand);
   }
 }
