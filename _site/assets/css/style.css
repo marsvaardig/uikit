@@ -188,11 +188,11 @@ summary {
   --ui-cluster-gap-s: var(--ui-spacing-xs);
   --ui-cluster-gap-l: var(--ui-spacing-m);
   /* Sizing */
-  --ui-font-size-s: 0.6875rem;
-  --ui-font-size-m: 0.75rem;
-  --ui-font-size-l: 0.8125rem;
-  --ui-font-size-xl: 0.875rem;
-  --ui-font-size-2xl: 0.9375rem;
+  --ui-font-size-s: 0.75rem;
+  --ui-font-size-m: 0.8125rem;
+  --ui-font-size-l: 0.875rem;
+  --ui-font-size-xl: 0.9375rem;
+  --ui-font-size-2xl: 1rem;
   --ui-font-size-3xl: 1.25rem;
   /* Radius */
   --ui-radius-s: 0.375rem;
@@ -201,7 +201,7 @@ summary {
   /* Background */
   --ui-background-primary: #F6F6F9;
   --ui-background-invert: #1D1C41;
-  --ui-background-invert-gradient: #142848;
+  --ui-background-invert-gradient: #1e3561;
   /* Surface */
   --ui-surface-primary: #FFF;
   --ui-surface-secondary: #F6F6F9;
@@ -267,7 +267,7 @@ html {
 
 body {
   overflow: auto;
-  font-family: Ubuntu, sans-serif;
+  line-height: 150%;
   color: #fff;
   background: var(--ui-background-invert) linear-gradient(180deg, var(--ui-background-invert) 0%, var(--ui-background-invert-gradient) 100%);
 }
