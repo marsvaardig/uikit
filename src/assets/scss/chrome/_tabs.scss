@@ -71,6 +71,12 @@
   border-bottom: 1px solid var(--ui-control-primary);
   font-size: var(--ui-font-size-l);
 
+  &.content__tabs--center {
+    ul {
+      justify-content: center;
+    }
+  }
+
   ul {
     display: flex;
     gap: .5rem;
