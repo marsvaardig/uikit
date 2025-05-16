@@ -379,10 +379,44 @@
         }
       });
     }
+    const filterList = document.querySelectorAll("[data-filter-list]");
+    if (filterList.length > 0) {
+      filterList.forEach((el) => {
+        const activeItem = el.querySelector(".is\\:active");
+        const scrollContainer = el.querySelector(".overflow__items");
+        if (activeItem) {
+          activeItem.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "center"
+          });
+        }
+        const prevButton = el.parentElement.querySelector("[data-filter-list-prev]");
+        const nextButton = el.parentElement.querySelector("[data-filter-list-next]");
+        if (prevButton && scrollContainer) {
+          prevButton.addEventListener("click", () => {
+            scrollContainer.scrollBy({
+              left: -200,
+              behavior: "smooth"
+            });
+          });
+        }
+        if (nextButton && scrollContainer) {
+          nextButton.addEventListener("click", () => {
+            scrollContainer.scrollBy({
+              left: 200,
+              behavior: "smooth"
+            });
+          });
+        }
+      });
+    }
     $body.addEventListener("click", (ev) => {
       const toggleTarget = ev.target.closest("[data-toggle-split]");
       const sidebarToggle = ev.target.closest("[data-sidebar-toggle]");
-      if (!toggleTarget && !sidebarToggle) return;
+      const filtersPrev = ev.target.closest("[data-filter-list-next]");
+      const filtersNext = ev.target.closest("[data-filter-list-prev]");
+      if (!toggleTarget && !sidebarToggle && !filtersPrev && !filtersNext) return;
       ev.preventDefault();
       if (toggleTarget) {
         $ui.classList.toggle("has:toggled-sidebar-split");
@@ -391,6 +425,15 @@
         const direction = sidebarToggle.getAttribute("data-sidebar-toggle");
         const toggled = $ui.classList.toggle(`has:toggled-sidebar-${direction}`);
         setToggleStorage(direction, toggled);
+      }
+      if (filtersPrev || filtersNext) {
+        const scrollContainer = ev.target.closest(".filters").querySelector(".overflow__items");
+        const scrollWidth = scrollContainer.offsetWidth;
+        console.log(scrollWidth);
+        scrollContainer.scrollBy({
+          left: scrollWidth * (filtersPrev ? 1 : -1),
+          behavior: "smooth"
+        });
       }
     });
     if ($splitSwitch && $main) {
