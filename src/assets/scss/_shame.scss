@@ -309,6 +309,10 @@ table {
   color: $brand;
   background: $brand-lighter-shade;
   border-radius: .5rem;
+
+  svg {
+    display: block;
+  }
 }
 
 .square--red {
