@@ -494,48 +494,28 @@
       }
     });
   }
-
-
-
+  
+  
+  
   const filterList = document.querySelectorAll('[data-filter-list]');
   if (filterList.length > 0) {
     filterList.forEach((el) => {
       const activeItem = el.querySelector('.is\\:active');
       const scrollContainer = el.querySelector('.overflow__items');
-
-      if (activeItem) {
-        // Scroll to this item in this horizontal list
-        activeItem.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center'
+      
+      if (activeItem && scrollContainer) {
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const itemRect = activeItem.getBoundingClientRect();
+        
+        const offset = itemRect.left - containerRect.left;
+        const scrollTo = offset - (scrollContainer.clientWidth / 2) + (activeItem.clientWidth / 2);
+        
+        scrollContainer.scrollBy({
+          left: scrollTo,
+          behavior: 'smooth'
         });
       }
-
-      // Add navigation button functionality
-      const prevButton = el.parentElement.querySelector('[data-filter-list-prev]');
-      const nextButton = el.parentElement.querySelector('[data-filter-list-next]');
-
-      if (prevButton && scrollContainer) {
-        prevButton.addEventListener('click', () => {
-          // Scroll left by 200px
-          scrollContainer.scrollBy({
-            left: -200,
-            behavior: 'smooth'
-          });
-        });
-      }
-
-      if (nextButton && scrollContainer) {
-        nextButton.addEventListener('click', () => {
-          // Scroll right by 200px
-          scrollContainer.scrollBy({
-            left: 200,
-            behavior: 'smooth'
-          });
-        });
-      }
-    })
+    });
   }
 
 
@@ -565,7 +545,6 @@
     if (filtersPrev || filtersNext) {
       const scrollContainer = ev.target.closest('.filters').querySelector('.overflow__items');
       const scrollWidth = scrollContainer.offsetWidth;
-      console.log(scrollWidth);
       scrollContainer.scrollBy({
         left: scrollWidth * (filtersPrev ? 1 : -1),
         behavior: 'smooth'
