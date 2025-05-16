@@ -239,7 +239,7 @@ table {
   gap: .5rem;
   padding-inline-end: .75rem;
   background: var(--ui-control-tertiary);
-  border-radius: px(16);
+  border-radius: px(20);
   box-shadow: inset 0 0 0 1px rgba(#000, .1);
 }
 
@@ -248,8 +248,8 @@ table {
   align-items: center;
   justify-content: center;
   gap: .65rem;
-  inline-size: px(32);
-  min-block-size: px(32);
+  inline-size: px(40);
+  min-block-size: px(40);
   padding: .5rem;
   font-size: var(--ui-font-size-l);
   font-weight: 700;
@@ -277,9 +277,10 @@ table {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: .33em .75em;
+  padding: .5em .75em;
   font-size: var(--ui-font-size-s);
   font-weight: 700;
+  line-height: 1em;
   color: #fff;
   background: var(--ui-text-brand);
   border-radius: var(--mv-radius-full);
