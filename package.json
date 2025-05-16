@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Better Simpler UI",
   "scripts": {
-    "compile:sass": "npx sass src/assets/scss:_site/assets/css",
+    "compile:sass": "npx sass -I node_modules src/assets/scss:_site/assets/css",
     "watch:eleventy": "npx @11ty/eleventy --serve",
-    "watch:sass": "npx sass src/assets/scss:_site/assets/css --watch",
+    "watch:sass": "npx sass --watch -I node_modules src/assets/scss:_site/assets/css",
     "build:js": "esbuild src/assets/scripts/main.js --bundle --outfile=_site/assets/js/scripts.js",
     "watch:js": "esbuild src/assets/scripts/main.js --bundle --outfile=_site/assets/js/scripts.js --watch",
     "build:settings": "esbuild src/assets/scripts/settings.js --bundle --outfile=_site/assets/js/settings.js",

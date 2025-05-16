@@ -55,10 +55,14 @@
                                 {% block content %}{% endblock %}
                             {% endif %}
                         {% else %}
+                            {% if '/tafelmanager' not in page.url %}
                             <div class="box box--grow overflow">
+                            {% endif %}
                                 {% block content %}{% endblock %}
                                 <div class="scroll-example-block">Scroll example block, just here to test the overflows of containers</div>
+                            {% if '/tafelmanager' not in page.url %}
                             </div>
+                            {% endif %}
                         {% endif %}
                     </div>
                     {% if viewType == 'item' %}

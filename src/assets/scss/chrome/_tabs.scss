@@ -61,3 +61,50 @@
     border-start-start-radius: 0;
   }
 }
+
+
+
+.content__tabs {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  border-bottom: 1px solid var(--ui-control-primary);
+  font-size: var(--ui-font-size-l);
+
+  ul {
+    display: flex;
+    gap: .5rem;
+    padding-inline-start: 0;
+    margin: 0 0 -2px;
+
+    & > ::marker {
+      font-size: 0;
+    }
+
+    li {
+      padding-block-end: 1px;
+    }
+
+    a {
+      display: flex;
+      padding: .65em;
+      opacity: .65;
+      border-block-end: 2px solid transparent;
+
+      svg {
+        fill: #152937;
+      }
+
+      @include hover {
+        opacity: .85;
+      }
+    }
+
+    .is\:active {
+      a {
+        opacity: 1;
+        border-color: #4f5b67;
+      }
+    }
+  }
+}

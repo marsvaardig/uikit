@@ -46,3 +46,9 @@
     border-color: #1c56b5;
   }
 }
+
+.button--small {
+  min-block-size: px(24);
+  padding: var(--ui-spacing-xs) var(--ui-spacing-s);
+  font-size: var(--ui-font-size-s);
+}
