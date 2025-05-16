@@ -183,6 +183,7 @@ summary {
   --ui-spacing-m: 1rem;
   --ui-spacing-l: 1.5rem;
   --ui-spacing-xl: 2rem;
+  --ui-spacing-fluid: var(--ui-spacing-m);
   /* Gap */
   --ui-cluster-gap: var(--ui-spacing-s);
   --ui-cluster-gap-s: var(--ui-spacing-xs);
@@ -1186,10 +1187,10 @@ svg:not([height]) {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  gap: var(--ui-chrome-spacing-m);
+  gap: var(--ui-spacing-fluid);
   min-inline-size: 100%;
   max-inline-size: 100%;
-  padding: var(--ui-chrome-spacing-m);
+  padding: var(--ui-spacing-fluid);
   overflow: hidden;
   color: var(--ui-text-primary);
   background: var(--ui-background-primary);
@@ -2108,7 +2109,7 @@ svg:not([height]) {
 .grid {
   display: flex;
   flex-direction: column;
-  gap: var(--ui-chrome-spacing-m);
+  gap: var(--ui-spacing-fluid);
   inline-size: 100%;
 }
 
@@ -2122,7 +2123,7 @@ svg:not([height]) {
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--ui-chrome-spacing-m);
+  gap: var(--ui-spacing-fluid);
   inline-size: 100%;
 }
 .row > * {

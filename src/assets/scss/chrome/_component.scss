@@ -4,10 +4,10 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  gap: var(--ui-chrome-spacing-m);
+  gap: var(--ui-spacing-fluid);
   min-inline-size: 100%;
   max-inline-size: 100%;
-  padding: var(--ui-chrome-spacing-m);
+  padding: var(--ui-spacing-fluid);
   overflow: hidden;
   color: var(--ui-text-primary);
   background: var(--ui-background-primary);

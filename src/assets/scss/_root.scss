@@ -7,6 +7,8 @@
   --ui-spacing-m: #{px(16)};
   --ui-spacing-l: #{px(24)};
   --ui-spacing-xl: #{px(32)};
+  //--ui-spacing-fluid: clamp(var(--ui-spacing-m), (var(--ui-spacing-s) + 1vw), var(--ui-spacing-l));
+  --ui-spacing-fluid: var(--ui-spacing-m);
 
   /* Gap */
   --ui-cluster-gap: var(--ui-spacing-s);
