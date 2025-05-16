@@ -1874,8 +1874,8 @@ svg:not([height]) {
   opacity: 1;
 }
 .navigation__list .is\:active > a {
-  background: #283b65;
-  border-color: #3d5075;
+  background: #1e3561;
+  border-color: rgba(255, 255, 255, 0.15);
 }
 .navigation__list .is\:active > a > .icon-wrapper {
   color: var(--ui-text-brand);
@@ -2638,9 +2638,8 @@ table .is\:selected td, table .is\:selected:hover td {
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
-  inline-size: 2.5rem;
-  min-block-size: 2.5rem;
-  padding: 0.5rem;
+  inline-size: 2rem;
+  min-block-size: 2rem;
   font-size: var(--ui-font-size-l);
   font-weight: 700;
   color: var(--ui-text-invert);

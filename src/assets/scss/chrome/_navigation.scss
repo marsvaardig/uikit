@@ -145,8 +145,8 @@
     }
 
     & > a {
-      background: #283b65;
-      border-color: #3d5075;
+      background: $brand-dark-shade2;
+      border-color: rgba(#fff, .15);
 
       & > .icon-wrapper {
         color: var(--ui-text-brand);
