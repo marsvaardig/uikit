@@ -188,11 +188,11 @@ summary {
   --ui-cluster-gap-s: var(--ui-spacing-xs);
   --ui-cluster-gap-l: var(--ui-spacing-m);
   /* Sizing */
-  --ui-font-size-s: 0.75rem;
-  --ui-font-size-m: 0.8125rem;
-  --ui-font-size-l: 0.875rem;
-  --ui-font-size-xl: 0.9375rem;
-  --ui-font-size-2xl: 1rem;
+  --ui-font-size-s: 0.6875rem;
+  --ui-font-size-m: 0.75rem;
+  --ui-font-size-l: 0.8125rem;
+  --ui-font-size-xl: 0.875rem;
+  --ui-font-size-2xl: 0.9375rem;
   --ui-font-size-3xl: 1.25rem;
   /* Radius */
   --ui-radius-s: 0.375rem;
@@ -267,7 +267,7 @@ html {
 
 body {
   overflow: auto;
-  line-height: 150%;
+  line-height: 135%;
   color: #fff;
   background: var(--ui-background-invert) linear-gradient(180deg, var(--ui-background-invert) 0%, var(--ui-background-invert-gradient) 100%);
 }
@@ -1812,7 +1812,7 @@ svg:not([height]) {
 }
 .navigation__list li {
   position: relative;
-  min-block-size: 2.25rem;
+  min-block-size: 2rem;
   padding-inline-start: 0.625rem;
 }
 .navigation__list li {
@@ -1835,7 +1835,7 @@ svg:not([height]) {
   align-items: center;
   gap: 1rem;
   inline-size: 100%;
-  padding: 0.5625rem 0.5rem;
+  padding: 0.375rem 0.5rem;
   overflow: hidden;
   font-size: var(--ui-font-size-xl);
   border: 1px solid transparent;

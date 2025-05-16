@@ -14,11 +14,11 @@
   --ui-cluster-gap-l: var(--ui-spacing-m);
 
   /* Sizing */
-  --ui-font-size-s: #{px(12)};
-  --ui-font-size-m: #{px(13)};
-  --ui-font-size-l: #{px(14)};
-  --ui-font-size-xl: #{px(15)};
-  --ui-font-size-2xl: #{px(16)};
+  --ui-font-size-s: #{px(11)};
+  --ui-font-size-m: #{px(12)};
+  --ui-font-size-l: #{px(13)};
+  --ui-font-size-xl: #{px(14)};
+  --ui-font-size-2xl: #{px(15)};
   --ui-font-size-3xl: #{px(20)};
 
   /* Radius */
@@ -97,7 +97,7 @@ html {
 
 body {
   overflow: auto;
-  line-height: 150%;
+  line-height: 135%;
   color: #fff;
   background: var(--ui-background-invert) linear-gradient(180deg, var(--ui-background-invert) 0%, var(--ui-background-invert-gradient) 100%);
 }

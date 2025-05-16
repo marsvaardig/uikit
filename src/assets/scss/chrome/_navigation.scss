@@ -80,7 +80,7 @@
 
   li {
     position: relative;
-    min-block-size: px(36);
+    min-block-size: px(32);
     padding-inline-start: px(10);
 
     @include pseudo(before) {
@@ -99,7 +99,7 @@
     align-items: center;
     gap: px(16);
     inline-size: 100%; // this combi works better on iOs
-    padding: px(9) px(8);
+    padding: px(6) px(8);
     overflow: hidden;
     font-size: var(--ui-font-size-xl);
     border: 1px solid transparent;
