@@ -21,7 +21,7 @@
 
   @include has(".sidebar--left") {
     min-inline-size: calc((100vw - (env(safe-area-inset-right) + env(safe-area-inset-left))) - #{px(48)} - #{px(8)});
-    transform: translateX(max(calc(max(#{px(-400) + px(48)}, (-100% + #{px(8)})) * (1 - var(--ui-sidebar-left-progress)))));
+    transform: translateX(max(calc(max(#{px(-400)} + #{px(48)}, (-100% + #{px(8)})) * (1 - var(--ui-sidebar-left-progress)))));
 
     @include breakpoint($chrome-breakpoint2) {
       min-inline-size: 0;
